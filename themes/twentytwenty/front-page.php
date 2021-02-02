@@ -252,7 +252,7 @@ foreach ($postCategories as $postCategory) {
                 <?php foreach ($galleryPosts->posts as $key => $thePost) : ?>
                     <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
                         <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
-                            <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->images[0]->url; ?>" />
+                            <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" />
                             <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
                         </div>
                     </a>
