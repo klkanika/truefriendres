@@ -19,18 +19,6 @@
     }
   </style>
 </head>
-<?php
-require_once('custom-classes/class-posts.php');
-$recentPosts = Post::getPostsByCategory('post', null, 12, 0);
-$knowledgePosts = array_filter($recentPosts->posts, function ($p) {
-  return in_array(
-    'knowledge',
-    array_map(function ($c) {
-      return $c->slug;
-    }, $p->categories)
-  );
-});
-?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
