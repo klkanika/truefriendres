@@ -36,21 +36,23 @@ foreach ($postCategories as $postCategory) {
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
     <?php include 'truefriend-header.php'; ?>
-		<!-- Set up your HTML -->
-		<style>
-			.banner{
-				height: 70vh;
-			}
-			.banner__title{
-				width: 100%;
-				background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
-			}
-			@media (max-width: 992px) {
-				.banner {
-					height: 50vh;
-				}
-			}
-		</style>
+    <!-- Set up your HTML -->
+    <style>
+        .banner {
+            height: 70vh;
+        }
+
+        .banner__title {
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+        }
+
+        @media (max-width: 992px) {
+            .banner {
+                height: 50vh;
+            }
+        }
+    </style>
     <section id="section-1stSlider" class="relative">
         <div id="1stSlider" class="owl-carousel">
             <?php
@@ -122,16 +124,16 @@ foreach ($postCategories as $postCategory) {
             ?>
                 <div class="relative cursor-pointer" onclick="window.open('<?= $thePost->link ?>','_blank')">
                     <div style="height:60vh">
-											<img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
+                        <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
                     </div>
-										<?php if($thePost->intervieweeBusinessLogo):?>
-											<div class="absolute top-3 left-3" style="width:45px;height:45px;">
-											<img class="object-cover w-full h-full rounded-full" src="<?= $thePost->intervieweeBusinessLogo ?>" />
-										</div>
-										<?php endif;?>
-                    <div class="absolute left-0 bottom-0" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">
+                    <?php if ($thePost->intervieweeBusinessLogo) : ?>
+                        <div class="absolute top-3 left-3" style="width:45px;height:45px;">
+                            <img class="object-cover w-full h-full rounded-full" src="<?= $thePost->intervieweeBusinessLogo ?>" />
+                        </div>
+                    <?php endif; ?>
+                    <div class="absolute left-0 bottom-0 w-full rounded-b-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));">
                         <div class="ml-6 mb-6 mr-6">
-                            <p class="font-bold text-white text-base mb-2"><?= $thePost->interviewee ?></p>
+                            <p class="font-bold text-white text-base mb-2"><?= $thePost->intervieweeBusiness ? $thePost->intervieweeBusiness : $thePost->interviewee ?></p>
                             <p class="text-white text-base"><?= $thePost->title ?></p>
                         </div>
                     </div>
@@ -141,7 +143,7 @@ foreach ($postCategories as $postCategory) {
             ?>
         </div>
     </section>
-		<?php include 'truefriend-restaurant101.php';?>
+    <?php include 'truefriend-restaurant101.php'; ?>
     <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" style="background-color:#262145;">
         <div class="lg:mb-12 mb-8">
             <div class="mb-1 flex justify-between lg:pr-8">
@@ -152,47 +154,53 @@ foreach ($postCategories as $postCategory) {
                 </div>
             </div>
             <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
-				</div>
-				<div class="lg:block hidden">
-        <div id="5thSlider" class="owl-carousel " style="border-color:#E9E9E9">
+        </div>
+        <div class="lg:block hidden">
+            <div id="5thSlider" class="owl-carousel " style="border-color:#E9E9E9">
+                <?php
+                foreach ($supplierTypes->supplierTypes as $supplierType) :
+                    if ((int)$supplierType->supplierTypeCount > 0) :
+                        $supplierType->supplierTypeCount = 110;
+                ?>
+                        <a href="<?= $supplierType->link ?>" target="_blank">
+                            <div class="relative" style="height:40vh;">
+                                <div style="height:40vh;">
+                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+                                </div>
+                                <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
+                                    <?php if ((int)$supplierType->supplierTypeCount < 99) {
+                                        echo $supplierType->supplierTypeCount;
+                                    } else {
+                                        echo '99+';
+                                    } ?>
+                                </div>
+                                <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                    <p><?= $supplierType->name ?></p>
+                                </div>
+                            </div>
+                        </a>
+                <?php endif;
+                endforeach; ?>
+            </div>
+        </div>
+        <div class="lg:hidden">
             <?php
-						foreach ($supplierTypes->supplierTypes as $supplierType):
-							if((int)$supplierType->supplierTypeCount > 0):
-								$supplierType->supplierTypeCount = 110;
+            foreach ($supplierTypes->supplierTypes as $supplierType) :
+                if ((int)$supplierType->supplierTypeCount > 0) :
             ?>
-                <a href="<?= $supplierType->link ?>" target="_blank">
-                    <div class="relative" style="height:40vh;">
-                        <div style="height:40vh;">
-                            <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+                    <div class="py-2 border-b flex items-center relative">
+                        <div class="w-20 h-20 mr-4">
+                            <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" />
                         </div>
-                        <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
-                            <?php if((int)$supplierType->supplierTypeCount < 99){echo $supplierType->supplierTypeCount;}else{echo '99+';} ?>
+                        <div>
+                            <div class="text-lg font-bold"><?= $supplierType->name ?></div>
+                            <div class="text-sm"><?= (int)$supplierType->supplierTypeCount ?> เบอร์โทร</div>
                         </div>
-                        <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
-                            <p><?= $supplierType->name ?></p>
-                        </div>
+                        <img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" />
                     </div>
-                </a>
-						<?php endif;endforeach;?>
-				</div>
-				</div>
-				<div class="lg:hidden">
-					<?php
-						foreach ($supplierTypes->supplierTypes as $supplierType):
-							if((int)$supplierType->supplierTypeCount > 0):
-          ?>
-						<div class="py-2 border-b flex items-center relative">
-							<div class="w-20 h-20 mr-4">
-								<img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" />
-							</div>
-							<div>
-								<div class="text-lg font-bold"><?= $supplierType->name ?></div>
-								<div class="text-sm"><?= (int)$supplierType->supplierTypeCount ?> เบอร์โทร</div>
-							</div>
-							<img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg"/>
-						</div>
-					<?php endif;endforeach;?>
-				</div>
+            <?php endif;
+            endforeach; ?>
+        </div>
     </section>
     <section class="flex items-center justify-center font-bold text-2xl h-48" id="banner-2" style="background-color:#F2F2F2;color:#062241;">
         <p>BANNER</p>
@@ -239,16 +247,16 @@ foreach ($postCategories as $postCategory) {
     </section>
     <section class="text-white" style="background-color:#19181F;">
         <div class="pt-16 lg:ml-8 lg:mr-8 ml-4 mr-4 lg:pb-16 pb-10 lg:text-base text-xs">
-						<p class="text-2xl mb-16 text-center">G A L L E R Y</p>
+            <p class="text-2xl mb-16 text-center">G A L L E R Y</p>
             <div class="flex flex-wrap justify-between">
-							<?php foreach($galleryPosts->posts as $key => $thePost): ?>
-								<a href="<?= $thePost->link;?>" class="<?= $key%3==0?'w-3/5':'w-2/5';?>  lg:mb-4 mb-2 relative">
-										<div class="gallery-thumbnail relative <?= $key%2==0?'lg:mr-4 mr-2':'';?>">
-												<img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->images[0]->url;?>" />
-												<div class="absolute w-full left-0 bottom-0 lg:p-6 p-3" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title?></div>
-										</div>
-							</a>
-							<?php endforeach;?>
+                <?php foreach ($galleryPosts->posts as $key => $thePost) : ?>
+                    <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
+                        <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
+                            <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->images[0]->url; ?>" />
+                            <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
             </div>
             <div class="flex justify-center">
                 <p class="mt-4 select-none cursor-pointer">Load More</p>
