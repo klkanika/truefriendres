@@ -17,13 +17,18 @@
         width: 14.285%
       }
     }
+
+    .loadmore:hover {
+      background-color: white;
+      color: #19181F;
+    }
   </style>
 </head>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
-  <section class="text-white w-full" style="background-color: #262145;" id="banner">
+  <section class="text-white w-full pb-12" style="background-color: #262145;" id="banner">
     <section class="w-full relative overflow-hidden" id="banner">
       <!-- bg of banner -->
       <div class="w-full h-full flex flex-row absolute flex-wrap">
@@ -86,6 +91,9 @@
       }
       ?>
     </section>
+    <div class="flex w-full justify-center mt-8">
+      <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore">LOAD MORE</div>
+    </div>
   </section>
   <?php include 'truefriend-footer.php'; ?>
 </body>
