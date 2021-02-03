@@ -12,7 +12,15 @@
 </head>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
-  <?php include 'truefriend-header.php'; ?>
+  <?php
+  include 'truefriend-header.php';
+  require_once('custom-classes/class-posts.php');
+  $categories = get_the_category();
+  $cat_ID = [];
+  foreach ($categories as $category) :
+    array_push($cat_ID, $category->cat_ID);
+  endforeach;
+  ?>
   <style>
     #headder {
       background: #262145;

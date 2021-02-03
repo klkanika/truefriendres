@@ -9,14 +9,18 @@
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
 </head>
 <?php
-  require_once('custom-classes/class-posts.php');
-  $recentPosts = Post::getPostsByCategory('post', null, 12, 0);
-  $knowledgePosts = array_filter($recentPosts->posts,function($p){
-    return in_array('knowledge', 
-      array_map(function($c){return $c->slug;}, $p->categories)
-    );
-  });
+require_once('custom-classes/class-posts.php');
+$recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
+$knowledgePosts = array_filter($recentPosts->posts, function ($p) {
+  return in_array(
+    'knowledge',
+    array_map(function ($c) {
+      return $c->slug;
+    }, $p->categories)
+  );
+});
 ?>
+
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
@@ -32,13 +36,13 @@
     </div>
     <div class="bg-white">
       <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;">
-        <?php  foreach($knowledgePosts as $thePost):?>
-        <a href="<?= $thePost->link?>" class="flex flex-col gap-4">
-          <img class="rounded-lg object-cover w-full object-cover w-full" src="<?= $thePost->featuredImage?>" alt="">
-          <div class="font-semibold text-lg"><?= $thePost->title?></div>
-          <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date?></div>
-        </a>
-        <?php endforeach;?>
+        <?php foreach ($knowledgePosts as $thePost) : ?>
+          <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
+            <img class="rounded-lg object-cover w-full object-cover w-full" src="<?= $thePost->featuredImage ?>" alt="">
+            <div class="font-semibold text-lg"><?= $thePost->title ?></div>
+            <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
+          </a>
+        <?php endforeach; ?>
       </div>
       <div class="bg-white text-center text-xs py-12">
         <button class="rounded-full text-white px-8 py-3 px-28" style="background-color: #262145;">LOAD MORE</button>

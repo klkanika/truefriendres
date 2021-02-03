@@ -15,16 +15,16 @@
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-suppliertypes.php');
 $stickyPosts = Post::getStickyPosts(4);
-$recentPosts = Post::getPostsByCategory('post', null, 12, 0);
-$interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0);
-$galleryPosts = Post::getPostsByCategory('gallery', null, 4, 0);
+$recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
+$interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, null);
+$galleryPosts = Post::getPostsByCategory('gallery', null, 4, 0, null);
 $supplierTypes = SupplierType::getSupplierTypes(12);
 // categories of posts (input as slug)
 $postCategories = array('news', 'marketing', 'knowledge');
 $postObjects = array();
 foreach ($postCategories as $postCategory) {
     $catObject = get_category_by_slug($postCategory);
-    $posts = Post::getPostsByCategory('post', $catObject->cat_ID, 4, 0);
+    $posts = Post::getPostsByCategory('post', $catObject->cat_ID, 4, 0, null);
     array_push($postObjects, json_decode(
         '{' .
             '"posts" : ' . json_encode($posts) . ',' .

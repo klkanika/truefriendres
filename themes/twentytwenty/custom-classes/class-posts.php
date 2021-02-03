@@ -98,18 +98,22 @@ class Post
         return $posts;
     }
 
-    public static function getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset)
+    public static function getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, $except)
     {
         $args = array(
             'post_type' => $postType,
             'posts_per_page' => $postsPerPage,
             'offset' => $offset,
             'post_status' =>  'publish',
-            'ignore_sticky_posts' => 1
+            'ignore_sticky_posts' => 1,
         );
 
         if ($postType === 'post' && $categoryNo != null) {
-            $args['cat'] = $categoryNo;
+            $args['category__in'] = $categoryNo;
+        }
+
+        if($except != null){
+            $args['post__not_in'] = $except;
         }
 
         $query = new WP_Query($args);
@@ -140,6 +144,7 @@ class Post
         $thePost->categories = get_the_category();
         $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : 'wp-content/themes/twentytwenty/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');
+        $thePost->numberDate = get_the_date('d/m/Y');
 
         if ($postType === 'interviews') {
             $thePost->interviewee = get_field('interviewee');

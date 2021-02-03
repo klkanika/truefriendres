@@ -10,7 +10,7 @@
 </head>
 <?php
 require_once('custom-classes/class-posts.php');
-$recentPosts = Post::getPostsByCategory('post', null, 12, 0);
+$recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
 $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
   return in_array(
     'knowledge',
