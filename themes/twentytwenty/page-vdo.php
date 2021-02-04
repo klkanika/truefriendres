@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge</title>
+  <title>Video</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
   <style>
@@ -39,12 +39,12 @@
         <?php
         for ($i = 0; $i < 10; $i++) {
         ?>
-          <div class="w-full lg:w-1/2 px-4">
-            <div class="w-full lg:h-80 h-56 bg-cover rounded-xl relative" style="background-image:url('https://images.pexels.com/photos/1022158/pexels-photo-1022158.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')">
+          <a href="" class="w-full lg:w-1/2 px-4">
+            <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= get_theme_file_uri() ?>/assets/images/img-default.jpg')">
               <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
             </div>
             <p class="mt-6 mb-8 text-base">แม็คโครจับมือDezpaX เปิด One Stop Solutions ครบจบเรื่องบรรจุภัณฑ์ในงบจำกัด</p>
-          </div>
+        </a>
         <?php
         }
         ?>

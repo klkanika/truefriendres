@@ -41,6 +41,7 @@
 	}
 	#headder{
 		background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
+		width: 100vw;
 	}
 	.burger-bar,.balloon-chat{
 		fill: #fff;

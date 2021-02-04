@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge</title>
+  <title>Restaurant 101</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
   <style>
@@ -60,7 +60,7 @@
           <div class="h-full border-white border opacity-20 border-r-0 border-b-0 hidden lg:block grid-line"></div>
         </div>
       </div>
-      <section class="flex items-center justify-center flex-col w-full pt-32" id="banner-wording">
+      <section class="flex items-center justify-center flex-col w-full pt-32 pb-3" id="banner-wording">
         <h1 class="text-xl z-20">บทความที่ทุกร้านอาหารต้องอ่าน</h1>
         <h1 class="text-5xl font-black mt-3 z-20">Restaurant 101</h1>
         <img class="z-20" src="<?= get_theme_file_uri() ?>/assets/images/restaurant-101.svg" />
@@ -76,7 +76,7 @@
       <?php
       for ($i = 0; $i < 10; $i++) {
       ?>
-        <div class="rounded-3xl p-6 mb-6" style="border:1px solid rgba(255,255,255,0.2);<?= wp_is_mobile() ? 'width:100%;' : 'width:49%;' ?><?= $i % 2 === 0 ? 'margin-right:1%' : 'margin-left:1%' ?>">
+        <a href="" class="rounded-3xl p-6 mb-6" style="border:1px solid rgba(255,255,255,0.2);<?= wp_is_mobile() ? 'width:100%;' : 'width:49%;' ?><?= $i % 2 === 0 ? 'margin-right:1%' : 'margin-left:1%' ?>">
           <div class="w-full relative flex items-center h-48 lg:h-64">
             <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('<?= get_theme_file_uri() ?>/assets/images/101-example.svg')"></div>
             <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
@@ -86,7 +86,7 @@
               <p class="lg:text-base text-sm mt-2">ทำไมร้านอาหาร SME ส่วนใหญ่ ตั้งราคาขายผิด จน ขาดทุน</p>
             </div>
           </div>
-        </div>
+      </a>
       <?php
       }
       ?>
