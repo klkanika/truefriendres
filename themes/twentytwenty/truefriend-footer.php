@@ -14,23 +14,23 @@
 
 		<div class="flex justify-between lg:w-1/4 w-full mr-8 ml-8 lg:ml-0 mt-14 lg:mt-10 text-xs" >
 			<ul class="lg:mr-6">
-				<li class="mb-4"><a href="#" target="_blank" style="color:rgba(255,255,255,0.5)">Article</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Restaurant 101</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Knowledge</a></li>
-				<li class="mb-1"><a href="#" target="_blank">News</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Video</a></li>
-				<li class="mb-1"><a href="#" target="_blank">File</a></li>
+				<li class="mb-4"><a href="#" style="color:rgba(255,255,255,0.5)">Article</a></li>
+				<li class="mb-1"><a href="#">Restaurant 101</a></li>
+				<li class="mb-1"><a href="#">Knowledge</a></li>
+				<li class="mb-1"><a href="#">News</a></li>
+				<li class="mb-1"><a href="#">Video</a></li>
+				<li class="mb-1"><a href="#">File</a></li>
 			</ul>
 			<ul class="lg:ml-6 lg:mr-6">
-				<li class="mb-4"><a href="#" target="_blank" style="color:rgba(255,255,255,0.5)" class="mb-4">Interview & Review</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Brand Story</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Review</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Franchise</a></li>
+				<li class="mb-4"><a href="#" style="color:rgba(255,255,255,0.5)" class="mb-4">Interview & Review</a></li>
+				<li class="mb-1"><a href="#">Brand Story</a></li>
+				<li class="mb-1"><a href="#">Review</a></li>
+				<li class="mb-1"><a href="#">Franchise</a></li>
 			</ul>
 			<ul class="lg:ml-6">
-				<li class="mb-4"><a href="#" target="_blank" style="color:rgba(255,255,255,0.5)" class="mb-4">SupplierHub</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Profile List</a></li>
-				<li class="mb-1"><a href="#" target="_blank">Product</a></li>
+				<li class="mb-4"><a href="#" style="color:rgba(255,255,255,0.5)" class="mb-4">SupplierHub</a></li>
+				<li class="mb-1"><a href="#">Profile List</a></li>
+				<li class="mb-1"><a href="#">Product</a></li>
 			</ul>
 		</div>
 	</div>

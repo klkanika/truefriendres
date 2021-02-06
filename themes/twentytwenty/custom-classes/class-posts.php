@@ -30,7 +30,7 @@ class Post
 
             while ($the_query->have_posts()) {
                 $the_query->the_post();
-                $thePost = Post::getPost('post');
+                $thePost = Post::getPost('post', null);
                 array_push($posts, $thePost);
             }
 
@@ -87,7 +87,7 @@ class Post
             $the_query2 = new WP_Query($args2);
             while ($the_query2->have_posts()) {
                 $the_query2->the_post();
-                $thePost = Post::getPost('post');
+                $thePost = Post::getPost('post', null);
                 // echo(json_encode($thePost));
                 array_push($posts, $thePost);
             }
@@ -110,9 +110,10 @@ class Post
 
         if ($postType === 'post' && $categoryNo != null) {
             $args['category__in'] = $categoryNo;
+            // $args['category__not_in'] = get_category_by_slug('Uncategorized')->cat_ID;
         }
 
-        if($except != null){
+        if ($except != null) {
             $args['post__not_in'] = $except;
         }
 
@@ -123,7 +124,7 @@ class Post
             $tq = $query->found_posts;
             while ($query->have_posts()) {
                 $query->the_post();
-                $thePost = Post::getPost($postType);
+                $thePost = Post::getPost($postType, null);
                 array_push($posts, $thePost);
             }
         }
@@ -135,7 +136,7 @@ class Post
                 '}');
     }
 
-    private static function getPost($postType)
+    private static function getPost($postType, $category)
     {
         $thePost = new Post();
         $thePost->id =  (get_the_ID());
@@ -145,14 +146,12 @@ class Post
         $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : 'wp-content/themes/twentytwenty/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');
         $thePost->numberDate = get_the_date('d/m/Y');
+        $thePost->restaurantCategory = get_field('restaurant_101_category');
 
         if ($postType === 'interviews') {
             $thePost->interviewee = get_field('interviewee');
             $thePost->intervieweeBusiness = get_field('intervieweeBusiness');
             $thePost->intervieweeBusinessLogo = get_field('intervieweeBusinessLogo');
-        }
-        if ($postType === 'gallery') {
-            $thePost->images = get_field('images');
         }
 
         return $thePost;

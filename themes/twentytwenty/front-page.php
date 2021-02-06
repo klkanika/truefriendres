@@ -16,8 +16,8 @@ require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-suppliertypes.php');
 $stickyPosts = Post::getStickyPosts(4);
 $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
-$interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, null);
-$galleryPosts = Post::getPostsByCategory('gallery', null, 4, 0, null);
+// $interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, null);
+$galleryPosts = Post::getPostsByCategory('post', get_category_by_slug('gallery')->cat_ID, 4, 0, null);
 $supplierTypes = SupplierType::getSupplierTypes(12);
 // categories of posts (input as slug)
 $postCategories = array('news', 'marketing', 'knowledge');
@@ -63,7 +63,7 @@ foreach ($postCategories as $postCategory) {
                         <img class="object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" />
                         <div class="absolute left-0 bottom-0 banner__title">
                             <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
-                                <div onclick="window.open('/category/<?= $thePost->categories[0]->slug ?>','_blank')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
+                                <div onclick="window.open('/category/<?= $thePost->categories[0]->slug ?>'),'_self'" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
                                 <p class="text-white lg:text-2xl text-xl"><?= $thePost->title ?></p>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ foreach ($postCategories as $postCategory) {
             <?php
             foreach ($recentPosts->posts as $thePost) {
             ?>
-                <a href="<?= $thePost->link ?>" target="_blank">
+                <a href="<?= $thePost->link ?>">
                     <div class="relative">
                         <div style="height:30vh">
                             <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
@@ -106,43 +106,7 @@ foreach ($postCategories as $postCategory) {
     <section class="flex items-center justify-center font-bold text-2xl h-48" id="banner-1" style="background-color:#F2F2F2;color:#062241;">
         <p>BANNER</p>
     </section>
-    <section id="section-3rdSlider" class="pt-14 pb-10 lg:px-8 lg:px-4 text-white" style="background-color:#19181F;">
-        <div class="mb-6 flex justify-between lg:px-0 px-4">
-            <p class="font-bold text-2xl lg:mb-0 mb-2">Interview</p>
-            <div class="flex items-center">
-                <a href="interviews" target="_blank" class="lg:mr-6 lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $interviewPosts->posts_count ?>)</a>
-                <!-- 3rd navigator -->
-                <div class="lg:flex items-center justify-between w-16 hidden">
-                    <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left.svg" referTo="3rdSlider" class="cursor-pointer toTheLeft" />
-                    <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" referTo="3rdSlider" class="cursor-pointer toTheRight" />
-                </div>
-            </div>
-        </div>
-        <div id="3rdSlider" class="owl-carousel lg:pl-0 pl-4">
-            <?php
-            foreach ($interviewPosts->posts as $thePost) {
-            ?>
-                <div class="relative cursor-pointer" onclick="window.open('<?= $thePost->link ?>','_blank')">
-                    <div style="height:60vh">
-                        <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
-                    </div>
-                    <?php if ($thePost->intervieweeBusinessLogo) : ?>
-                        <div class="absolute top-3 left-3" style="width:45px;height:45px;">
-                            <img class="object-cover w-full h-full rounded-full" src="<?= $thePost->intervieweeBusinessLogo ?>" />
-                        </div>
-                    <?php endif; ?>
-                    <div class="absolute left-0 bottom-0 w-full rounded-b-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));">
-                        <div class="ml-6 mb-6 mr-6">
-                            <p class="font-bold text-white text-base mb-2"><?= $thePost->intervieweeBusiness ? $thePost->intervieweeBusiness : $thePost->interviewee ?></p>
-                            <p class="text-white text-base"><?= $thePost->title ?></p>
-                        </div>
-                    </div>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
-    </section>
+    <?php include 'truefriend-interview.php'; ?>
     <?php include 'truefriend-restaurant101.php'; ?>
     <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" style="background-color:#262145;">
         <div class="lg:mb-12 mb-8">
@@ -150,7 +114,7 @@ foreach ($postCategories as $postCategory) {
                 <p class="font-bold text-2xl">Supplier Hub</p>
                 <div class="flex items-center">
                     <p class="font-bold mr-8 hidden lg:block">ค้นหา</p>
-                    <a href="suppliers" target="_blank" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierTypes->posts_count ?>)</a>
+                    <a href="suppliers" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierTypes->posts_count ?>)</a>
                 </div>
             </div>
             <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
@@ -160,9 +124,8 @@ foreach ($postCategories as $postCategory) {
                 <?php
                 foreach ($supplierTypes->supplierTypes as $supplierType) :
                     if ((int)$supplierType->supplierTypeCount > 0) :
-                        $supplierType->supplierTypeCount = 110;
                 ?>
-                        <a href="<?= $supplierType->link ?>" target="_blank">
+                        <a href="<?= $supplierType->link ?>">
                             <div class="relative" style="height:40vh;">
                                 <div style="height:40vh;">
                                     <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
@@ -212,7 +175,7 @@ foreach ($postCategories as $postCategory) {
             $posts = $postObject->posts->posts;
         ?>
             <div class="lg:w-1/3 w-full lg:pr-6 lg:text-sm text-xs mb-12 lg:mb-0">
-                <div onclick="window.open('category/<?= $catObject->slug ?>/','_blank')" class="flex items-center lg:text-2xl text-base font-bold cursor-pointer select-none w-max lg:mb-6 mb-4">
+                <div onclick="window.open('category/<?= $catObject->slug ?>/','_self')" class="flex items-center lg:text-2xl text-base font-bold cursor-pointer select-none w-max lg:mb-6 mb-4">
                     <p><?= $catObject->name ?></p>
                     <img class="lg:ml-2" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" />
                 </div>
@@ -222,7 +185,7 @@ foreach ($postCategories as $postCategory) {
                         $thePost = $posts[$i];
                         if ($i === 0) {
                 ?>
-                            <div onclick="window.open('<?= $thePost->link ?>','_blank')" class="cursor-pointer mb-8">
+                            <div onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
                                 <div class="mb-4" style="height:30vh">
                                     <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
                                 </div>
@@ -231,7 +194,7 @@ foreach ($postCategories as $postCategory) {
                         <?php
                         } else {
                         ?>
-                            <div class="mt-6 pb-4 cursor-pointer border-grey-800 border-b <?= $i === 3 ? 'lg:border-none' : '' ?>" onclick="window.open('<?= $thePost->link ?>','_blank')">
+                            <div class="mt-6 pb-4 cursor-pointer border-grey-800 border-b <?= $i === 3 ? 'lg:border-none' : '' ?>" onclick="window.open('<?= $thePost->link ?>','_self')">
                                 <p class="font-bold lg:text-base text-sm">HOT UPDATE</p>
                                 <p><?= $thePost->title ?></p>
                             </div>
