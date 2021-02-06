@@ -156,4 +156,16 @@ class Post
 
         return $thePost;
     }
+
+    // function getPostBySlug( $slug, $post_type = "post" ) {
+    //     $query = new WP_Query(
+    //         array(
+    //             'name'   => $slug,
+    //             'post_type'   => $post_type,
+    //             'numberposts' => 1,
+    //             'fields'      => 'ids',
+    //         ) );
+    //     $posts = $query->get_posts();
+    //     return array_shift( $posts );
+    // }
 }

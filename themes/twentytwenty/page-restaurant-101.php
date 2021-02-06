@@ -10,7 +10,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge</title>
+  <title>Restaurant 101</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
   <style>
@@ -66,7 +66,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
           <div class="h-full border-white border opacity-20 border-r-0 border-b-0 hidden lg:block grid-line"></div>
         </div>
       </div>
-      <section class="flex items-center justify-center flex-col w-full pt-32" id="banner-wording">
+      <section class="flex items-center justify-center flex-col w-full pt-32 pb-3" id="banner-wording">
         <h1 class="text-xl z-20">บทความที่ทุกร้านอาหารต้องอ่าน</h1>
         <h1 class="text-5xl font-black mt-3 z-20">Restaurant 101</h1>
         <img class="z-20" src="<?= get_theme_file_uri() ?>/assets/images/restaurant-101.svg" />

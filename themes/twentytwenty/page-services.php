@@ -7,6 +7,8 @@
   <title>Services</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
   <style>
 
   </style>
@@ -28,19 +30,14 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
-  <section class="text-white pt-32 w-full" style="background-color: #262145;">
+  <section class="text-white pt-32 w-full bg-contain" style="background-color: #262145;background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-grid.svg')">
     <div class="flex flex-col my-8 lg:px-40 px-8">
-      <span class="text-4xl text-center mb-2 font-thin">บริการของเรา</span>
+      <span class="text-xl text-center mb-2 font-thin">บริการของเรา</span>
       <span class="text-5xl text-center font-extrabold">Our Services</span>
     </div>
-    <div class="star border-gray-500 lg:px-32 lg:mx-8 px-8 py-5 flex lg:justify-content-center justify-center gap-1">
-      <a href=""><img class="w-24 md:w-auto " src="<?= get_theme_file_uri() ?>/assets/images/Ellipse 156.png" alt=""></a>
-      <a href=""><img class="w-24 md:w-auto" src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 349.png" alt=""></a>
-      <a href=""><img class="w-24 md:w-auto" src="<?= get_theme_file_uri() ?>/assets/images/Star 3.png" alt=""></a>
-    </div>
+    <img class="w-48 my-8 mx-auto" src="<?= get_theme_file_uri() ?>/assets/images/service-img.svg" alt="">
     <div class="flex flex-col lg:px-40 px-8">
-      <span class="text-xl text-center mb-2 font-normal">นอกจากการเป็นคลังความรู้สำหรับธุรกิจร้านอาหารแล้ว</span>
-      <span class="text-xl text-center mb-2 font-normal">เรายังมีบริการอื่นๆเพื่อช่วยผู้ประกอบการไปถึงฝั่งฝัน</span>
+      <span class="text-xl text-center mb-2 font-normal">นอกจากการเป็นคลังความรู้สำหรับธุรกิจร้านอาหารแล้ว<br>เรายังมีบริการอื่นๆเพื่อช่วยผู้ประกอบการไปถึงฝั่งฝัน</span>
     </div>
     <div class="button border-gray-500 lg:px-32 lg:mx-8 px-8 py-5 pb-14  flex lg:justify-content-center justify-center gap-1">
       <button class="rounded-full text-black font-bold py-3 px-16" style="background-color: #FEDA52;">Read more</button>
@@ -55,169 +52,325 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
     </div>
   </section>
 
-
-  <div class="  flex-col  justify-start lg :pl-40 lg:px-32 px-4 grid-cols-2 " style="background-color: #E5E5E5;">
-    <p class="lg:text-left text-black  text-4xl font-bold pt-20 ">PR & Marketing</p>
-
-    <p class="text-left text-black text-xl font-bold pt-20 "></p>
-    <div class=" flex space-x-4 ">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector.png" alt=""></a>
-      <span class="lg:text-lg text-center text-black mb-2 font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
-    </div>
-    <div class=" flex space-x-4">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector.png" alt=""></a>
-      <span class="lg:text-lg text-center text-black mb-2 font-bold">ลงมือทำสำเร็จ</span>
-    </div>
-    <div class=" flex space-x-4">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector.png" alt=""></a>
-      <span class="lg:text-lg text-center text-black mb-2 font-bold">เห็นผลใน 1 เดือน</span>
-    </div>
-    <div class="grid grid-cols-2 gap-4 pt-14">
-      <div class="flex flex-col ">
-        <span class="text-lg text-left text-black mb-2 font-bold pb-8">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</span>
-        <span class="text-lg text-left text-black mb-2 font-thin ">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</span>
-        <div class=" flex space-x-4 pt-14">
-          <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" alt=""></a>
-          <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt=""></a>
-
-          <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/uo.png" alt=""></a>
-
-
-        </div>
-        <div class=" flex space-x-4 pt-14">
-          <button class="rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</button>
-        </div>
-
+  <!-- PR & Marketing -->
+  <section class="px-6 md:px-0 md:pl-20 pt-20" style="background-color: #E5E5E5;color:#262145">
+    <div class="md:flex  pb-16">
+      <div class="md:hidden items-center justify-center">
+        <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png"/>
       </div>
-      <div class="flex lg:justify-content-center justify-center">
-        <a href=""><img class="w-auto h-auto " src="<?= get_theme_file_uri() ?>/assets/images/Group 135.png" alt=""></a>
+      <div class="md:w-2/4">
+        <p class="lg:text-left text-4xl font-bold">PR & Marketing</p>
+        <div class="my-12">
+          <div class="flex mb-2 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+            <span class="ml-4 text-xl font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
+          </div>
+          <div class="flex mb-2 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+            <span class="ml-4 text-xl font-bold">ลงมือทำสำเร็จ</span>
+          </div>
+          <div class="flex mb-3 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+            <span class="ml-4 text-xl font-bold">เห็นผลใน 1 เดือน</span>
+          </div>
+        </div>
+        <div class="mb-16">
+          <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
+          <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
+        </div>
+        <div class="mb-8 md:mb-16">
+          <div class="font-bold mb-4">Our Client</div>
+          <div class="hidden md:flex">
+            <div class="tooltip">
+              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" />
+              <div class="tooltiptext">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+            <div class="tooltip -ml-2">
+              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" />
+              <div class="tooltiptext">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+          </div>
+          <div class="md:hidden -mx-6">
+            <div class="owl-carousel">
+            <div class="slideClient">
+              <div class="flex items-center mb-4">
+                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                <div class="ml-4">
+                  <div >พีท พัชระ</div>
+                  <div class="font-bold">Potato corner</div>
+                </div>
+              </div>
+              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+            </div>
+            <div class="slideClient">
+              <div class="flex items-center mb-4">
+                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                <div class="ml-4">
+                  <div >พีท พัชระ</div>
+                  <div class="font-bold">Potato corner</div>
+                </div>
+              </div>
+              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="/contact-us" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
+        </div>
+      </div>
+      <div class="w-2/4 hidden md:flex items-center justify-center">
+        <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png"/>
       </div>
     </div>
-
-
-
-
-
-
-    <div class="flex flex-col lg:px-40 px-8 pt-20">
-      <span class="lg:text-xl text-center text-black mb-2 font-bold">สอบถามรายละเอียด PR & MARKETING</span>
+    <div class="text-center mb-2 font-bold">สอบถามรายละเอียด PR & MARKETING</div>
+    <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-300 md:flex md:justify-center md:mr-20">
+      <div class="mx-3 flex items-center mb-2 md:mb-0">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call.svg" />
+        <a href="tel:08276281927" class="ml-2 underline">08276281927 (คุณออม)</a>
+      </div>
+      <div class="mx-3 flex items-center mb-2 md:mb-0">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-line.svg" />
+        <a href="https://line.me/ti/p/~@ormzins" target="_blank" class="ml-2 underline">@ormzin</a>
+      </div>
+      <div class="mx-3 flex items-center">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-mail.svg" />
+        <a href="mailto:amanicha@gmail.com" class="ml-2 underline">amanicha@gmail.com</a>
+      </div>
     </div>
+  </section>
 
-    <div class=" flex space-x-4 ">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector 250.png" alt=""></a>
+  <!-- Consultant -->
+  <section class="px-6 md:px-0 md:pl-20 pt-6 md:pt-20 " style="background-color: #262145;color:#fff">
+    <div class="md:flex  pb-16">
+      <div class="md:hidden items-center justify-center -mx-6 mb-6">
+        <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png"/>
+      </div>
+      <div class="md:w-2/4">
+        <p class="lg:text-left text-4xl font-bold">Consultant</p>
+        <div class="my-12">
+          <div class="flex mb-2 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+            <span class="ml-4 text-xl font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
+          </div>
+          <div class="flex mb-2 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+            <span class="ml-4 text-xl font-bold">ลงมือทำสำเร็จ</span>
+          </div>
+          <div class="flex mb-3 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+            <span class="ml-4 text-xl font-bold">เห็นผลใน 1 เดือน</span>
+          </div>
+        </div>
+        <div class="mb-16">
+          <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
+          <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
+        </div>
+        <div class="mb-8 md:mb-16">
+          <div class="font-bold mb-4">Our Client</div>
+          <div class="hidden md:flex">
+            <div class="tooltip">
+              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" />
+              <div class="tooltiptext">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+            <div class="tooltip -ml-2">
+              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" />
+              <div class="tooltiptext">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+          </div>
+          <div class="md:hidden -mx-6">
+            <div class="owl-carousel">
+              <div class="slideClient">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+              <div class="slideClient">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="/contact-us" class="inline-block rounded-full font-bold py-3 px-16" style="background-color: #D4BD7D;color:#262145">Contact Us</a>
+        </div>
+      </div>
+      <div class="w-2/4 hidden md:flex items-center justify-center px-16">
+        <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png"/>
+      </div>
     </div>
-    <div class=" flex space-x-4 flex lg:justify-content-center justify-center">
-      <a href=""><img class="md :w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 317.png" alt=""></a>
-      <a href=""><img class="md :w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 316.png" alt=""></a>
-      <a href=""><img class="md :w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 277.png" alt=""></a>
-      <a href=""><img class="md :w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/amanicha@gmail.com-1.png" alt=""></a>
+    <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Consultant</div>
+    <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-300 md:flex md:justify-center md:mr-20">
+      <div class="mx-3 flex items-center mb-2 md:mb-0">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call-white.svg" />
+        <a href="tel:08276281927" class="ml-2 underline">08276281927 (คุณออม)</a>
+      </div>
+      <div class="mx-3 flex items-center mb-2 md:mb-0">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-line-white.svg" />
+        <a href="https://line.me/ti/p/~@ormzins" target="_blank" class="ml-2 underline">@ormzin</a>
+      </div>
+      <div class="mx-3 flex items-center">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-mail-white.svg" />
+        <a href="mailto:amanicha@gmail.com" class="ml-2 underline">amanicha@gmail.com</a>
+      </div>
     </div>
+  </section>
 
-  </div>
-
-
-
+  <!-- Training -->
+  <section class="px-6 md:px-0 md:pl-20 pt-20 bg-contain" style="background-color: #D4BD7D;color:#262145;background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-grid.svg')">
+    <div class="md:flex  pb-16">
+      <div class="md:hidden items-center justify-center">
+        <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png"/>
+      </div>
+      <div class="md:w-2/4">
+        <p class="lg:text-left text-4xl font-bold">Training</p>
+        <div class="my-12">
+          <div class="flex mb-2 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-blue.svg" alt="">
+            <span class="ml-4 text-xl font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
+          </div>
+          <div class="flex mb-2 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-blue.svg" alt="">
+            <span class="ml-4 text-xl font-bold">ลงมือทำสำเร็จ</span>
+          </div>
+          <div class="flex mb-3 items-center">
+            <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-blue.svg" alt="">
+            <span class="ml-4 text-xl font-bold">เห็นผลใน 1 เดือน</span>
+          </div>
+        </div>
+        <div class="mb-16">
+          <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
+          <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
+        </div>
+        <div class="mb-8 md:mb-16">
+          <div class="font-bold mb-4">Our Client</div>
+          <div class="hidden md:flex">
+            <div class="tooltip">
+              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" />
+              <div class="tooltiptext">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+            <div class="tooltip -ml-2">
+              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" />
+              <div class="tooltiptext">
+                <div class="flex items-center mb-4">
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                  <div class="ml-4">
+                    <div >พีท พัชระ</div>
+                    <div class="font-bold">Potato corner</div>
+                  </div>
+                </div>
+                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+              </div>
+            </div>
+          </div>
+          <div class="md:hidden -mx-6">
+            <div class="owl-carousel">
+            <div class="slideClient">
+              <div class="flex items-center mb-4">
+                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                <div class="ml-4">
+                  <div >พีท พัชระ</div>
+                  <div class="font-bold">Potato corner</div>
+                </div>
+              </div>
+              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+            </div>
+            <div class="slideClient">
+              <div class="flex items-center mb-4">
+                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                <div class="ml-4">
+                  <div >พีท พัชระ</div>
+                  <div class="font-bold">Potato corner</div>
+                </div>
+              </div>
+              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="/contact-us" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
+        </div>
+      </div>
+      <div class="w-2/4 hidden md:flex items-center justify-center">
+        <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png"/>
+      </div>
+    </div>
+    <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Training</div>
+    <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-900 md:flex md:justify-center md:mr-20">
+      <div class="mx-3 flex items-center mb-2 md:mb-0">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call.svg" />
+        <a href="tel:08276281927" class="ml-2 underline">08276281927 (คุณออม)</a>
+      </div>
+      <div class="mx-3 flex items-center mb-2 md:mb-0">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-line.svg" />
+        <a href="https://line.me/ti/p/~@ormzins" target="_blank" class="ml-2 underline">@ormzin</a>
+      </div>
+      <div class="mx-3 flex items-center">
+        <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-mail.svg" />
+        <a href="mailto:amanicha@gmail.com" class="ml-2 underline">amanicha@gmail.com</a>
+      </div>
+    </div>
   </section>
 
 
-  <div class="  flex-col justify-start pl-40 grid-cols-2 " style="background-color: #262145;">
-    <p class="text-left text-white text-4xl font-bold pt-20 ">Consultant</p>
-
-    <p class="text-left text-black text-xl font-bold pt-20 "></p>
-    <div class=" flex space-x-4">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector.png" alt=""></a>
-      <span class="lg:text-lg text-center text-white mb-2 font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
-    </div>
-    <div class=" flex space-x-4">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector.png" alt=""></a>
-      <span class="lg:text-lg text-center text-white mb-2 font-bold">ลงมือทำสำเร็จ</span>
-    </div>
-    <div class=" flex space-x-4">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector.png" alt=""></a>
-      <span class="lg:text-lg text-center text-white mb-2 font-bold">เห็นผลใน 1 เดือน</span>
-    </div>
-    <div class="grid grid-cols-2 gap-4 pt-14">
-      <div class="flex flex-col ">
-        <span class="text-lg text-left text-white mb-2 font-bold pb-8">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</span>
-        <span class="text-lg text-left text-white mb-2 font-thin ">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</span>
-        <div class=" flex space-x-4 pt-14">
-          <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" alt=""></a>
-          <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt=""></a>
-        </div>
-        <div class=" flex space-x-4 pt-14">
-          <button class="rounded-full text-black font-bold py-3 px-16" style="background-color: #D4BD7D;">Contact Us</button>
-        </div>
-      </div>
-      <div class="flex lg:justify-content-center justify-center">
-        <a href=""><img class="md:w-auto md:h-auto " src="<?= get_theme_file_uri() ?>/assets/images/Group 293.svg" alt=""></a>
-      </div>
-    </div>
-
-
-
-    <div class="flex flex-col lg:px-40 px-8 pt-20">
-      <span class="lg:text-xl text-center text-white mb-2 font-bold">สอบถามรายละเอียด PR & MARKETING</span>
-    </div>
-
-    <div class=" flex space-x-4 ">
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector 251.png" alt=""></a>
-    </div>
-    <div class=" flex space-x-4 flex lg:justify-content-center justify-center">
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 321.png" alt=""></a>
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 319.png" alt=""></a>
-      <a href=""><img class="md:w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 320.png" alt=""></a>
-
-    </div>
-  </div>
-
-  <div class="  flex-col justify-start pl-40 grid-cols-2 " style="background-color: #D4BD7D;">
-    <p class="text-left text: #262145 text-4xl font-bold pt-20 ">Training</p>
-
-    <p class="text-left text-black text-xl font-bold pt-20 "></p>
-    <div class=" flex space-x-4">
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/VectorBlue.png" alt=""></a>
-      <span class="text-lg text-center text: #262145 mb-2 font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
-    </div>
-    <div class=" flex space-x-4">
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/VectorBlue.png" alt=""></a>
-      <span class="text-lg text-center text: #262145 mb-2 font-bold">ลงมือทำสำเร็จ</span>
-    </div>
-    <div class=" flex space-x-4">
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/VectorBlue.png" alt=""></a>
-      <span class="text-lg text-center text: #262145 mb-2 font-bold">เห็นผลใน 1 เดือน</span>
-    </div>
-    <div class="grid grid-cols-2 gap-4 pt-14">
-      <div class="flex flex-col ">
-        <span class="text-lg text-left text: #262145 mb-2 font-bold pb-8">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</span>
-        <span class="text-lg text-left text: #262145 mb-2 font-thin ">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</span>
-        <div class=" flex space-x-4 pt-14">
-          <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" alt=""></a>
-          <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt=""></a>
-        </div>
-        <div class=" flex space-x-4 pt-14">
-          <button class="rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</button>
-        </div>
-      </div>
-      <div class="flex lg:justify-content-center justify-center">
-        <a href=""><img class="w-auto h-auto " src="<?= get_theme_file_uri() ?>/assets/images/Group 294.png" alt=""></a>
-      </div>
-    </div>
-
-    <div class="flex flex-col lg:px-40 px-8 pt-20">
-      <span class="text-xl text-center text: #262145 mb-2 font-bold">สอบถามรายละเอียด PR & MARKETING</span>
-    </div>
-
-    <div class=" flex space-x-4 ">
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Vector 250.png" alt=""></a>
-    </div>
-    <div class=" flex space-x-4 flex lg:justify-content-center justify-center">
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 317.png" alt=""></a>
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 316.png" alt=""></a>
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/Group 277.png" alt=""></a>
-      <a href=""><img class="w-24 md:w-auto pb-4" src="<?= get_theme_file_uri() ?>/assets/images/amanicha@gmail.com-1.png" alt=""></a>
-
-    </div>
-  </div>
   <section id="contact-us" class="lg:h-screen px-12 lg:px-48 lg:pt-18 flex items-center" style="background-color: #F2F2F2;">
     <div class="lg:flex w-full lg:justify-between flex-col lg:flex-row">
       <div class="flex flex-col gap-8 flex-1" style="color: #262145;">
@@ -243,14 +396,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
         </div>
       </div>
       <form action="#" class="text-sm flex flex-col flex-1 flex-grow gap-3 max-w-md lg:my-0 my-16">
-        <span class="text-sm font-semibold">ติดต่อเรื่อง</span>
-        <div class="contact-topic flex gap-2 mb-4">
-          <input id="topicMarketing" name="topic" type="radio" value="marketing" checked="checked">
-          <label class="rounded-lg text-sm px-4 text-center py-3" for="topicMarketing">Marketing</label>
-
-          <input id="topicConsult" name="topic" type="radio" value="consult">
-          <label class="rounded-lg text-sm px-4 text-center py-3" for="topicConsult">Consult</label>
-        </div>
+        <span class="text-sm font-semibold">ติดต่อ</span>
         <input name="name" type="text" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="ชื่อ">
         <input name="phone" type="text" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="เบอร์โทรศัพท์">
         <input name="email" type="email" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="อีเมล">
@@ -264,8 +410,64 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
 
 
 </body>
+<style>
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 15px;
+    position: absolute;
+    z-index: 1;
+    bottom: -10%;
+    left: 110%;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+    color: #262145;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    right: 99%;
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .slideClient{
+    padding: 15px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+    margin: 14px;
+    color: #262145;
+  }
+</style>
 
 </html>
 
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function() {
+    $(".owl-carousel").owlCarousel({
+        items: $(window).width() < 1024 ? 1.3 : 4,
+        loop: true,
+        // autoplay: true,
+        autoplayHoverPause: true,
+        slideBy: 2,
+        margin: 16,
+        dots: false,
+    });
+  });
+</script>

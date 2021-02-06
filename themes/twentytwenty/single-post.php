@@ -45,17 +45,17 @@
       <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : 'wp-content/themes/twentytwenty/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
     </div>
   </section>
-
-  <section class="w-full bg-white lg:p-20 px-4 py-8 overflow-hidden max-h-screen relative" style="color: #062241;" id="content-section">
+<!-- overflow-hidden max-h-screen -->
+  <section class="w-full bg-white lg:p-20 px-4 py-8  relative" style="color: #062241;" id="content-section">
     <div class="flex lg:flex-row flex-col lg:gap-28">
       <div class="flex-1 text-base flex flex-col gap-4"><?= the_content() ?></div>
       <div class="lg:w-1/4 flex flex-col gap-8 lg:mt-0 mt-16 lg:block hidden">
         <?php include 'truefriend-sponsored.php'; ?>
       </div>
     </div>
-    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background-color:rgba(255,255,255,0.8)">
+    <!-- <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background-color:rgba(255,255,255,0.8)">
       <button class="rounded-full text-white py-3 px-28" style="background-color: #262145;" id="readnext">READ NEXT</button>
-    </div>
+    </div> -->
   </section>
 
   <div class="w-full flex lg:flex-row flex-col lg:px-20 px-8 py-10 justify-between items-center" style="background-color: #F2F2F2; color: #062241;">
