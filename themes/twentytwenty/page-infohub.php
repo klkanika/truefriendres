@@ -59,7 +59,7 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
         </div>
       </a>
     </div>
-    <div class="flex items-center justify-center flex-wrap gap-4 mb-6 lg:block hidden">
+    <div class="flex items-center justify-center flex-wrap gap-4 mb-6 lg:flex hidden">
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt="" /></a>
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt="" /></a>
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" /></a>
