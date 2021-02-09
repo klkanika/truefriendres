@@ -22,33 +22,44 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
     <h2 class="text-2xl mb-4">คลังแสงของคนอยากเปิดร้านอาหาร</h2>
     <h1 class="text-6xl font-black tracking-tighter mb-6">Infohub</h1>
     <h3 class="text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</h3>
-    <div class="flex justify-center w-full mt-16 mb-12">
-      <a href="#" class="w-1/5 flex items-center justify-center flex-col h-72 relative ml-2 mr-2 rounded-md" style="background-color:#FFD950">
-        <h1 class="text-3xl font-black tracking-tighter mb-3">Supplier</h1>
-        <h2 class="text-sm text-center">รวมข้อมูล Supplier ทั่วประเทศไทย <br />กว่า 600 บริษัทในประเทศไทย</h2>
+    <div class="flex items-center justify-center flex-wrap gap-4 mt-12 lg:hidden">
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" /></a>
+    </div>
+    <div class="flex justify-center flex-wrap w-full mt-16 mb-12">
+      <a href="#" class="lg:w-1/5 w-full flex lg:items-center lg:justify-center flex-col lg:h-72 h-40 relative lg:mb-0 mb-4 lg:ml-2 lg:mr-2 ml-4 mr-4 rounded-md" style="background-color:#FFD950">
+        <div class="lg:text-center px-4 pt-4 lg:pb-10">
+          <h1 class="text-3xl font-black tracking-tighter lg:mb-3 mb-2">Supplier</h1>
+          <h2 class="text-xs lg:text-sm lg:text-center">รวมข้อมูล Supplier ทั่วประเทศไทย <br class="hidden lg:block" />กว่า 600 บริษัทในประเทศไทย</h2>
+        </div>
         <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
           <p>ดูข้อมูล</p>
           <div class="flex items-center"><?= $supplier->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" alt="" /></div>
         </div>
       </a>
-      <a href="#" class="w-1/5 flex items-center justify-center flex-col h-72 relative text-white ml-2 mr-2 rounded-md" style="background-color:#262145">
-        <h1 class="text-3xl font-black tracking-tighter mb-3">Restaurant</h1>
-        <h2 class="text-sm text-center">รวมข้อมูลร้านอาหารต่างๆ<br />กว่า 600 ธุรกิจในประเทศไทย</h2>
+      <a href="#" class="lg:w-1/5 w-full flex lg:items-center lg:justify-center flex-col lg:h-72 h-40 relative lg:mb-0 mb-4 text-white lg:ml-2 lg:mr-2 ml-4 mr-4 rounded-md" style="background-color:#262145">
+        <div class="lg:text-center px-4 pt-4 lg:pb-10">
+          <h1 class="text-3xl font-black tracking-tighter lg:mb-3 mb-2">Restaurant</h1>
+          <h2 class="text-xs lg:text-sm lg:text-center">รวมข้อมูลร้านอาหารต่างๆ<br class="hidden lg:block" />กว่า 600 ธุรกิจในประเทศไทย</h2>
+        </div>
         <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
           <p>ดูข้อมูล</p>
           <div class="flex items-center"><?= $restaurant->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" alt="" /></div>
         </div>
       </a>
-      <a href="#" class="w-1/5 flex items-center justify-center flex-col h-72 relative bg-white ml-2 mr-2 rounded-md" style="color:#251D5C">
-        <h1 class="text-3xl font-black tracking-tighter mb-3">Franchise</h1>
-        <h2 class="text-sm text-center">ศูนย์รวมข้อมูลเฟรนชายกว่า<br />600 เฟรนชายในประเทศไทย</h2>
+      <a href="#" class="lg:w-1/5 w-full flex lg:items-center lg:justify-center flex-col lg:h-72 h-40 relative lg:mb-0 mb-4 bg-white lg:ml-2 lg:mr-2 ml-4 mr-4 rounded-md" style="color:#251D5C">
+        <div class="lg:text-center px-4 pt-4 lg:pb-10">
+          <h1 class="text-3xl font-black tracking-tighter lg:mb-3 mb-2">Franchise</h1>
+          <h2 class="text-xs lg:text-sm lg:text-center">ศูนย์รวมข้อมูลเฟรนชายกว่า<br class="hidden lg:block" />600 เฟรนชายในประเทศไทย</h2>
+        </div>
         <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
           <p>ดูข้อมูล</p>
           <div class="flex items-center"><?= $franchise->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" alt="" /></div>
         </div>
       </a>
     </div>
-    <div class="flex items-center justify-center flex-wrap gap-4 mb-6">
+    <div class="flex items-center justify-center flex-wrap gap-4 mb-6 lg:block hidden">
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt="" /></a>
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt="" /></a>
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" /></a>
