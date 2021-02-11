@@ -67,7 +67,7 @@ $suppliers = $suppliersObject->posts;
         </section>
         <section id="register" style="background-color:#FEDA52;" class="flex flex-col items-center w-full py-24">
             <h1 class="text-3xl font-black">สมัครเป็น Supplier ฟรี</h1>
-            <a href="<?= get_site_url() ?>/supplier-resgister" class="text-center text-xs pt-6">
+            <a href="<?= get_site_url() ?>/supplier-register" class="text-center text-xs pt-6">
                 <button class="rounded-full px-8 py-3 px-28 bg-white" style="color:#262145">ลงทะเบียน</button>
             </a>
         </section>
