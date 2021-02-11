@@ -154,6 +154,11 @@ class Post
             $thePost->intervieweeBusinessLogo = get_field('intervieweeBusinessLogo');
         }
 
+        if ($postType === 'suppliers') {
+            $thePost->supplierName = get_field('supplierName');
+            $thePost->telInfo = get_field('telInfo');
+        }
+
         return $thePost;
     }
 

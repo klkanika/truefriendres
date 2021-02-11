@@ -23,9 +23,9 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
     <h1 class="text-6xl font-black tracking-tighter mb-6">Infohub</h1>
     <h3 class="text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</h3>
     <div class="flex items-center justify-center flex-wrap gap-4 mt-12 lg:hidden">
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt="" /></a>
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt="" /></a>
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
     </div>
     <div class="flex justify-center flex-wrap w-full mt-16 mb-12">
       <a href="<?= get_site_url() ?>/suppliers" class="lg:w-1/5 w-full flex lg:items-center lg:justify-center flex-col lg:h-72 h-40 relative lg:mb-0 mb-4 lg:ml-2 lg:mr-2 ml-4 mr-4 rounded-md" style="background-color:#FFD950">
@@ -60,9 +60,9 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
       </a>
     </div>
     <div class="flex items-center justify-center flex-wrap gap-4 mb-6 lg:flex hidden">
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt="" /></a>
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt="" /></a>
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
     </div>
   </section>
   <?php

@@ -40,13 +40,4 @@ class SupplierType
                 '"posts_count" : ' .  count($terms) .
                 '}');
     }
-
-    // private static function getSupplierType()
-    // {
-    //     $supplierType = new SupplierType();
-
-    //     var_dump()
-
-    //     return $supplierType;
-    // }
 }

@@ -8,20 +8,19 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
     <p class="font-bold text-2xl">Restaurant 101</p>
     <a href="restaurant-101" class="lg:text-base text-xs font-bold lg:mr-8 mr-4">ดูทั้งหมด (<?= count($Restaurant101Posts); ?>)</a>
   </div>
-  <div id="tabSlider" class="owl-carousel lg:mb-8 mb-6" style="border-color:#E9E9E9">
-    <?php
-    $restaurantCategoriesObject = acf_get_field('restaurant_101_category');
-    $restaurantCategories = $restaurantCategoriesObject['choices'];
-    ?>
-    <div class="tab-button select-none cursor-pointer tab-button-active border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs">ทั้งหมด</div>
-    <?php foreach ($restaurantCategories as $category) : ?>
-      <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs"><?= $category ?></div>
-    <?php endforeach; ?>
-    <!-- <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs">ร้านกาแฟ</div>
-    <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs">ร้านชาบู</div>
-    <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs">ร้านติ่มซำ</div>
-    <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs">ร้านชานม</div>
-    <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs">ร้านอาหารไทย</div> -->
+  <?php
+  $restaurantCategoriesObject = acf_get_field('restaurant_101_category');
+  $restaurantCategories = $restaurantCategoriesObject['choices'];
+  ?>
+  <div class="swiper-container mb-6">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="tab-button select-none cursor-pointer tab-button-active border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide">ทั้งหมด</div>
+      <?php foreach ($restaurantCategories as $category) : ?>
+        <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide"><?= $category ?></div>
+      <?php endforeach; ?>
+    </div>
   </div>
   <div id="restaurant101Slider" class="owl-carousel pb-16 border-red-900 border-b" style="border-color:#E9E9E9">
     <?php foreach ($Restaurant101Posts as $thePost) : ?>
@@ -43,13 +42,13 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
   <script>
     $(window).resize(function() {
-      $("#tabSlider").trigger('destroy.owl.carousel');
-      $("#tabSlider").owlCarousel({
-        items: $(window).width() < 1024 ? 3.5 : 7.5,
-        margin: 10,
-        slideBy: 1,
-        dots: false,
-      });
+      // $("#tabSlider").trigger('destroy.owl.carousel');
+      // $("#tabSlider").owlCarousel({
+      //   items: $(window).width() < 1024 ? 3.5 : 7.5,
+      //   margin: 10,
+      //   slideBy: 1,
+      //   dots: false,
+      // });
       $("#restaurant101Slider").trigger('destroy.owl.carousel');
       $("#restaurant101Slider").owlCarousel({
         items: $(window).width() < 1024 ? 1.1 : 2.25,
@@ -64,12 +63,13 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
     });
 
     $(document).ready(function() {
-      $("#tabSlider").owlCarousel({
-        items: $(window).width() < 1024 ? 3.5 : 7.5,
-        margin: 10,
-        slideBy: 1,
-        dots: false,
-      });
+      // $("#tabSlider").owlCarousel({
+      //   items: $(window).width() < 1024 ? 3.5 : 7.5,
+      //   margin: 10,
+      //   slideBy: 0,
+      //   dots: false,
+      //   nav: false,
+      // });
       $("#restaurant101Slider").owlCarousel({
         items: $(window).width() < 1024 ? 1.1 : 2.25,
         loop: true,
@@ -78,6 +78,18 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
         slideBy: 1,
         margin: 20,
         dots: false,
+      });
+      const swiper = new Swiper('.swiper-container', {
+        // Optional parameters
+        loop: false,
+        slidesPerView: 3.5,
+        spaceBetween: 10,
+        breakpoints: {
+          1024: {
+            slidesPerView: 7.5,
+            spaceBetween: 10,
+          },
+        }
       });
     });
   </script>
