@@ -117,11 +117,11 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
   </style>
   <section id="register-courses" class="flex items-center justify-center md:px-12 pt-32 pb-4 w-screen" style="background-color: #F2F2F2; color:#262145;">
     <div class="w-3/4">
-      <div class="flex text-base md:text-xl pb-2">
+      <div class="flex text-base md:text-2xl pb-2">
         <div class="font-light pr-2">ลงทะเบียน</div>
         <div class="font-bold">สมัครลงคอร์ส</div>
       </div>
-      <p class="text-xl md:text-5xl font-bold pb-2">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+      <p class="text-xl md:text-6xl font-bold pb-2">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
       <p class="text-sm md:text-base">หลังจากที่แอดมินได้ Approve แล้วข้อมูลของคุณจะลงไปที่ Website</p>
       <div class="block md:flex font-bold py-10">
         <div class="flex">
@@ -303,12 +303,12 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
                   </button>
                 </div>
                 <div class="md:col-end-6 col-span-4">
-                <button class="h-10 rounded-full w-full flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#262145; color: #DBDBDB;">
-                  ชำระภายหลัง
-                </button>
+                  <button class="h-10 rounded-full w-full flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#262145; color: #DBDBDB;">
+                    ชำระภายหลัง
+                  </button>
+                </div>
               </div>
-              </div>
-              
+
               <button type="submit" class="h-14 w-full flex items-center justify-center border-t-2 p-2 font-bold hover:bg-gray-50 focus:outline-none">
                 ถัดไป
                 <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" />
@@ -319,8 +319,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
       </div>
 
       <div class="flex items-center justify-center">
-      <button type="submit" class="h-14 w-full md:w-1/3 rounded-full p-4" style="background-color:#FFD950; color: #262145;">ลงทะเบียน</button>
-
+        <button type="submit" class="h-14 w-full md:w-1/3 rounded-full p-4" style="background-color:#FFD950; color: #262145;">ลงทะเบียน</button>
       </div>
     </div>
   </section>
@@ -328,50 +327,6 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
 
 
 </body>
-<style>
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 300px;
-    background-color: #fff;
-    border-radius: 6px;
-    padding: 15px;
-    position: absolute;
-    z-index: 1;
-    bottom: -10%;
-    left: 110%;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
-    color: #262145;
-  }
-
-  .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 10%;
-    right: 99%;
-    border-width: 15px;
-    border-style: solid;
-    border-color: transparent #fff transparent transparent;
-  }
-
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
-
-  .slideClient {
-    padding: 15px;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
-    margin: 14px;
-    color: #262145;
-  }
-</style>
 
 </html>
 
