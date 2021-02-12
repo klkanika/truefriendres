@@ -19,6 +19,13 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <style>
+    #headder{
+      background: transparent;
+      color: var(--primary);
+    }
+    #headder svg{
+      fill: var(--primary);
+    }
     #infohub{
       background-color:#f2f2f2;
       color:#262145;
