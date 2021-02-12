@@ -46,6 +46,7 @@
 	#headder {
 		background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
 		width: 100vw;
+		color: #fff;
 	}
 
 	.burger-bar,
@@ -54,7 +55,7 @@
 	}
 
 	.logo {
-		color: #fff;
+		color: inherit;
 		font-weight: 600;
 		line-height: 1.2em;
 		font-size: 1.05rem;
@@ -128,8 +129,8 @@
 	</svg>
 	<div class="logo flex items-center lg:ml-8">
 		<div style="width: 35px;"><?php twentytwenty_site_logo(); ?></div>
-		<a href="/">
-			<div class="ml-2">เพื่อนแท้<br />ร้านอาหาร</div>
+		<a href="<?= get_site_url() ?>/">
+			<div class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
 		</a>
 	</div>
 	<!-- <div class="" style="width: 120px;margin-left: 60px;"></div> -->

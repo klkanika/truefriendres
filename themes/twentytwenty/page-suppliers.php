@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infohub</title>
+    <title>Suppliers hub</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
 <?php
 require_once('custom-classes/class-posts.php');
@@ -23,9 +23,15 @@ $suppliersObject = Post::getPostsByCategory('suppliers', null, 10, 0, null);
 $suppliers = $suppliersObject->posts;
 ?>
 
-<body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
+<body  class="w-full">
     <?php include 'truefriend-header.php'; ?>
     <!-- Set up your HTML -->
+    <style>
+        #content{
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
     <section class="text-white pt-32 w-full" style="background-color:#f2f2f2;color:#262145;">
         <section class="w-full flex items-center flex-col">
             <h2 class="lg:text-2xl text-sm mb-2">รวมเบอร์ติดต่อ Supplier สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</h2>
@@ -37,8 +43,8 @@ $suppliers = $suppliersObject->posts;
                 <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
             </div>
         </section>
-        <hr class="lg:my-12 my-8" style="border-top:1px solid rgba(0,0,0,0.12)" />
-        <section class="lg:ml-12 ml-4 lg:py-8 pb-4" id="content">
+        <hr class="mt-8 mb-8 lg:mt-12 lg:mt-8" style="border-top:1px solid rgba(0,0,0,0.12)" />
+        <section class="mx:6 lg:py-8 lg:px-0 px-4 pb-4" id="content">
             <!-- Slider main container -->
             <div class="swiper-container">
                 <!-- Additional required wrapper -->
@@ -50,7 +56,7 @@ $suppliers = $suppliersObject->posts;
                     <?php endforeach; ?>
                 </div>
             </div>
-            <section class="lg:pl-24 lg:pr-36 pr-4 mt-12" id="content-card">
+            <section class="xs:px-20 lg:px-20 lg:mt-12" id="content-card">
                 <?php foreach ($suppliers as $supplier) : ?>
                     <a href="<?= $supplier->link ?>" class="py-8 flex items-center justify-between w-full cursor-pointer" style="border-bottom:1px solid rgba(0,0,0,0.12)">
                         <div class="flex justify-between items-center w-4/5 lg:flex-nowrap flex-wrap">
@@ -66,9 +72,9 @@ $suppliers = $suppliersObject->posts;
             </section>
         </section>
         <section id="register" style="background-color:#FEDA52;" class="flex flex-col items-center w-full py-24">
-            <h1 class="text-3xl font-black">สมัครเป็น Supplier ฟรี</h1>
+            <h1 class="text-3xl font-bold">สมัครเป็น Supplier ฟรี</h1>
             <a href="<?= get_site_url() ?>/supplier-register" class="text-center text-xs pt-6">
-                <button class="rounded-full px-8 py-3 px-28 bg-white" style="color:#262145">ลงทะเบียน</button>
+                <button class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="color:#262145">ลงทะเบียน</button>
             </a>
         </section>
     </section>

@@ -14,7 +14,7 @@ array_shift($interviewPosts);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interview</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   <style>
     .interview-card {
       height: 80vh;
