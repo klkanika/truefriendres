@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infohub</title>
+  <title>Suppliers</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
@@ -85,7 +85,7 @@ $socialMedia = get_field('socialMedia');
     </div>
     <section class="lg:mx-48 lg:mx-4 my-16" id="content" style="color:#062241">
       <div class="w-full flex lg:mx-0">
-        <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full px-4 lg:px-0">
+        <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
           <a href="<?= get_site_url() ?>/suppliers" class="px-8 py-3 lg:mb-4 mb-2 rounded-full text-base" style="color:#262145;background-color:#FEDA52;">Supplier hub</a>
           <?php foreach ($theSupplierTypes as $theSupplierType) : ?>
             <a href="#" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">

@@ -27,6 +27,13 @@ $suppliers = $suppliersObject->posts;
     <?php include 'truefriend-header.php'; ?>
     <!-- Set up your HTML -->
     <style>
+        #headder{
+            background: transparent;
+            color: var(--primary);
+        }
+        #headder svg{
+            fill: var(--primary);
+        }
         #content{
             max-width: 1000px;
             margin: 0 auto;
@@ -35,7 +42,7 @@ $suppliers = $suppliersObject->posts;
     <section class="text-white pt-32 w-full" style="background-color:#f2f2f2;color:#262145;">
         <section class="w-full flex items-center flex-col">
             <h2 class="lg:text-2xl text-sm mb-2">รวมเบอร์ติดต่อ Supplier สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</h2>
-            <h1 class="lg:text-6xl text-5xl font-black tracking-tighter">Supplier hub</h1>
+            <h1 class="lg:text-6xl text-5xl font-bold tracking-tighter">Supplier hub</h1>
             <img class="lg:w-1/3 w-full lg:-mt-7 -mt-2" src="<?= get_theme_file_uri() ?>/assets/images/supplier-book.svg" alt="" />
             <div class="flex items-center justify-center flex-wrap gap-4 mt-6">
                 <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
@@ -44,11 +51,11 @@ $suppliers = $suppliersObject->posts;
             </div>
         </section>
         <hr class="mt-8 mb-8 lg:mt-12 lg:mt-8" style="border-top:1px solid rgba(0,0,0,0.12)" />
-        <section class="mx:6 lg:py-8 lg:px-0 px-4 pb-4" id="content">
+        <section class="mx:6 lg:py-8 pb-4" id="content">
             <!-- Slider main container -->
             <div class="swiper-container">
                 <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper pl-4 lg:pl-0">
                     <!-- Slides -->
                     <div class="tab-button select-none cursor-pointer tab-button-active border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide">ทั้งหมด</div>
                     <?php foreach ($suppliertypes as $suppliertype) : ?>
@@ -56,11 +63,11 @@ $suppliers = $suppliersObject->posts;
                     <?php endforeach; ?>
                 </div>
             </div>
-            <section class="xs:px-20 lg:px-20 lg:mt-12" id="content-card">
+            <section class="px-4 lg:px-20 lg:mt-12" id="content-card">
                 <?php foreach ($suppliers as $supplier) : ?>
                     <a href="<?= $supplier->link ?>" class="py-8 flex items-center justify-between w-full cursor-pointer" style="border-bottom:1px solid rgba(0,0,0,0.12)">
                         <div class="flex justify-between items-center w-4/5 lg:flex-nowrap flex-wrap">
-                            <h1 class="font-black lg:w-2/3 w-full pr-12 text-xl"><?= $supplier->supplierName ?></h1>
+                            <h1 class="font-bold lg:w-2/3 w-full pr-12 text-xl"><?= $supplier->supplierName ?></h1>
                             <h2 class="lg:w-1/3 w-full lg:text-xl text-base"><?= $supplier->telInfo->tel ?> (<?= $supplier->telInfo->telOwner ?>)</h2>
                         </div>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/big-right.svg" alt="" />
