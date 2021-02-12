@@ -130,11 +130,11 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <hr class="my-5" />
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">สินค้า</p>
-        <?php foreach ($อาเรย์สินค้า as $สินค้า) : ?>
-          <div class="flex flex-wrap">
+        <div class="flex flex-wrap">
+          <?php foreach ($อาเรย์สินค้า as $สินค้า) : ?>
             <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $สินค้า->name ?></div>
           <?php endforeach ?>
-          </div>
+        </div>
       </div>
       <hr class="my-5" />
       <div class="mx-4 lg:mx-0">
