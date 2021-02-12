@@ -106,7 +106,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
           <a href="<?= get_site_url() ?>/suppliers" class="px-8 py-3 lg:mb-4 mb-2 rounded-full text-base" style="color:#262145;background-color:#FEDA52;">Supplier hub</a>
           <?php foreach ($supplierTypes as $supplierType) : ?>
-            <a href="#" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
+            <a href="<?= get_site_url() ?>/suppliers?suppliertype=<?= $supplierType->term_id ?>" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
               <div class="lg:w-10 lg:h-10 w-8 h-8 absolute left-0 top-1/2 ml-2 rounded-full" style="transform:translate(0,-50%)">
                 <img class="object-cover h-full w-full rounded-full" src="<?= get_field('pictureUrl', $supplierType) ? get_field('pictureUrl', $supplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="" />
               </div>

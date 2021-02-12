@@ -111,6 +111,14 @@ class Post
         if ($postType === 'post' && $categoryNo != null) {
             $args['category__in'] = $categoryNo;
             // $args['category__not_in'] = get_category_by_slug('Uncategorized')->cat_ID;
+        } else if ($postType === 'suppliers' && $categoryNo != null) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'suppliertypes',
+                    'field' => 'term_id',
+                    'terms' => $categoryNo
+                )
+            );
         }
 
         if ($except != null) {

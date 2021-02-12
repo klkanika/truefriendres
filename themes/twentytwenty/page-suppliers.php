@@ -13,13 +13,17 @@ require_once('custom-classes/class-posts.php');
 $args = array(
     'taxonomy' => 'suppliertypes',
     'orderby' => 'name',
-    'order'   => 'ASC'
+    'order'   => 'ASC',
 );
 $suppliertypes = get_categories($args);
 $restaurantCategoriesObject = acf_get_field('restaurant_101_category');
 $restaurantCategories = $restaurantCategoriesObject['choices'];
 
-$suppliersObject = Post::getPostsByCategory('suppliers', null, 10, 0, null);
+$supplierTypeId = $_GET['suppliertype'];
+if (!get_term_by('id', $supplierTypeId, 'suppliertypes')) {
+    $supplierTypeId = null;
+}
+$suppliersObject = Post::getPostsByCategory('suppliers', $supplierTypeId, 10, 0, null);
 $suppliers = $suppliersObject->posts;
 ?>
 
@@ -59,9 +63,9 @@ $suppliers = $suppliersObject->posts;
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper pl-4 lg:pl-0">
                     <!-- Slides -->
-                    <div class="tab-button select-none cursor-pointer tab-button-active border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide" style="width:auto">ทั้งหมด</div>
+                    <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide <?= !$supplierTypeId ? 'tab-button-active' : '' ?>" style="width:auto">ทั้งหมด</div>
                     <?php foreach ($suppliertypes as $suppliertype) : ?>
-                        <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide" style="width:auto"><?= $suppliertype->cat_name ?></div>
+                        <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide <?= $supplierTypeId == $suppliertype->term_id ? 'tab-button-active' : '' ?>" style="width:auto"><?= $suppliertype->cat_name ?></div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -75,6 +79,9 @@ $suppliers = $suppliersObject->posts;
                         <img src="<?= get_theme_file_uri() ?>/assets/images/big-right.svg" alt="" />
                     </a>
                 <?php endforeach; ?>
+                <?php if (count($suppliers) === 0) { ?>
+                    <div class="flex justify-center items-center">ไม่พบ Supplier ในประเภทธุรกิจนี้</div>
+                <?php } ?>
                 <div class="text-center text-xs py-12">
                     <button class="rounded-full text-white px-8 py-3 px-28" style="background-color: #262145;">LOAD MORE</button>
                 </div>
