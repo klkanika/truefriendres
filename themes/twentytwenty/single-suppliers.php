@@ -75,7 +75,7 @@ $socialMedia = get_field('socialMedia');
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
         <?php foreach ($featuredImages as $featuredImage) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $featuredImage['image']['url'] ?>" alt="" /></div>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $featuredImage['image'] ?>" alt="" /></div>
         <?php endforeach ?>
         
       </div>
