@@ -181,6 +181,11 @@ $form = [
 			</form>
 		</section>
 	</section>
+	<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" method="post">
+		<input type="text" name="abc" />
+		<input type="submit" name="submit" />
+		<input type="hidden" name="action" value="supplier_register">
+	</form>
 	<?php include 'truefriend-footer.php'; ?>
 </body>
 
