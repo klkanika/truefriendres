@@ -59,9 +59,9 @@ $suppliers = $suppliersObject->posts;
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper pl-4 lg:pl-0">
                     <!-- Slides -->
-                    <div class="tab-button select-none cursor-pointer tab-button-active border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide">ทั้งหมด</div>
+                    <div class="tab-button select-none cursor-pointer tab-button-active border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide" style="width:auto">ทั้งหมด</div>
                     <?php foreach ($suppliertypes as $suppliertype) : ?>
-                        <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide"><?= $suppliertype->cat_name ?></div>
+                        <div class="tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide" style="width:auto"><?= $suppliertype->cat_name ?></div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -114,7 +114,7 @@ $suppliers = $suppliersObject->posts;
             spaceBetween: 10,
             breakpoints: {
                 1024: {
-                    slidesPerView: 7.5,
+                    slidesPerView: 'auto',
                     spaceBetween: 10,
                 },
             }

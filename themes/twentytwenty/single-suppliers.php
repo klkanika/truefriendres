@@ -10,11 +10,13 @@
 </head>
 <?php
 require_once('custom-classes/class-provinces.php');
+require_once('custom-classes/class-suppliertypes.php');
+$supplierTypes = wp_get_post_terms(get_the_ID(), 'suppliertypes');
+$supplierGoods = wp_get_post_terms(get_the_ID(), 'suppliergoods');
 $อาเรย์รูปภาพ = get_field('รูปภาพ');
 $อาเรย์สินค้า = get_field('สินค้าที่จำหน่าย');
 $อาเรย์สถานที่จัดส่ง = get_field('สถานที่จัดส่ง');
 $ภาคการจัดส่ง = array('ภาคกลาง' => false, 'ภาคตะวันตก' => false, 'ภาคตะวันออก' => false, 'ภาคตะวันออกเฉียงเหนือ' => false, 'ภาคเหนือ' => false, 'ภาคใต้' => false);
-$ประเภทกิจการ = get_field('ประเภทกิจการ');
 $โซเชียลมีเดีย = get_field('โซเชียลมีเดีย');
 $รายละเอียดเจ้าของธุรกิจ = get_field('รายละเอียดเจ้าของธุรกิจ');
 foreach ($อาเรย์สถานที่จัดส่ง as $จังหวัดจัดส่ง) {
@@ -103,12 +105,14 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <div class="w-full flex lg:mx-0">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
           <a href="<?= get_site_url() ?>/suppliers" class="px-8 py-3 lg:mb-4 mb-2 rounded-full text-base" style="color:#262145;background-color:#FEDA52;">Supplier hub</a>
-          <a href="#" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
-            <div class="lg:w-10 lg:h-10 w-8 h-8 absolute left-0 top-1/2 ml-2 rounded-full" style="transform:translate(0,-50%)">
-              <img class="object-cover h-full w-full rounded-full" src="<?= get_field('pictureUrl', $ประเภทกิจการ) ? get_field('pictureUrl', $ประเภทกิจการ) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="" />
-            </div>
-            <?= $ประเภทกิจการ->name ?>
-          </a>
+          <?php foreach ($supplierTypes as $supplierType) : ?>
+            <a href="#" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
+              <div class="lg:w-10 lg:h-10 w-8 h-8 absolute left-0 top-1/2 ml-2 rounded-full" style="transform:translate(0,-50%)">
+                <img class="object-cover h-full w-full rounded-full" src="<?= get_field('pictureUrl', $supplierType) ? get_field('pictureUrl', $supplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="" />
+              </div>
+              <?= $supplierType->name ?>
+            </a>
+          <?php endforeach ?>
         </div>
         <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
@@ -131,8 +135,8 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">สินค้า</p>
         <div class="flex flex-wrap">
-          <?php foreach ($อาเรย์สินค้า as $สินค้า) : ?>
-            <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $สินค้า->name ?></div>
+          <?php foreach ($supplierGoods as $sg) : ?>
+            <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $sg->name ?></div>
           <?php endforeach ?>
         </div>
       </div>
