@@ -11,9 +11,9 @@
 <?php
 require_once('custom-classes/class-posts.php');
 $args = array(
-    'taxonomy' => 'suppliertypes',
-    'orderby' => 'name',
-    'order'   => 'ASC'
+	'taxonomy' => 'suppliertypes',
+	'orderby' => 'name',
+	'order'   => 'ASC'
 );
 $suppliertypes = get_categories($args);
 $restaurantCategoriesObject = acf_get_field('restaurant_101_category');
@@ -31,7 +31,7 @@ $form = [
 				"label" 			=> "ประเภทกิจการ",
 				"placeholder" => "",
 				"type"				=> "select",
-				"options"			=> ["ร้านอาหาร","ร้านกาแฟ"],
+				"options"			=> ["ร้านอาหาร", "ร้านกาแฟ"],
 				"required"		=> true
 			],
 			[
@@ -59,7 +59,7 @@ $form = [
 				"label" 			=> "ประเภทกิจการ",
 				"placeholder" => "",
 				"type"				=> "select",
-				"options"			=> ["ร้านอาหาร","ร้านกาแฟ"],
+				"options"			=> ["ร้านอาหาร", "ร้านกาแฟ"],
 				"required"		=> true
 			],
 			[
@@ -124,7 +124,7 @@ $form = [
 				
 			</section>
 			<section>
-			<form>
+			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" method="post">
 					<?php foreach($form as $i => $f): ?>
 						<div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i?>">
 							<div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i?>)">
@@ -170,7 +170,6 @@ $form = [
 								</div>
 								<?php endif;?>
 							</div>
-						</div>
 					<?php endforeach; ?>
 					<div class="py-6 px-8">
 						<label class="checkbox font-semibold">
@@ -181,7 +180,8 @@ $form = [
 					</div>
 					<hr class="mx-8">
 					<div class="my-6 text-center">
-					<button class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="background: #FFD950;">ลงทะเบียน</button>
+					<input type="hidden" name="action" value="supplier_register">
+					<button type="submit" class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="background: #FFD950;">ลงทะเบียน</button>
 					</div>
 				</form>
 			</section>
@@ -197,7 +197,7 @@ $form = [
 	// 	// console.log($(this).parents('collapse'))
 	// 	showStep(step)
 	// }
-	function showStep(step){
+	function showStep(step) {
 		$('.collapse').removeClass('open')
 		$(`.collapse[collapse=${step}]`).addClass('open')
 	}
