@@ -9,33 +9,38 @@
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
 <?php
-require_once('custom-classes/class-posts.php');
-$featuredImages = get_field('featuredImages');
-$args = array(
-  'taxonomy' => 'suppliertypes',
-  'orderby' => 'name',
-  'order'   => 'ASC'
-);
-$suppliertypes = get_categories($args);
-$theSupplierTypes = get_the_terms(get_the_ID(), 'suppliertypes');
-$goods = explode("\r\n", get_field('goods'));
-$deliveryAreas = get_field('deliveryArea');
-$socialMedia = get_field('socialMedia');
-// echo '<pre>';print_r($featuredImages );exit;
+require_once('custom-classes/class-provinces.php');
+$อาเรย์รูปภาพ = get_field('รูปภาพ');
+$อาเรย์สินค้า = get_field('สินค้าที่จำหน่าย');
+$อาเรย์สถานที่จัดส่ง = get_field('สถานที่จัดส่ง');
+$ภาคการจัดส่ง = array('ภาคกลาง' => false, 'ภาคตะวันตก' => false, 'ภาคตะวันออก' => false, 'ภาคตะวันออกเฉียงเหนือ' => false, 'ภาคเหนือ' => false, 'ภาคใต้' => false);
+$ประเภทกิจการ = get_field('ประเภทกิจการ');
+$โซเชียลมีเดีย = get_field('โซเชียลมีเดีย');
+$รายละเอียดเจ้าของธุรกิจ = get_field('รายละเอียดเจ้าของธุรกิจ');
+foreach ($อาเรย์สถานที่จัดส่ง as $จังหวัดจัดส่ง) {
+  foreach ($provinces as $ภาค => $อาเรย์จังหวัด) {
+    if (in_array($จังหวัดจัดส่ง, $อาเรย์จังหวัด)) {
+      $ภาคการจัดส่ง[$ภาค] = true;
+    }
+  }
+}
 ?>
 
-<body  class="w-full">
+<body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <style>
-    #headder{
+    #headder {
       background: transparent;
       color: var(--primary);
     }
-    #headder svg{
+
+    #headder svg {
       fill: var(--primary);
     }
-    #suppliers-content .swiper-button-next,#suppliers-content .swiper-button-prev {
+
+    #suppliers-content .swiper-button-next,
+    #suppliers-content .swiper-button-prev {
       background-color: #fff;
       border-radius: 100%;
       width: 40px;
@@ -44,28 +49,39 @@ $socialMedia = get_field('socialMedia');
       align-items: center;
       justify-content: center;
     }
-    #suppliers-content .swiper-button-next:after,#suppliers-content .swiper-button-prev:after{
+
+    #suppliers-content .swiper-button-next:after,
+    #suppliers-content .swiper-button-prev:after {
       font-size: 15px;
       color: #000;
     }
-    #suppliers-content .swiper-button-disabled{
+
+    #suppliers-content .swiper-button-disabled {
       display: none;
     }
-    #suppliers-content .swiper-button-next{
+
+    #suppliers-content .swiper-button-next {
       right: 1rem;
     }
-    #suppliers-content .swiper-button-prev{
+
+    #suppliers-content .swiper-button-prev {
       left: 1rem;
     }
-    #suppliers-content .banner-slide{
-      width:35%;height: 18rem;
+
+    #suppliers-content .banner-slide {
+      width: 35%;
+      height: 18rem;
     }
+
     @media (max-width:992px) {
-      #suppliers-content .swiper-button-next,#suppliers-content .swiper-button-prev {
+
+      #suppliers-content .swiper-button-next,
+      #suppliers-content .swiper-button-prev {
         display: none;
       }
-      #suppliers-content .banner-slide{
-        width:80%;
+
+      #suppliers-content .banner-slide {
+        width: 80%;
       }
     }
   </style>
@@ -74,27 +90,25 @@ $socialMedia = get_field('socialMedia');
     <div class="swiper-container">
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
-        <?php foreach ($featuredImages as $featuredImage) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $featuredImage['image']['url'] ?>" alt="" /></div>
+        <?php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูปภาพ['image'] ?>" alt="" /></div>
         <?php endforeach ?>
-        
+
       </div>
       <!-- Add Arrows -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
     <section class="lg:mx-48 lg:mx-4 my-16" id="content" style="color:#062241">
       <div class="w-full flex lg:mx-0">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
           <a href="<?= get_site_url() ?>/suppliers" class="px-8 py-3 lg:mb-4 mb-2 rounded-full text-base" style="color:#262145;background-color:#FEDA52;">Supplier hub</a>
-          <?php foreach ($theSupplierTypes as $theSupplierType) : ?>
-            <a href="#" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
-              <div class="lg:w-10 lg:h-10 w-8 h-8 absolute left-0 top-1/2 ml-2 rounded-full" style="transform:translate(0,-50%)">
-                <img class="object-cover h-full w-full rounded-full" src="<?= get_field('pictureUrl', $theSupplierType) ? get_field('pictureUrl', $theSupplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="" />
-              </div>
-              <?= $theSupplierType->name ?>
-            </a>
-          <?php endforeach ?>
+          <a href="#" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
+            <div class="lg:w-10 lg:h-10 w-8 h-8 absolute left-0 top-1/2 ml-2 rounded-full" style="transform:translate(0,-50%)">
+              <img class="object-cover h-full w-full rounded-full" src="<?= get_field('pictureUrl', $ประเภทกิจการ) ? get_field('pictureUrl', $ประเภทกิจการ) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="" />
+            </div>
+            <?= $ประเภทกิจการ->name ?>
+          </a>
         </div>
         <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
@@ -103,10 +117,10 @@ $socialMedia = get_field('socialMedia');
         </div>
       </div>
       <div class="mx-4 lg:mx-0">
-        <h1 class="text-4xl font-bold mt-4"><?= get_field('supplierName') ?></h1>
-        <h2 class="text-lg mt-3"><?= get_field('telInfo')['tel'] ?> (<?= get_field('telInfo')['telOwner'] ?>)</h2>
+        <h1 class="text-4xl font-bold mt-4"><?= get_field('ชื่อธุรกิจ') ?></h1>
+        <h2 class="text-lg mt-3"><?= get_field('รายละเอียดเจ้าของธุรกิจ')['เบอร์โทร'] ?> (<?= get_field('รายละเอียดเจ้าของธุรกิจ')['ชื่อ'] ?>)</h2>
         <p class="text-sm mt-8" style="color:rgba(6,34,65,0.5)">รายละเอียด</p>
-        <p class="text-base mt-1"><?= get_field('supplierDetail') ?></p>
+        <p class="text-base mt-1"><?= get_field('แนะนำธุรกิจ') ? get_field('แนะนำธุรกิจ') : '-' ?></p>
         <div class="items-center justify-end flex-wrap gap-4 lg:hidden flex">
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
@@ -116,18 +130,18 @@ $socialMedia = get_field('socialMedia');
       <hr class="my-5" />
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">สินค้า</p>
-        <div class="flex flex-wrap">
-          <?php foreach ($goods as $g) : ?>
-            <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $g ?></div>
+        <?php foreach ($อาเรย์สินค้า as $สินค้า) : ?>
+          <div class="flex flex-wrap">
+            <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $สินค้า->name ?></div>
           <?php endforeach ?>
-        </div>
+          </div>
       </div>
       <hr class="my-5" />
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">พื้นที่การจัดส่ง</p>
         <div class="flex flex-wrap">
-          <?php foreach ($deliveryAreas as $deliveryArea) : ?>
-            <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $deliveryArea ?></div>
+          <?php foreach ($ภาคการจัดส่ง as $ภาค => $มีภาค) : ?>
+            <?= $มีภาค ? '<div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base">' . $ภาค . '</div>' : '' ?>
           <?php endforeach ?>
         </div>
       </div>
@@ -135,10 +149,10 @@ $socialMedia = get_field('socialMedia');
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">ติดต่อ / Social media</p>
         <div class="flex flex-col">
-          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/phone-icon.svg" alt="" /><?= $socialMedia['telInfo']['tel'] ? $socialMedia['telInfo']['tel'] : '-' ?> <?= $socialMedia['telInfo']['telOwner'] ? '(' . $socialMedia['telInfo']['telOwner'] . ')' : '' ?></div>
-          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt="" /><?= $socialMedia['line'] ? $socialMedia['line'] : '-' ?></div>
-          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/email-icon.svg" alt="" /><?= $socialMedia['email'] ? $socialMedia['email'] : '-' ?></div>
-          <div class="flex items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /><?= $socialMedia['facebook'] ? $socialMedia['facebook'] : '-' ?></div>
+          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/phone-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] : '-' ?> <?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? '(' . $รายละเอียดเจ้าของธุรกิจ['ชื่อ'] . ')' : '' ?></div>
+          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt="" /><?= $โซเชียลมีเดีย['line'] ? $โซเชียลมีเดีย['line'] : '-' ?></div>
+          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/email-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['email'] ? $รายละเอียดเจ้าของธุรกิจ['email'] : '-' ?></div>
+          <div class="flex items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /><?= $โซเชียลมีเดีย['facebook'] ? $โซเชียลมีเดีย['facebook'] : '-' ?></div>
         </div>
       </div>
       <hr class="my-5" />

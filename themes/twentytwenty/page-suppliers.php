@@ -23,18 +23,20 @@ $suppliersObject = Post::getPostsByCategory('suppliers', null, 10, 0, null);
 $suppliers = $suppliersObject->posts;
 ?>
 
-<body  class="w-full">
+<body class="w-full">
     <?php include 'truefriend-header.php'; ?>
     <!-- Set up your HTML -->
     <style>
-        #headder{
+        #headder {
             background: transparent;
             color: var(--primary);
         }
-        #headder svg{
+
+        #headder svg {
             fill: var(--primary);
         }
-        #content{
+
+        #content {
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -67,8 +69,8 @@ $suppliers = $suppliersObject->posts;
                 <?php foreach ($suppliers as $supplier) : ?>
                     <a href="<?= $supplier->link ?>" class="py-8 flex items-center justify-between w-full cursor-pointer" style="border-bottom:1px solid rgba(0,0,0,0.12)">
                         <div class="flex justify-between items-center w-4/5 lg:flex-nowrap flex-wrap">
-                            <h1 class="font-bold lg:w-2/3 w-full pr-12 text-xl"><?= $supplier->supplierName ?></h1>
-                            <h2 class="lg:w-1/3 w-full lg:text-xl text-base"><?= $supplier->telInfo->tel ?> (<?= $supplier->telInfo->telOwner ?>)</h2>
+                            <h1 class="font-bold lg:w-2/3 w-full pr-12 text-xl"><?= $supplier->ชื่อธุรกิจ ?></h1>
+                            <h2 class="lg:w-1/3 w-full lg:text-xl text-base"><?= $supplier->รายละเอียดเจ้าของธุรกิจ->เบอร์โทร ?> (<?= $supplier->รายละเอียดเจ้าของธุรกิจ->ชื่อ ?>)</h2>
                         </div>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/big-right.svg" alt="" />
                     </a>

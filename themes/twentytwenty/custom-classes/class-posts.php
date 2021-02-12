@@ -155,8 +155,8 @@ class Post
         }
 
         if ($postType === 'suppliers') {
-            $thePost->supplierName = get_field('supplierName');
-            $thePost->telInfo = get_field('telInfo');
+            $thePost->ชื่อธุรกิจ = get_field('ชื่อธุรกิจ');
+            $thePost->รายละเอียดเจ้าของธุรกิจ = get_field('รายละเอียดเจ้าของธุรกิจ');
         }
 
         return $thePost;
