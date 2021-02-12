@@ -48,6 +48,11 @@ $suppliers = $suppliersObject->posts;
             <div class="bg-white rounded-xl">
                 abc
             </div>
+            <form action="<?= get_site_url() ?>/wp-admin/admin-post.php" method="post">
+                <input type="text" name="abc" />
+                <input type="submit" name="submit" />
+                <input type="hidden" name="action" value="supplier_register">
+            </form>
         </section>
     </section>
     <?php include 'truefriend-footer.php'; ?>
@@ -56,22 +61,3 @@ $suppliers = $suppliersObject->posts;
 </html>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-<?php
-// Create post object
-// $my_post = array(
-//     'post_title' => wp_strip_all_tags('โย่วๆ'),
-//     'post_type' => 'suppliers',
-//     'post_status' =>  'submitted'
-// );
-
-// // Insert the post into the database
-// $the_post_id = wp_insert_post($my_post);
-// update_field('ชื่อธุรกิจ', 'Tom', $the_post_id);
-// update_field('แนะนำธุรกิจ', 'อิอิซ่า', $the_post_id);
-// $value = array("ไต้หวัน");
-// update_field('ประเทศ', $value, $the_post_id);
-// $value = array("ภาคใต้");
-// update_field( 'สถานที่จัดส่ง', $value, $post_id );
-
-?>
