@@ -170,6 +170,7 @@ $form = [
 								</div>
 								<?php endif;?>
 							</div>
+						</div>
 					<?php endforeach; ?>
 					<div class="py-6 px-8">
 						<label class="checkbox font-semibold">
