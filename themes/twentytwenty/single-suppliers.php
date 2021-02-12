@@ -62,6 +62,11 @@ $socialMedia = get_field('socialMedia');
         <h2 class="text-xl mt-3"><?= get_field('telInfo')['tel'] ?> (<?= get_field('telInfo')['telOwner'] ?>)</h2>
         <p class="text-sm mt-8" style="color:rgba(6,34,65,0.5)">รายละเอียด</p>
         <p class="text-base mt-1"><?= get_field('supplierDetail') ?></p>
+        <div class="items-center justify-end flex-wrap gap-4 lg-hidden flex">
+          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+        </div>
       </div>
       <hr class="my-5" />
       <div class="mx-4 lg:mx-0">
