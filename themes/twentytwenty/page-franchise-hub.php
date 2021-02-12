@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Knowledge</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
+  <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
 </head>
 <?php
 require_once('custom-classes/class-posts.php');
@@ -21,7 +21,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
 });
 ?>
 
-<body  class="w-full">
+<body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full" style="background-color: #262145;">

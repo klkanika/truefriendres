@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   <style>
     .loadmore:hover {
       background-color: white;
@@ -15,7 +15,7 @@
   </style>
 </head>
 
-<body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
+<body  class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white w-full pb-12 overflow-hidden" style="background-color: #19181F;" id="banner">

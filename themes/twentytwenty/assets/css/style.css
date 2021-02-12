@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Thin.woff") format("woff");
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-ExtraLight.woff") format("woff");
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Light.woff") format("woff");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Medium.woff") format("woff");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-SemiBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-ExtraBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Black.woff") format("woff");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+html {
+  --primary: #062241;
+}
+
+body {
+  font-family: "NotoSansThai", sans-serif;
+}
