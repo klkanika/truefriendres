@@ -111,6 +111,14 @@ class Post
         if ($postType === 'post' && $categoryNo != null) {
             $args['category__in'] = $categoryNo;
             // $args['category__not_in'] = get_category_by_slug('Uncategorized')->cat_ID;
+        } else if ($postType === 'suppliers' && $categoryNo != null) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'suppliertypes',
+                    'field' => 'term_id',
+                    'terms' => $categoryNo
+                )
+            );
         }
 
         if ($except != null) {
@@ -155,8 +163,8 @@ class Post
         }
 
         if ($postType === 'suppliers') {
-            $thePost->supplierName = get_field('supplierName');
-            $thePost->telInfo = get_field('telInfo');
+            $thePost->ชื่อธุรกิจ = get_field('ชื่อธุรกิจ');
+            $thePost->รายละเอียดเจ้าของธุรกิจ = get_field('รายละเอียดเจ้าของธุรกิจ');
         }
 
         return $thePost;

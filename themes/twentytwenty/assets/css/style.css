@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Thin.woff") format("woff");
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-ExtraLight.woff") format("woff");
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Light.woff") format("woff");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Medium.woff") format("woff");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-SemiBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-ExtraBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("../fonts/NotoSans/NotoSansThai-Black.woff") format("woff");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+html {
+  --primary: #062241;
+}
+
+body {
+  font-family: "NotoSansThai", sans-serif;
+}
+
+button:focus {
+  outline: unset !important;
+}
+
+/* The checkbox */
+.checkbox {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox .checkmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 1.4em;
+  width: 1.4em;
+  margin-right: 1em;
+  border: 2px solid #c4c4c4;
+  border-radius: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover input ~ .checkmark,
+.checkbox input:checked ~ .checkmark {
+  background-color: #2273de;
+  border-color: #2273de;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  background-image: url("../images/checkbox-check.svg");
+  width: 1em;
+  height: 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}

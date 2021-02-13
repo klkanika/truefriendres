@@ -6,12 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Services</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
-  <style>
-
-  </style>
 </head>
 
 <?php
@@ -27,7 +24,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
 });
 ?>
 
-<body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
+<body  class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full bg-contain" style="background-color: #262145;background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-grid.svg')">
@@ -248,7 +245,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
       </div>
     </div>
     <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Consultant</div>
-    <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-300 md:flex md:justify-center md:mr-20">
+    <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-100 md:flex md:justify-center md:mr-20">
       <div class="mx-3 flex items-center mb-2 md:mb-0">
         <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call-white.svg" />
         <a href="tel:08276281927" class="ml-2 underline">08276281927 (คุณออม)</a>
