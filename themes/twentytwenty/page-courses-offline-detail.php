@@ -65,12 +65,21 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
     }
 
     .carousel-cell {
-      width: 440px;
-      height: 293px;
+      width: 240px;
+      height: 193px;
       margin-right: 10px;
       background: #C4C4C4;
       border-radius: 5px;
       counter-increment: gallery-cell;
+    }
+
+    @media screen and (min-width: 768px) {
+
+      /* half-width cells for larger devices */
+      .carousel-cell {
+        width: 440px;
+        height: 293px;
+      }
     }
 
     /* cell number */

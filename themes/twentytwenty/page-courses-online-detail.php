@@ -144,12 +144,21 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
     }
 
     .carousel-cell {
-      width: 440px;
-      height: 293px;
+      width: 240px;
+      height: 193px;
       margin-right: 10px;
       background: #C4C4C4;
       border-radius: 5px;
       counter-increment: gallery-cell;
+    }
+
+    @media screen and (min-width: 768px) {
+
+      /* half-width cells for larger devices */
+      .carousel-cell {
+        width: 440px;
+        height: 293px;
+      }
     }
 
     /* cell number */
@@ -295,13 +304,16 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
           <div class="overflow-hidden leading-normal rounded-none">
             <p class="pl-2 py-2 flex justify-between">
               - ร้านแรก...ปัญหา อุปสรรค และวิธีแก้ไข (คุณหณึ่งฤทัย)
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
             <p class="pl-2 py-2 flex justify-between">
               - ต้นทุนมาตรฐานของร้านอาหาร ควรเป็นเท่าไร?
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
             <p class="pl-2 py-2 flex justify-between">
               - รายได้ต่อหัว และ profit margin ของแต่ละธุรกิจอาหาร ควรเป็นเท่าไร?
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
           </div>
         </div>
       </div>
@@ -314,13 +326,16 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
           <div class="overflow-hidden leading-normal rounded-none">
             <p class="pl-2 py-2 flex justify-between">
               - เทคนิคการหาพนักงาน และทำอย่างไรเพื่อดึงพนักงาน
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
             <p class="pl-2 py-2 flex justify-between">
               - กลยุทธ์การเลือกทำเล และสถานที่ - กรณีนอกห้าง
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
             <p class="pl-2 py-2 flex justify-between">
               - ขยายสาขา...ขยายเอง vs. แฟรนไชส์ อันไหนดีกว่ากัน
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
           </div>
         </div>
       </div>
@@ -333,13 +348,16 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
           <div class="overflow-hidden leading-normal rounded-none">
             <p class="pl-2 py-2 flex justify-between">
               - บริหารงบการเงินอย่างไร
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
             <p class="pl-2 py-2 flex justify-between">
               - แนวโน้วเศรษฐกิจไทย และผลกระทบต่อธุรกิจอาหาร
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
             <p class="pl-2 py-2 flex justify-between">
               - สรุป
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""></p>
+              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+            </p>
           </div>
         </div>
       </div>
