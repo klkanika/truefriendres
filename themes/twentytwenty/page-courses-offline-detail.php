@@ -9,8 +9,6 @@
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
 </head>
 
 <?php
@@ -56,61 +54,79 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
       }
     }
 
-    .flickity-button:disabled {
+    #documents .swiper-button-next,
+    #documents .swiper-button-prev {
+      background-color: #fff;
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #documents .swiper-button-next:after,
+    #documents .swiper-button-prev:after {
+      font-size: 15px;
+      color: #000;
+    }
+
+    #documents .swiper-button-disabled {
       display: none;
     }
 
-    .carousel {
-      background: transparent;
+    #documents .swiper-button-next {
+      right: 1rem;
     }
 
-    .carousel-cell {
-      width: 240px;
-      height: 193px;
-      margin-right: 10px;
-      background: #C4C4C4;
-      border-radius: 5px;
-      counter-increment: gallery-cell;
+    #documents .swiper-button-prev {
+      left: 1rem;
     }
 
-    @media screen and (min-width: 768px) {
+    #documents .banner-slide {
+      width: 35%;
+      height: 18rem;
+      background-color: #C4C4C4;
+    }
 
-      /* half-width cells for larger devices */
-      .carousel-cell {
-        width: 440px;
-        height: 293px;
+    #document .swiper-container {
+      padding: "auto";
+    }
+
+    @media (max-width:992px) {
+
+      #documents .swiper-button-next,
+      #documents .swiper-button-prev {
+        display: none;
       }
-    }
 
-    /* cell number */
-    .carousel-cell:before {
-      display: block;
-      text-align: center;
-      /* content: counter(gallery-cell); */
-      line-height: 200px;
-      font-size: 80px;
-      color: white;
+      #documents .banner-slide {
+        width: 80%;
+      }
     }
   </style>
 
   <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
-    <div class="carousel w-full md:pl-32 hidden md:block" 
-      data-flickity='{ "cellAlign": "left", "pageDots": false }'>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-    </div>
-    <div class="carousel w-full px-4 block md:hidden" 
-      data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-      <div class="carousel-cell"></div>
-    </div>
+    <!-- Slider main container -->
+    <div class="swiper-container w-full">
+      <div class="swiper-wrapper md:pl-32 pl-4">
+        <!-- Slides -->
+        <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
+        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+        </div>
+        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+        </div>
+        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+        </div>
+        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+        </div>
+        <!-- <?//php endforeach ?> -->
 
+      </div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
     <div class="w-full md:pl-32 md:pr-32 mt-16 mb-12 px-4">
       <div class="flex items-center justify-between">
         <button class="h-10 rounded-full flex items-center justify-center p-4 md:p-6 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#262145; color: #DBDBDB;">
@@ -134,8 +150,8 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
         </div>
       </div>
       <a href="" class="w-full lg:w-1/2 px-4">
-        <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= get_theme_file_uri() ?>/assets/images/img-default.jpg')">
-          <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
+        <div class="w-full lg:h-96 h-56 flex items-center justify-center rounded-xl relative bg-gray-400">
+          <img class="object-none object-center" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
         </div>
       </a>
       <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
@@ -184,6 +200,20 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
       slideBy: 2,
       margin: 16,
       dots: false,
+    });
+
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 15,
+      // loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // breakpoints: {
+      //   992: {
+      //   },
+      // }
     });
   });
 </script>
