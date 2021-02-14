@@ -88,7 +88,8 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
 
     /* Icon formatting - closed */
     .tab input[type=checkbox]+label::after {
-      content: "\25BE";
+      content: url(<?= get_theme_file_uri() ?>/assets/images/collapse.svg);
+      /* content: "\25BE"; */
       font-weight: bold;
       /*.font-bold*/
       /* border-width: 1px; */

@@ -449,7 +449,8 @@ $CoursesPosts = $CoursesPostsObject->posts;
     });
 
     $("#offlinePicSlider").trigger('destroy.owl.carousel');
-    $("#offlineCoursesSlider").owlCarousel({
+    $(window).width() < 768 ? 
+    $("#offlinePicSlider").owlCarousel({
       items: $(window).width() < 1024 ? 1.1 : 2.25,
       loop: true,
       // autoplay: true,
@@ -457,7 +458,10 @@ $CoursesPosts = $CoursesPostsObject->posts;
       slideBy: 1,
       margin: 20,
       dots: false,
-    });
+      checkVisible: true,
+    })
+    : $("#offlinePicSlider").hide()
+    ;
 
     $("#offlineCoursesSlider").trigger('destroy.owl.carousel');
     $("#offlineCoursesSlider").owlCarousel({
@@ -479,6 +483,7 @@ $CoursesPosts = $CoursesPostsObject->posts;
       slideBy: 1,
       margin: 20,
       dots: false,
+      checkVisible: $(window).width() < 1024 ? 1.1 : 2.25,
     });
 
   });
@@ -512,6 +517,7 @@ $CoursesPosts = $CoursesPostsObject->posts;
     //     },
     //   }
     // });
+    $(window).width() < 768 ? 
     $("#offlinePicSlider").owlCarousel({
       items: $(window).width() < 1024 ? 1.1 : 2.25,
       loop: true,
@@ -520,7 +526,10 @@ $CoursesPosts = $CoursesPostsObject->posts;
       slideBy: 1,
       margin: 20,
       dots: false,
-    });
+      checkVisible: true,
+    })
+    : $("#offlinePicSlider").hide()
+    ;
 
     $("#offlineCoursesSlider").owlCarousel({
       items: $(window).width() < 1024 ? 1.1 : 2.25,

@@ -57,9 +57,9 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
   </style>
   <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <div class="flex text-base md:text-2xl pb-2">
-      <div class="font-light pr-2">คลังแสงของคนอยากเปิดร้านอาหาร</div>
+      <div class="text-base md:text-xl font-light pr-2">คลังแสงของคนอยากเปิดร้านอาหาร</div>
     </div>
-    <p class="text-xl md:text-6xl font-bold pb-2">Document</p>
+    <p class="text-3xl md:text-6xl font-bold pb-2">Document</p>
     <p class="text-sm md:text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</p>
     <div class="flex mt-10 z-20">
       <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
