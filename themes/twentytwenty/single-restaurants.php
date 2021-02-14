@@ -10,7 +10,16 @@
 </head>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
-  <?php include 'truefriend-header.php'; ?>
+  <?php
+  include 'truefriend-header.php';
+  $อาเรย์รูปภาพ = get_field('รูปภาพ');
+  $เมนูแนะนำ = get_field('เมนูแนะนำ');
+  $restaurant_type = wp_get_post_terms(get_the_ID(), 'restaurant_type');
+  $restaurant_products = wp_get_post_terms(get_the_ID(), 'restaurant_product');
+  $restaurant_available = get_field('restaurantAvailable');
+  $restaurant_delivery_available = get_field('restaurantDeliveryAvailable');
+  $restaurant_facility = wp_get_post_terms(get_the_ID(), 'restaurant_facility');
+  ?>
   <style>
     #headder {
       background: transparent;
@@ -72,9 +81,12 @@
     <div class="swiper-container">
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
-        <?php foreach ([0, 0, 0, 0] as $รูปภาพ) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="" /></div>
-        <?php endforeach ?>
+        <?php
+        if ($อาเรย์รูปภาพ) {
+          foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?>
+            <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูปภาพ['รูป'] ?>" alt="" /></div>
+        <?php endforeach;
+        } ?>
 
       </div>
       <!-- Add Arrows -->
@@ -84,10 +96,12 @@
     <div class="flex items-center justify-between mt-12">
       <div class="flex items-center justify-center">
         <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Franchise hub</div>
-        <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
-          <img class="w-7 h-7 absolute left-0 ml-1" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt="">
-          <span class="ml-6 text-xs">ร้านเสต็ก</span>
-        </div>
+        <?php foreach ($restaurant_type as $rstype) : ?>
+          <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
+            <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $rstype) ? get_field('pictureUrl', $rstype) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
+            <span class="ml-6 text-xs"><?= $rstype->name ?></span>
+          </div>
+        <?php endforeach; ?>
       </div>
       <div class="lg:flex hidden lg:px-32 lg:mx-8 px-8 py-5 lg:justify-start justify-center ">
         <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt=""></a>
@@ -96,13 +110,13 @@
       </div>
     </div>
     <div class="mt-4">
-      <p class="lg:text-4xl text-3xl font-semibold ">บริษัทอนุภัทร เสต็กเนื้อ</p>
-      <p class="text-lg mt-2">0824564755 (คุณริน)</p>
+      <p class="lg:text-4xl text-3xl font-semibold "><?= get_field('ชื่อร้าน') ?></p>
+      <p class="text-lg mt-2"><?= get_field('telInfo')['telNo'] ?> (<?= get_field('telInfo')['telOwner'] ?>)</p>
     </div>
     <div class="lg:mt-12 mt-8">
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">รายละเอียด</p>
-        <p class="text-xl">เราขายสินค้าประเภทผักสดปลอดสารพิษราคาถูกมาก สั่งเยอะลดราคาได้ จัดส่งฟรี คลังสินค้าอยู่บริเวณห้วยขวาง</p>
+        <p class="text-xl"><?= get_field('restaurantDetail') ?></p>
 
         <div class="lg:hidden flex pt-8 justify-end">
           <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt=""></a>
@@ -113,14 +127,16 @@
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">สินค้า</p>
         <div class="flex flex-wrap">
-          <?php foreach (["ผัก", "ผักชี", "ผักกาดขาว"] as $product) : ?>
-            <span class="border rounded-full px-4 py-1 text-center mr-2" style="border-color: #262145; min-width: 5rem;"><?= $product ?></span>
+          <?php foreach ($restaurant_products as $rp) : ?>
+            <span class="border rounded-full px-4 py-1 text-center mr-2" style="border-color: #262145; min-width: 5rem;"><?= $rp->name ?></span>
           <?php endforeach; ?>
         </div>
       </div>
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">เวลาเปิดร้าน</p>
-        <p class="text-xl">ทุกวัน 11:00 - 21:00 น.</p>
+        <?php foreach ($restaurant_available as $ra) : ?>
+          <p class="text-xl"><?= $ra['restaurantDay'] ?> <?= $ra['restaurantOpen'] ?> - <?= $ra['restaurantClose'] ?> น.</p>
+        <?php endforeach; ?>
       </div>
       <div class="border-b border-gray-300 py-8 -mx-4">
         <div class="flex items-center justify-between mb-2 lg:mx-0 mx-4">
@@ -134,49 +150,51 @@
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">เมนูแนะนำ</p>
         <div class="flex">
-          <?php foreach ([0, 0] as $menu) : ?>
+          <?php foreach ($เมนูแนะนำ as $เมนู) : ?>
             <a href="#">
-              <img src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="" class="h-40 mr-2 rounded-lg">
+              <img src="<?= ($เมนู['menuPic']) ?>" alt="" class="h-40 mr-2 rounded-lg">
             </a>
           <?php endforeach; ?>
         </div>
       </div>
       <div class="border-b border-gray-300 lg:py-8 py-3 lg:block grid grid-cols-2">
         <p class="text-gray-500 lg:mb-2">ช่วงราคา</p>
-        <p class="lg:text-xl">251 - 500 บาท</p>
+        <p class="lg:text-xl"><?= get_field('ช่วงราคาอาหาร')['priceStart'] ?> - <?= get_field('ช่วงราคาอาหาร')['priceEnd'] ?> บาท</p>
       </div>
       <div class="border-b border-gray-300 lg:py-8 py-3 lg:block grid grid-cols-2">
         <p class="text-gray-500 lg:mb-2">เวลาเปิด-ปิด เดลิเวอรี่</p>
-        <p class="lg:text-xl">ทุกวัน 11:00 - 20:00 น.</p>
+        <?php foreach ($restaurant_delivery_available as $rda) : ?>
+          <p class="lg:text-xl"><?= $rda['restaurantDeliveryDay'] ?> <?= $rda['restaurantDeliveryOpen'] ?> - <?= $rda['restaurantDeliveryClose'] ?> น.</p>
+        <?php endforeach; ?>
       </div>
       <div class="border-b border-gray-300 lg:py-8 py-3 lg:block grid grid-cols-2">
         <p class="text-gray-500 lg:mb-2">จำนวนที่นั่ง</p>
-        <p class="lg:text-xl">มากกว่า 150 ที่นั่ง</p>
+        <p class="lg:text-xl">มากกว่า <?= get_field('seat') ?> ที่นั่ง</p>
       </div>
       <div class="border-b border-gray-300 lg:py-8 py-3">
         <p class="text-gray-500 lg:mb-2">สิ่งอำนวยความสะดวก</p>
         <div class="flex flex-wrap lg:mt-0 mt-4">
-          <?php foreach (["ที่จอดรถ", "รับบัตรเครดิท", "ห้องน้ำ", "wifi", "เดลิเวอรี่", "แอลกอฮอล์"] as $product) : ?>
-            <span class="border rounded-full px-4 py-1 text-center mr-2 lg:mb-0 mb-2" style="border-color: #262145; min-width: 5rem;"><?= $product ?></span>
+          <?php foreach ($restaurant_facility as $rfa) : ?>
+            <span class="border rounded-full px-4 py-1 text-center mr-2 lg:mb-0 mb-2" style="border-color: #262145; min-width: 5rem;"><?= $rfa->name ?></span>
           <?php endforeach; ?>
         </div>
       </div>
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">จำนวนสาขา</p>
-        <p class="text-xl">200 สาขา (ข้อมูลเมื่อ 20 Dec 2563)</p>
+        <p class="text-xl"><?= get_field('จำนวนสาขา') ?> สาขา (ข้อมูลเมื่อ <?= get_field('branchCountLastUpdate') ?>)</p>
       </div>
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">ข้อมูลเพิ่มเติมอื่นๆ</p>
-        <p class="text-xl">หยุดทุกวันพุธที่ 2 ของเดือน</p>
+        <p class="text-xl"><?= get_field('ข้อมูลเพิ่มเติมอื่นๆ') ?></p>
       </div>
       <div class="py-8">
         <p class="lg:text-gray-500 mb-2">Social Media</p>
         <div>
           <p>
-            <span class="font-semibold">Facebook: </span>facebook.com/anupat_steak
+            <span class="font-semibold">Facebook: </span><?= get_field('ช่องทางติดตาม')['facebook_page'] ?>
           </p>
           <p>
-            <span class="font-semibold">Line: </span>@anupat_steak
+            <span class="font-semibold">Line: </span><?= get_field('ช่องทางติดตาม')['line'] ?>
           </p>
         </div>
       </div>
@@ -186,9 +204,9 @@
     <span class="text-3xl font-bold">
       ลงทะเบียน Restaurant ฟรี
     </span>
-    <button class="rounded-full py-3 px-24 text-xs bg-white my-6">
+    <a class="rounded-full py-3 px-24 text-xs bg-white my-6" href="<?=get_site_url()?>/restaurant-register">
       ลงทะเบียน
-    </button>
+    </a>
   </div>
   <?php include 'truefriend-footer.php'; ?>
 </body>

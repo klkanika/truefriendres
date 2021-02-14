@@ -108,15 +108,15 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
     <section class="lg:mx-48 lg:mx-4 my-16" id="content" style="color:#062241">
       <div class="w-full flex lg:mx-0">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
-          <a href="<?= get_site_url() ?>/suppliers" class="px-8 py-3 lg:mb-4 mb-2 rounded-full text-base" style="color:#262145;background-color:#FEDA52;">Supplier hub</a>
-          <?php foreach ($supplierTypes as $supplierType) : ?>
-            <a href="<?= get_site_url() ?>/suppliers?suppliertype=<?= $supplierType->term_id ?>" class="pl-14 pr-8 py-3 lg:mb-4 mb-2 rounded-full lg:text-base text-sm text-white relative cursor-pointer flex items-center" style="background-color:#062241;">
-              <div class="lg:w-10 lg:h-10 w-8 h-8 absolute left-0 top-1/2 ml-2 rounded-full" style="transform:translate(0,-50%)">
-                <img class="object-cover h-full w-full rounded-full" src="<?= get_field('pictureUrl', $supplierType) ? get_field('pictureUrl', $supplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="" />
+          <div class="flex items-center justify-center">
+            <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Franchise hub</div>
+            <?php foreach ($supplierTypes as $supplierType) : ?>
+              <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
+                <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $supplierType) ? get_field('pictureUrl', $supplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
+                <span class="ml-6 text-xs"><?= $supplierType->name ?></span>
               </div>
-              <?= $supplierType->name ?>
-            </a>
-          <?php endforeach ?>
+            <?php endforeach ?>
+          </div>
         </div>
         <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>

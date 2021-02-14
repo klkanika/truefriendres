@@ -288,7 +288,7 @@
   </section>
   <div class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
     <span class="text-3xl font-bold">
-      ลงทะเบียน Restaurant ฟรี
+      ลงทะเบียน Franchise ฟรี
     </span>
     <button class="rounded-full py-3 px-24 text-xs bg-white my-6">
       ลงทะเบียน

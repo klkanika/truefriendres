@@ -87,12 +87,14 @@ $suppliers = $suppliersObject->posts;
                 </div>
             </section>
         </section>
-        <section id="register" style="background-color:#FEDA52;" class="flex flex-col items-center w-full py-24">
-            <h1 class="text-3xl font-bold">สมัครเป็น Supplier ฟรี</h1>
-            <a href="<?= get_site_url() ?>/supplier-register" class="text-center text-xs pt-6">
-                <button class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="color:#262145">ลงทะเบียน</button>
+        <div class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
+            <span class="text-3xl font-bold">
+                ลงทะเบียน Supplier ฟรี
+            </span>
+            <a href="<?= get_site_url() ?>/supplier-register" class="rounded-full py-3 px-24 text-xs bg-white my-6">
+                ลงทะเบียน
             </a>
-        </section>
+        </div>
     </section>
     <?php
     $footerbgcolor = '#f2f2f2';

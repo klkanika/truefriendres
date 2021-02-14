@@ -21,7 +21,18 @@
 </head>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
-  <?php include 'truefriend-header.php'; ?>
+  <?php
+  include 'truefriend-header.php';
+  require_once('custom-classes/class-posts.php');
+  $args = array(
+    'taxonomy' => 'restaurant_type',
+    'orderby' => 'name',
+    'order'   => 'ASC',
+  );
+  $restaurant_type = get_categories($args);
+  $restaurantsObject = Post::getPostsByCategory('restaurants', null, 10, 0, null);
+  $restaurants = $restaurantsObject->posts;
+  ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full" style="color: #262145;">
     <div class="flex flex-col items-center justify-center border-b border-gray-300 pb-12">
@@ -37,6 +48,9 @@
       <div class="flex items-center">
         <select class="bg-transparent border border-gray-300 rounded-full px-2 py-1">
           <option value="">ประเภทธุรกิจ</option>
+          <?php foreach ($restaurant_type as $rstype) : ?>
+            <option value="<?= $rstype->slug ?>"><?= $rstype->name ?></option>
+          <?php endforeach; ?>
         </select>
         <select class="ml-2 bg-transparent border border-gray-300 rounded-full px-2 py-1">
           <option value="">%กำไรต่อปี</option>
@@ -60,25 +74,25 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $row) : ?>
+          <?php foreach ($restaurants as $res) : ?>
             <tr class="border-b border-gray-300">
               <td class="font-bold pb-3 pt-2">
-                บริษัทอนุภัทรเสต็กเนื้อ
+                <?= $res->ชื่อร้าน ?>
               </td>
               <td>
-                ร้านเสต็ก
+                <?= $res->ประเภทธุรกิจ ? $res->ประเภทธุรกิจ : '-' ?>
               </td>
               <td>
-                200 สาขา
+                <?= $res->จำนวนสาขา ? $res->จำนวนสาขา . ' สาขา' : '-' ?>
               </td>
               <td>
-                นนทบุรี
+                <?= $res->จังหวัด ? $res->จังหวัด : '-' ?>
               </td>
               <td>
-                0824564755
+                <?= $res->เบอร์โทรศัพท์ ? $res->เบอร์โทรศัพท์ : '-' ?>
               </td>
               <td>
-                <a href="#">
+                <a href="<?= $res->link ?>">
                   <img class="w-4 h-4 mr-2" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">
                 </a>
               </td>
@@ -106,9 +120,9 @@
       <span class="text-3xl font-bold">
         ลงทะเบียน Restaurant ฟรี
       </span>
-      <button class="rounded-full py-3 px-24 text-xs bg-white my-6">
+      <a class="rounded-full py-3 px-24 text-xs bg-white my-6" href="<?= get_site_url() ?>/restaurant-register">
         ลงทะเบียน
-      </button>
+      </a>
     </div>
   </section>
   <?php include 'truefriend-footer.php'; ?>

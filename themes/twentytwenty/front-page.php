@@ -114,7 +114,7 @@ foreach ($postCategories as $postCategory) {
                 <p class="font-bold text-2xl">Supplier Hub</p>
                 <div class="flex items-center">
                     <p class="font-bold mr-8 hidden lg:block">ค้นหา</p>
-                    <a href="suppliers" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierTypes->posts_count ?>)</a>
+                    <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierTypes->posts_count ?>)</a>
                 </div>
             </div>
             <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
