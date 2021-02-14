@@ -50,35 +50,35 @@ $CoursesPosts = $CoursesPostsObject->posts;
 
     <div id="lastestCoursesSlider" class="owl-carousel pb-16 border-red-900 border-b" style="border-color:#E9E9E9">
       <a href="">
-        <div class="relative fourthSliderClass">
-          <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" />
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-          <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
+        <div class="relative fourthSliderClass rounded-xl" style="background-color:#262145;">
+          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
+          <div class="absolute top-5 left-5" style="width: 40px;"></div>
           <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">test</p>
-            <p class="lg:text-lg text-xs">test2</p>
+            <p class="lg:text-xs text-xs mb-1">online</p>
+            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
           </div>
         </div>
       </a>
       <a href="">
-        <div class="relative fourthSliderClass">
-          <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" />
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-          <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
+        <div class="relative fourthSliderClass rounded-xl" style="background-color:#262145;">
+          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
+          <div class="absolute top-5 left-5" style="width: 40px;"></div>
           <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">test</p>
-            <p class="lg:text-lg text-xs">test2</p>
+            <p class="lg:text-xs text-xs mb-1">online</p>
+            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
           </div>
         </div>
       </a>
     </div>
   </section>
   <!-- Offine course -->
-  <section class="px-6 md:px-0 md:pl-20 pt-20" style="background-color: #E5E5E5;color:#262145">
+  <section class="md:pl-20 pt-20" style="background-color: #E5E5E5;color:#262145">
     <div class="md:flex pb-16">
       <div class="md:w-2/4">
-        <p class="lg:text-left text-4xl font-bold">Offine course</p>
-        <div class="my-12">
+        <p class="px-6 md:px-0 lg:text-left text-4xl font-bold">Offine course</p>
+        <div class="px-6 md:px-0 my-12">
           <div class="flex mb-2 items-center">
             <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
             <span class="ml-4 text-base md:text-xl font-bold">สอนตั้งแต่ขั้นพื้นฐาน</span>
@@ -94,7 +94,7 @@ $CoursesPosts = $CoursesPostsObject->posts;
         </div>
 
         <!--Slider-->
-        <div id="offlinePicSlider" class="md:hidden owl-carousel pb-16 border-red-900 border-b" style="border-color:#E9E9E9;color:#262145;">
+        <div id="offlinePicSlider" class="md:hidden owl-carousel pl-6 md:pl-0 pb-16 border-red-900 border-b" style="border-color:#E9E9E9;color:#262145;">
           <div class="relative fourthSliderClass">
             <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/courses-offline-01.png" />
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
@@ -113,11 +113,11 @@ $CoursesPosts = $CoursesPostsObject->posts;
           </div>
         </div>
 
-        <div class="mb-16">
+        <div class="px-6 md:px-0 mb-16">
           <p class="text-sm md:text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-sm md:text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
-        <div class="mb-8 md:mb-16">
+        <div class="px-6 md:px-0 mb-8 md:mb-16">
           <div class="font-bold mb-4">Our Client</div>
           <div class="flex">
             <div class="tooltip">
@@ -173,31 +173,31 @@ $CoursesPosts = $CoursesPostsObject->posts;
           </div>
         </div>
       </div>
-      <div class="w-2/4 hidden md:flex items-center justify-center">
+      <div class="px-6 md:px-0 w-2/4 hidden md:flex items-center justify-center">
         <img src="<?= get_theme_file_uri() ?>/assets/images/courses-offline.png" />
       </div>
     </div>
     <!--Slider-->
-    <div id="offlineCoursesSlider" class="owl-carousel pb-16 border-red-900 border-b" style="border-color:#E9E9E9">
+    <div id="offlineCoursesSlider" class="owl-carousel pl-6 md:pl-0 pb-16 border-red-900 border-b" style="border-color:#E9E9E9;color:#262145;">
       <a href="">
-        <div class="relative fourthSliderClass">
-          <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" />
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-          <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">test</p>
-            <p class="lg:text-lg text-xs">test2</p>
+        <div class="relative fourthSliderClass bg-gray-300 rounded-xl">
+          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
+          <div class="absolute top-5 left-5" style="width: 40px;"></div>
+          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
+            <p class="lg:text-xs text-xs mb-1">offline</p>
+            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
           </div>
         </div>
       </a>
       <a href="">
-        <div class="relative fourthSliderClass">
-          <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" />
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-          <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">test</p>
-            <p class="lg:text-lg text-xs">test2</p>
+        <div class="relative fourthSliderClass bg-gray-300 rounded-xl">
+          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
+          <div class="absolute top-5 left-5" style="width: 40px;"></div>
+          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
+            <p class="lg:text-xs text-xs mb-1">offline</p>
+            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
           </div>
         </div>
       </a>
@@ -205,8 +205,8 @@ $CoursesPosts = $CoursesPostsObject->posts;
   </section>
 
   <!-- Online Course -->
-  <section class="px-6 md:px-0 md:pl-20 pt-6 md:pt-20 " style="background-color: #262145;color:#fff">
-    <div class="md:flex pb-16">
+  <section class="md:pl-20 pt-6 md:pt-20 " style="background-color: #262145;color:#fff">
+    <div class="px-6 md:px-0 md:flex pb-16">
       <div class="md:w-2/4">
         <p class="lg:text-left text-4xl font-bold">Online Course</p>
         <div class="my-12">
@@ -286,44 +286,45 @@ $CoursesPosts = $CoursesPostsObject->posts;
           </div>
         </div>
       </div>
-      <div class="w-2/4 hidden md:flex items-center justify-center px-16">
+      <div class="w-2/4 hidden md:flex items-center justify-center pl-16">
         <img src="<?= get_theme_file_uri() ?>/assets/images/courses-online.png" />
       </div>
     </div>
     <!--Slider-->
-    <div id="onlineCoursesSlider" class="owl-carousel pb-16 border-red-900 border-b" style="border-color:#E9E9E9;color:#262145;">
+    <div id="onlineCoursesSlider" class="owl-carousel pl-6 md:pl-0 pb-16 border-red-900 border-b" style="border-color:#E9E9E9;color:#262145;">
       <a href="">
         <div class="relative fourthSliderClass bg-gray-300 rounded-xl">
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs" style="border-color:#262145;">
+          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">
             รายละเอียดคอร์ส
           </div>
-          <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
+          <div class="absolute top-5 left-5" style="width: 40px;"></div>
           <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">test</p>
-            <p class="lg:text-lg text-xs">test2</p>
+            <p class="lg:text-xs text-xs mb-1">offline</p>
+            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
           </div>
         </div>
       </a>
       <a href="">
         <div class="relative fourthSliderClass bg-gray-300 rounded-xl">
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs" style="border-color:#262145;">
+          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">
             รายละเอียดคอร์ส
           </div>
-          <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
+          <div class="absolute top-5 left-5" style="width: 40px;"></div>
           <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">test</p>
-            <p class="lg:text-lg text-xs">test2</p>
+            <p class="lg:text-xs text-xs mb-1">offline</p>
+            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
           </div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- Training -->
+  <!-- Free Seminar -->
   <section class="py-20 flex items-center justify-center" style="background-color: #D4BD7D;color:#262145;">
-    <div class="hidden md:flex bg-contain" style="background-color: #D4BD7D;color:#262145;background-image: url('<?= get_theme_file_uri() ?>/assets/images/courses-free-seminar.svg')">
-      <div class="p-6" style="height:621px;width:535px;">
-        <p class="lg:text-left text-4xl font-bold">Free Seminar</p>
+    <div class="hidden md:flex" style="background-color: #D4BD7D;color:#262145;">
+      <img class="object-cover" src="<?= get_theme_file_uri() ?>/assets/images/courses-free-seminar.svg" />
+      <div class="absolute pt-12 pl-8 pr-16" style="width: 577px;height:691px;">
+        <p class="lg:text-left text-4xl font-bold pt-2">Free Seminar</p>
         <div class="my-6">
           <div class="flex mb-2 items-center">
             <img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/service-check-blue.svg" alt="">
@@ -338,7 +339,7 @@ $CoursesPosts = $CoursesPostsObject->posts;
             <span class="ml-4 text-xl font-bold">เห็นผลใน 1 เดือน</span>
           </div>
         </div>
-        <div class="mb-10">
+        <div class="mb-8">
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
@@ -449,15 +450,18 @@ $CoursesPosts = $CoursesPostsObject->posts;
     });
 
     $("#offlinePicSlider").trigger('destroy.owl.carousel');
-    $("#offlineCoursesSlider").owlCarousel({
-      items: $(window).width() < 1024 ? 1.1 : 2.25,
-      loop: true,
-      // autoplay: true,
-      autoplayHoverPause: true,
-      slideBy: 1,
-      margin: 20,
-      dots: false,
-    });
+    $(window).width() < 768 ?
+      $("#offlinePicSlider").owlCarousel({
+        items: $(window).width() < 1024 ? 1.1 : 2.25,
+        loop: true,
+        // autoplay: true,
+        autoplayHoverPause: true,
+        slideBy: 1,
+        margin: 20,
+        dots: false,
+        checkVisible: true,
+      }) :
+      $("#offlinePicSlider").hide();
 
     $("#offlineCoursesSlider").trigger('destroy.owl.carousel');
     $("#offlineCoursesSlider").owlCarousel({
@@ -479,6 +483,7 @@ $CoursesPosts = $CoursesPostsObject->posts;
       slideBy: 1,
       margin: 20,
       dots: false,
+      checkVisible: $(window).width() < 1024 ? 1.1 : 2.25,
     });
 
   });
@@ -512,15 +517,18 @@ $CoursesPosts = $CoursesPostsObject->posts;
     //     },
     //   }
     // });
-    $("#offlinePicSlider").owlCarousel({
-      items: $(window).width() < 1024 ? 1.1 : 2.25,
-      loop: true,
-      // autoplay: true,
-      autoplayHoverPause: true,
-      slideBy: 1,
-      margin: 20,
-      dots: false,
-    });
+    $(window).width() < 768 ?
+      $("#offlinePicSlider").owlCarousel({
+        items: $(window).width() < 1024 ? 1.1 : 2.25,
+        loop: true,
+        // autoplay: true,
+        autoplayHoverPause: true,
+        slideBy: 1,
+        margin: 20,
+        dots: false,
+        checkVisible: true,
+      }) :
+      $("#offlinePicSlider").hide();
 
     $("#offlineCoursesSlider").owlCarousel({
       items: $(window).width() < 1024 ? 1.1 : 2.25,
