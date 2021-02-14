@@ -11,10 +11,75 @@
 
 <body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
+  <style>
+    #headder {
+      background: transparent;
+      color: var(--primary);
+    }
+
+    #headder svg {
+      fill: var(--primary);
+    }
+
+    #suppliers-content .swiper-button-next,
+    #suppliers-content .swiper-button-prev {
+      background-color: #fff;
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #suppliers-content .swiper-button-next:after,
+    #suppliers-content .swiper-button-prev:after {
+      font-size: 15px;
+      color: #000;
+    }
+
+    #suppliers-content .swiper-button-disabled {
+      display: none;
+    }
+
+    #suppliers-content .swiper-button-next {
+      right: 1rem;
+    }
+
+    #suppliers-content .swiper-button-prev {
+      left: 1rem;
+    }
+
+    #suppliers-content .banner-slide {
+      width: 35%;
+      height: 18rem;
+    }
+
+    @media (max-width:992px) {
+
+      #suppliers-content .swiper-button-next,
+      #suppliers-content .swiper-button-prev {
+        display: none;
+      }
+
+      #suppliers-content .banner-slide {
+        width: 80%;
+      }
+    }
+  </style>
   <!-- Set up your HTML -->
-  <section class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
-    <div class="flex">
-      <div class="bg-gray-300 h-64 w-72 rounded-lg"></div>
+  <section id="suppliers-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
+    <div class="swiper-container">
+      <div class="swiper-wrapper lg:pl-48 pl-4">
+        <!-- Slides -->
+        <?php foreach ([0, 0, 0, 0] as $รูปภาพ) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="" /></div>
+        <?php endforeach ?>
+
+      </div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
     <div class="flex items-center justify-between mt-12">
       <div class="flex items-center justify-center">
@@ -132,3 +197,21 @@
 
 <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 15,
+      // loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // breakpoints: {
+      //   992: {
+      //   },
+      // }
+    });
+  });
+</script>

@@ -56,7 +56,7 @@
   <section id="section-1stSlider" class="relative">
     <div id="1stSlider" class="owl-carousel">
       <div class="relative">
-        <img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/cover-franchise.png" />
+        <img class="lg:object-cover w-full lg:h-full h-64" src="<?= get_theme_file_uri() ?>/assets/images/cover-franchise.png" />
         <div class="absolute left-0 bottom-0">
           <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
             <p class="lg:text-2xl text-xl">เฟรนชายยอดนิยม</p>
