@@ -53,8 +53,8 @@
     </div>
 
   </section>
-  <section id="section-1stSlider" class="relative">
-    <div id="1stSlider" class="owl-carousel">
+  <section class="relative">
+    <div class="">
       <div class="relative">
         <img class="lg:object-cover w-full lg:h-full h-64" src="<?= get_theme_file_uri() ?>/assets/images/cover-franchise.png" />
         <div class="absolute left-0 bottom-0">
@@ -72,60 +72,58 @@
     </div>
   </section>
 
-  <section class="text-white py-12" style="background-color: #23212e;">
-    <div class="flex items-center justify-center pb-12">
-      <div class="hit-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
-      <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
-        <div class="hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
-      <?php endforeach; ?>
-    </div>
-    <div class="flex w-full lg:px-16">
-      <div class="relative grid grid-cols-5 grid-rows-5 gap-2 border border-gray-300 rounded-lg p-3 lg:w-2/4">
-        <div class="absolute left-0 rounded-full w-10 h-10 bg-gray-300 -ml-5 -mt-5 flex items-center justify-center">
-          <span class="font-semibold" style="color: #23212e;">#1</span>
-        </div>
-
-        <img class="row-span-4 col-span-4 h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-        <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-        <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-        <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-        <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-
-        <div class="col-span-5 flex items-center justify-center">
-          <div>
-            <p>สาขา</p>
-            <p>200</p>
-          </div>
-          <p class="mx-12 text-xl font-semibold">
-            โคตรดีวากิว
-          </p>
-          <div class="">
-            <p>ค่าสมัคร</p>
-            <p>20,000</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white" style="color: #262145;">
-    <div class="py-12 px-8">
-      <p class="text-xl mb-2">เฟรนชายเปิดใหม่</p>
-      <p class="font-semibold text-2xl">Newly submitted Franchise</p>
-
-      <div class="flex items-center py-8">
-        <div class="new-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+  <section class="text-white py-12 lg:pl-16 pl-4" style="background-color: #23212e;">
+    <div class="swiper-container cat-swiper">
+      <div class="swiper-wrapper pb-12">
+        <div style="width: auto;" class="swiper-slide hit-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
         <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
-          <div class="new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
+          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
         <?php endforeach; ?>
       </div>
+    </div>
+    <div class="swiper-container hit-swiper py-4">
+      <div class="swiper-wrapper" style="padding: 1.25rem 1.25rem;">
+        <div style="height: 40vh;" class="swiper-slide relative grid grid-cols-5 grid-rows-5 gap-2 border border-gray-300 rounded-lg p-3 lg:w-2/4">
+          <div class="absolute left-0 rounded-full w-10 h-10 bg-gray-300 -ml-5 -mt-5 flex items-center justify-center">
+            <span class="font-semibold" style="color: #23212e;">#1</span>
+          </div>
 
-      <div class="w-full flex ">
-        <?php foreach ([0, 0] as $type) : ?>
-          <div class="grid grid-cols-4 grid-rows-4 gap-2 border border-gray-300 rounded-lg p-3 shadow-md mr-8 lg:w-1/4">
-            <div class="col-span-4 flex items-center text-black">
+          <img class="row-span-4 col-span-4 h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+          <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+          <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+          <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+          <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+
+          <div class="col-span-5 flex items-center justify-center">
+            <div>
+              <p>สาขา</p>
+              <p>200</p>
+            </div>
+            <p class="mx-12 text-xl font-semibold">
+              โคตรดีวากิว
+            </p>
+            <div class="">
+              <p>ค่าสมัคร</p>
+              <p>20,000</p>
+            </div>
+          </div>
+        </div>
+
+        <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $type) : ?>
+          <div style="background-color: #464356; width:auto; height: 40vh;" class="swiper-slide relative grid grid-cols-4 grid-rows-5 gap-2 border border-gray-300 rounded-lg p-3 shadow-md mr-8">
+            <div class="absolute left-0 rounded-full w-10 h-10 bg-gray-300 -ml-5 -mt-5 flex items-center justify-center">
+              <span class="font-semibold" style="color: #23212e;">#1</span>
+            </div>
+
+            <img class="row-span-3 col-span-4 w-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+
+            <div class="col-span-4 flex items-center">
               <div class="mr-auto">
-                <p>สาขา</p>
+                <p>เนื้อ</p>
                 <p class="text-xl font-semibold">โคตรดีวากิว</p>
               </div>
               <div class="mr-4">
@@ -138,16 +136,56 @@
               </div>
             </div>
 
-            <img class="row-span-4 col-span-4 w-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-
-
           </div>
         <?php endforeach; ?>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white" style="color: #262145;">
+    <div class="py-12 lg:px-16 px-4">
+      <p class="text-xl mb-2">เฟรนชายเปิดใหม่</p>
+      <p class="font-semibold text-2xl">Newly submitted Franchise</p>
+
+      <div class="swiper-container cat-swiper">
+        <div class="swiper-wrapper py-8">
+          <div style="width: auto;" class="swiper-slide new-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+          <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
+            <div style="width: auto;" class="swiper-slide new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <div class="swiper-container new-swiper">
+        <div class="swiper-wrapper">
+          <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $type) : ?>
+            <div class="swiper-slide grid grid-cols-4 grid-rows-4 gap-2 border border-gray-300 rounded-lg p-3 shadow-md mr-8">
+              <div class="col-span-4 flex items-center text-black">
+                <div class="mr-auto">
+                  <p>เนื้อ</p>
+                  <p class="text-xl font-semibold">โคตรดีวากิว</p>
+                </div>
+                <div class="mr-4">
+                  <p>สาขา</p>
+                  <p class="text-xl font-semibold">200</p>
+                </div>
+                <div class="">
+                  <p>ค่าสมัคร</p>
+                  <p class="text-xl font-semibold">20,000</p>
+                </div>
+              </div>
+
+              <img class="row-span-4 col-span-4 w-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+
+
+            </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
 
@@ -155,45 +193,47 @@
       <span class="text-white">Banner</span>
     </div>
 
-    <div class="py-12 px-8">
+    <div class="py-12 lg:px-16 px-4">
       <p class="text-xl mb-2">เฟรนชายเปิดใหม่</p>
       <p class="font-semibold text-2xl">Newly submitted Franchise</p>
 
-      <div class="flex items-center py-8">
-        <div class="new-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
-        <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
-          <div class="new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
-        <?php endforeach; ?>
+      <div class="swiper-container cat-swiper">
+        <div class="swiper-wrapper py-8">
+          <div style="width: auto;" class="swiper-slide new-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+          <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
+            <div style="width: auto;" class="swiper-slide new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
+          <?php endforeach; ?>
+        </div>
       </div>
+      <div class="swiper-container new-swiper">
+        <div class="swiper-wrapper">
+          <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $type) : ?>
+            <div class="swiper-slide grid grid-cols-4 grid-rows-4 gap-2 border border-gray-300 rounded-lg p-3 shadow-md mr-8">
+              <div class="col-span-4 flex items-center text-black">
+                <div class="mr-auto">
+                  <p>เนื้อ</p>
+                  <p class="text-xl font-semibold">โคตรดีวากิว</p>
+                </div>
+                <div class="mr-4">
+                  <p>สาขา</p>
+                  <p class="text-xl font-semibold">200</p>
+                </div>
+                <div class="">
+                  <p>ค่าสมัคร</p>
+                  <p class="text-xl font-semibold">20,000</p>
+                </div>
+              </div>
 
-      <div class="w-full flex ">
-        <?php foreach ([0, 0] as $type) : ?>
-          <div class="grid grid-cols-4 grid-rows-4 gap-2 border border-gray-300 rounded-lg p-3 shadow-md mr-8 lg:w-1/4">
-            <div class="col-span-4 flex items-center text-black">
-              <div class="mr-auto">
-                <p>สาขา</p>
-                <p class="text-xl font-semibold">โคตรดีวากิว</p>
-              </div>
-              <div class="mr-4">
-                <p>สาขา</p>
-                <p class="text-xl font-semibold">200</p>
-              </div>
-              <div class="">
-                <p>ค่าสมัคร</p>
-                <p class="text-xl font-semibold">20,000</p>
-              </div>
+              <img class="row-span-4 col-span-4 w-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+
             </div>
-
-            <img class="row-span-4 col-span-4 w-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-
-
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </section>
@@ -215,21 +255,30 @@
     </div>
 
     <div class="pb-8">
-      <?php foreach ([0, 0] as $type) : ?>
-        <div class="border-b border-gray-300 py-4">
-          <div class="flex items-center justify-between pb-4 text-xl">
-            <p class="text-2xl font-semibold">บริษัทอนุภัทรเสต็กเนื้อ</p>
-            <p>ร้านเสต็ก</p>
-            <p>200 สาขา</p>
-            <p>20,000 บาท</p>
-            <img class="w-4 h-4" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">
+      <?php foreach ([0, 0] as $item) : ?>
+        <div class="border-b border-gray-300 py-4 lg:block flex items-center justify-between">
+          <div>
+            <div class="lg:flex block lg:items-center lg:justify-between pb-4 text-xl">
+              <p class="text-2xl font-semibold lg:mb-0 mb-2">บริษัทอนุภัทรเสต็กเนื้อ</p>
+              <p class="inline-block">ร้านเสต็ก</p>
+              <p class="inline-block">200 สาขา</p>
+              <p class="inline-block">20,000 บาท</p>
+              <img class="w-4 h-4 lg:block hidden" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">
+            </div>
+            <div class="hidden lg:grid grid-cols-5 gap-2">
+              <?php foreach ([0, 0, 0, 0, 0] as $item) : ?>
+                <img class="object-cover rounded-lg" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <?php endforeach; ?>
+            </div>
+            <div class="lg:hidden grid grid-cols-3 gap-2 w-5/6">
+              <?php foreach ([0, 0, 0] as $item) : ?>
+                <img class="object-cover h-20  rounded-lg" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+              <?php endforeach; ?>
+            </div>
           </div>
-          <div class="hidden lg:grid grid-cols-5 gap-2">
-            <?php foreach ([0, 0, 0, 0, 0] as $type) : ?>
-              <img class="" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-            <?php endforeach; ?>
-          </div>
+          <img class="w-5 h-5 lg:hidden block" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">
         </div>
+
       <?php endforeach; ?>
       <div class="flex items-center justify-center py-12">
         <button class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
@@ -252,3 +301,48 @@
 
 <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+
+    const hitSwiper = new Swiper('.hit-swiper', {
+      // Optional parameters
+      loop: false,
+      slidesPerView: 1.1,
+      spaceBetween: 30,
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      }
+    });
+
+    const newSwiper = new Swiper('.new-swiper', {
+      // Optional parameters
+      loop: false,
+      slidesPerView: 1.25,
+      spaceBetween: 30,
+      breakpoints: {
+        1024: {
+          slidesPerView: 2.75,
+          spaceBetween: 30,
+        },
+      }
+    });
+
+    const catSwiper = new Swiper('.cat-swiper', {
+      // Optional parameters
+      loop: false,
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+      breakpoints: {
+        1024: {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+        },
+      }
+    });
+
+
+  });
+</script>
