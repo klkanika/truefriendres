@@ -92,9 +92,13 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
     <div class="swiper-container">
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
-        <?php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูปภาพ['image'] ?>" alt="" /></div>
-        <?php endforeach ?>
+        <?php
+        if ($อาเรย์รูปภาพ) {
+          foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?>
+            <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูปภาพ['image'] ?>" alt="" /></div>
+        <?php
+          endforeach;
+        } ?>
 
       </div>
       <!-- Add Arrows -->

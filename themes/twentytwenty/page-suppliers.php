@@ -19,7 +19,7 @@ $suppliertypes = get_categories($args);
 $restaurantCategoriesObject = acf_get_field('restaurant_101_category');
 $restaurantCategories = $restaurantCategoriesObject['choices'];
 
-$supplierTypeId = $_GET['suppliertype'];
+$supplierTypeId = isset($_GET['suppliertype']) ? $_GET['suppliertype'] : null;
 if (!get_term_by('id', $supplierTypeId, 'suppliertypes')) {
     $supplierTypeId = null;
 }
