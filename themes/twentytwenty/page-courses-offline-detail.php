@@ -111,17 +111,10 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
     <div class="swiper-container w-full">
       <div class="swiper-wrapper md:pl-32 pl-4">
         <!-- Slides -->
-        <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <!-- <?//php endforeach ?> -->
-
+        <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $thePost) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+          </div>
+        <?php endforeach; ?>
       </div>
       <!-- Add Arrows -->
       <div class="swiper-button-next"></div>
