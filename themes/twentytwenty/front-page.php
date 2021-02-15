@@ -63,7 +63,7 @@ foreach ($postCategories as $postCategory) {
                         <img class="object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" />
                         <div class="absolute left-0 bottom-0 banner__title">
                             <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
-                                <div onclick="window.open('/category/<?= $thePost->categories[0]->slug ?>'),'_self'" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
+                                <div onclick="window.open('<?= get_site_url() ?>/<?= $thePost->categories[0]->slug ?>','_self')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
                                 <p class="text-white lg:text-2xl text-xl"><?= $thePost->title ?></p>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ foreach ($postCategories as $postCategory) {
                                         echo '99+';
                                     } ?>
                                 </div>
-                                <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
                                     <p><?= $supplierType->name ?></p>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ foreach ($postCategories as $postCategory) {
             $posts = $postObject->posts->posts;
         ?>
             <div class="lg:w-1/3 w-full lg:pr-6 lg:text-sm text-xs mb-12 lg:mb-0">
-                <div onclick="window.open('category/<?= $catObject->slug ?>/','_self')" class="flex items-center lg:text-2xl text-base font-bold cursor-pointer select-none w-max lg:mb-6 mb-4">
+                <div onclick="window.open('<?= get_site_url() ?>/<?= $catObject->slug ?>/','_self')" class="flex items-center lg:text-2xl text-base font-bold cursor-pointer select-none w-max lg:mb-6 mb-4">
                     <p><?= $catObject->name ?></p>
                     <img class="lg:ml-2" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" />
                 </div>

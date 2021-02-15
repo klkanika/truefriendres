@@ -10,18 +10,10 @@
 </head>
 <?php
 require_once('custom-classes/class-posts.php');
-$recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
-$knowledgePosts = array_filter($recentPosts->posts, function ($p) {
-  return in_array(
-    'knowledge',
-    array_map(function ($c) {
-      return $c->slug;
-    }, $p->categories)
-  );
-});
+$knowledgePosts = Post::getPostsByCategory('post', get_category_by_slug('knowledge')->cat_ID, 12, 0, null)->posts;
 ?>
 
-<body  class="w-full">
+<body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full" style="background-color: #262145;">
@@ -38,7 +30,9 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
       <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;">
         <?php foreach ($knowledgePosts as $thePost) : ?>
           <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
-            <img class="rounded-lg object-cover w-full object-cover w-full" src="<?= $thePost->featuredImage ?>" alt="">
+            <div class="h-72">
+              <img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" alt="">
+            </div>
             <div class="font-semibold text-lg"><?= $thePost->title ?></div>
             <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
           </a>

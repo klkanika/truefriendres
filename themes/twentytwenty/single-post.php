@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 </head>
 
-<body  class="w-full">
+<body class="w-full">
   <?php
   include 'truefriend-header.php';
   require_once('custom-classes/class-posts.php');
@@ -42,10 +42,10 @@
       </div>
     </div>
     <div class="relative">
-      <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : 'wp-content/themes/twentytwenty/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
+      <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
     </div>
   </section>
-<!-- overflow-hidden max-h-screen -->
+  <!-- overflow-hidden max-h-screen -->
   <section class="w-full bg-white lg:p-20 px-4 py-8  relative" style="color: #062241;" id="content-section">
     <div class="flex lg:flex-row flex-col lg:gap-28">
       <div class="flex-1 text-base flex flex-col gap-4"><?= the_content() ?></div>
@@ -84,7 +84,7 @@
         setup_postdata($post); ?>
         <a href="<?= the_permalink() ?>" class="block">
           <div style="height:250px;" class="mb-2">
-            <img class="object-cover w-full h-full rounded" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : 'wp-content/themes/twentytwenty/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
+            <img class="object-cover w-full h-full rounded" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
           </div>
           <span class="text-sm"><?= the_title() ?></span>
         </a>
