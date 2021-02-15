@@ -30,7 +30,7 @@ $knowledgePosts = Post::getPostsByCategory('post', get_category_by_slug('knowled
       <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;">
         <?php foreach ($knowledgePosts as $thePost) : ?>
           <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
-            <div class="h-72">
+            <div class="lg:h-72 h-56">
               <img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" alt="">
             </div>
             <div class="font-semibold text-lg"><?= $thePost->title ?></div>
