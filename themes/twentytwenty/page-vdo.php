@@ -15,8 +15,12 @@
   </style>
 </head>
 
-<body  class="w-full">
-  <?php include 'truefriend-header.php'; ?>
+<body class="w-full">
+  <?php
+  include 'truefriend-header.php';
+  require_once('custom-classes/class-posts.php');
+  $videoPosts = Post::getPostsByCategory('post', get_category_by_slug('video')->cat_ID, 12, 0, null)->posts;
+  ?>
   <!-- Set up your HTML -->
   <section class="text-white w-full pb-12 overflow-hidden" style="background-color: #19181F;" id="banner">
     <section class="w-full h-64 relative overflow-hidden lg:pl-32 lg:pr-32 pl-8 pr-8" id="banner">
@@ -36,15 +40,13 @@
     </section>
     <section class="lg:pl-32 lg:pr-32 pl-6 pr-6 -mx-4" id="card-list">
       <div class="w-full flex flex-wrap">
-        <?php
-        for ($i = 0; $i < 10; $i++) {
-        ?>
-          <a href="" class="w-full lg:w-1/2 px-4">
-            <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= get_theme_file_uri() ?>/assets/images/img-default.jpg')">
+        <?php foreach ($videoPosts as $thePost) { ?>
+          <a href="<?= $thePost->link ?>" class="w-full lg:w-1/2 px-4">
+            <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>">
               <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
             </div>
-            <p class="mt-6 mb-8 text-base">แม็คโครจับมือDezpaX เปิด One Stop Solutions ครบจบเรื่องบรรจุภัณฑ์ในงบจำกัด</p>
-        </a>
+            <p class="mt-6 mb-8 text-base"><?= $thePost->title ?></p>
+          </a>
         <?php
         }
         ?>

@@ -31,7 +31,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
   </style>
 </head>
 
-<body  class="w-full">
+<body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white w-full pb-12" style="background-color: #262145;" id="banner">
@@ -78,15 +78,15 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
         </div>
       </section>
     </section>
-    <section class="w-full lg:px-8 px-4 grid grid-cols-2 gap-5 mt-16" id="card-list">
+    <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
       <?php foreach ($Restaurant101Posts as $thePost) : ?>
-        <a href="<?= $thePost->link ?>" class="w-full bg-center bg-no-repeat rounded-3xl" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
+        <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
           <div class="p-6 w-full">
             <div class="w-full relative flex items-center h-48 lg:h-64">
               <!-- <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('<?= $thePost->featuredImage ?>')"></div> -->
               <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
               <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-              <div class="absolute left-0 bottom-0">
+              <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
                 <p class="text-xs"><?= $thePost->restaurantCategory[0] ?></p>
                 <p class="lg:text-base text-sm mt-2"><?= $thePost->title; ?></p>
               </div>

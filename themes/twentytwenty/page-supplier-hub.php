@@ -19,7 +19,7 @@ $suppliertypes = get_categories($args);
 $restaurantCategoriesObject = acf_get_field('restaurant_101_category');
 $restaurantCategories = $restaurantCategoriesObject['choices'];
 
-$supplierTypeId = isset($_GET['suppliertype']) ? $_GET['suppliertype'] : null;
+$supplierTypeId = isset($_GET['type']) ? $_GET['type'] : null;
 if (!get_term_by('id', $supplierTypeId, 'suppliertypes')) {
     $supplierTypeId = null;
 }
@@ -119,7 +119,7 @@ $suppliers = $suppliersObject->posts;
         const swiper = new Swiper('.swiper-container', {
             // Optional parameters
             loop: false,
-            slidesPerView: 2.75,
+            slidesPerView: 'auto',
             spaceBetween: 10,
             breakpoints: {
                 1024: {
