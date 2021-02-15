@@ -17,8 +17,11 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-$CoursesPostsObject = Post::getPostsByCategory('post', get_category_by_slug('courses')->cat_ID, 12, 0, null);
-$CoursesPosts = $CoursesPostsObject->posts;
+// $CoursesPostsObject = Post::getPostsByCategory('post', get_category_by_slug('courses')->cat_ID, 12, 0, null);
+// $CoursesPosts = $CoursesPostsObject->posts;
+$coursesPosts = [
+  "บริหารร้านอาหารให้โตแบบก้าวกระโดด", "บัญชีอย่างง่ายเพื่อเจ้าของกิจการ", "บริหารร้านอาหารให้โตแบบก้าวกระโดด", "บัญชีอย่างง่ายเพื่อเจ้าของกิจการ"
+]
 ?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
@@ -51,45 +54,17 @@ $CoursesPosts = $CoursesPostsObject->posts;
     <div class="swiper-container lastestCoursesSlider w-full">
       <div class="swiper-wrapper md:pl-8 pl-4 pb-16">
         <!-- Slides -->
-        <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
-
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">online</p>
-            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+        <?php foreach ($coursesPosts as $i => $thePost) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
+            <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+            <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
+            <div class="absolute top-5 left-5" style="width: 40px;"></div>
+            <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
+              <p class="lg:text-xs text-xs mb-1">online</p>
+              <p class="lg:text-lg text-xs font-bold"><?= $thePost ?></p>
+            </div>
           </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">online</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">online</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-            <p class="lg:text-xs text-xs mb-1">online</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <!-- <?//php endforeach ?> -->
+        <?php endforeach; ?>
       </div>
     </div>
 
@@ -118,24 +93,12 @@ $CoursesPosts = $CoursesPostsObject->posts;
         <div class="md:hidden swiper-container offlinePicSlider w-full ml-6 mb-16">
           <div class="swiper-wrapper pl-4">
             <!-- Slides -->
-            <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-              <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/courses-offline-01.png" />
-              <div class="absolute top-5 left-5" style="width: 40px;"></div>
-            </div>
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-              <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/courses-offline-02.png" />
-              <div class="absolute top-5 left-5" style="width: 40px;"></div>
-            </div>
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-              <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/courses-offline-03.png" />
-              <div class="absolute top-5 left-5" style="width: 40px;"></div>
-            </div>
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-              <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/courses-offline-04.png" />
-              <div class="absolute top-5 left-5" style="width: 40px;"></div>
-            </div>
-            <!-- <?//php endforeach ?> -->
+            <?php foreach (["/assets/images/courses-offline-01.png", "/assets/images/courses-offline-02.png", "/assets/images/courses-offline-03.png", "/assets/images/courses-offline-04.png"] as $thePost) : ?>
+              <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
+                <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?><?= $thePost ?>" />
+                <div class="absolute top-5 left-5" style="width: 40px;"></div>
+              </div>
+            <?php endforeach; ?>
           </div>
         </div>
         <div class="px-6 md:px-0 mb-16">
@@ -206,48 +169,20 @@ $CoursesPosts = $CoursesPostsObject->posts;
     <div class="swiper-container offlineCoursesSlider w-full">
       <div class="swiper-wrapper pl-6 md:pl-20 pb-16">
         <!-- Slides -->
-        <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
-
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+        <?php foreach ($coursesPosts as $i => $thePost) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
+            <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+            <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
+            <div class="absolute top-5 left-5" style="width: 40px;"></div>
+            <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
+              <p class="lg:text-xs text-xs mb-1">offline</p>
+              <p class="lg:text-lg text-xs font-bold"><?= $thePost ?></p>
+            </div>
           </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
-          </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <!-- <?//php endforeach ?> -->
+        <?php endforeach; ?>
       </div>
     </div>
-    
+
   </section>
 
   <!-- Online Course -->
@@ -340,45 +275,17 @@ $CoursesPosts = $CoursesPostsObject->posts;
     <div class="swiper-container onlineCoursesSlider w-full" style="color:#262145;">
       <div class="swiper-wrapper pl-6 md:pl-20 pb-16">
         <!-- Slides -->
-        <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
-
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+        <?php foreach ($coursesPosts as $i => $thePost) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
+            <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+            <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
+            <div class="absolute top-5 left-5" style="width: 40px;"></div>
+            <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
+              <p class="lg:text-xs text-xs mb-1">online</p>
+              <p class="lg:text-lg text-xs font-bold"><?= $thePost ?></p>
+            </div>
           </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
-          </div>
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-          <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
-          <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
-          <div class="absolute top-5 left-5" style="width: 40px;"></div>
-          <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-            <p class="lg:text-xs text-xs mb-1">offline</p>
-            <p class="lg:text-lg text-xs font-bold">บัญชีอย่างง่ายเพื่อเจ้าของกิจการ</p>
-          </div>
-        </div>
-        <!-- <?//php endforeach ?> -->
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -501,27 +408,26 @@ $CoursesPosts = $CoursesPostsObject->posts;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
 
 <script>
-
   $(document).ready(function() {
-    var swiper = new Swiper('.lastestCoursesSlider', {
+    var lastestCoursesSlider = new Swiper('.lastestCoursesSlider', {
       slidesPerView: 'auto',
       spaceBetween: 15,
     });
 
-    var swiper = new Swiper('.offlinePicSlider', {
-      slidesPerView: 'auto',
-      spaceBetween: 15,
-    });
-    
-    var swiper = new Swiper('.offlineCoursesSlider', {
+    var offlinePicSlider = new Swiper('.offlinePicSlider', {
       slidesPerView: 'auto',
       spaceBetween: 15,
     });
 
-    var swiper = new Swiper('.onlineCoursesSlider', {
+    var offlineCoursesSlider = new Swiper('.offlineCoursesSlider', {
       slidesPerView: 'auto',
       spaceBetween: 15,
     });
-  
+
+    var onlineCoursesSlider = new Swiper('.onlineCoursesSlider', {
+      slidesPerView: 'auto',
+      spaceBetween: 15,
+    });
+
   });
 </script>

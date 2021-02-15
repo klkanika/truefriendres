@@ -22,7 +22,41 @@ $documentsPosts = array_filter($recentPosts->posts, function ($p) {
     }, $p->categories)
   );
 });
-echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
+$courseDetail = [
+  [
+    "header" => "Part 1: ก่อนจะริเริ่มธุรกิจอาหาร….เตรียมตัวอย่างไร?",
+    "line" => [
+      "- ก่อนเริ่มต้นธุรกิจอาหารของ คุณหนึ่งฤทัย ตวงโชคดี ผู้ก่อตั้ง Yakiniku Giants",
+      "- ก่อนเริ่มต้นธุรกิจอาหารของ คุณวิเชียร อุดมศาสตร์พร CEO Kimju Food",
+      "- ก่อนเริ่มต้นธุรกิจอาหารของ คุณสุวัฒน์ ทรงพัฒนะโยธิน รองกรรมการผู้จัดการ Chester's Grill",
+      "- ก่อนจะเป็นร้านแรกที่เมืองไทย (คุณหนึ่งฤทัย)"
+    ]
+  ],
+  [
+    "header" => "Part 2: ร้านแรกในเมืองไทย...ทำอย่างไรให้ประสบความสำเร็จ",
+    "line" => [
+      "- ร้านแรก...ปัญหา อุปสรรค และวิธีแก้ไข (คุณหณึ่งฤทัย)",
+      "- ต้นทุนมาตรฐานของร้านอาหาร ควรเป็นเท่าไร?",
+      "- รายได้ต่อหัว และ profit margin ของแต่ละธุรกิจอาหาร ควรเป็นเท่าไร?",
+    ]
+  ],
+  [
+    "header" => "Part 3: ขยายธุรกิจอาหารแบบก้าวกระโดด",
+    "line" => [
+      "- เทคนิคการหาพนักงาน และทำอย่างไรเพื่อดึงพนักงาน",
+      "- กลยุทธ์การเลือกทำเล และสถานที่ - กรณีนอกห้าง",
+      "- ขยายสาขา...ขยายเอง vs. แฟรนไชส์ อันไหนดีกว่ากัน",
+    ]
+  ],
+  [
+    "header" => "Part 4: ถาม-ตอบ",
+    "line" => [
+      "- บริหารงบการเงินอย่างไร",
+      "- แนวโน้วเศรษฐกิจไทย และผลกระทบต่อธุรกิจอาหาร",
+      "- สรุป",
+    ]
+  ],
+]
 ?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
@@ -71,14 +105,12 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
 
     /* Icon formatting - closed */
     .tab input[type=checkbox]+label::after {
-      content: url(<?= get_theme_file_uri() ?>/assets/images/collapse.svg);
-
+      content: url('<?= get_theme_file_uri() ?>/assets/images/collapse.svg');
     }
 
     /* Icon formatting - open */
     .tab input[type=checkbox]:checked+label::after {
       transform: rotate(180deg);
-
     }
 
     #headder {
@@ -164,17 +196,10 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
     <div class="swiper-container w-full">
       <div class="swiper-wrapper pl-4 md:pl-32">
         <!-- Slides -->
-        <!-- <?//php foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?> -->
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
-        </div>
-        <!-- <?//php endforeach ?> -->
-
+        <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $thePost) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+          </div>
+        <?php endforeach; ?>
       </div>
       <!-- Add Arrows -->
       <div class="swiper-button-next"></div>
@@ -184,7 +209,7 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
     <div class="w-full md:pl-32 md:pr-32 mt-16 mb-12 px-4">
       <div class="flex items-center justify-between">
         <button class="h-10 rounded-full flex items-center justify-center p-4 md:p-6 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#262145; color: #DBDBDB;">
-          offline
+          online
         </button>
         <div class="flex">
           <a href="" class="mr-4"><img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
@@ -216,142 +241,37 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
 
       <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
       <div class="block md:hidden">
-        <div class="tab w-full overflow-hidden">
-          <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs">
-          <label class="block p-2 leading-normal cursor-pointer rounded-none border-t-2 border-b-2 mb-2" for="tab-multi-one">
-            <span class="font-bold">Part 1: ก่อนจะริเริ่มธุรกิจอาหาร….เตรียมตัวอย่างไร?</span>
-          </label>
-          <div class="tab-content overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2">- ก่อนเริ่มต้นธุรกิจอาหารของ คุณหนึ่งฤทัย ตวงโชคดี ผู้ก่อตั้ง Yakiniku Giants</p>
-            <p class="pl-2 py-2">- ก่อนเริ่มต้นธุรกิจอาหารของ คุณวิเชียร อุดมศาสตร์พร CEO Kimju Food</p>
-            <p class="pl-2 py-2">- ก่อนเริ่มต้นธุรกิจอาหารของ คุณสุวัฒน์ ทรงพัฒนะโยธิน รองกรรมการผู้จัดการ Chester's Grill</p>
-            <p class="pl-2 py-2">- ก่อนจะเป็นร้านแรกที่เมืองไทย (คุณหนึ่งฤทัย)</p>
+        <?php foreach ($courseDetail as $i => $detail) : ?>
+          <div class="tab w-full overflow-hidden">
+            <input class="absolute opacity-0 " id="tab-multi-<?= $i ?>" type="checkbox" name="tabs">
+            <label <?php if ($i == 0) : ?> class="block p-2 leading-normal cursor-pointer rounded-none border-t-2 border-b-2 mb-2" <?php else : ?>class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" <?php endif; ?> for="tab-multi-<?= $i ?>">
+              <span class="font-bold"><?= $detail['header'] ?></span>
+            </label>
+            <div class="tab-content overflow-hidden leading-normal rounded-none">
+              <?php foreach ($detail['line'] as $lineDetail) : ?>
+                <p class="pl-2 py-2"><?= $lineDetail ?></p>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
-        <div class="tab w-full overflow-hidden">
-          <input class="absolute opacity-0 " id="tab-multi-two" type="checkbox" name="tabs">
-          <label class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" for="tab-multi-two">
-            <span class="font-bold">Part 2: ร้านแรกในเมืองไทย...ทำอย่างไร ให้ประสบความสำเร็จ</span>
-          </label>
-          <div class="tab-content overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2">- ร้านแรก...ปัญหา อุปสรรค และวิธีแก้ไข (คุณหณึ่งฤทัย)</p>
-            <p class="pl-2 py-2">- ต้นทุนมาตรฐานของร้านอาหาร ควรเป็นเท่าไร?</p>
-            <p class="pl-2 py-2">- รายได้ต่อหัว และ profit margin ของแต่ละธุรกิจอาหาร ควรเป็นเท่าไร?</p>
-          </div>
-        </div>
-        <div class="tab w-full overflow-hidden">
-          <input class="absolute opacity-0 " id="tab-multi-three" type="checkbox" name="tabs">
-          <label class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" for="tab-multi-three">
-            <span class="font-bold">Part 3: ขยายธุรกิจอาหารแบบก้าวกระโดด</span>
-          </label>
-          <div class="tab-content overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2">- เทคนิคการหาพนักงาน และทำอย่างไรเพื่อดึงพนักงาน</p>
-            <p class="pl-2 py-2">- กลยุทธ์การเลือกทำเล และสถานที่ - กรณีนอกห้าง</p>
-            <p class="pl-2 py-2">- ขยายสาขา...ขยายเอง vs. แฟรนไชส์ อันไหนดีกว่ากัน</p>
-          </div>
-        </div>
-        <div class="tab w-full overflow-hidden">
-          <input class="absolute opacity-0 " id="tab-multi-four" type="checkbox" name="tabs">
-          <label class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" for="tab-multi-four">
-            <span class="font-bold">Part 4: ถาม-ตอบ</span>
-          </label>
-          <div class="tab-content overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2">- บริหารงบการเงินอย่างไร</p>
-            <p class="pl-2 py-2">- แนวโน้วเศรษฐกิจไทย และผลกระทบต่อธุรกิจอาหาร</p>
-            <p class="pl-2 py-2">- สรุป</p>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
 
-      <div class="hidden md:flex">
-        <div class="w-full overflow-hidden">
-          <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
-            <span class="font-bold">Part 1: ก่อนจะริเริ่มธุรกิจอาหาร….เตรียมตัวอย่างไร?</span>
-          </label>
-          <div class="overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2 flex justify-between">
-              - ก่อนเริ่มต้นธุรกิจอาหารของ คุณหนึ่งฤทัย ตวงโชคดี ผู้ก่อตั้ง Yakiniku Giants
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - ก่อนเริ่มต้นธุรกิจอาหารของ คุณวิเชียร อุดมศาสตร์พร CEO Kimju Food
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - ก่อนเริ่มต้นธุรกิจอาหารของ คุณสุวัฒน์ ทรงพัฒนะโยธิน รองกรรมการผู้จัดการ Chester's Grill
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - ก่อนจะเป็นร้านแรกที่เมืองไทย (คุณหนึ่งฤทัย)
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-          </div>
-        </div>
-      </div>
 
-      <div class="hidden md:flex">
+      <div class="hidden md:block">
         <div class="w-full overflow-hidden">
-          <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
-            <span class="font-bold">Part 2: ร้านแรกในเมืองไทย...ทำอย่างไร ให้ประสบความสำเร็จ</span>
-          </label>
-          <div class="overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2 flex justify-between">
-              - ร้านแรก...ปัญหา อุปสรรค และวิธีแก้ไข (คุณหณึ่งฤทัย)
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - ต้นทุนมาตรฐานของร้านอาหาร ควรเป็นเท่าไร?
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - รายได้ต่อหัว และ profit margin ของแต่ละธุรกิจอาหาร ควรเป็นเท่าไร?
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hidden md:flex">
-        <div class="w-full overflow-hidden">
-          <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
-            <span class="font-bold">Part 3: ขยายธุรกิจอาหารแบบก้าวกระโดด</span>
-          </label>
-          <div class="overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2 flex justify-between">
-              - เทคนิคการหาพนักงาน และทำอย่างไรเพื่อดึงพนักงาน
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - กลยุทธ์การเลือกทำเล และสถานที่ - กรณีนอกห้าง
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - ขยายสาขา...ขยายเอง vs. แฟรนไชส์ อันไหนดีกว่ากัน
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hidden md:flex">
-        <div class="w-full overflow-hidden">
-          <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
-            <span class="font-bold">Part 4: ถาม-ตอบ</span>
-          </label>
-          <div class="overflow-hidden leading-normal rounded-none">
-            <p class="pl-2 py-2 flex justify-between">
-              - บริหารงบการเงินอย่างไร
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - แนวโน้วเศรษฐกิจไทย และผลกระทบต่อธุรกิจอาหาร
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-            <p class="pl-2 py-2 flex justify-between">
-              - สรุป
-              <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-            </p>
-          </div>
+          <?php foreach ($courseDetail as $i => $detail) : ?>
+            <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
+              <span class="font-bold"><?= $detail['header'] ?></span>
+            </label>
+            <div class="overflow-hidden leading-normal rounded-none">
+              <?php foreach ($detail['line'] as $lineDetail) : ?>
+                <p class="pl-2 py-2 flex justify-between">
+                  <?= $lineDetail ?>
+                  <img class="w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
+                </p>
+              <?php endforeach; ?>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
 
@@ -381,28 +301,13 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
 <script>
   $(document).ready(function() {
-    $(".owl-carousel").owlCarousel({
-      items: $(window).width() < 1024 ? 1.3 : 4,
-      loop: true,
-      // autoplay: true,
-      autoplayHoverPause: true,
-      slideBy: 2,
-      margin: 16,
-      dots: false,
-    });
-
     const swiper = new Swiper('.swiper-container', {
       slidesPerView: 'auto',
       spaceBetween: 15,
-      // loop: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      // breakpoints: {
-      //   992: {
-      //   },
-      // }
     });
   });
 </script>
