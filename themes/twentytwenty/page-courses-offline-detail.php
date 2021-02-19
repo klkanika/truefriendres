@@ -11,22 +11,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 </head>
 
-<?php
-require_once('custom-classes/class-posts.php');
-$recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
-$documentsPosts = array_filter($recentPosts->posts, function ($p) {
-  return in_array(
-    'offline-courses-detail',
-    array_map(function ($c) {
-      return $c->slug;
-    }, $p->categories)
-  );
-});
-echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
-?>
-
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
-  <?php include 'truefriend-header.php'; ?>
+  <?php
+  include 'truefriend-header.php';
+  $end = new DateTime(get_field('วันปิดรับสมัคร'));
+  $today = new DateTime();
+  $interval = $today->diff($end);
+  $left = intval($interval->format('%a'));
+  $dateleft =  ($left + 1) . ' วัน';
+  $เนื้อหาของคอร์สนี้ = get_field('เนื้อหาของคอร์สนี้');
+  ?>
   <style>
     #headder {
       background: transparent;
@@ -111,8 +105,9 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
     <div class="swiper-container w-full">
       <div class="swiper-wrapper md:pl-32 pl-4">
         <!-- Slides -->
-        <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $thePost) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300">
+        <?php foreach (get_field('รูปภาพ') as $รูป) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
+            <img class="object-cover w-full h-full" src="<?= $รูป['รูป']['url'] ?>" alt="" />
           </div>
         <?php endforeach; ?>
       </div>
@@ -131,42 +126,44 @@ echo '<script>console.log("PHP error: ' . $knowledgePosts . '")</script>';
           <a href=""><img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt=""></a>
         </div>
       </div>
-      <p class="text-2xl md:text-5xl font-bold my-6">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+      <p class="text-2xl md:text-5xl font-bold my-6"><?= get_field('ชื่อ') ?></p>
       <div class="flex mb-2 md:mb-6">
         <button type="submit" class="flex h-14 p-4 rounded-lg" style="background-color:#FFD950; color: #262145;">
           <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-clock.svg" alt="">
-          <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก 3 วัน</span>
+          <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก <?= $dateleft ?></span>
         </button>
         <div class="flex p-4">
           <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-person.svg" alt="">
-          <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;">10 ท่านสุดท้าย</span>
+          <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;"><?= intval(get_field('จำนวนคนที่รับสมัคร')) - intval(get_field('จำนวนคนตอนนี้')) ?> ท่านสุดท้าย</span>
         </div>
       </div>
-      <a href="" class="w-full lg:w-1/2 px-4">
+      <!-- <a href="" class="w-full lg:w-1/2 px-4">
         <div class="w-full lg:h-96 h-56 flex items-center justify-center rounded-xl relative bg-gray-400">
           <img class="object-none object-center" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
         </div>
-      </a>
+      </a> -->
+      <div class="flex justify-center">
+        <?= get_field('วิดีโอ') ?>
+      </div>
       <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
-      <p>เสวนาเปิดใจผู้บริหารมืออาชีพ 3 ท่าน ที่จะมาบอกกลยุทธ์ อุปสรรค ปัจจัยความสำเร็จ แนวทางบริหาร วิธีการขยายธุรกิจ วิธีสร้างแบรนด์ เทคนิคการบริหารพนักงาน และอื่นๆที่สำคัญต่อความสำเร็จ ในการสร้างธุรกิจอาหาร</p>
+      <p><?= get_field('รายละเอียด') ?></p>
 
       <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">ผู้สอน</p>
-      <p>สถาบัน ธุรกิจแฟรนไชส์อาหาร</p>
+      <p><?= get_field('ผู้สอน') ?></p>
 
       <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
-      <p>Part 1: ก่อนจะริเริ่มธุรกิจอาหาร….เตรียมตัวอย่างไร?</p>
-      <p>Part 2: ร้านแรกในเมืองไทย...ทำอย่างไรให้ประสบความสำเร็จ</p>
-      <p>Part 3: ขยายธุรกิจอาหารแบบก้าวกระโดด</p>
-      <p>Part 4: ถาม-ตอบ</p>
+      <?php foreach ($เนื้อหาของคอร์สนี้ as $key => $part) : ?>
+        <p>Part <?= $key + 1 ?>: <?= $part['ชื่อ_part'] ?></p>
+      <?php endforeach; ?>
 
     </div>
   </section>
 
   <section id="register" class="text-white py-16 w-full flex items-center flex-col" style="background-color: #FFD950; color:#262145;">
     <p class="text-5xl font-bold pb-4">ลงทะเบียนเรียน</p>
-    <button class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
+    <a href="<?= get_site_url() ?>/courses-register" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
       ลงทะเบียน
-    </button>
+    </a>
   </section>
   <?php
   $footerbgcolor = '#f2f2f2';

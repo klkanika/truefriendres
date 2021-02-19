@@ -180,6 +180,7 @@ class Post
             $thePost->ชื่อ = get_field('ชื่อ');
             $thePost->รายละเอียด = get_field('รายละเอียด');
             $thePost->file = get_field('file');
+            $thePost->pictureUrl = get_field('pictureurl');
         }
 
         return $thePost;

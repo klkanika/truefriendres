@@ -60,15 +60,25 @@ $documents = $documentsObject->posts;
       <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt=""></a>
     </div>
     <div class="flex justify-center flex-wrap w-full md:w-3/4 mt-16 mb-12 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-y-4 md:gap-x-8">
-      <?php foreach ($documents as $key => $thePost) : ?>
+      <?php foreach ($documents as $key => $thePost) :
+        $path_info = pathinfo($thePost->file);
+        $extension = $path_info['extension'];
+        if ($extension === 'xls' || $extension === 'xlsx') {
+          $extension = 'Excel';
+        } else if ($extension === 'pdf') {
+          $extension = 'PDF';
+        } else if ($extension === '.doc' || $extension === '.docx') {
+          $extension = 'Word';
+        }
+      ?>
         <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md bg-white" <?php if ($key == 0) : ?> style="background-color:#C1AF91;color:#251D5C" <?php endif; ?>>
-          <?php if ($key == 0) { ?><img class="object-cover" src="<?= get_theme_file_uri() ?>/assets/images/document-bg.svg" /><?php } ?>
+          <?= $thePost->pictureUrl ? '<img class="object-cover h-full w-full" src="' . $thePost->pictureUrl . '" />' : '' ?>
           <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
             <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2"><?= $thePost->ชื่อ ?></h1>
             <h2 class="text-xs lg:text-sm lg:text-center"><?= $thePost->รายละเอียด ?></h2>
           </div>
           <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
-            <a href="<?= $thePost->file ?>" download>Download Excel</a>
+            <a href="<?= $thePost->file ?>" download>Download <?= $extension ?></a>
             <div class="flex items-center">
               <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
               <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
