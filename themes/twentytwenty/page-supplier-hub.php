@@ -16,8 +16,6 @@ $args = array(
     'order'   => 'ASC',
 );
 $suppliertypes = get_categories($args);
-$restaurantCategoriesObject = acf_get_field('restaurant_101_category');
-$restaurantCategories = $restaurantCategoriesObject['choices'];
 
 $supplierTypeId = isset($_GET['type']) ? $_GET['type'] : null;
 if (!get_term_by('id', $supplierTypeId, 'suppliertypes')) {

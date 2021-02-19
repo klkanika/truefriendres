@@ -67,14 +67,25 @@
     }
   </style>
 
-  <?php include 'truefriend-header.php'; ?>
+  <?php
+  include 'truefriend-header.php';
+  $รูปภาพ = get_field('รูปภาพ');
+  $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
+  $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
+  $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
+  $contact = [];
+  $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
+  foreach ($ข้อมูลติดต่อ as $key => $ข้อมูล) {
+    $contact[$key] = $ข้อมูล;
+  }
+  ?>
   <!-- Set up your HTML -->
   <section id="suppliers-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
     <div class="swiper-container">
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
-        <?php foreach ([0,0,0,0] as $รูปภาพ) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="" /></div>
+        <?php foreach ($รูปภาพ as $รูป) : ?>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูป['รูป']['url'] ?>" alt="" /></div>
         <?php endforeach ?>
 
       </div>
@@ -85,10 +96,12 @@
     <div class="flex items-center justify-between mt-12">
       <div class="flex items-center justify-center">
         <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Franchise hub</div>
-        <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
-          <img class="w-7 h-7 absolute left-0 ml-1" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt="">
-          <span class="ml-6 text-xs">ร้านเสต็ก</span>
-        </div>
+        <?php foreach ($franchiseTypes as $franchiseType) : ?>
+          <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
+            <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $franchiseType) ? get_field('pictureUrl', $franchiseType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
+            <span class="ml-6 text-xs"><?= $franchiseType->name ?></span>
+          </div>
+        <?php endforeach ?>
       </div>
       <div class="lg:flex hidden lg:px-32 lg:mx-8 px-8 py-5 lg:justify-start justify-center ">
         <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt=""></a>
@@ -97,13 +110,13 @@
       </div>
     </div>
     <div class="mt-4">
-      <p class="lg:text-4xl text-3xl font-semibold ">บริษัทอนุภัทร เสต็กเนื้อ</p>
-      <p class="text-lg mt-2">0824564755 (คุณริน)</p>
+      <p class="lg:text-4xl text-3xl font-semibold "><?= get_field('ชื่อธุรกิจ') ?></p>
+      <p class="text-lg mt-2"><?= get_field('เบอร์โทร') ?> <?= get_field('ชื่อ') ? '(' . get_field('ชื่อ') . ')' : '' ?></p>
     </div>
     <div class="lg:mt-12 mt-8">
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">รายละเอียด</p>
-        <p class="text-xl">เราขายสินค้าประเภทผักสดปลอดสารพิษราคาถูกมาก สั่งเยอะลดราคาได้ จัดส่งฟรี คลังสินค้าอยู่บริเวณห้วยขวาง</p>
+        <p class="text-xl"><?= get_field('แนะนำธุรกิจ') ? get_field('แนะนำธุรกิจ') : '-' ?></p>
 
         <div class="lg:hidden flex pt-8 justify-end">
           <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt=""></a>
@@ -113,47 +126,58 @@
       </div>
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">ลักษณะกิจการ</p>
-        <p class="text-xl">แฟรนไชส์ชานมไข่มุก, ชา</p>
+        <p class="text-xl">
+          <?php foreach ($franchiseStyles as $key => $franchiseStyle) : ?>
+            <?= ($key > 0 ? ', ' : '') . $franchiseStyle->name ?>
+          <?php endforeach ?>
+        </p>
       </div>
 
       <div class="border-b border-gray-300 grid lg:grid-cols-2 py-8">
         <div class="border-b border-gray-300 py-8">
           <p class="text-gray-500 mb-2">รูปแบบธุรกิจ</p>
-          <p class="text-xl">ขายแฟรนไชส์ | Franchise</p>
+          <?php foreach ($นโยบาย_การขยายสาขา as $key => $นโยบาย) : ?>
+            <p class="text-xl"><?= $นโยบาย ?></p>
+          <?php endforeach ?>
+          <?php
+          if (count($นโยบาย_การขยายสาขา) === 0) {
+            echo '-';
+          }
+          ?>
         </div>
         <div class="border-b border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ค่าแฟรนไชส์</p>
-          <p class="text-xl">350,000 บาท</p>
+          <p class="text-xl"><?= get_field('ค่าแฟรนไชส์ต่อปี') ? get_field('ค่าแฟรนไชส์ต่อปี') : '-' ?></p>
         </div>
         <div class="border-b border-gray-300 py-8">
           <p class="text-gray-500 mb-2">ระยะเวลาคืนทุน</p>
-          <p class="text-xl">ขึ้นอยู่กับยอดการจำหน่ายของแต่ละพื้นที่</p>
+          <p class="text-xl"><?= get_field('ระยะเวลาคืนทุน') ? get_field('ระยะเวลาคืนทุน') : '-' ?></p>
         </div>
         <div class="border-b border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ระยะเวลาสัญญา</p>
-          <p class="text-xl">6 ปี</p>
+          <p class="text-xl"><?= get_field('ระยะเวลาสัญญา') ? get_field('ระยะเวลาสัญญา') : '-' ?></p>
         </div>
         <div class="border-b border-gray-300 py-8">
           <p class="text-gray-500 mb-2">ปีที่ก่อตั้ง</p>
-          <p class="text-xl">พ.ศ. 2550 (ขายแฟรนไชส์มา 13 ปี)</p>
+          <p class="text-xl"><?= get_field('ปีที่ก่อตั้ง') ? 'พ.ศ. ' . get_field('ปีที่ก่อตั้ง') : '-' ?> <?= get_field('ปีที่เริ่มขายแฟรนชายส์') ? '(ขายแฟรนไชส์มา ' . (date("Y") - intval(get_field('ปีที่เริ่มขายแฟรนชายส์'))) .  ' ปี)' : '' ?></p>
         </div>
         <div class="border-b border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ค่า Royalty Free</p>
-          <p class="text-xl">3%</p>
+          <p class="text-xl"><?= get_field('ค่า_royalty_fee') ? get_field('ค่า_royalty_fee')['ค่า_royalty_fee'] . ' ' . get_field('ค่า_royalty_fee')['หน่วย'] : '-' ?></p>
         </div>
         <div class="border-gray-300 py-8">
           <p class="text-gray-500 mb-2">ประเทศ</p>
-          <p class="text-xl">Thailand</p>
+          <p class="text-xl"><?= get_field('ประเทศ') ? get_field('ประเทศ') : '-' ?></p>
         </div>
         <div class="border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ค่า Marketing Free</p>
-          <p class="text-xl">1%</p>
+          <p class="text-xl"><?= get_field('ค่า_marketing_fee') ? get_field('ค่า_marketing_fee')['ค่า_marketing_fee'] . ' ' . get_field('ค่า_marketing_fee')['หน่วย'] : '-' ?></p>
         </div>
       </div>
 
       <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">ความเป็นมา</p>
-        <p class="text-xl">โอชายะเป็นแฟรนไชส์ที่ประสบความสำเร็จในด้านชานม, ไข่มุกและน้ำผลไม้ ด้วยร้านค้ากว่า 350 ร้านทั่วประเทศในปีพ. ศ. 2563 เรามุ่งมั่นที่จะเติบโตอย่างต่อเนื่องในประเทศไทย เราเชื่อในความซื่อสัตย์และคุณภาพในการดำเนินธุรกิจของเราและเรายินดีต้อนรับผู้ที่มีคุณสมบัติเหมาะสมที่จะเข้าร่วมกับเราในการเพิ่มมูลค่าให้กับลูกค้าและระบบแฟรนไชส์ของเรา!</p>
+        <p class="text-xl"><?= get_field('ความเป็นมา') ?></p>
       </div>
 
       <?php foreach (["สินค้าและบริการ", "จำนวนสาขา", "อัตราการขยายสาขา", "การลงทุน", "คุณสมบัติผู้สลงทุน", "สิ่งที่ได้รับ", "อื่นๆ"] as $item) : ?>
@@ -174,7 +198,7 @@
           </p>
           <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon" />
         </div>
-        <?php foreach (["ชื่อผู้ติดต่อ" => "น้องมิก", "อีเมล" => "น้องมิก", "เบอร์โทร" => "น้องมิก", "เว็บไซต์" => "น้องมิก",] as $key => $value) : ?>
+        <?php foreach ($contact as $key => $value) : ?>
           <div class="flex items-center border-b border-gray-300 py-2">
             <p class="font-bold lg:w-1/4 w-1/3"><?= $key ?></p>
             <p class=""><?= $value ?></p>
@@ -192,41 +216,27 @@
         </div>
       </div>
   </section>
-  <section class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
-    <div class="flex items-center justify-between">
-      <p class="text-2xl font-bold">Franchise hub</p>
-      <div class="flex lg:items-center font-semibold">
-        <span class="mr-8 lg:block hidden">ค้นหา</span>
-        <span class="mr-8 lg:text-base text-xs">ดูทั้งหมด (360)</span>
-        <div class=" lg:flex hidden items-center justify-between w-12 ">
-          <img src="<?= get_theme_file_uri() ?>/assets/images/left.svg" class="cursor-pointer" />
-          <img src="<?= get_theme_file_uri() ?>/assets/images/chev-right.svg" class="cursor-pointer" />
-        </div>
-      </div>
-    </div>
-    <p>แหล่งรวมเบอร์ติดต่อ Franchise hub ประเภทต่างๆ</p>
-
-    <div class="grid lg:grid-cols-5 grid-cols-1 gap-y-3 gap-x-4 py-8">
-      <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $f) : ?>
-        <div class="border-b border-gray-300 py-2 flex items-center">
-          <img src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" class="w-12 h-12 rounded mr-2 object-cover" />
-          <div>
-            <p class="font-semibold">ร้านเสต็ก</p>
-            <p class="text-sm">100 แฟรนไชส์</p>
-          </div>
-          <img src="<?= get_theme_file_uri() ?>/assets/images/right.svg" class="w-4 h-4 ml-auto lg:hidden block" />
-        </div>
-      <?php endforeach ?>
-    </div>
-  </section>
+  <?php
+  $args = array(
+    'taxonomy' => 'franchise_type',
+    'orderby' => 'name',
+    'order'   => 'ASC',
+  );
+  $franchisetypes = get_categories($args);
+  $thumbnail_slider_title = 'Franchise hub';
+  $thumbnail_slider_sub_title = 'แหล่งรวมเบอร์ติดต่อ Franchise ประเภทต่างๆ';
+  $thumbnail_slider_type = 'franchise-hub';
+  $thumbnail_slider_material = $franchisetypes;
+  include 'truefriend-thumbnail-slider.php';
+  ?>
 
   <div class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
     <span class="text-3xl font-bold">
       ลงทะเบียน Franchise ฟรี
     </span>
-    <button class="rounded-full py-3 px-24 text-xs bg-white my-6">
+    <a href="<?= get_site_url() ?>/franchise-register" class="rounded-full py-3 px-24 text-xs bg-white my-6">
       ลงทะเบียน
-    </button>
+    </a>
   </div>
   <?php include 'truefriend-footer.php'; ?>
 </body>

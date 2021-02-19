@@ -14,8 +14,8 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-$documentsPosts = Post::getPostsByCategory('post', get_category_by_slug('documents')->cat_ID, 4, 0, null);
-
+$documentsObject = Post::getPostsByCategory('documents', null, 12, 0, null);
+$documents = $documentsObject->posts;
 ?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
@@ -47,7 +47,7 @@ $documentsPosts = Post::getPostsByCategory('post', get_category_by_slug('documen
       }
     }
   </style>
-  
+
   <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <div class="flex text-base md:text-2xl pb-2">
       <div class="text-base md:text-xl font-light pr-2">คลังแสงของคนอยากเปิดร้านอาหาร</div>
@@ -60,17 +60,17 @@ $documentsPosts = Post::getPostsByCategory('post', get_category_by_slug('documen
       <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
     </div>
     <div class="flex justify-center flex-wrap w-full md:w-2/3 mt-16 mb-12 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-y-4 md:gap-x-8">
-      <?php foreach ([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $thePost) : ?>
+      <?php foreach ($documents as $key => $thePost) : ?>
         <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md bg-white" 
-          <?php if($thePost == 1): ?> style="background-color:#C1AF91;color:#251D5C" <?php endif; ?>
+        <?php if ($key == 0) : ?> style="background-color:#C1AF91;color:#251D5C" <?php endif; ?>
           >
-          <?php if($thePost == 1) {?><img class="object-cover" src="<?= get_theme_file_uri() ?>/assets/images/document-bg.svg" /><?php } ?>
+          <?php if ($key == 0) { ?><img class="object-cover" src="<?= get_theme_file_uri() ?>/assets/images/document-bg.svg" /><?php } ?>
           <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
-            <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2">สูตรคำนวณการใช้วัตถุดิบ</h1>
-            <h2 class="text-xs lg:text-sm lg:text-center">สูตรคำนวณการใช้วัตถุดิบให้พอดี ป้องกันสต็อกขาด สต็อกบวม</h2>
+            <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2"><?= $thePost->ชื่อ ?></h1>
+            <h2 class="text-xs lg:text-sm lg:text-center"><?= $thePost->รายละเอียด ?></h2>
           </div>
           <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
-            <a href="">Download Excel</a>
+            <a href="<?= $thePost->file ?>" download>Download Excel</a>
             <div class="flex items-center">
               <a href=""><img class="mr-3 w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
               <a href=""><img class="mr-3 w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
@@ -96,5 +96,3 @@ $documentsPosts = Post::getPostsByCategory('post', get_category_by_slug('documen
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
-<script>
-</script>

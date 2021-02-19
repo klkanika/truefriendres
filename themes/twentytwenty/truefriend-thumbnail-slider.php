@@ -9,7 +9,7 @@ foreach ($thumbnail_slider_material as $material) {
         <p class="text-2xl font-bold"><?= $thumbnail_slider_title ?></p>
         <div class="flex lg:items-center font-semibold">
             <span class="mr-8 lg:block hidden">ค้นหา</span>
-            <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>" class="mr-8 lg:text-base text-xs">ดูทั้งหมด (<?=$count_material < 1000 ? $count_material : '999+'?>)</a>
+            <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>" class="mr-8 lg:text-base text-xs">ดูทั้งหมด (<?= $count_material < 1000 ? $count_material : '999+' ?>)</a>
             <div class=" lg:flex hidden items-center justify-between w-12 ">
                 <img src="<?= get_theme_file_uri() ?>/assets/images/left.svg" class="cursor-pointer" />
                 <img src="<?= get_theme_file_uri() ?>/assets/images/chev-right.svg" class="cursor-pointer" />
