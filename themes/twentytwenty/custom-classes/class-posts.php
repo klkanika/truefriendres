@@ -176,6 +176,12 @@ class Post
             $thePost->เบอร์โทรศัพท์ = get_field('telInfo')['telNo'];
         }
 
+        if ($postType === 'documents') {
+            $thePost->ชื่อ = get_field('ชื่อ');
+            $thePost->รายละเอียด = get_field('รายละเอียด');
+            $thePost->file = get_field('file');
+        }
+
         return $thePost;
     }
 
