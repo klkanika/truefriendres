@@ -39,7 +39,15 @@
     }
   </style>
 
-  <?php include 'truefriend-header.php'; ?>
+  <?php
+  include 'truefriend-header.php';
+  $args = array(
+    'taxonomy' => 'franchise_type',
+    'orderby' => 'count',
+    'order'   => 'DESC'
+  );
+  $franchise_type = get_categories($args);
+  ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full" style="color: #262145;">
     <div class="flex flex-col items-center justify-center border-b border-gray-300 pb-12">
@@ -76,8 +84,8 @@
     <div class="swiper-container cat-swiper">
       <div class="swiper-wrapper pb-12">
         <div style="width: auto;" class="swiper-slide hit-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
-        <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
-          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
+        <?php foreach ($franchise_type as $type) : ?>
+          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
@@ -151,8 +159,8 @@
       <div class="swiper-container cat-swiper">
         <div class="swiper-wrapper py-8">
           <div style="width: auto;" class="swiper-slide new-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
-          <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
-            <div style="width: auto;" class="swiper-slide new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
+          <?php foreach ($franchise_type as $type) : ?>
+            <div style="width: auto;" class="swiper-slide new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
           <?php endforeach; ?>
         </div>
       </div>
@@ -200,8 +208,8 @@
       <div class="swiper-container cat-swiper">
         <div class="swiper-wrapper py-8">
           <div style="width: auto;" class="swiper-slide new-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
-          <?php foreach (["ร้านกาฟแฟ", "ร้านชาบู", "ร้านติ่มซำ", "ร้านชานม", "ร้านอาหารไทย"] as $type) : ?>
-            <div style="width: auto;" class="swiper-slide new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type ?></div>
+          <?php foreach ($franchise_type as $type) : ?>
+            <div style="width: auto;" class="swiper-slide new-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
           <?php endforeach; ?>
         </div>
       </div>
@@ -243,6 +251,9 @@
       <div class="flex items-center">
         <select class="bg-transparent border border-gray-300 rounded-full px-2 py-1">
           <option value="">ประเภทธุรกิจ</option>
+          <?php foreach ($franchise_type as $type) { ?>
+            <option value=""><?= $type->name ?></option>
+          <?php } ?>
         </select>
         <select class="ml-2 bg-transparent border border-gray-300 rounded-full px-2 py-1">
           <option value="">ค่าเปิด</option>
