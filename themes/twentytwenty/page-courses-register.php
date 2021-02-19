@@ -182,19 +182,19 @@ $form = [
     }
   </style>
   <section id="register-courses" class="flex items-center justify-center md:px-12 pt-32 pb-4 w-screen" style="background-color: #F2F2F2; color:#262145;">
-    <div class="w-3/4">
+    <div class="w-5/6	lg:w-3/4">
       <div class="flex text-base md:text-2xl pb-2">
         <div class="font-light pr-2">ลงทะเบียน</div>
         <div class="font-bold">สมัครลงคอร์ส</div>
       </div>
-      <p class="text-xl md:text-6xl font-bold pb-2">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+      <p class="text-3xl md:text-6xl font-bold pb-2">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
       <p class="text-sm md:text-base">หลังจากที่แอดมินได้ Approve แล้วข้อมูลของคุณจะลงไปที่ Website</p>
-      <div class="block md:flex font-bold py-10">
-        <div class="flex">
+      <div class="block md:flex font-bold py-8 lg:py-10">
+        <div class="flex mb-4 lg:mb-0">
           <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/content-check.png" />
           <p class="pl-2 pr-4">ขยายฐานลูกค้า</p>
         </div>
-        <div class="flex">
+        <div class="flex mb-4 lg:mb-0">
           <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/content-check.png" />
           <p class="pl-2 pr-4">สมัครฟรี</p>
         </div>

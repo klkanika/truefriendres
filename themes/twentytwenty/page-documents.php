@@ -52,12 +52,12 @@ $documents = $documentsObject->posts;
     <div class="flex text-base md:text-2xl pb-2">
       <div class="text-base md:text-xl font-light pr-2">คลังแสงของคนอยากเปิดร้านอาหาร</div>
     </div>
-    <p class="text-3xl md:text-6xl font-bold pb-2">Document</p>
+    <p class="text-4xl md:text-6xl font-bold pb-2">Document</p>
     <p class="text-sm md:text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</p>
     <div class="flex mt-10 z-20">
-      <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
-      <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
-      <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt=""></a>
+      <a href=""><img class="mr-4 w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+      <a href=""><img class="mr-4 w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
     </div>
     <div class="flex justify-center flex-wrap w-full md:w-3/4 mt-16 mb-12 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-y-4 md:gap-x-8">
       <?php foreach ($documents as $key => $thePost) :
@@ -80,9 +80,9 @@ $documents = $documentsObject->posts;
           <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
             <a href="<?= $thePost->file ?>" download>Download <?= $extension ?></a>
             <div class="flex items-center">
-              <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
-              <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
-              <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt=""></a>
+              <a href=""><img class="mr-3 w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+              <a href=""><img class="mr-3 w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+              <a href=""><img class="w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
             </div>
           </div>
         </div>
@@ -104,5 +104,3 @@ $documents = $documentsObject->posts;
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
-<script>
-</script>

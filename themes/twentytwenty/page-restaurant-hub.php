@@ -53,7 +53,7 @@
           <?php endforeach; ?>
         </select>
         <select class="ml-2 bg-transparent border border-gray-300 rounded-full px-2 py-1">
-          <option value="">%กำไรต่อปี</option>
+          <option value="">จำนวนสาขา</option>
         </select>
       </div>
       <div class="lg:ml-auto lg:w-auto lg:my-0 my-4 w-full flex items-center bg-transparent border border-gray-300 rounded-full px-4 py-1">
