@@ -103,7 +103,7 @@
   <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <!-- Slider main container -->
     <div class="swiper-container w-full">
-      <div class="swiper-wrapper md:pl-32 pl-4">
+      <div class="swiper-wrapper md:pl-48 pl-4">
         <!-- Slides -->
         <?php foreach (get_field('รูปภาพ') as $รูป) : ?>
           <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">

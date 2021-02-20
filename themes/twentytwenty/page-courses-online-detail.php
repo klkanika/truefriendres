@@ -174,7 +174,7 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
   <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <!-- Slider main container -->
     <div class="swiper-container w-full">
-      <div class="swiper-wrapper pl-4 md:pl-32">
+      <div class="swiper-wrapper pl-4 md:pl-48">
         <!-- Slides -->
         <?php foreach (get_field('รูปภาพ') as $รูป) : ?>
           <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
