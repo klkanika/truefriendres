@@ -115,15 +115,17 @@
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
-    <div class="w-full md:pl-32 md:pr-32 mt-16 mb-12 px-4">
+    <div class="w-full md:pl-48 md:pr-48 mt-16 mb-12 px-4">
       <div class="flex items-center justify-between">
-        <button class="h-10 rounded-full flex items-center justify-center p-4 md:p-6 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#262145; color: #DBDBDB;">
-          offline
-        </button>
-        <div class="flex">
-          <a href="" class="mr-4"><img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
-          <a href="" class="mr-4"><img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
-          <a href=""><img class="w-8 h-8" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt=""></a>
+        <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
+          <div class="flex items-center justify-center">
+            <div class="text-xs rounded-full text-sm px-4 py-2 text-white" style="background-color: #062241;">offline</div>
+          </div>
+        </div>
+        <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
+          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
         </div>
       </div>
       <p class="text-2xl md:text-5xl font-bold my-6"><?= get_field('ชื่อ') ?></p>
@@ -143,6 +145,7 @@
         </div>
       </a> -->
       <div class="flex justify-center">
+        <style>iframe{width: 100% !important;height: 450px !important;}</style>
         <?= get_field('วิดีโอ') ?>
       </div>
       <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
