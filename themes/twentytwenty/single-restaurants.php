@@ -82,11 +82,11 @@
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
         <?php
-        if ($อาเรย์รูปภาพ) {
+        if ($อาเรย์รูปภาพ):
           foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?>
             <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูปภาพ['รูป'] ?>" alt="" /></div>
         <?php endforeach;
-        } ?>
+        endif; ?>
 
       </div>
       <!-- Add Arrows -->

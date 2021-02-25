@@ -62,7 +62,7 @@
   </section>
 
   <section class="w-full py-8" style="color: #262145;">
-    <div class="max-w-screen-md	md:mx-auto">
+    <div class="max-w-screen-lg	md:mx-auto">
       <div class="flex lg:flex-row flex-col-reverse mx-4 md:mx-0">
         <div class="flex items-center">
           <div class="border border-gray-300 rounded-full px-2 py-1 w-32">
