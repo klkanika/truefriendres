@@ -10,6 +10,18 @@
 </head>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
+  <?php
+    include 'truefriend-header.php';
+    $รูปภาพ = get_field('รูปภาพ');
+    $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
+    $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
+    $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
+    $contact = [];
+    $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
+    foreach ($ข้อมูลติดต่อ as $key => $ข้อมูล) {
+      $contact[$key] = $ข้อมูล;
+    }
+    ?>
   <style>
     #headder {
       background: transparent;
@@ -67,18 +79,7 @@
     }
   </style>
 
-  <?php
-  include 'truefriend-header.php';
-  $รูปภาพ = get_field('รูปภาพ');
-  $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
-  $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
-  $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
-  $contact = [];
-  $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
-  foreach ($ข้อมูลติดต่อ as $key => $ข้อมูล) {
-    $contact[$key] = $ข้อมูล;
-  }
-  ?>
+  
   <!-- Set up your HTML -->
   <section id="suppliers-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
     <div class="swiper-container">
@@ -175,7 +176,7 @@
         </div>
       </div>
 
-      <div class="border-b border-gray-300 py-8">
+      <!-- <div class="border-b border-gray-300 py-8">
         <p class="text-gray-500 mb-2">ความเป็นมา</p>
         <p class="text-xl"><?= get_field('ความเป็นมา') ?></p>
       </div>
@@ -204,14 +205,14 @@
             <p class=""><?= $value ?></p>
           </div>
         <?php endforeach ?>
-      </div>
+      </div> -->
 
       <div class="border-b border-gray-300 py-8 -mx-4">
         <div class="flex items-center justify-between mb-2 lg:mx-0 mx-4">
           <p class="text-gray-500 mb-2">สถานที่และเส้นทาง</p>
           <a href="#" class="font-semibold">เปิดใน Google Map</a>
         </div>
-        <div class="w-full bg-gray-400 rounded-lg" style="height: 60vh;">
+        <div class="w-full bg-gray-300 flex items-center justify-center" style="height: 60vh;">
           GOOGLE MAP
         </div>
       </div>
@@ -234,10 +235,16 @@
     <span class="text-3xl font-bold">
       ลงทะเบียน Franchise ฟรี
     </span>
-    <a href="<?= get_site_url() ?>/franchise-register" class="rounded-full py-3 px-24 text-xs bg-white my-6">
+    <a href="<?= get_site_url() ?>/franchise-register" class="rounded-full py-3 px-24 bg-white my-6">
       ลงทะเบียน
     </a>
   </div>
+  <?php
+    $footerbgcolor = '#f2f2f2';
+    $footercolor = '#19181F';
+    $footerheadercolor = 'rgba(0,0,0,0.5)';
+    $footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
+    ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 
