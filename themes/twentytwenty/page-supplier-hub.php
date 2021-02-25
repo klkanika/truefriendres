@@ -29,30 +29,30 @@ $suppliers = $suppliersObject->posts;
     <?php include 'truefriend-header.php'; ?>
     <!-- Set up your HTML -->
     <style>
-        #headder {
-            background: transparent;
-            color: var(--primary);
-        }
+			#headder {
+					background: transparent;
+					color: var(--primary);
+			}
 
-        #headder svg {
-            fill: var(--primary);
-        }
+			#headder svg {
+					fill: var(--primary);
+			}
 
-        #content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+			#content {
+					max-width: 1000px;
+					margin: 0 auto;
+			}
     </style>
     <section class="text-white pt-32 w-full" style="background-color:#f2f2f2;color:#262145;">
         <section class="w-full flex items-center flex-col">
-            <h2 class="lg:text-2xl text-sm mb-2">รวมเบอร์ติดต่อ Supplier สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</h2>
-            <h1 class="lg:text-6xl text-5xl font-bold tracking-tighter">Supplier hub</h1>
-            <img class="lg:w-1/3 w-full lg:-mt-7 -mt-2" src="<?= get_theme_file_uri() ?>/assets/images/supplier-book.svg" alt="" />
-            <div class="flex items-center justify-center flex-wrap gap-4 mt-6">
-                <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-                <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-                <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
-            </div>
+					<h2 class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Supplier สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</h2>
+					<h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mt-2">Supplier hub</h1>
+					<img class="lg:w-1/3 w-full lg:-mt-7 -mt-2" src="<?= get_theme_file_uri() ?>/assets/images/supplier-book.svg" alt="" />
+					<div class="flex items-center justify-center flex-wrap gap-4 mt-6">
+						<a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+						<a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+						<a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+					</div>
         </section>
         <hr class="mt-8 mb-8 lg:mt-12 lg:mt-8" style="border-top:1px solid rgba(0,0,0,0.12)" />
         <section class="mx:6 lg:py-8 pb-4" id="content">
@@ -89,7 +89,7 @@ $suppliers = $suppliersObject->posts;
             <span class="text-3xl font-bold">
                 ลงทะเบียน Supplier ฟรี
             </span>
-            <a href="<?= get_site_url() ?>/supplier-register" class="rounded-full py-3 px-24 text-xs bg-white my-6">
+            <a href="<?= get_site_url() ?>/supplier-register" class="rounded-full py-3 px-24 bg-white my-6">
                 ลงทะเบียน
             </a>
         </div>
