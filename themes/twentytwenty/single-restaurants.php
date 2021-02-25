@@ -138,12 +138,12 @@
           <p class="text-xl"><?= $ra['restaurantDay'] ?> <?= $ra['restaurantOpen'] ?> - <?= $ra['restaurantClose'] ?> น.</p>
         <?php endforeach; ?>
       </div>
-      <div class="border-b border-gray-300 py-8 -mx-4">
+      <div class="border-b border-gray-300 py-8 -mx-4 md:mx-0">
         <div class="flex items-center justify-between mb-2 lg:mx-0 mx-4">
           <p class="text-gray-500 mb-2">สถานที่และเส้นทาง</p>
           <a href="#" class="font-semibold">เปิดใน Google Map</a>
         </div>
-        <div class="w-full bg-gray-400 rounded-lg" style="height: 60vh;">
+        <div class="w-full bg-gray-300 flex justify-center items-center" style="height: 60vh;">
           GOOGLE MAP
         </div>
       </div>
@@ -204,7 +204,7 @@
     <span class="text-3xl font-bold">
       ลงทะเบียน Restaurant ฟรี
     </span>
-    <a class="rounded-full py-3 px-24 text-xs bg-white my-6" href="<?=get_site_url()?>/restaurant-register">
+    <a class="rounded-full py-3 px-24 bg-white my-6" href="<?=get_site_url()?>/restaurant-register">
       ลงทะเบียน
     </a>
   </div>
