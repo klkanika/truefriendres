@@ -70,7 +70,7 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
         </div>
         <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
           <p>ดูข้อมูล</p>
-          <div class="flex items-center"><?= $supplier->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" alt="" /></div>
+          <div class="flex items-center"><?= $supplier->posts_count > 999 ? '999+' : $supplier->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" alt="" /></div>
         </div>
       </a>
       <a href="<?= get_site_url() ?>/restaurant-hub" class="cursor-pointer lg:w-1/5 w-full flex lg:items-center lg:justify-center flex-col lg:h-64 h-40 relative lg:mb-0 mb-4 text-white lg:ml-2 lg:mr-2 ml-4 mr-4 rounded-md" style="background-color:#262145">
@@ -80,7 +80,7 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
         </div>
         <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
           <p>ดูข้อมูล</p>
-          <div class="flex items-center"><?= $restaurant->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" alt="" /></div>
+          <div class="flex items-center"><?= $restaurant->posts_count > 999 ? '999+' : $restaurant->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" alt="" /></div>
         </div>
       </a>
       <a href="<?= get_site_url() ?>/franchise-hub" class="cursor-pointer lg:w-1/5 w-full flex lg:items-center lg:justify-center flex-col lg:h-64 h-40 relative lg:mb-0 mb-4 bg-white lg:ml-2 lg:mr-2 ml-4 mr-4 rounded-md" style="color:#251D5C">
@@ -90,7 +90,7 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
         </div>
         <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
           <p>ดูข้อมูล</p>
-          <div class="flex items-center"><?= $franchise->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" alt="" /></div>
+          <div class="flex items-center"><?= $franchise->posts_count > 999 ? '999+' : $franchise->posts_count ?>+ <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" alt="" /></div>
         </div>
       </a>
     </div>

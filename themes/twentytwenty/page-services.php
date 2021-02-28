@@ -37,7 +37,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
       <span class="text-xl text-center mb-2 font-normal">นอกจากการเป็นคลังความรู้สำหรับธุรกิจร้านอาหารแล้ว<br>เรายังมีบริการอื่นๆเพื่อช่วยผู้ประกอบการไปถึงฝั่งฝัน</span>
     </div>
     <div class="button border-gray-500 lg:px-32 lg:mx-8 px-8 py-5 pb-14  flex lg:justify-content-center justify-center gap-1">
-      <button class="rounded-full text-black font-bold py-3 px-16" style="background-color: #FEDA52;">Read more</button>
+      <div scrollto="prmarketing" class="scrollto-item rounded-full text-black font-bold py-3 px-16" style="background-color: #FEDA52;">Read more</div>
 
     </div>
     <div class=" lg:px-32 lg:mx-8 px-8 py-5 flex lg:justify-content-center justify-center gap-4">
@@ -50,7 +50,7 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
   </section>
 
   <!-- PR & Marketing -->
-  <section class="px-6 md:px-0 md:pl-20 pt-20" style="background-color: #E5E5E5;color:#262145">
+  <section id="prmarketing" class="px-6 md:px-0 md:pl-20 pt-20" style="background-color: #E5E5E5;color:#262145">
     <div class="md:flex  pb-16">
       <div class="md:hidden items-center justify-center">
         <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png"/>

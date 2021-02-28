@@ -1,6 +1,6 @@
 <?php
 require_once('custom-classes/class-posts.php');
-$Restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 12, 0, null);
+$Restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 20, 0, null);
 $Restaurant101Posts = $Restaurant101PostsObject->posts;
 ?>
 <section id="restaurant101" class="pt-8 lg:pl-8 pl-4 test" style="color:#062241;">

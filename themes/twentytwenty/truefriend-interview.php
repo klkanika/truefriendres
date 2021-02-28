@@ -1,4 +1,4 @@
-<?php $interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, [get_the_ID()]); ?>
+<?php $interviewPosts = Post::getPostsByCategory('interviews', null, 8, 0, [get_the_ID()]); ?>
 <section id="section-3rdSlider" class="pt-14 pb-10 lg:px-8 lg:px-4 text-white" style="background-color:#19181F;">
     <div class="mb-6 flex justify-between lg:px-0 px-4">
         <p class="font-bold text-2xl lg:mb-0 mb-2">Interview</p>

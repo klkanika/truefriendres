@@ -102,11 +102,14 @@ class Post
     {
         $args = array(
             'post_type' => $postType,
-            'posts_per_page' => $postsPerPage,
             'offset' => $offset,
             'post_status' =>  'publish',
             'ignore_sticky_posts' => 1,
         );
+
+        if($postsPerPage != null){
+            $args['posts_per_page'] = $postsPerPage;
+        }
 
         if ($postType === 'post' && $categoryNo != null) {
             $args['category__in'] = $categoryNo;
@@ -181,6 +184,14 @@ class Post
             $thePost->รายละเอียด = get_field('รายละเอียด');
             $thePost->file = get_field('file');
             $thePost->pictureUrl = get_field('pictureurl');
+        }
+
+        if ($postType === 'advertisement') {
+            $thePost->adsLink = get_field('link');
+            $thePost->adsImage = get_field('image');
+            $thePost->adsMobileImage = get_field('mobile_image');
+            $thePost->adsDisplayAt = get_field('display_at');
+            
         }
 
         return $thePost;

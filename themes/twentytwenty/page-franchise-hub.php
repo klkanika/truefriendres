@@ -12,6 +12,7 @@
 </head>
 
 <?php
+require_once('custom-classes/class-posts.php');
   $args = array(
     'taxonomy' => 'franchise_type',
     'orderby' => 'count',
@@ -145,9 +146,7 @@
     </div>
   </section>
 
-  <div class="w-full h-48 bg-gray-400 flex items-center justify-center">
-    <span class="text-white">Banner</span>
-  </div>
+  <?php include 'truefriend-advertisement.php'; ?>
 
   <!-- Other category -->
   <section id="other" class="py-12">
@@ -189,9 +188,7 @@
     </div>
   </section>
 
-  <div class="w-full h-48 bg-gray-400 flex items-center justify-center">
-    <span class="text-white">Banner</span>
-  </div>
+  <?php include 'truefriend-advertisement.php'; ?>
 
   <!-- lists -->
   <section id="lists" class="py-8 md:py-16" style="color: #262145;">
@@ -246,7 +243,7 @@
             </div>
           </a>
           <?php if(in_array($key, [1,5])):?>
-          <div class="w-full h-36 bg-gray-300 flex items-center justify-center rounded-lg	mt-6"><span class="text-white">Banner</span></div>
+            <?php include 'truefriend-advertisement-small.php'; ?>
           <?php endif;?>
         </div>
       <?php endforeach; ?>

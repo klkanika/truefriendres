@@ -27,6 +27,7 @@
 
 </head>
 <?php
+$footerbgcolor = '#19181F';
 require_once('custom-classes/class-posts.php');
 ?>
 
@@ -39,7 +40,14 @@ require_once('custom-classes/class-posts.php');
         <div class="flex lg:flex-row flex-col lg:items-center lg:justify-between lg:border-t border-white py-4 lg:w-1/2">
           <span class="text-2xl font-medium">Interview</span>
           <div class="flex items-center lg:pt-0 pt-6">
-            <img src="<?= get_field('intervieweeBusinessLogo') ?>" alt="" class="w-10 h-10 rounded-full object-cover">
+            <?php
+              $logo = get_field('intervieweeBusinessLogo');
+              if(!empty($logo)) :
+            ?>
+              <img src="<?= get_field('intervieweeBusinessLogo') ?>" alt="" class="w-12 h-12 rounded-full object-cover">
+            <?php else:?>
+              <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+            <?php endif;?>
             <div class="flex flex-col ml-2">
               <span><?= get_field('interviewee') ?></span>
               <span><?= get_field('intervieweeBusiness') ?></span>
@@ -57,7 +65,7 @@ require_once('custom-classes/class-posts.php');
     </div>
     <div class="lg:w-1/2 lg:px-0 px-5">
       <div class="flex flex-col items-center py-8">
-        <p class="lg:text-3xl text-xl text-center">
+        <p class="lg:text-3xl text-xl text-center break-words">
           <?= get_the_title() ?>
         </p>
         <div class="lg:px-32 lg:mx-8 px-8 py-4 flex lg:justify-start justify-center gap-4">

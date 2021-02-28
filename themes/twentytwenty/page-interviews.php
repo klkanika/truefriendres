@@ -2,10 +2,11 @@
 <html lang="en">
 <?php
 require_once('custom-classes/class-posts.php');
-$interviewPostsObject = Post::getPostsByCategory('interviews', null, 9, 0, null);
+$interviewPostsObject = Post::getPostsByCategory('interviews', null, 8, 0, null);
 $interviewPosts = $interviewPostsObject->posts;
 $firstPost = $interviewPosts[0];
 array_shift($interviewPosts);
+$footerbgcolor = '#19181F';
 //Shift out for the first post
 ?>
 
@@ -55,7 +56,9 @@ array_shift($interviewPosts);
           <div>
             <p class="border-b border-white pb-4 text-xl font-light">ล่าสุด</p>
             <div class="flex items-center py-4">
-              <img src="<?= $firstPost->intervieweeBusinessLogo ?>" alt="" class="w-10 h-10 rounded-full object-cover">
+              <?php if(!empty($firstPost->intervieweeBusinessLogo)) :?>
+                <img src="<?= $firstPost->intervieweeBusinessLogo ?>" alt="" class="w-10 h-10 rounded-full object-cover">
+              <? endif;?>
               <p class="ml-2"><?= $firstPost->intervieweeBusiness ? $firstPost->intervieweeBusiness : $firstPost->interviewee ?></p>
             </div>
             <p class="text-2xl"><?= $firstPost->title ?></p>
@@ -73,7 +76,9 @@ array_shift($interviewPosts);
           <img class="object-cover w-full h-full rounded-xl" src="<?= $item->featuredImage ?>" />
         </div>
         <div class="absolute top-3 left-3" style="width:45px;height:45px;">
-          <img class="object-cover w-full h-full rounded-full" src="<?= $item->intervieweeBusinessLogo ?>" />
+          <?php if(!empty($item->intervieweeBusinessLogo )) :?>
+            <img class="object-cover w-full h-full rounded-full" src="<?= $item->intervieweeBusinessLogo ?>" />
+          <?endif;?>
         </div>
         <div class="absolute left-0 bottom-0" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">
           <div class="ml-6 mb-6 mr-6">

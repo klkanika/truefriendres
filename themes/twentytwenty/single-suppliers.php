@@ -127,8 +127,10 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <div class="mx-4 lg:mx-0">
         <h1 class="text-4xl font-bold mt-4"><?= get_field('ชื่อธุรกิจ') ?></h1>
         <h2 class="text-lg mt-3"><?= get_field('รายละเอียดเจ้าของธุรกิจ')['เบอร์โทร'] ?> (<?= get_field('รายละเอียดเจ้าของธุรกิจ')['ชื่อ'] ?>)</h2>
+        <?php if (!empty(get_field('แนะนำธุรกิจ'))):?>
         <p class="text-sm mt-8" style="color:rgba(6,34,65,0.5)">รายละเอียด</p>
-        <p class="text-base mt-1"><?= get_field('แนะนำธุรกิจ') ? get_field('แนะนำธุรกิจ') : '-' ?></p>
+          <p class="text-base mt-1"><?= get_field('แนะนำธุรกิจ') ?></p>
+        <?php endif; ?>
         <div class="items-center justify-end flex-wrap gap-4 lg:hidden flex">
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
           <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
@@ -136,6 +138,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         </div>
       </div>
       <hr class="my-5" />
+      <?php if (!empty($supplierGoods)):?>
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">สินค้า</p>
         <div class="flex flex-wrap">
@@ -145,6 +148,8 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         </div>
       </div>
       <hr class="my-5" />
+      <?php endif; ?>
+      <?php if (!empty($อาเรย์สถานที่จัดส่ง)):?>
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">พื้นที่การจัดส่ง</p>
         <div class="flex flex-wrap">
@@ -154,13 +159,22 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         </div>
       </div>
       <hr class="my-5" />
+      <?php endif; ?>
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">ติดต่อ / Social media</p>
         <div class="flex flex-col">
-          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/phone-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] : '-' ?> <?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? '(' . $รายละเอียดเจ้าของธุรกิจ['ชื่อ'] . ')' : '' ?></div>
-          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt="" /><?= $โซเชียลมีเดีย['line'] ? $โซเชียลมีเดีย['line'] : '-' ?></div>
-          <div class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/email-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['email'] ? $รายละเอียดเจ้าของธุรกิจ['email'] : '-' ?></div>
-          <div class="flex items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /><?= $โซเชียลมีเดีย['facebook'] ? $โซเชียลมีเดีย['facebook'] : '-' ?></div>
+          <?php if (!empty($รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'])):?>
+            <a href="tel:<?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ?>" class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/phone-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] : '-' ?> <?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? '(' . $รายละเอียดเจ้าของธุรกิจ['ชื่อ'] . ')' : '' ?></a>
+          <?php endif;?>
+          <?php if (!empty($โซเชียลมีเดีย['line'])):?>
+            <a target="_blank" href="https://line.me/ti/p/~<?= $โซเชียลมีเดีย['line']?>"class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt="" /><?= $โซเชียลมีเดีย['line'] ? $โซเชียลมีเดีย['line'] : '-' ?></a>
+          <?php endif;?>
+          <?php if (!empty($รายละเอียดเจ้าของธุรกิจ['email'])):?>
+            <a href="mailto:<?= $รายละเอียดเจ้าของธุรกิจ['email']?>" class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/email-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['email'] ? $รายละเอียดเจ้าของธุรกิจ['email'] : '-' ?></a>
+          <?php endif;?>
+          <?php if (!empty($โซเชียลมีเดีย['facebook'])):?>
+            <a target="_blank" href="https://<?= $โซเชียลมีเดีย['facebook']?>" class="flex items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /><?= $โซเชียลมีเดีย['facebook'] ? $โซเชียลมีเดีย['facebook'] : '-' ?></a>
+          <?php endif;?>
         </div>
       </div>
       <hr class="my-5" />
@@ -187,7 +201,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <span class="text-3xl font-bold">
         ลงทะเบียน Supplier ฟรี
       </span>
-      <a href="<?= get_site_url() ?>/supplier-register" class="rounded-full py-3 px-24 text-xs bg-white my-6">
+      <a href="<?= get_site_url() ?>/supplier-register" class="rounded-full py-3 px-24 bg-white my-6">
         ลงทะเบียน
       </a>
     </div>

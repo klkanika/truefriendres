@@ -14,23 +14,27 @@
 <?php
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-suppliertypes.php');
-$stickyPosts = Post::getStickyPosts(4);
+$stickyPosts = Post::getStickyPosts(5);
 $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
 // $interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, null);
+$galleryCatId = get_category_by_slug('gallery')->cat_ID;
 $galleryPosts = Post::getPostsByCategory('post', get_category_by_slug('gallery')->cat_ID, 4, 0, null);
-$supplierTypes = SupplierType::getSupplierTypes(12);
+$supplierTypes = SupplierType::getSupplierTypes(20);
 // categories of posts (input as slug)
 $postCategories = array('news', 'marketing', 'knowledge');
 $postObjects = array();
 foreach ($postCategories as $postCategory) {
     $catObject = get_category_by_slug($postCategory);
-    $posts = Post::getPostsByCategory('post', $catObject->cat_ID, 4, 0, null);
-    array_push($postObjects, json_decode(
-        '{' .
-            '"posts" : ' . json_encode($posts) . ',' .
-            '"catObject" : ' . json_encode($catObject) .
-            '}'
-    ));
+    
+    if(!empty($catObject)){
+        $posts = Post::getPostsByCategory('post', $catObject->cat_ID, 4, 0, null);
+        array_push($postObjects, json_decode(
+            '{' .
+                '"posts" : ' . json_encode($posts) . ',' .
+                '"catObject" : ' . json_encode($catObject) .
+                '}'
+        ));
+    }
 }
 ?>
 
@@ -103,9 +107,7 @@ foreach ($postCategories as $postCategory) {
             ?>
         </div>
     </section>
-    <section class="flex items-center justify-center font-bold text-2xl h-48" id="banner-1" style="background-color:#F2F2F2;color:#062241;">
-        <p>BANNER</p>
-    </section>
+    <?php include 'truefriend-advertisement.php'; ?>
     <?php include 'truefriend-interview.php'; ?>
     <?php include 'truefriend-restaurant101.php'; ?>
     <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" style="background-color:#262145;">
@@ -165,9 +167,7 @@ foreach ($postCategories as $postCategory) {
             endforeach; ?>
         </div>
     </section>
-    <section class="flex items-center justify-center font-bold text-2xl h-48" id="banner-2" style="background-color:#F2F2F2;color:#062241;">
-        <p>BANNER</p>
-    </section>
+    <?php include 'truefriend-advertisement.php'; ?>
     <section id="section-blogs" class="pt-12 lg:ml-8 lg:mr-2 ml-4 mr-4 lg:pb-16 pb-12 flex flex-wrap" style="color:#062241">
         <?php
         foreach ($postObjects as $postObject) {
@@ -212,14 +212,17 @@ foreach ($postCategories as $postCategory) {
         <div class="pt-16 lg:ml-8 lg:mr-8 ml-4 mr-4 lg:pb-16 pb-10 lg:text-base text-xs">
             <p class="text-2xl mb-16 text-center">G A L L E R Y</p>
             <div class="flex flex-wrap justify-between">
-                <?php foreach ($galleryPosts->posts as $key => $thePost) : ?>
-                    <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
-                        <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
-                            <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" />
-                            <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
+                <?php 
+                if(!empty($galleryCatId)):
+                    foreach ($galleryPosts->posts as $key => $thePost) : ?>
+                        <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
+                            <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
+                                <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" />
+                                <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
+                            </div>
+                        </a>
+                    <?php endforeach; 
+                endif;?>
             </div>
             <div class="flex justify-center">
                 <p class="mt-4 select-none cursor-pointer">Load More</p>

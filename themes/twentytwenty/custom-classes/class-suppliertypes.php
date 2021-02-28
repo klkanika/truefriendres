@@ -14,10 +14,11 @@ class SupplierType
             'hide_empty' => false,
             'order' => 'ASC'
         ));
-
+        $countTerms = 0;
         $supplierTypes = [];
         if ($terms) {
             $count = 0;
+            
             foreach ($terms as $term) {
                 if ($count < $postsPerPage) {
                     $supplierType = new SupplierType();
@@ -26,6 +27,8 @@ class SupplierType
                     $supplierType->link = get_site_url() . '/supplier-hub?suppliertype=' . $term->term_id;
                     $supplierType->featuredImage = get_field('pictureUrl', $term) ? get_field('pictureUrl', $term) : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
                     $supplierType->supplierTypeCount = $term->count ? $term->count : 0;
+                    if($term->count)
+                        $countTerms++;
                     array_push($supplierTypes, $supplierType);
                     $count++;
                 } else {
@@ -37,7 +40,7 @@ class SupplierType
         return
             json_decode('{
                 "supplierTypes" : ' . json_encode($supplierTypes) . ',' .
-                '"posts_count" : ' .  count($terms) .
+                '"posts_count" : ' .  count($countTerms) .
                 '}');
     }
 }

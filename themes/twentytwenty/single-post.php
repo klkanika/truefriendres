@@ -13,6 +13,7 @@
 
 <body class="w-full">
   <?php
+  $currentPostId = $post->ID;
   include 'truefriend-header.php';
   require_once('custom-classes/class-posts.php');
   $categories = get_the_category();
@@ -79,14 +80,14 @@
     </div>
     <!-- grid grid-cols-3 gap-4  -->
     <div id="relatedSlider" class="owl-carousel">
-      <?php $related = get_posts(array('category__in' => wp_get_post_categories(get_the_ID()), 'numberposts' => 5, 'post__not_in' => array(get_the_ID())));
-      if ($related) foreach ($related as $post) :
-        setup_postdata($post); ?>
-        <a href="<?= the_permalink() ?>" class="block">
+      <?php 
+        $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
+        if ($related) foreach ($related->posts as $key => $category) :?>
+        <a href="<?= $category->link ?>" class="block">
           <div style="height:250px;" class="mb-2">
-            <img class="object-cover w-full h-full rounded" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
+            <img class="object-cover w-full h-full rounded" src="<?= $category->featuredImage ?>" />
           </div>
-          <span class="text-sm"><?= the_title() ?></span>
+          <span class="text-sm"><?= $category->title ?></span>
         </a>
       <?php endforeach;
       wp_reset_postdata(); ?>

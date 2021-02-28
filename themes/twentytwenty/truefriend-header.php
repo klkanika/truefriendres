@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	.fourthSliderClass {
 		height: 30vh;
@@ -80,6 +81,10 @@
 		max-width: 100%;
 		max-height: 100%;
 	}
+
+	.scrollto-item {
+		cursor: pointer;
+	}
 </style>
 <script>
 	// The debounce function receives our function as a parameter
@@ -117,6 +122,13 @@
 
 	// Update scroll position for first time
 	storeScroll();
+
+	$(document).on('click','.scrollto-item',function(){
+		console.log(`#${$(this).attr('scrollto')}`)
+		$('html, body').animate({
+		scrollTop: $(`#${$(this).attr('scrollto')}`).offset().top - 80
+		}, 1000);
+	});
 </script>
 <div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 lg:pt-4 lg:pb-4 p-4 z-40">
 	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar">
@@ -135,16 +147,18 @@
 	</div>
 	<!-- <div class="" style="width: 120px;margin-left: 60px;"></div> -->
 	<div class="flex items-center">
-		<svg x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class="lg:mr-6 mr-4 cursor-pointer balloon-chat">
-			<path class="st0" d="M0,2.6c0-0.7,0.3-1.4,0.8-1.8C1.3,0.3,1.9,0,2.6,0h15.7c0.7,0,1.4,0.3,1.8,0.8c0.5,0.5,0.8,1.2,0.8,1.8v10.5
-			c0,0.7-0.3,1.4-0.8,1.8c-0.5,0.5-1.2,0.8-1.8,0.8H5.8c-0.3,0-0.7,0.1-0.9,0.4l-3.7,3.7C1,19.9,0.9,20,0.8,20c-0.1,0-0.3,0-0.4,0
-			s-0.2-0.1-0.3-0.2C0,19.6,0,19.5,0,19.3V2.6z M4.6,3.9C4.4,3.9,4.2,4,4.1,4.1C4,4.2,3.9,4.4,3.9,4.6C3.9,4.8,4,4.9,4.1,5
-			c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2C16.9,4.9,17,4.8,17,4.6c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z
-			M4.6,7.2c-0.2,0-0.3,0.1-0.5,0.2C4,7.5,3.9,7.7,3.9,7.8C3.9,8,4,8.2,4.1,8.3c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2
-			C16.9,8.2,17,8,17,7.8c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z M4.6,10.5c-0.2,0-0.3,0.1-0.5,0.2
-			c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.3,0.2,0.5c0.1,0.1,0.3,0.2,0.5,0.2h6.5c0.2,0,0.3-0.1,0.5-0.2c0.1-0.1,0.2-0.3,0.2-0.5
-			c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z" />
-		</svg>
+		<a href="https://www.facebook.com/RestaurantBuddy/" target="_blank">
+			<svg x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class="lg:mr-6 mr-4 cursor-pointer balloon-chat">
+				<path class="st0" d="M0,2.6c0-0.7,0.3-1.4,0.8-1.8C1.3,0.3,1.9,0,2.6,0h15.7c0.7,0,1.4,0.3,1.8,0.8c0.5,0.5,0.8,1.2,0.8,1.8v10.5
+				c0,0.7-0.3,1.4-0.8,1.8c-0.5,0.5-1.2,0.8-1.8,0.8H5.8c-0.3,0-0.7,0.1-0.9,0.4l-3.7,3.7C1,19.9,0.9,20,0.8,20c-0.1,0-0.3,0-0.4,0
+				s-0.2-0.1-0.3-0.2C0,19.6,0,19.5,0,19.3V2.6z M4.6,3.9C4.4,3.9,4.2,4,4.1,4.1C4,4.2,3.9,4.4,3.9,4.6C3.9,4.8,4,4.9,4.1,5
+				c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2C16.9,4.9,17,4.8,17,4.6c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z
+				M4.6,7.2c-0.2,0-0.3,0.1-0.5,0.2C4,7.5,3.9,7.7,3.9,7.8C3.9,8,4,8.2,4.1,8.3c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2
+				C16.9,8.2,17,8,17,7.8c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z M4.6,10.5c-0.2,0-0.3,0.1-0.5,0.2
+				c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.3,0.2,0.5c0.1,0.1,0.3,0.2,0.5,0.2h6.5c0.2,0,0.3-0.1,0.5-0.2c0.1-0.1,0.2-0.3,0.2-0.5
+				c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z" />
+			</svg>
+		</a>
 
 		<div class="lg:w-10 lg:h-10 w-8 h-8 rounded-full flex justify-center items-center cursor-pointer" style="background-color:#FFD950;">
 			<img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
