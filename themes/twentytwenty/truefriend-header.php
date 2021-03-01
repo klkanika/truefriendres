@@ -123,10 +123,10 @@
 	// Update scroll position for first time
 	storeScroll();
 
-	$(document).on('click','.scrollto-item',function(){
+	$(document).on('click', '.scrollto-item', function() {
 		console.log(`#${$(this).attr('scrollto')}`)
 		$('html, body').animate({
-		scrollTop: $(`#${$(this).attr('scrollto')}`).offset().top - 80
+			scrollTop: $(`#${$(this).attr('scrollto')}`).offset().top - 80
 		}, 1000);
 	});
 </script>
@@ -160,9 +160,22 @@
 			</svg>
 		</a>
 
-		<div class="lg:w-10 lg:h-10 w-8 h-8 rounded-full flex justify-center items-center cursor-pointer" style="background-color:#FFD950;">
-			<img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+		<div class="rounded-full flex" style="background-color:#FFD950;">
+			<input class="rounded-full pl-6 hidden" type="text" style="background-color:#FFD950;color:#262145;" placeholder="search..." id="searchbox" />
+			<div class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
+				<img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+			</div>
 		</div>
 	</div>
 </div>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+	$("#magni").click(() => {
+		let searchbox = $("#searchbox");
+		searchbox.show();
+		searchbox.focus();
+		if(searchbox.val()){
+			//process
+		}
+	});
+</script>
