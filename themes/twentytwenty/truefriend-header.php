@@ -160,12 +160,14 @@
 			</svg>
 		</a>
 
-		<div class="rounded-full flex" style="background-color:#FFD950;">
-			<input class="rounded-full pl-6 hidden" type="text" style="background-color:#FFD950;color:#262145;" placeholder="search..." id="searchbox" />
-			<div class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
-				<img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+		<form method="get">
+			<div class="rounded-full flex" style="background-color:#FFD950;">
+				<input class="rounded-full pl-6 hidden" type="text" style="background-color:#FFD950;color:#262145;" placeholder="search..." id="searchbox" name="s" />
+				<button type="button" class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
+					<img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+				</button>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -174,8 +176,8 @@
 		let searchbox = $("#searchbox");
 		searchbox.show();
 		searchbox.focus();
-		if(searchbox.val()){
-			//process
+		if (searchbox.val()) {
+			$("#magni").attr('type', 'submit')
 		}
 	});
 </script>
