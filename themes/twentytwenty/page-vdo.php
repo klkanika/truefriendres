@@ -19,7 +19,10 @@
   <?php
   include 'truefriend-header.php';
   require_once('custom-classes/class-posts.php');
-  $videoPosts = Post::getPostsByCategory('post', get_category_by_slug('video')->cat_ID, 12, 0, null)->posts;
+  $videoPosts = null;
+  if(!empty(get_category_by_slug('video'))){
+    $videoPosts = Post::getPostsByCategory('post', get_category_by_slug('video')->cat_ID, 6, 0, null)->posts;
+  }
   ?>
   <!-- Set up your HTML -->
   <section class="text-white w-full pb-12 overflow-hidden" style="background-color: #19181F;" id="banner">
@@ -33,9 +36,9 @@
     <hr class="opacity-20 lg:ml-8 lg:mr-8" />
     <section class="lg:pl-32 mt-6 pb-12" id="contact">
       <div class="flex justify-center lg:justify-start z-20">
-        <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
-        <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-        <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></a>
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('vdo'))) ?>" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('vdo'))) ?>" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
+        <div copytoclipboard="<?= get_permalink(get_page_by_path('documents')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
       </div>
     </section>
     <section class="lg:pl-32 lg:pr-32 pl-6 pr-6 -mx-4" id="card-list">

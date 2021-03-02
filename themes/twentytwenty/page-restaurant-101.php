@@ -3,7 +3,7 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-$Restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 12, 0, null);
+$Restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 8, 0, null);
 $Restaurant101Posts = $Restaurant101PostsObject->posts;
 ?>
 
@@ -72,9 +72,9 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
         <img class="z-20" src="<?= get_theme_file_uri() ?>/assets/images/restaurant-101.svg" />
         <h2 class="z-20 text-base">นอกจากการเป็นคลังความรู้สำหรับธุรกิจร้านอาหารแล้ว <br /> เรายังมีบริการอื่นๆเพื่อช่วยผู้ประกอบการไปถึงฝั่งฝัน</h2>
         <div class="flex mt-10 z-20">
-          <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
-          <a href="" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-          <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></a>
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('restaurant-101'))) ?>" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('restaurant-101'))) ?>" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
+          <div copytoclipboard="<?= get_permalink(get_page_by_path('restaurant-101')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
         </div>
       </section>
     </section>

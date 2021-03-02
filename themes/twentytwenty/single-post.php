@@ -21,6 +21,7 @@
   foreach ($categories as $category) :
     array_push($cat_ID, $category->cat_ID);
   endforeach;
+  $thisLink = get_permalink();
   ?>
   <style>
     #headder {
@@ -37,14 +38,16 @@
       </div>
       <div class="text-white lg:text-3xl text-xl mx-auto"><?= the_title() ?></div>
       <div class="flex justify-center mt-2">
-        <a href="" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
-        <a href="" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-        <a href="" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></a>
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
+        <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
       </div>
     </div>
-    <div class="relative">
-      <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
-    </div>
+    <?php if(!empty(get_the_post_thumbnail_url())):?>
+      <div class="relative">
+        <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
+      </div>
+    <?php endif?>
   </section>
   <!-- overflow-hidden max-h-screen -->
   <section class="w-full bg-white lg:p-20 px-4 py-8  relative" style="color: #062241;" id="content-section">
@@ -62,11 +65,11 @@
   <div class="w-full flex lg:flex-row flex-col lg:px-20 px-8 py-10 justify-between items-center" style="background-color: #F2F2F2; color: #062241;">
     <span class="text-xl">Share this article</span>
     <div class="flex items-center justify-center flex-wrap gap-4 lg:pr-20 lg:mt-0 mt-8">
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
-      <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
       <div class="relative bg-white rounded-full lg:w-80 w-full pl-4 pr-12 py-3 shadow-lg">
-        <img class="w-6 h-6 cursor-pointer absolute right-0 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" onclick="copyToClipboard('<?= the_permalink(); ?>')">
-        <div class="truncate"><?= the_permalink() ?></div>
+        <img copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard w-6 h-6 absolute right-0 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" onclick="copyToClipboard('<?= the_permalink(); ?>')">
+        <div class="truncate"><?= $thisLink ?></div>
       </div>
     </div>
   </div>

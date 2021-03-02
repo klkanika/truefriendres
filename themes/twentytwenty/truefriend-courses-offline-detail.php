@@ -14,6 +14,7 @@
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php
   include 'truefriend-header.php';
+  $thisLink = get_permalink();
   $end = new DateTime(get_field('วันปิดรับสมัคร'));
   $today = new DateTime();
   $interval = $today->diff($end);
@@ -123,9 +124,9 @@
           </div>
         </div>
         <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+          <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
         </div>
       </div>
       <p class="text-2xl md:text-5xl font-bold my-6"><?= get_field('ชื่อ') ?></p>
