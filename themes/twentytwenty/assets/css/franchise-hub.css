@@ -96,7 +96,8 @@
   display: flex;
   margin: 2px -2px;
 }
-.franchise .others-img img {
+.franchise .others-img img,
+.franchise .others-img div {
   width: calc((100% / 4) - 3px);
   margin: 2px;
 }

@@ -209,7 +209,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhKE9MOf0H3VwfJJAgS_gjS9oPdkHfZQ&callback=initMap&libraries=&v=weekly"
           async
         ></script>
-      <?endif;?>
+      <?php endif;?>
     </section>
     <?php
     $args = array(

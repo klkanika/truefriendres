@@ -45,14 +45,14 @@ $suppliers = $suppliersObject->posts;
     </style>
     <section class="text-white pt-32 w-full" style="background-color:#f2f2f2;color:#262145;">
         <section class="w-full flex items-center flex-col">
-            <h2 class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Supplier สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</h2>
-            <h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mt-2">Supplier hub</h1>
-            <img class="lg:w-1/3 w-full lg:-mt-7 -mt-2" src="<?= get_theme_file_uri() ?>/assets/images/supplier-book.svg" alt="" />
-            <div class="flex items-center justify-center flex-wrap gap-4 mt-6">
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('supplier-hub'))) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-                <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('supplier-hub'))) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-                <div copytoclipboard="<?= get_permalink(get_page_by_path('supplier-hub')) ?>" class="btn-copytoclipboard"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
-            </div>
+					<h2 class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Supplier สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</h2>
+					<h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mt-2">Supplier hub</h1>
+					<img class="lg:w-1/3 w-full lg:-mt-7 -mt-2" src="<?= get_theme_file_uri() ?>/assets/images/supplier-book.svg" alt="" />
+					<div class="flex items-center justify-center flex-wrap gap-4 mt-6">
+						<a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+						<a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+						<a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+					</div>
         </section>
         <hr class="mt-8 mb-8 lg:mt-12 lg:mt-8" style="border-top:1px solid rgba(0,0,0,0.12)" />
         <section class="mx:6 lg:py-8 pb-4" id="content">

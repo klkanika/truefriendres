@@ -210,6 +210,7 @@ class Post
             $thePost->ชื่อธุรกิจ = get_field('ชื่อธุรกิจ');
             $thePost->จำนวนสาขา = get_field('จำนวน_franchise_c');
             $thePost->ค่าสมัคร = get_field('ค่าแฟรนไชส์ต่อปี');
+            $thePost->รูปภาพ = get_field('รูปภาพ');
         }
 
         return $thePost;

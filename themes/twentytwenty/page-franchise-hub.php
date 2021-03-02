@@ -22,6 +22,7 @@ $franchise_type = get_categories($args);
 
 $franchisesObject = Post::getPostsByCategory('franchises', null, 5, 0, null);
 $franchises = $franchisesObject->posts
+
 ?>
 
 <body class="w-full">
@@ -84,22 +85,32 @@ $franchises = $franchisesObject->posts
     </div>
     <div id="hilite-franchise" class="swiper-container franchise">
       <div class="swiper-wrapper">
-        <?php foreach ($franchises as $index => $franchise) : ?>
+        <?php foreach (array_slice($franchises, 0, 9) as $index => $franchise) : ?>
           <div class="swiper-slide">
             <div class="slide">
               <div class="number">#<?= $index + 1 ?></div>
               <div class="first-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <?php if (count($franchise->รูปภาพ) > 0) : ?>
+                  <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
+                <?php else : ?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
+                <?php endif ?>
               </div>
               <div class="others-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
+                  <img src="<?= $img->รูป ?>" class="object-cover" />
+                <?php } ?>
+                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
+                <?php } ?>
               </div>
               <div class="swiper-content">
                 <div class="swiper-content-name"><?= $franchise->ชื่อธุรกิจ ?></div>
-                <div class="swiper-content-label">สาขา<br /><b><?= $franchise->จำนวนสาขา ?></b></div>
+                <div class="swiper-content-label">สาขา<br />
+                  <b>
+                    <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
+                  </b>
+                </div>
                 <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
               </div>
             </div>
@@ -129,20 +140,32 @@ $franchises = $franchisesObject->posts
           <div class="swiper-slide">
             <div class="slide">
               <div class="swiper-content">
-                <div class="swiper-content-label">เนื้อ<br /><b><?= $franchise->ชื่อธุรกิจ ?></b></div>
-                <div class="swiper-content-label">สาขา<br /><b><?= $franchise->จำนวนสาขา ?></b></div>
+                <div class="swiper-content-label">
+                  <?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?>
+                  <br /><b><?= $franchise->ชื่อธุรกิจ ?></b>
+                </div>
+                <div class="swiper-content-label">สาขา<br />
+                  <b>
+                    <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
+                  </b>
+                </div>
                 <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
               </div>
               <div class="first-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <?php if (count($franchise->รูปภาพ) > 0) : ?>
+                  <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
+                <?php else : ?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
+                <?php endif ?>
               </div>
               <div class="others-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
+                  <img src="<?= $img->รูป ?>" class="object-cover" />
+                <?php } ?>
+                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
+                <?php } ?>
               </div>
-
             </div>
           </div>
         <?php endforeach; ?>
@@ -172,19 +195,30 @@ $franchises = $franchisesObject->posts
           <div class="swiper-slide">
             <div class="slide">
               <div class="swiper-content">
-                <div class="swiper-content-label">เนื้อ<br /><b><?= $franchise->ชื่อธุรกิจ ?></b></div>
-                <div class="swiper-content-label">สาขา<br /><b><?= $franchise->จำนวนสาขา ?></b></div>
+                <div class="swiper-content-label"><?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?><br /><b><?= $franchise->ชื่อธุรกิจ ?></b></div>
+                <div class="swiper-content-label">สาขา<br />
+                  <b>
+                    <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
+                  </b>
+                </div>
                 <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
               </div>
               <div class="first-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <?php if (count($franchise->รูปภาพ) > 0) : ?>
+                  <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
+                <?php else : ?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
+                <?php endif ?>
               </div>
               <div class="others-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $index => $img) { ?>
+                  <img src="<?= $img->รูป ?>" class="object-cover" />
+                <?php } ?>
+                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
+                <?php } ?>
               </div>
+
             </div>
           </div>
         <?php endforeach; ?>
@@ -225,28 +259,31 @@ $franchises = $franchisesObject->posts
           <div class="w-2/12">จำนวนสาขา</div>
           <div class="w-2/12">ค่าเปิด</div>
         </div>
-        <?php foreach ([0, 0, 0, 0, 0, 0, 0] as $key => $item) : ?>
+        <?php foreach ($franchises as $index => $franchise) : ?>
           <div class="border-b border-gray-300 p-4 md:px-0 font-light">
             <a href="">
               <div class="flex flex-wrap items-center mb-4 text-base ">
-                <div class="w-full md:w-5/12 text-2xl font-semibold">บริษัทอนุภัทรเสต็กเนื้อ</div>
-                <div class="w-4/12 md:w-2/12">ร้านเสต็ก</div>
-                <div class="w-4/12 md:w-2/12">200 สาขา</div>
-                <div class="w-4/12 md:w-2/12">20,000 บาท</div>
+                <div class="w-full md:w-5/12 text-2xl font-semibold"><?= $franchise->ชื่อธุรกิจ ?></div>
+                <div class="w-4/12 md:w-2/12"><?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?></div>
+                <div class="w-4/12 md:w-2/12"><?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?> สาขา</div>
+                <div class="w-4/12 md:w-2/12"><?= $franchise->ค่าสมัคร ?> บาท</div>
                 <div class="hidden md:w-1/12 md:flex justify-end"><img class="w-4 h-4" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt=""></div>
               </div>
               <div class="lists-imgs">
-                <?php foreach ([0, 0, 0, 0, 0, 0] as $imgKey => $imgItem) : ?>
-                  <?php if ($imgKey < 5) : ?>
-                    <div class="item <?= $imgKey > 2 ? 'hidden md:block' : '' ?>">
-                      <div class="item-more">20+</div>
-                      <img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-                    </div>
-                  <?php endif; ?>
+                <?php foreach (array_slice($franchise->รูปภาพ, 0, 5) as $index => $img) : ?>
+                  <div class="item <?= $index > 2 ? 'hidden md:block' : '' ?>">
+                    <div class="item-more"><?= count($franchise->รูปภาพ) - 5 ?>+</div>
+                    <img class="object-cover w-full h-full" src="<?= $img->รูป ?>" alt="">
+                  </div>
                 <?php endforeach; ?>
+                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
+                  <div class="item">
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
+                  </div>
+                <?php } ?>
               </div>
             </a>
-            <?php if (in_array($key, [1, 5])) : ?>
+            <?php if (in_array($index, [1, 5])) : ?>
               <?php include 'truefriend-advertisement-small.php'; ?>
             <?php endif; ?>
           </div>
