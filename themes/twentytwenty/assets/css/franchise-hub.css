@@ -26,7 +26,9 @@
 }
 
 #new .tab-active,
-#new .tab:hover {
+#new .tab:hover,
+#other .tab-active,
+#other .tab:hover {
   background-color: #262145;
   color: #fff;
   border: 1px solid #262145;
