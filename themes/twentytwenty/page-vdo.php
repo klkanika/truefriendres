@@ -44,22 +44,26 @@
     </section>
     <section class="lg:pl-32 lg:pr-32 pl-6 pr-6 -mx-4" id="card-list">
       <div class="w-full flex flex-wrap" id="posts">
-        <?php foreach ($videoPosts as $thePost) { ?>
+        <?php foreach ($videoPosts as $thePost): ?>
           <a href="<?= $thePost->link ?>" class="w-full lg:w-1/2 px-4">
-            <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>">
+            <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>')">
               <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
             </div>
             <p class="mt-6 mb-8 text-base"><?= $thePost->title ?></p>
           </a>
-        <?php
-        }
-        ?>
+        <?php endforeach ?>
       </div>
     </section>
     <div class="flex w-full justify-center mt-8 ">
       <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
     </div>
   </section>
+  <?php
+  $footerbgcolor = '#19181F';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 
