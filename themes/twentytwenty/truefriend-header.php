@@ -85,6 +85,26 @@
 	.scrollto-item {
 		cursor: pointer;
 	}
+
+	.btn-copytoclipboard {
+		cursor: pointer;
+	}
+
+	.copy-notification {
+		color: #ffffff;
+		background-color: rgba(0,0,0,0.8);
+		padding: 20px;
+		border-radius: 30px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 150px;
+		margin-top: -30px;
+		margin-left: -85px;
+		display: none;
+		text-align:center;
+		z-index: 40;
+	}
 </style>
 <script>
 	// The debounce function receives our function as a parameter
@@ -129,6 +149,40 @@
 			scrollTop: $(`#${$(this).attr('scrollto')}`).offset().top - 80
 		}, 1000);
 	});
+
+	$(document).on('click','.btn-copytoclipboard',function(event){
+		event.preventDefault();
+		CopyToClipboard($(this).attr('copytoclipboard'), true, "Value copied");
+	});
+
+	function CopyToClipboard(value, showNotification, notificationText) {
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val(value).select();
+		document.execCommand("copy");
+		$temp.remove();
+
+		if (typeof showNotification === 'undefined') {
+                showNotification = true;
+            }
+            if (typeof notificationText === 'undefined') {
+                notificationText = "Copied to clipboard";
+            }
+
+            var notificationTag = $("div.copy-notification");
+            if (showNotification && notificationTag.length == 0) {
+                notificationTag = $("<div/>", { "class": "copy-notification", text: notificationText });
+                $("body").append(notificationTag);
+
+                notificationTag.fadeIn("slow", function () {
+                    setTimeout(function () {
+                        notificationTag.fadeOut("slow", function () {
+                            notificationTag.remove();
+                        });
+                    }, 1000);
+                });
+            }
+	}
 </script>
 <div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 lg:pt-4 lg:pb-4 p-4 z-40">
 	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar">

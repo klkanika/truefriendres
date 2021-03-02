@@ -17,7 +17,17 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-// $CoursesPostsObject = Post::getPostsByCategory('post', get_category_by_slug('courses')->cat_ID, 12, 0, null);
+$onlineTermId = get_term_by('name', 'online', 'course_type')->term_id;
+$offlineTermId = get_term_by('name', 'offline', 'course_type')->term_id;
+$allPosts = Post::getPostsByCategory('courses', null, 20, 0, null);
+$onlinePosts = Post::getPostsByCategory('courses', $onlineTermId, null, 0, null);
+$offlinePosts = Post::getPostsByCategory('courses', $offlineTermId, null, 0, null);
+
+// echo '<pre>';
+// if(empty($allPosts))
+// print_r('empty');
+// else
+// print_r($allPosts);
 // $CoursesPosts = $CoursesPostsObject->posts;
 $coursesPosts = [
   "บริหารร้านอาหารให้โตแบบก้าวกระโดด", "บัญชีอย่างง่ายเพื่อเจ้าของกิจการ", "บริหารร้านอาหารให้โตแบบก้าวกระโดด", "บัญชีอย่างง่ายเพื่อเจ้าของกิจการ"
@@ -40,7 +50,7 @@ $coursesPosts = [
       </span>
     </div>
     <div class="button border-gray-500 lg:px-32 lg:mx-8 px-8 py-5 pb-14  flex lg:justify-content-center justify-center gap-1">
-      <button class="rounded-full text-black font-bold py-3 px-16" style="background-color: #FEDA52;">Register</button>
+      <a href="<?= get_permalink(get_page_by_path('courses-register')) ?>" class="rounded-full text-black font-bold py-3 px-16" style="background-color: #FEDA52;">Register</a>
     </div>
     </div>
   </section>
@@ -54,16 +64,16 @@ $coursesPosts = [
     <div class="swiper-container lastestCoursesSlider w-full">
       <div class="swiper-wrapper md:pl-8 pl-4 pb-16">
         <!-- Slides -->
-        <?php foreach ($coursesPosts as $i => $thePost) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-            <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+        <?php foreach ($allPosts->posts as $i => $thePost) : ?>
+          <a href="<?=$thePost->link?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
+            <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" />
             <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-              <p class="lg:text-xs text-xs mb-1">online</p>
-              <p class="lg:text-lg text-xs font-bold"><?= $thePost ?></p>
+              <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
             </div>
-          </div>
+          </a>
         <?php endforeach; ?>
       </div>
     </div>
@@ -169,16 +179,16 @@ $coursesPosts = [
     <div class="swiper-container offlineCoursesSlider w-full">
       <div class="swiper-wrapper pl-6 md:pl-20 pb-16">
         <!-- Slides -->
-        <?php foreach ($coursesPosts as $i => $thePost) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-            <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+        <?php foreach ($offlinePosts->posts as $i => $thePost) : ?>
+          <a href="<?=$thePost->link?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
+            <img class="object-cover w-full h-full rounded-xl opacity-30" src="<?= $thePost->featuredImage ?>" />
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-              <p class="lg:text-xs text-xs mb-1">offline</p>
-              <p class="lg:text-lg text-xs font-bold"><?= $thePost ?></p>
+              <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
             </div>
-          </div>
+          </a>
         <?php endforeach; ?>
       </div>
     </div>
@@ -275,16 +285,16 @@ $coursesPosts = [
     <div class="swiper-container onlineCoursesSlider w-full" style="color:#262145;">
       <div class="swiper-wrapper pl-6 md:pl-20 pb-16">
         <!-- Slides -->
-        <?php foreach ($coursesPosts as $i => $thePost) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-            <!-- <img class="object-cover w-full h-full rounded-xl" src="<?= get_theme_file_uri() ?>/assets/images/img-default.jpg" /> -->
+        <?php foreach ($onlinePosts->posts as $i => $thePost) : ?>
+          <a href="<?=$thePost->link?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
+            <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" />
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-              <p class="lg:text-xs text-xs mb-1">online</p>
-              <p class="lg:text-lg text-xs font-bold"><?= $thePost ?></p>
+              <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
             </div>
-          </div>
+          </a>
         <?php endforeach; ?>
       </div>
     </div>
@@ -315,7 +325,7 @@ $coursesPosts = [
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
         <div>
-          <a href="/contact-us" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
+          <a href="<?= get_permalink(get_page_by_path('courses-register')) ?>" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
         </div>
       </div>
     </div>
@@ -340,7 +350,7 @@ $coursesPosts = [
         <p class="text-sm md:text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
       </div>
       <div>
-        <a href="/contact-us" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
+        <a href="<?= get_permalink(get_page_by_path('courses-register')) ?>" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
       </div>
     </div>
   </section>

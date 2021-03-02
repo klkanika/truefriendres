@@ -56,9 +56,14 @@ $footerbgcolor = '#19181F';
           <div>
             <p class="border-b border-white pb-4 text-xl font-light">ล่าสุด</p>
             <div class="flex items-center py-4">
-              <?php if(!empty($firstPost->intervieweeBusinessLogo)) :?>
-                <img src="<?= $firstPost->intervieweeBusinessLogo ?>" alt="" class="w-10 h-10 rounded-full object-cover">
-              <? endif;?>
+              <?php
+                $logo = $firstPost->intervieweeBusinessLogo;
+                if(!empty($logo)) :
+              ?>
+                <img src="<?= $logo ?>" alt="" class="w-12 h-12 rounded-full object-cover">
+              <?php else:?>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+              <?php endif;?>
               <p class="ml-2"><?= $firstPost->intervieweeBusiness ? $firstPost->intervieweeBusiness : $firstPost->interviewee ?></p>
             </div>
             <p class="text-2xl"><?= $firstPost->title ?></p>
