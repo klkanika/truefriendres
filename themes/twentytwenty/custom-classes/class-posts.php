@@ -107,7 +107,7 @@ class Post
             'ignore_sticky_posts' => 1,
         );
 
-        if($postsPerPage != null){
+        if ($postsPerPage != null) {
             $args['posts_per_page'] = $postsPerPage;
         }
 
@@ -191,7 +191,12 @@ class Post
             $thePost->adsImage = get_field('image');
             $thePost->adsMobileImage = get_field('mobile_image');
             $thePost->adsDisplayAt = get_field('display_at');
-            
+        }
+
+        if ($postType === 'franchises') {
+            $thePost->ชื่อธุรกิจ = get_field('ชื่อธุรกิจ');
+            $thePost->จำนวนสาขา = get_field('จำนวน_franchise_c');
+            $thePost->ค่าสมัคร = get_field('ค่าแฟรนไชส์ต่อปี');
         }
 
         return $thePost;

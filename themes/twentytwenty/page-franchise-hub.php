@@ -13,15 +13,19 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-  $args = array(
-    'taxonomy' => 'franchise_type',
-    'orderby' => 'count',
-    'order'   => 'DESC'
-  );
-  $franchise_type = get_categories($args);
+$args = array(
+  'taxonomy' => 'franchise_type',
+  'orderby' => 'count',
+  'order'   => 'DESC'
+);
+$franchise_type = get_categories($args);
+
+$franchisesObject = Post::getPostsByCategory('franchises', null, 5, 0, null);
+$franchises = $franchisesObject->posts
 ?>
+
 <body class="w-full">
-  <?php include 'truefriend-header.php';?>
+  <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <style>
     #headder {
@@ -67,7 +71,7 @@ require_once('custom-classes/class-posts.php');
       <div class="swiper-button-prev"></div>
     </div>
   </section>
-  
+
   <!-- hilite -->
   <section id="hilite" class="text-white py-12 md:pl-16 pl-0" style="background-color: #23212e;">
     <div class="swiper-container cat-swiper mb-8">
@@ -80,23 +84,23 @@ require_once('custom-classes/class-posts.php');
     </div>
     <div id="hilite-franchise" class="swiper-container franchise">
       <div class="swiper-wrapper">
-        <?php foreach ([0, 0, 0, 0, 0, 0, 0] as $key => $post) : ?>
+        <?php foreach ($franchises as $index => $franchise) : ?>
           <div class="swiper-slide">
             <div class="slide">
-              <div class="number">#<?= $key+1 ?></div>
+              <div class="number">#<?= $index + 1 ?></div>
               <div class="first-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
               </div>
               <div class="others-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
               </div>
               <div class="swiper-content">
-                <div class="swiper-content-name">โคตรดีวากิว</div>
-                <div class="swiper-content-label">สาขา<br/><b>200</b></div>
-                <div class="swiper-content-label">ค่าสมัคร<br/><b>20,000</b></div>
+                <div class="swiper-content-name"><?= $franchise->ชื่อธุรกิจ ?></div>
+                <div class="swiper-content-label">สาขา<br /><b><?= $franchise->จำนวนสาขา ?></b></div>
+                <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
               </div>
             </div>
           </div>
@@ -113,32 +117,32 @@ require_once('custom-classes/class-posts.php');
     </div>
     <div class="swiper-container cat-swiper mb-8">
       <div class="swiper-wrapper md:pl-20 pl-4">
-        <div style="width: auto;" class="swiper-slide hit-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+        <div style="width: auto;" class="swiper-slide tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
         <?php foreach ($franchise_type as $type) : ?>
-          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
+          <div style="width: auto;" class="swiper-slide tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
     <div id="new-franchise" class="swiper-container franchise franchise-normal">
       <div class="swiper-wrapper md:px-16 px-0">
-        <?php foreach ([0, 0, 0, 0, 0, 0, 0] as $key => $post) : ?>
+        <?php foreach ($franchises as $index => $franchise) : ?>
           <div class="swiper-slide">
             <div class="slide">
               <div class="swiper-content">
-                <div class="swiper-content-label">เนื้อ<br/><b>โคตรดีวากิว</b></div>
-                <div class="swiper-content-label">สาขา<br/><b>200</b></div>
-                <div class="swiper-content-label">ค่าสมัคร<br/><b>20,000</b></div>
+                <div class="swiper-content-label">เนื้อ<br /><b><?= $franchise->ชื่อธุรกิจ ?></b></div>
+                <div class="swiper-content-label">สาขา<br /><b><?= $franchise->จำนวนสาขา ?></b></div>
+                <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
               </div>
               <div class="first-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
               </div>
               <div class="others-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
               </div>
-              
+
             </div>
           </div>
         <?php endforeach; ?>
@@ -156,30 +160,30 @@ require_once('custom-classes/class-posts.php');
     </div>
     <div class="swiper-container cat-swiper mb-8">
       <div class="swiper-wrapper md:pl-20 pl-4">
-        <div style="width: auto;" class="swiper-slide hit-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+        <div style="width: auto;" class="swiper-slide tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
         <?php foreach ($franchise_type as $type) : ?>
-          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
+          <div style="width: auto;" class="swiper-slide tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
     <div id="other-franchise" class="swiper-container franchise franchise-normal">
       <div class="swiper-wrapper md:px-16 px-0">
-        <?php foreach ([0, 0, 0, 0, 0, 0, 0] as $key => $post) : ?>
+        <?php foreach ($franchises as $index => $franchise) : ?>
           <div class="swiper-slide">
             <div class="slide">
               <div class="swiper-content">
-                <div class="swiper-content-label">เนื้อ<br/><b>โคตรดีวากิว</b></div>
-                <div class="swiper-content-label">สาขา<br/><b>200</b></div>
-                <div class="swiper-content-label">ค่าสมัคร<br/><b>20,000</b></div>
+                <div class="swiper-content-label">เนื้อ<br /><b><?= $franchise->ชื่อธุรกิจ ?></b></div>
+                <div class="swiper-content-label">สาขา<br /><b><?= $franchise->จำนวนสาขา ?></b></div>
+                <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
               </div>
               <div class="first-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
               </div>
               <div class="others-img">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
-                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover"/>
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/Rectangle 446.jpg" class="object-cover" />
               </div>
             </div>
           </div>
@@ -215,38 +219,38 @@ require_once('custom-classes/class-posts.php');
         </div>
       </div>
       <div class="py-8">
-      <div class="hidden md:flex items-center py-4">
-        <div class="w-5/12">ชื่อ</div>
-        <div class="w-2/12">ประเภทธุรกิจ</div>
-        <div class="w-2/12">จำนวนสาขา</div>
-        <div class="w-2/12">ค่าเปิด</div>
-      </div>
-      <?php foreach ([0, 0, 0, 0, 0, 0, 0] as $key => $item) : ?>
-        <div class="border-b border-gray-300 p-4 md:px-0 font-light">
-          <a href="">
-            <div class="flex flex-wrap items-center mb-4 text-base ">
-              <div class="w-full md:w-5/12 text-2xl font-semibold">บริษัทอนุภัทรเสต็กเนื้อ</div>
-              <div class="w-4/12 md:w-2/12">ร้านเสต็ก</div>
-              <div class="w-4/12 md:w-2/12">200 สาขา</div>
-              <div class="w-4/12 md:w-2/12">20,000 บาท</div>
-              <div class="hidden md:w-1/12 md:flex justify-end"><img class="w-4 h-4" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt=""></div>
-            </div>
-            <div class="lists-imgs">
-              <?php foreach ([0, 0, 0, 0, 0, 0] as $imgKey => $imgItem) : ?>
-                <?php if($imgKey < 5):?>
-                  <div class="item <?= $imgKey > 2 ? 'hidden md:block': ''?>">
-                    <div class="item-more">20+</div>
-                    <img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
-                  </div>
-                <?php endif;?>
-              <?php endforeach; ?>
-            </div>
-          </a>
-          <?php if(in_array($key, [1,5])):?>
-            <?php include 'truefriend-advertisement-small.php'; ?>
-          <?php endif;?>
+        <div class="hidden md:flex items-center py-4">
+          <div class="w-5/12">ชื่อ</div>
+          <div class="w-2/12">ประเภทธุรกิจ</div>
+          <div class="w-2/12">จำนวนสาขา</div>
+          <div class="w-2/12">ค่าเปิด</div>
         </div>
-      <?php endforeach; ?>
+        <?php foreach ([0, 0, 0, 0, 0, 0, 0] as $key => $item) : ?>
+          <div class="border-b border-gray-300 p-4 md:px-0 font-light">
+            <a href="">
+              <div class="flex flex-wrap items-center mb-4 text-base ">
+                <div class="w-full md:w-5/12 text-2xl font-semibold">บริษัทอนุภัทรเสต็กเนื้อ</div>
+                <div class="w-4/12 md:w-2/12">ร้านเสต็ก</div>
+                <div class="w-4/12 md:w-2/12">200 สาขา</div>
+                <div class="w-4/12 md:w-2/12">20,000 บาท</div>
+                <div class="hidden md:w-1/12 md:flex justify-end"><img class="w-4 h-4" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt=""></div>
+              </div>
+              <div class="lists-imgs">
+                <?php foreach ([0, 0, 0, 0, 0, 0] as $imgKey => $imgItem) : ?>
+                  <?php if ($imgKey < 5) : ?>
+                    <div class="item <?= $imgKey > 2 ? 'hidden md:block' : '' ?>">
+                      <div class="item-more">20+</div>
+                      <img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/menu-sample.png" alt="">
+                    </div>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </div>
+            </a>
+            <?php if (in_array($key, [1, 5])) : ?>
+              <?php include 'truefriend-advertisement-small.php'; ?>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
       </div>
       <div class="flex items-center justify-center py-8">
         <button class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
@@ -257,19 +261,19 @@ require_once('custom-classes/class-posts.php');
   <!-- register -->
   <section class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
     <span class="text-3xl font-bold">
-        ลงทะเบียน Franchise ฟรี
+      ลงทะเบียน Franchise ฟรี
     </span>
     <a href="<?= get_site_url() ?>/franchise-register" class="rounded-full py-3 px-24 bg-white my-6">
-        ลงทะเบียน
+      ลงทะเบียน
     </a>
   </section>
 
   <?php
-    $footerbgcolor = '#f2f2f2';
-    $footercolor = '#19181F';
-    $footerheadercolor = 'rgba(0,0,0,0.5)';
-    $footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
-    ?>
+  $footerbgcolor = '#f2f2f2';
+  $footercolor = '#19181F';
+  $footerheadercolor = 'rgba(0,0,0,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 <script>
@@ -296,7 +300,7 @@ require_once('custom-classes/class-posts.php');
   const franchise = new Swiper('.franchise-normal', {
     spaceBetween: 0,
     breakpoints: {
-      0:{
+      0: {
         slidesPerView: 1.1,
       },
       992: {
@@ -305,4 +309,5 @@ require_once('custom-classes/class-posts.php');
     }
   });
 </script>
+
 </html>

@@ -18,18 +18,20 @@
 #banner .swiper-button-next {
   right: 1rem;
 }
-.hit-tab {
-  background-color: #262145;
+
+.tab {
+  background-color: white;
   color: #262145;
   border: 1px solid #262145;
 }
 
-.hit-tab-active,
-.hit-tab:hover {
+#new .tab-active,
+#new .tab:hover {
   background-color: #262145;
   color: #fff;
   border: 1px solid #262145;
 }
+
 #hilite .hit-tab {
   background-color: transparent;
   color: white;
