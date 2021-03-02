@@ -20,8 +20,9 @@
   include 'truefriend-header.php';
   require_once('custom-classes/class-posts.php');
   $videoPosts = null;
-  if(!empty(get_category_by_slug('video'))){
-    $videoPosts = Post::getPostsByCategory('post', get_category_by_slug('video')->cat_ID, 6, 0, null)->posts;
+  if (!empty(get_category_by_slug('video'))) {
+    $videoPostsObject = Post::getPostsByCategory('post', get_category_by_slug('video')->cat_ID, 6, 0, null);
+    $videoPosts = $videoPostsObject->posts;
   }
   ?>
   <!-- Set up your HTML -->
@@ -42,7 +43,7 @@
       </div>
     </section>
     <section class="lg:pl-32 lg:pr-32 pl-6 pr-6 -mx-4" id="card-list">
-      <div class="w-full flex flex-wrap">
+      <div class="w-full flex flex-wrap" id="posts">
         <?php foreach ($videoPosts as $thePost) { ?>
           <a href="<?= $thePost->link ?>" class="w-full lg:w-1/2 px-4">
             <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>">
@@ -56,7 +57,7 @@
       </div>
     </section>
     <div class="flex w-full justify-center mt-8 ">
-      <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore">LOAD MORE</div>
+      <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
     </div>
   </section>
   <?php include 'truefriend-footer.php'; ?>
@@ -66,3 +67,56 @@
 
 <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
+    let allPosts = <?= $videoPostsObject->posts_count ?>;
+    let currentPosts = 6;
+    let postsPerPage = 6;
+    let loadMoreBtn = $("#loadmore");
+
+    if (allPosts > currentPosts) {
+      loadMoreBtn.show();
+    }
+
+    loadMoreBtn.click(() => {
+      loadMoreBtn.hide();
+      loadMorePost(postsPerPage);
+      if (allPosts > currentPosts) {
+        loadMoreBtn.show();
+      }
+    });
+
+    const loadMorePost = (postsPerPage) => {
+      var request = {
+        'action': 'get_posts_by_cat_json_ajax',
+        'postType': 'post',
+        'postsPerPage': postsPerPage,
+        'offset': currentPosts,
+        'categoryNo': <?= get_category_by_slug('video')->cat_ID ?>,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          currentPosts += postsObject.posts.length;
+          const posts = postsObject.posts;
+          posts.map((thePost, i) => {
+            $("#posts").append(`
+            <a href="${thePost.link}" class="w-full lg:w-1/2 px-4">
+              <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('${thePost.featuredImage}">
+                <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
+              </div>
+              <p class="mt-6 mb-8 text-base">${thePost.title}</p>
+            </a>
+            `);
+          })
+        }
+      })
+    }
+  });
+</script>
