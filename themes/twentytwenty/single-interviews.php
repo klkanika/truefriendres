@@ -29,6 +29,7 @@
 <?php
 $footerbgcolor = '#19181F';
 require_once('custom-classes/class-posts.php');
+$thisLink = get_permalink();
 ?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;background-color: #19181F;" class="text-white w-full">
@@ -59,9 +60,9 @@ require_once('custom-classes/class-posts.php');
   </section>
   <section class="relative w-full flex flex-col items-center">
     <div class="absolute right-0 hidden lg:flex flex-col mr-8" style="bottom: 50; transform: translate(0 ,50%);">
-      <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
-      <a href=""><img class="w-5 h-5 mt-6" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-      <a href=""><img class="w-5 h-5 mt-6" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></a>
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-5 h-5 mt-6" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
+      <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard"><img class="w-5 h-5 mt-6" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
     </div>
     <div class="lg:w-1/2 lg:px-0 px-5">
       <div class="flex flex-col items-center py-8">
@@ -69,9 +70,9 @@ require_once('custom-classes/class-posts.php');
           <?= get_the_title() ?>
         </p>
         <div class="lg:px-32 lg:mx-8 px-8 py-4 flex lg:justify-start justify-center gap-4">
-          <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
-          <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-          <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></a>
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
+          <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
         </div>
       </div>
       <div class="text-sm font-thin leading-8">

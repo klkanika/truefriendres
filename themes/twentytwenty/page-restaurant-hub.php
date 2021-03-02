@@ -54,9 +54,9 @@
       <div class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Restaurant สำหรับทำธุรกิจไว้ทนี่ที่ี่เดียว</div>
       <div class="lg:text-6xl text-5xl font-bold tracking-tighter mt-2">Restaurant hub</div>
       <div class="flex items-center justify-center flex-wrap mt-4">
-        <a href=""><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-        <a href=""><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-        <a href=""><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('restaurant-hub'))) ?>"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('restaurant-hub'))) ?>"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+        <div copytoclipboard="<?= get_permalink(get_page_by_path('restaurant-hub')) ?>" class="btn-copytoclipboard"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
       </div>
     </div>
   </section>
@@ -112,7 +112,9 @@
                   <?= $res->จังหวัด ? $res->จังหวัด : '-' ?>
                 </td>
                 <td>
-                  <?= $res->เบอร์โทรศัพท์ ? $res->เบอร์โทรศัพท์ : '-' ?>
+                  <a href="tel:<?= $res->เบอร์โทรศัพท์ ?>">
+                    <?= $res->เบอร์โทรศัพท์ ? $res->เบอร์โทรศัพท์ : '-' ?>
+                  </a>
                 </td>
                 <td>
                   <a href="<?= $res->link ?>">
@@ -125,12 +127,12 @@
         </table>
       </div>
       <div class="lg:hidden block px-4">
-        <?php foreach ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as $row) : ?>
-          <a href="#" class="flex items-center justify-between py-4 border-b border-gray-300">
+      <?php foreach ($restaurants as $res) : ?>
+          <a href="<?= $res->link ?>" class="flex items-center justify-between py-4 border-b border-gray-300">
             <div class="flex flex-col">
-              <p class="text-xl font-semibold">บริษัทอนุภัทรเสต็กเนื้อ</p>
-              <p class="text-base my-2">ธุรกิจ ร้านเสต็ก จำนว 200 สาขา นนทบุรี</p>
-              <p class="text-xl">0824564755</p>
+              <p class="text-xl font-semibold"><?= $res->ชื่อร้าน ?></p>
+              <p class="text-base my-2"><?= $res->ประเภทธุรกิจ ? 'ธุรกิจ '.$res->ประเภทธุรกิจ.' ' : '' ?><?= $res->จำนวนสาขา ? 'จำนวน '.$res-> จำนวนสาขา . ' สาขา ' : '' ?> <?= $res->จังหวัด ? $res->จังหวัด : '' ?></p>
+              <p class="text-xl"><?= $res->เบอร์โทรศัพท์ ? $res->เบอร์โทรศัพท์ : '' ?></p>
             </div>
             <img class="w-4 h-4" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">
           </a>

@@ -153,6 +153,7 @@ foreach ($postCategories as $postCategory) {
             foreach ($supplierTypes->supplierTypes as $supplierType) :
                 if ((int)$supplierType->supplierTypeCount > 0) :
             ?>
+                <a href="<?= $supplierType->link ?>">
                     <div class="py-2 border-b flex items-center relative">
                         <div class="w-20 h-20 mr-4">
                             <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" />
@@ -163,6 +164,7 @@ foreach ($postCategories as $postCategory) {
                         </div>
                         <img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" />
                     </div>
+                </a>
             <?php endif;
             endforeach; ?>
         </div>

@@ -114,10 +114,18 @@ class Post
         if ($postType === 'post' && $categoryNo != null) {
             $args['category__in'] = $categoryNo;
             // $args['category__not_in'] = get_category_by_slug('Uncategorized')->cat_ID;
-        } else if ($postType === 'suppliers' && $categoryNo != null) {
+        } else if (($postType === 'suppliers') && $categoryNo != null) {
             $args['tax_query'] = array(
                 array(
                     'taxonomy' => 'suppliertypes',
+                    'field' => 'term_id',
+                    'terms' => $categoryNo
+                )
+            );
+        } else if (($postType === 'courses') && $categoryNo != null) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'course_type',
                     'field' => 'term_id',
                     'terms' => $categoryNo
                 )
@@ -191,6 +199,11 @@ class Post
             $thePost->adsImage = get_field('image');
             $thePost->adsMobileImage = get_field('mobile_image');
             $thePost->adsDisplayAt = get_field('display_at');
+        }
+
+        if ($postType === 'courses') {
+            $thePost->ชื่อ = get_field('ชื่อ');
+            $thePost->terms = get_the_terms(get_the_ID(), 'course_type');
         }
 
         if ($postType === 'franchises') {

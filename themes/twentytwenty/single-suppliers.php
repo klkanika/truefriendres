@@ -7,6 +7,27 @@
   <title>Suppliers</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
+  <script>
+      // Initialize and add the map
+      let map;
+
+      function initMap() {
+        var lat = '<?php echo get_field('ปักหมุดแผนที่')['lat']; ?>';
+        var lng = '<?php echo get_field('ปักหมุดแผนที่')['lng']; ?>';
+        // The location of Uluru
+        const uluru = { lat: parseFloat(lat), lng: parseFloat(lng) };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 15,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+      }
+  </script>
 </head>
 <?php
 require_once('custom-classes/class-provinces.php');
@@ -119,22 +140,22 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
           </div>
         </div>
         <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink()) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink()) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+          <div copytoclipboard="<?= get_permalink() ?>" class="btn-copytoclipboard"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
         </div>
       </div>
       <div class="mx-4 lg:mx-0">
         <h1 class="text-4xl font-bold mt-4"><?= get_field('ชื่อธุรกิจ') ?></h1>
         <h2 class="text-lg mt-3"><?= get_field('รายละเอียดเจ้าของธุรกิจ')['เบอร์โทร'] ?> (<?= get_field('รายละเอียดเจ้าของธุรกิจ')['ชื่อ'] ?>)</h2>
         <?php if (!empty(get_field('แนะนำธุรกิจ'))):?>
-        <p class="text-sm mt-8" style="color:rgba(6,34,65,0.5)">รายละเอียด</p>
+          <p class="text-sm mt-8" style="color:rgba(6,34,65,0.5)">รายละเอียด</p>
           <p class="text-base mt-1"><?= get_field('แนะนำธุรกิจ') ?></p>
         <?php endif; ?>
         <div class="items-center justify-end flex-wrap gap-4 lg:hidden flex">
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink()) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink()) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+          <div copytoclipboard="<?= get_permalink() ?>" class="btn-copytoclipboard"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
         </div>
       </div>
       <hr class="my-5" />
@@ -178,11 +199,17 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         </div>
       </div>
       <hr class="my-5" />
-      <div class="mx-4 lg:mx-0 mb-4 flex items-center justify-between">
-        <p class="text-sm" style="color:rgba(6,34,65,0.5)">แผนที่</p>
-        <a href="#" class="text-base mt-1 font-bold">เปิดใน Google Maps</a>
-      </div>
-      <div style="background-color:#C4C4C4;" class="flex items-center justify-center h-96">GOOGLE MAP</div>
+      <?php if (!empty(get_field('ปักหมุดแผนที่'))):?>
+        <div class="mx-4 lg:mx-0 mb-4 flex items-center justify-between">
+          <p class="text-sm" style="color:rgba(6,34,65,0.5)">แผนที่</p>
+          <a target="_blank" href="https://maps.google.com/?q=<?=get_field('ปักหมุดแผนที่')['lat']?>,<?=get_field('ปักหมุดแผนที่')['lng']?>" class="text-base mt-1 font-bold">เปิดใน Google Maps</a>
+        </div>
+        <div id="map" style="background-color:#C4C4C4;" class="flex items-center justify-center h-96"></div>
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhKE9MOf0H3VwfJJAgS_gjS9oPdkHfZQ&callback=initMap&libraries=&v=weekly"
+          async
+        ></script>
+      <?endif;?>
     </section>
     <?php
     $args = array(
