@@ -8,31 +8,34 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   <script>
-      // Initialize and add the map
-      let map;
+    // Initialize and add the map
+    let map;
 
-      function initMap() {
-        var lat = '<?php echo get_field('ปักหมุดแผนที่')['lat']; ?>';
-        var lng = '<?php echo get_field('ปักหมุดแผนที่')['lng']; ?>';
-        // The location of Uluru
-        const uluru = { lat: parseFloat(lat), lng: parseFloat(lng) };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 15,
-          center: uluru,
-        });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-          position: uluru,
-          map: map,
-        });
-      }
+    function initMap() {
+      var lat = '<?php echo get_field('ปักหมุดแผนที่')['lat']; ?>';
+      var lng = '<?php echo get_field('ปักหมุดแผนที่')['lng']; ?>';
+      // The location of Uluru
+      const uluru = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
+      };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: uluru,
+      });
+      // The marker, positioned at Uluru
+      const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+      });
+    }
   </script>
 </head>
 <?php
 require_once('custom-classes/class-provinces.php');
 require_once('custom-classes/class-suppliertypes.php');
-$supplierTypes = wp_get_post_terms(get_the_ID(), 'suppliertypes');
+$supplierTypes = wp_get_post_terms(get_the_ID(), 'suppliertypes', array('orderby' => 'name'));
 $supplierGoods = wp_get_post_terms(get_the_ID(), 'suppliergoods');
 $อาเรย์รูปภาพ = get_field('รูปภาพ');
 $อาเรย์สินค้า = get_field('สินค้าที่จำหน่าย');
@@ -110,7 +113,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
   </style>
   <section id="suppliers-content" class="text-white pt-32 w-full" style="background-color:#f2f2f2;color:#262145;">
     <!-- Slider main container -->
-    <div class="swiper-container">
+    <div class="swiper-container supplier-swiper">
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
         <?php
@@ -130,7 +133,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <div class="w-full flex lg:mx-0">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
           <div class="flex items-center justify-center">
-            <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Supplier hub</div>
+            <a class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;" href="<?= get_site_url() ?>/supplier-hub">Supplier hub</a>
             <?php foreach ($supplierTypes as $supplierType) : ?>
               <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
                 <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $supplierType) ? get_field('pictureUrl', $supplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
@@ -148,7 +151,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <div class="mx-4 lg:mx-0">
         <h1 class="text-4xl font-bold mt-4"><?= get_field('ชื่อธุรกิจ') ?></h1>
         <h2 class="text-lg mt-3"><?= get_field('รายละเอียดเจ้าของธุรกิจ')['เบอร์โทร'] ?> (<?= get_field('รายละเอียดเจ้าของธุรกิจ')['ชื่อ'] ?>)</h2>
-        <?php if (!empty(get_field('แนะนำธุรกิจ'))):?>
+        <?php if (!empty(get_field('แนะนำธุรกิจ'))) : ?>
           <p class="text-sm mt-8" style="color:rgba(6,34,65,0.5)">รายละเอียด</p>
           <p class="text-base mt-1"><?= get_field('แนะนำธุรกิจ') ?></p>
         <?php endif; ?>
@@ -159,69 +162,69 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         </div>
       </div>
       <hr class="my-5" />
-      <?php if (!empty($supplierGoods)):?>
-      <div class="mx-4 lg:mx-0">
-        <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">สินค้า</p>
-        <div class="flex flex-wrap">
-          <?php foreach ($supplierGoods as $sg) : ?>
-            <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $sg->name ?></div>
-          <?php endforeach ?>
+      <?php if (!empty($supplierGoods)) : ?>
+        <div class="mx-4 lg:mx-0">
+          <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">สินค้า</p>
+          <div class="flex flex-wrap">
+            <?php foreach ($supplierGoods as $sg) : ?>
+              <div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base"><?= $sg->name ?></div>
+            <?php endforeach ?>
+          </div>
         </div>
-      </div>
-      <hr class="my-5" />
+        <hr class="my-5" />
       <?php endif; ?>
-      <?php if (!empty($อาเรย์สถานที่จัดส่ง)):?>
-      <div class="mx-4 lg:mx-0">
-        <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">พื้นที่การจัดส่ง</p>
-        <div class="flex flex-wrap">
-          <?php foreach ($ภาคการจัดส่ง as $ภาค => $มีภาค) : ?>
-            <?= $มีภาค ? '<div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base">' . $ภาค . '</div>' : '' ?>
-          <?php endforeach ?>
+      <?php if (!empty($อาเรย์สถานที่จัดส่ง)) : ?>
+        <div class="mx-4 lg:mx-0">
+          <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">พื้นที่การจัดส่ง</p>
+          <div class="flex flex-wrap">
+            <?php foreach ($ภาคการจัดส่ง as $ภาค => $มีภาค) : ?>
+              <?= $มีภาค ? '<div style="border:1px solid #062241" class="px-4 lg:px-8 py-1 mr-2 rounded-full mb-2 text-xs lg:text-base">' . $ภาค . '</div>' : '' ?>
+            <?php endforeach ?>
+          </div>
         </div>
-      </div>
-      <hr class="my-5" />
+        <hr class="my-5" />
       <?php endif; ?>
       <div class="mx-4 lg:mx-0">
         <p class="text-sm mb-2" style="color:rgba(6,34,65,0.5)">ติดต่อ / Social media</p>
         <div class="flex flex-col">
-          <?php if (!empty($รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'])):?>
+          <?php if (!empty($รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'])) : ?>
             <a href="tel:<?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ?>" class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/phone-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] : '-' ?> <?= $รายละเอียดเจ้าของธุรกิจ['เบอร์โทร'] ? '(' . $รายละเอียดเจ้าของธุรกิจ['ชื่อ'] . ')' : '' ?></a>
-          <?php endif;?>
-          <?php if (!empty($โซเชียลมีเดีย['line'])):?>
-            <a target="_blank" href="https://line.me/ti/p/~<?= $โซเชียลมีเดีย['line']?>"class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt="" /><?= $โซเชียลมีเดีย['line'] ? $โซเชียลมีเดีย['line'] : '-' ?></a>
-          <?php endif;?>
-          <?php if (!empty($รายละเอียดเจ้าของธุรกิจ['email'])):?>
-            <a href="mailto:<?= $รายละเอียดเจ้าของธุรกิจ['email']?>" class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/email-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['email'] ? $รายละเอียดเจ้าของธุรกิจ['email'] : '-' ?></a>
-          <?php endif;?>
-          <?php if (!empty($โซเชียลมีเดีย['facebook'])):?>
-            <a target="_blank" href="https://<?= $โซเชียลมีเดีย['facebook']?>" class="flex items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /><?= $โซเชียลมีเดีย['facebook'] ? $โซเชียลมีเดีย['facebook'] : '-' ?></a>
-          <?php endif;?>
+          <?php endif; ?>
+          <?php if (!empty($โซเชียลมีเดีย['line'])) : ?>
+            <a target="_blank" href="https://line.me/ti/p/~<?= $โซเชียลมีเดีย['line'] ?>" class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt="" /><?= $โซเชียลมีเดีย['line'] ? $โซเชียลมีเดีย['line'] : '-' ?></a>
+          <?php endif; ?>
+          <?php if (!empty($รายละเอียดเจ้าของธุรกิจ['email'])) : ?>
+            <a href="mailto:<?= $รายละเอียดเจ้าของธุรกิจ['email'] ?>" class="flex mb-3 items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/email-icon.svg" alt="" /><?= $รายละเอียดเจ้าของธุรกิจ['email'] ? $รายละเอียดเจ้าของธุรกิจ['email'] : '-' ?></a>
+          <?php endif; ?>
+          <?php if (!empty($โซเชียลมีเดีย['facebook'])) : ?>
+            <a target="_blank" href="https://<?= $โซเชียลมีเดีย['facebook'] ?>" class="flex items-center"><img class="w-6 h-6 cursor-pointer mr-4" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /><?= $โซเชียลมีเดีย['facebook'] ? $โซเชียลมีเดีย['facebook'] : '-' ?></a>
+          <?php endif; ?>
         </div>
       </div>
       <hr class="my-5" />
-      <?php if (!empty(get_field('ปักหมุดแผนที่'))):?>
+      <?php if (!empty(get_field('ปักหมุดแผนที่'))) : ?>
         <div class="mx-4 lg:mx-0 mb-4 flex items-center justify-between">
           <p class="text-sm" style="color:rgba(6,34,65,0.5)">แผนที่</p>
-          <a target="_blank" href="https://maps.google.com/?q=<?=get_field('ปักหมุดแผนที่')['lat']?>,<?=get_field('ปักหมุดแผนที่')['lng']?>" class="text-base mt-1 font-bold">เปิดใน Google Maps</a>
+          <a target="_blank" href="https://maps.google.com/?q=<?= get_field('ปักหมุดแผนที่')['lat'] ?>,<?= get_field('ปักหมุดแผนที่')['lng'] ?>" class="text-base mt-1 font-bold">เปิดใน Google Maps</a>
         </div>
         <div id="map" style="background-color:#C4C4C4;" class="flex items-center justify-center h-96"></div>
-        <script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhKE9MOf0H3VwfJJAgS_gjS9oPdkHfZQ&callback=initMap&libraries=&v=weekly"
-          async
-        ></script>
-      <?php endif;?>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhKE9MOf0H3VwfJJAgS_gjS9oPdkHfZQ&callback=initMap&libraries=&v=weekly" async></script>
+      <?php endif; ?>
     </section>
     <?php
     $args = array(
       'taxonomy' => 'suppliertypes',
-      'orderby' => 'name',
-      'order'   => 'ASC',
+      'orderby' => 'count',
+      'order'   => 'DESC',
+      'number' => 100
     );
     $suppliertypes = get_categories($args);
     $thumbnail_slider_title = 'Supplier hub';
     $thumbnail_slider_sub_title = 'แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ';
     $thumbnail_slider_type = 'supplier-hub';
     $thumbnail_slider_material = $suppliertypes;
+    $post_type = 'suppliers';
+    $category_name = 'suppliertypes';
     include 'truefriend-thumbnail-slider.php';
     ?>
     <div class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
@@ -252,7 +255,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       $(this).addClass('tab-button-active')
     });
 
-    const swiper = new Swiper('.swiper-container', {
+    const swiper = new Swiper('.supplier-swiper', {
       slidesPerView: 'auto',
       spaceBetween: 15,
       // loop: true,
