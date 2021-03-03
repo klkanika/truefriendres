@@ -12,6 +12,9 @@
 </head>
 
 <?php
+$marketingClient = get_field( 'pr_marketing_client',get_the_ID() );
+$consultantClient = get_field( 'consultant',get_the_ID() );
+$traningClient = get_field( 'training',get_the_ID() );
 require_once('custom-classes/class-posts.php');
 $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
 $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
@@ -75,63 +78,39 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
+        <?php if(!empty($marketingClient)): ?>
         <div class="mb-8 md:mb-16">
           <div class="font-bold mb-4">Our Client</div>
-          <div class="hidden md:flex">
-            <div class="tooltip">
-              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" />
-              <div class="tooltiptext">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
+          <div class="flex">
+            <?php foreach($marketingClient as $key => $thePost) : ?>
+              <?php $margin = 0.5*-1*$key;?>
+              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
+                <?php if(!empty($thePost['icon_image'])):?>
+                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                <?php else:?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                <?php endif;?>
+                <div class="tooltiptext">
+                  <div class="flex items-center mb-4">
+                    <?php if(!empty($thePost['customer_image'])):?>
+                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                    <?php else:?>
+                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
+                    <?php endif;?>
+                    <div class="ml-4">
+                      <div><?=$thePost['customer_name']?></div>
+                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+                    </div>
                   </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-            </div>
-            <div class="tooltip -ml-2">
-              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" />
-              <div class="tooltiptext">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
-                  </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-            </div>
-          </div>
-          <div class="md:hidden -mx-6">
-            <div class="owl-carousel">
-            <div class="slideClient">
-              <div class="flex items-center mb-4">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                <div class="ml-4">
-                  <div >พีท พัชระ</div>
-                  <div class="font-bold">Potato corner</div>
+                  <p><?=$thePost['review']?></p>
                 </div>
               </div>
-              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-            </div>
-            <div class="slideClient">
-              <div class="flex items-center mb-4">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                <div class="ml-4">
-                  <div >พีท พัชระ</div>
-                  <div class="font-bold">Potato corner</div>
-                </div>
-              </div>
-              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-            </div>
-            </div>
+            <?php endforeach; ?>
           </div>
         </div>
+        <?php endif;?>
         <div>
-          <a href="/contact-us" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
+          <a href="<?= get_permalink(get_page_by_path('contact-us')) ?>" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
         </div>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center">
@@ -181,63 +160,39 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
+        <?php if(!empty($consultantClient)): ?>
         <div class="mb-8 md:mb-16">
           <div class="font-bold mb-4">Our Client</div>
-          <div class="hidden md:flex">
-            <div class="tooltip">
-              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" />
-              <div class="tooltiptext">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
+          <div class="flex">
+            <?php foreach($consultantClient as $key => $thePost) : ?>
+              <?php $margin = 0.5*-1*$key;?>
+              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
+                <?php if(!empty($thePost['icon_image'])):?>
+                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                <?php else:?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                <?php endif;?>
+                <div class="tooltiptext">
+                  <div class="flex items-center mb-4">
+                    <?php if(!empty($thePost['customer_image'])):?>
+                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                    <?php else:?>
+                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
+                    <?php endif;?>               
+                    <div class="ml-4">
+                      <div><?=$thePost['customer_name']?></div>
+                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+                    </div>
                   </div>
+                  <p><?=$thePost['review']?></p>
                 </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
               </div>
-            </div>
-            <div class="tooltip -ml-2">
-              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" />
-              <div class="tooltiptext">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
-                  </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-            </div>
-          </div>
-          <div class="md:hidden -mx-6">
-            <div class="owl-carousel">
-              <div class="slideClient">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
-                  </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-              <div class="slideClient">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
-                  </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-            </div>
+            <?php endforeach; ?>
           </div>
         </div>
+        <?php endif;?>
         <div>
-          <a href="/contact-us" class="inline-block rounded-full font-bold py-3 px-16" style="background-color: #D4BD7D;color:#262145">Contact Us</a>
+          <a href="<?= get_permalink(get_page_by_path('contact-us')) ?>" class="inline-block rounded-full font-bold py-3 px-16" style="background-color: #D4BD7D;color:#262145">Contact Us</a>
         </div>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center px-16">
@@ -287,63 +242,39 @@ $knowledgePosts = array_filter($recentPosts->posts, function ($p) {
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
+        <?php if(!empty($traningClient)): ?>
         <div class="mb-8 md:mb-16">
           <div class="font-bold mb-4">Our Client</div>
-          <div class="hidden md:flex">
-            <div class="tooltip">
-              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 7.png" />
-              <div class="tooltiptext">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
+          <div class="flex">
+            <?php foreach($traningClient as $key => $thePost) : ?>
+              <?php $margin = 0.5*-1*$key;?>
+              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
+                <?php if(!empty($thePost['icon_image'])):?>
+                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                <?php else:?>
+                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                <?php endif;?>
+                <div class="tooltiptext">
+                  <div class="flex items-center mb-4">
+                    <?php if(!empty($thePost['customer_image'])):?>
+                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                    <?php else:?>
+                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
+                    <?php endif;?>
+                    <div class="ml-4">
+                      <div><?=$thePost['customer_name']?></div>
+                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+                    </div>
                   </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-            </div>
-            <div class="tooltip -ml-2">
-              <img class="w-12 h-12 object-cover" src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" />
-              <div class="tooltiptext">
-                <div class="flex items-center mb-4">
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                  <div class="ml-4">
-                    <div >พีท พัชระ</div>
-                    <div class="font-bold">Potato corner</div>
-                  </div>
-                </div>
-                <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-              </div>
-            </div>
-          </div>
-          <div class="md:hidden -mx-6">
-            <div class="owl-carousel">
-            <div class="slideClient">
-              <div class="flex items-center mb-4">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                <div class="ml-4">
-                  <div >พีท พัชระ</div>
-                  <div class="font-bold">Potato corner</div>
+                  <p><?=$thePost['review']?></p>
                 </div>
               </div>
-              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-            </div>
-            <div class="slideClient">
-              <div class="flex items-center mb-4">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/image 8.png" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                <div class="ml-4">
-                  <div >พีท พัชระ</div>
-                  <div class="font-bold">Potato corner</div>
-                </div>
-              </div>
-              <p>สุดยอดเลยครับ เห็นผลจริงรายได้ผมเพิ่ม 3 เท่า หลังจากได้เพื่อนแท้ร้านอาหารมา ช่วยปรึกษาเรื่องการตลาด แนะนำครับผม</p>
-            </div>
-            </div>
+            <?php endforeach; ?>
           </div>
         </div>
+        <?php endif;?>
         <div>
-          <a href="/contact-us" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
+          <a href="<?= get_permalink(get_page_by_path('contact-us')) ?>" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
         </div>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center">
