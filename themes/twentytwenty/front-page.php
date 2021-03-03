@@ -25,8 +25,8 @@ $postCategories = array('news', 'marketing', 'knowledge');
 $postObjects = array();
 foreach ($postCategories as $postCategory) {
     $catObject = get_category_by_slug($postCategory);
-    
-    if(!empty($catObject)){
+
+    if (!empty($catObject)) {
         $posts = Post::getPostsByCategory('post', $catObject->cat_ID, 4, 0, null);
         array_push($postObjects, json_decode(
             '{' .
@@ -153,18 +153,18 @@ foreach ($postCategories as $postCategory) {
             foreach ($supplierTypes->supplierTypes as $supplierType) :
                 if ((int)$supplierType->supplierTypeCount > 0) :
             ?>
-                <a href="<?= $supplierType->link ?>">
-                    <div class="py-2 border-b flex items-center relative">
-                        <div class="w-20 h-20 mr-4">
-                            <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" />
+                    <a href="<?= $supplierType->link ?>">
+                        <div class="py-2 border-b flex items-center relative">
+                            <div class="w-20 h-20 mr-4">
+                                <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" />
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold"><?= $supplierType->name ?></div>
+                                <div class="text-sm"><?= (int)$supplierType->supplierTypeCount ?> เบอร์โทร</div>
+                            </div>
+                            <img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" />
                         </div>
-                        <div>
-                            <div class="text-lg font-bold"><?= $supplierType->name ?></div>
-                            <div class="text-sm"><?= (int)$supplierType->supplierTypeCount ?> เบอร์โทร</div>
-                        </div>
-                        <img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" />
-                    </div>
-                </a>
+                    </a>
             <?php endif;
             endforeach; ?>
         </div>
@@ -213,21 +213,21 @@ foreach ($postCategories as $postCategory) {
     <section class="text-white" style="background-color:#19181F;">
         <div class="pt-16 lg:ml-8 lg:mr-8 ml-4 mr-4 lg:pb-16 pb-10 lg:text-base text-xs">
             <p class="text-2xl mb-16 text-center">G A L L E R Y</p>
-            <div class="flex flex-wrap justify-between">
-                <?php 
-                if(!empty($galleryCatId)):
+            <div class="flex flex-wrap justify-between" id="gallery-posts">
+                <?php
+                if (!empty($galleryCatId)) :
                     foreach ($galleryPosts->posts as $key => $thePost) : ?>
                         <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
                             <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
                                 <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" />
-                                <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
+                                <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
                             </div>
                         </a>
-                    <?php endforeach; 
-                endif;?>
+                <?php endforeach;
+                endif; ?>
             </div>
             <div class="flex justify-center">
-                <p class="mt-4 select-none cursor-pointer">Load More</p>
+                <p class="mt-4 select-none cursor-pointer hidden" id="loadmore">Load More</p>
             </div>
         </div>
     </section>
@@ -317,5 +317,55 @@ foreach ($postCategories as $postCategory) {
             $(".tab-button").removeClass('tab-button-active')
             $(this).addClass('tab-button-active')
         })
+
+        var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
+        let allGalleryPosts = <?= $galleryPosts->posts_count ?>;
+        let currentGalleryPosts = 4;
+        let galleryPostsPerPage = 8;
+        let loadMoreBtn = $("#loadmore");
+
+        if (allGalleryPosts > currentGalleryPosts) {
+            loadMoreBtn.show();
+        }
+
+        loadMoreBtn.click(() => {
+            loadMoreBtn.hide();
+            getPostByType('post', <?= get_category_by_slug('gallery')->cat_ID ?>, galleryPostsPerPage, currentGalleryPosts);
+            if (allGalleryPosts > currentGalleryPosts) {
+                loadMoreBtn.show();
+            }
+        });
+
+        const getPostByType = (postType, cat_ID, postsPerPage, offset) => {
+            var request = {
+                'action': 'get_posts_by_cat_json_ajax',
+                'postType': postType,
+                'postsPerPage': postsPerPage,
+                'offset': offset,
+                'categoryNo': cat_ID,
+            };
+
+            $.ajax({
+                type: "POST",
+                url: ajaxurl,
+                data: request,
+                async: false,
+                dataType: "json",
+                success: function(postsObject) {
+                    currentGalleryPosts += postsObject.posts.length;
+                    const posts = postsObject.posts;
+                    posts.map((thePost, key) => {
+                        $("#gallery-posts").append(`
+                        <a href="${thePost.link}" class="${key % 4 === 1 || key % 4 === 2 ? 'w-3/5' : 'w-2/5'}  lg:mb-4 mb-2 relative">
+                            <div class="gallery-thumbnail relative ${ key % 2 == 0 ? 'lg:mr-4 mr-2' : '' }">
+                                <img class="object-cover w-full h-full rounded-lg" src="${thePost.featuredImage}" />
+                                <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">${thePost.title}</div>
+                            </div>
+                        </a>
+                        `);
+                    })
+                }
+            })
+        }
     });
 </script>
