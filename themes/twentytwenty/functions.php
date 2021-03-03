@@ -870,3 +870,48 @@ function get_posts_by_cat_json_ajax()
 	echo json_encode($posts);
 	wp_die();
 }
+
+add_action('wp_ajax_get_cat_by_name_json_ajax', 'get_cat_by_name_json_ajax');
+add_action('wp_ajax_nopriv_get_cat_by_name_json_ajax', 'get_cat_by_name_json_ajax');
+
+function get_cat_by_name_json_ajax()
+{
+	$args = array(
+		'taxonomy' => $_POST['taxonomy'],
+		'orderby' => 'count',
+		'order'   => 'DESC',
+		'number' => 100,
+		'name__like' => $_POST['keyword']
+	);
+
+	$categories = get_categories($args);
+	if ($_POST['taxonomy'] === 'suppliertypes') {
+		foreach ($categories as $key => $cat) {
+			$cat->pictureUrl = get_field('pictureUrl', $cat) ? get_field('pictureUrl', $cat) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+		}
+	}
+
+	echo json_encode($categories);
+	wp_die();
+}
+require_once('custom-classes/class-restaurant.php');
+
+add_action('wp_ajax_get_restaurant_json_ajax', 'get_restaurant_json_ajax');
+add_action('wp_ajax_nopriv_get_restaurant_json_ajax', 'get_restaurant_json_ajax');
+
+function get_restaurant_json_ajax()
+{
+	$postType = $_POST['postType'];
+	$categoryNo = $_POST['categoryNo'];
+	$offset = $_POST['offset'];
+	$postsPerPage = $_POST['postsPerPage'];
+	$ชื่อร้าน = $_POST['ชื่อร้าน'];
+	$startNum = $_POST['startNum'];
+	$endNum = $_POST['endNum'];
+
+	$posts = Restaurant::getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, null, $ชื่อร้าน, $startNum, $endNum);
+
+	echo json_encode($posts);
+	wp_die();
+}
+

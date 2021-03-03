@@ -134,7 +134,16 @@ class Post
                     'terms' => $categoryNo
                 )
             );
+        } else if (($postType === 'restaurants') && $categoryNo != null) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'restaurant_type',
+                    'field' => 'term_id',
+                    'terms' => $categoryNo
+                )
+            );
         }
+    
 
         if ($except != null) {
             $args['post__not_in'] = $except;
@@ -185,6 +194,7 @@ class Post
         if ($postType === 'restaurants') {
             $thePost->ชื่อร้าน = get_field('ชื่อร้าน');
             $restaurantTypes = wp_get_post_terms(get_the_ID(), 'restaurant_type');
+            $thePost->typeId = $restaurantTypes[0]->term_id;
             $thePost->ประเภทธุรกิจ = $restaurantTypes[0]->name;
             $thePost->จำนวนสาขา = get_field('จำนวนสาขา');
             $thePost->จังหวัด = get_field('province');

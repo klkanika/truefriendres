@@ -12,6 +12,7 @@
 </head>
 
 <?php
+$thisLink = get_permalink();
 $courseDetail = [
   [
     "header" => "part1 จ้า",
@@ -191,25 +192,29 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
       <div class="flex items-center justify-between">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
           <div class="flex items-center justify-center">
-            <div class="text-xs rounded-full text-sm px-4 py-2 text-white" style="background-color: #062241;">offline</div>
+            <div class="text-xs rounded-full text-sm px-4 py-2 text-white" style="background-color: #062241;">online</div>
           </div>
         </div>
         <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-          <a href=""><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+          <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
         </div>
       </div>
       <p class="text-2xl md:text-5xl font-bold my-6"><?= get_field('ชื่อ') ?></p>
       <div class="flex mb-2 md:mb-6">
-        <button type="submit" class="flex h-14 p-4 rounded-lg" style="background-color:#FFD950; color: #262145;">
-          <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-clock.svg" alt="">
-          <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก <?= $dateleft ?></span>
-        </button>
-        <div class="flex p-4">
-          <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-person.svg" alt="">
-          <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;"><?= intval(get_field('จำนวนคนที่รับสมัคร')) - intval(get_field('จำนวนคนตอนนี้')) ?> ท่านสุดท้าย</span>
-        </div>
+        <?php if(!empty(get_field('วันปิดรับสมัคร'))): ?>
+          <div type="submit" class="flex h-14 p-4 rounded-lg" style="background-color:#FFD950; color: #262145;">
+            <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-clock.svg" alt="">
+            <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก <?= $dateleft ?></span>
+          </div>
+        <?php endif;?>
+        <?php if(!empty(get_field('จำนวนคนที่รับสมัคร'))): ?>
+          <div class="flex p-4">
+            <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-person.svg" alt="">
+            <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;"><?= intval(get_field('จำนวนคนที่รับสมัคร')) - intval(get_field('จำนวนคนตอนนี้')) ?> ท่านสุดท้าย</span>
+          </div>
+        <?php endif;?>
       </div>
       <!-- <a href="" class="w-full lg:w-1/2 px-4">
         <div class="w-full lg:h-96 h-56 flex items-center justify-center rounded-xl relative bg-gray-400">
@@ -220,54 +225,62 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
       <style>iframe{width: 100% !important;height: 450px !important;}</style>
         <?= get_field('วิดีโอ') ?>
       </div>
-      <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
-      <p><?= get_field('รายละเอียด') ?></p>
-
-      <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">ผู้สอน</p>
-      <p><?= get_field('ผู้สอน') ?></p>
-
-      <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
-      <div class="block md:hidden">
-        <?php foreach ($courseDetail as $i => $detail) : ?>
-          <div class="tab w-full overflow-hidden">
-            <input class="absolute opacity-0 " id="tab-multi-<?= $i ?>" type="checkbox" name="tabs">
-            <label <?php if ($i == 0) : ?> class="block p-2 leading-normal cursor-pointer rounded-none border-t-2 border-b-2 mb-2" <?php else : ?>class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" <?php endif; ?> for="tab-multi-<?= $i ?>">
-              <span class="font-bold"><?= $detail['header'] ?></span>
-            </label>
-            <div class="tab-content overflow-hidden leading-normal rounded-none">
-              <?php foreach ($detail['line'] as $lineDetail) : ?>
-                <p class="pl-2 py-2"><?= $lineDetail ?></p>
-              <?php endforeach; ?>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-
-
-      <div class="hidden md:block">
-        <div class="w-full overflow-hidden">
+      <?php if(!empty(get_field('รายละเอียด'))): ?>
+        <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
+        <p><?= get_field('รายละเอียด') ?></p>
+      <?php endif;?>
+      <?php if(!empty(get_field('ผู้สอน'))): ?>
+        <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">ผู้สอน</p>
+        <p><?= get_field('ผู้สอน') ?></p>
+      <?php endif;?>
+      <?php if(!empty($courseDetail)): ?>
+        <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
+        <div class="block md:hidden">
           <?php foreach ($courseDetail as $i => $detail) : ?>
-            <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
-              <span class="font-bold"><?= $detail['header'] ?></span>
-            </label>
-            <div class="overflow-hidden leading-normal rounded-none">
-              <?php foreach ($detail['line'] as $lineDetail) : ?>
-                <p class="pl-2 py-2 flex justify-between">
-                  <?= $lineDetail ?>
-                  <img class="w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt="">
-                </p>
-              <?php endforeach; ?>
+            <div class="tab w-full overflow-hidden">
+              <input class="absolute opacity-0 " id="tab-multi-<?= $i ?>" type="checkbox" name="tabs">
+              <label <?php if ($i == 0) : ?> class="block p-2 leading-normal cursor-pointer rounded-none border-t-2 border-b-2 mb-2" <?php else : ?>class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" <?php endif; ?> for="tab-multi-<?= $i ?>">
+                <span class="font-bold"><?= $detail['header'] ?></span>
+              </label>
+              <?php if(!empty($detail['line'])):?>
+                <div class="tab-content overflow-hidden leading-normal rounded-none">
+                  <?php foreach ($detail['line'] as $lineDetail) : ?>
+                    <p class="pl-2 py-2"><?= $lineDetail ?></p>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
             </div>
           <?php endforeach; ?>
         </div>
-      </div>
+
+        <div class="hidden md:block">
+          <div class="w-full overflow-hidden">
+            <?php foreach ($courseDetail as $i => $detail) : ?>
+              <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
+                <span class="font-bold"><?= $detail['header'] ?></span>
+              </label>
+              <?php if(!empty($detail['line'])):?>
+                <div class="overflow-hidden leading-normal rounded-none">
+                  <?php foreach ($detail['line'] as $lineDetail) : ?>
+                    <p class="pl-2 py-2 flex justify-between">
+                      <?= $lineDetail ?>
+                      <!-- <img class="w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/play-btn-blue.svg" alt=""> -->
+                    </p>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      <?php endif;?>
+
 
     </div>
   </section>
 
   <section id="register" class="text-white py-16 w-full flex items-center flex-col" style="background-color: #FFD950; color:#262145;">
-    <p class="text-5xl font-bold pb-4">ลงทะเบียนเรียน</p>
-    <a href="<?= get_site_url() ?>/courses-register" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
+    <p class="text-3xl font-bold pb-4">ลงทะเบียนเรียน</p>
+    <a href="<?= get_site_url() ?>/courses-register" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
       ลงทะเบียน
     </a>
   </section>
