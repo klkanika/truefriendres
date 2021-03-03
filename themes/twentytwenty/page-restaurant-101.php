@@ -3,8 +3,8 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-$Restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 8, 0, null);
-$Restaurant101Posts = $Restaurant101PostsObject->posts;
+$restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 8, 0, null);
+$restaurant101Posts = $restaurant101PostsObject->posts;
 ?>
 
 <head>
@@ -79,7 +79,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
       </section>
     </section>
     <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
-      <?php foreach ($Restaurant101Posts as $thePost) : ?>
+      <?php foreach ($restaurant101Posts as $thePost) : ?>
         <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
           <div class="p-6 w-full">
             <div class="w-full relative flex items-center h-48 lg:h-64">
@@ -96,7 +96,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
       <?php endforeach ?>
     </section>
     <div class="flex w-full justify-center mt-8">
-      <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore">LOAD MORE</div>
+      <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
     </div>
   </section>
   <?php include 'truefriend-footer.php'; ?>
@@ -106,3 +106,63 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
 
 <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
+    let allPosts = <?= $restaurant101PostsObject->posts_count ?>;
+    let currentPosts = 8;
+    let postsPerPage = 8;
+    let loadMoreBtn = $("#loadmore");
+
+    if (allPosts > currentPosts) {
+      loadMoreBtn.show();
+    }
+
+    loadMoreBtn.click(() => {
+      loadMoreBtn.hide();
+      loadMorePost(postsPerPage);
+      if (allPosts > currentPosts) {
+        loadMoreBtn.show();
+      }
+    });
+
+    const loadMorePost = (postsPerPage) => {
+      var request = {
+        'action': 'get_posts_by_cat_json_ajax',
+        'postType': 'post',
+        'postsPerPage': postsPerPage,
+        'offset': currentPosts,
+        'categoryNo': <?= get_category_by_slug('restaurant101')->cat_ID ?>,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          currentPosts += postsObject.posts.length;
+          const posts = postsObject.posts;
+          posts.map((thePost, i) => {
+            $("#card-list").append(`
+            <a href="${thePost.link}" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('${thePost.featuredImage}');border:1px solid rgba(255,255,255,0.2);">
+              <div class="p-6 w-full">
+                <div class="w-full relative flex items-center h-48 lg:h-64">
+                  <!-- <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('${thePost.featuredImage}')"></div> -->
+                  <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
+                  <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
+                  <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
+                    <p class="text-xs">${thePost.restaurantCategory?thePost.restaurantCategory[0]:''}</p>
+                    <p class="lg:text-base text-sm mt-2">${thePost.title}</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+            `);
+          })
+        }
+      })
+    }
+  });
+</script>

@@ -98,6 +98,10 @@ class Post
         return $posts;
     }
 
+    public static function test(){
+        return true;
+    }
+
     public static function getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, $except)
     {
         $args = array(

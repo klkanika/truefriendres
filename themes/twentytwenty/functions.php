@@ -852,3 +852,21 @@ function supplier_register_process()
 
 	exit();
 }
+
+require_once('custom-classes/class-posts.php');
+
+add_action('wp_ajax_get_posts_by_cat_json_ajax', 'get_posts_by_cat_json_ajax');
+add_action('wp_ajax_nopriv_get_posts_by_cat_json_ajax', 'get_posts_by_cat_json_ajax');
+
+function get_posts_by_cat_json_ajax()
+{
+	$postType = $_POST['postType'];
+	$categoryNo = $_POST['categoryNo'];
+	$offset = $_POST['offset'];
+	$postsPerPage = $_POST['postsPerPage'];
+
+	$posts = Post::getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, null);
+
+	echo json_encode($posts);
+	wp_die();
+}

@@ -43,23 +43,23 @@
         <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
       </div>
     </div>
-    <?php if(!empty(get_the_post_thumbnail_url())):?>
+    <?php if (!empty(get_the_post_thumbnail_url())) : ?>
       <div class="relative">
         <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
       </div>
-    <?php endif?>
+    <?php endif ?>
   </section>
   <!-- overflow-hidden max-h-screen -->
-  <section class="w-full bg-white lg:p-20 px-4 py-8  relative" style="color: #062241;" id="content-section">
+  <section class="w-full lg:p-20 px-4 py-8 relative max-h-screen overflow-hidden" style="color: #062241;" id="content-section">
     <div class="flex lg:flex-row flex-col lg:gap-28">
       <div class="flex-1 text-base flex flex-col gap-4"><?= the_content() ?></div>
       <div class="lg:w-1/4 flex flex-col gap-8 lg:mt-0 mt-16 lg:block hidden">
         <?php include 'truefriend-sponsored.php'; ?>
       </div>
     </div>
-    <!-- <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background-color:rgba(255,255,255,0.8)">
-      <button class="rounded-full text-white py-3 px-28" style="background-color: #262145;" id="readnext">READ NEXT</button>
-    </div> -->
+    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background-color:rgba(255,255,255,0.8)">
+      <button class="rounded-full text-white py-3 lg:px-28 px-14" style="background-color: #262145;" id="readnext">READ NEXT</button>
+    </div>
   </section>
 
   <div class="w-full flex lg:flex-row flex-col lg:px-20 px-8 py-10 justify-between items-center" style="background-color: #F2F2F2; color: #062241;">
@@ -67,7 +67,7 @@
     <div class="flex items-center justify-center flex-wrap gap-4 lg:pr-20 lg:mt-0 mt-8">
       <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
       <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
-      <div class="relative bg-white rounded-full lg:w-80 w-full pl-4 pr-12 py-3 shadow-lg">
+      <div class="relative bg-white rounded-full w-80 pl-4 pr-12 py-3 shadow-lg overflow-hidden">
         <img copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard w-6 h-6 absolute right-0 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" onclick="copyToClipboard('<?= the_permalink(); ?>')">
         <div class="truncate"><?= $thisLink ?></div>
       </div>
@@ -83,9 +83,9 @@
     </div>
     <!-- grid grid-cols-3 gap-4  -->
     <div id="relatedSlider" class="owl-carousel">
-      <?php 
-        $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
-        if ($related) foreach ($related->posts as $key => $category) :?>
+      <?php
+      $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
+      if ($related) foreach ($related->posts as $key => $category) : ?>
         <a href="<?= $category->link ?>" class="block">
           <div style="height:250px;" class="mb-2">
             <img class="object-cover w-full h-full rounded" src="<?= $category->featuredImage ?>" />
