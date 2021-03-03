@@ -131,14 +131,18 @@
       </div>
       <p class="text-2xl md:text-5xl font-bold my-6"><?= get_field('ชื่อ') ?></p>
       <div class="flex mb-2 md:mb-6">
-        <button type="submit" class="flex h-14 p-4 rounded-lg" style="background-color:#FFD950; color: #262145;">
-          <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-clock.svg" alt="">
-          <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก <?= $dateleft ?></span>
-        </button>
-        <div class="flex p-4">
-          <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-person.svg" alt="">
-          <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;"><?= intval(get_field('จำนวนคนที่รับสมัคร')) - intval(get_field('จำนวนคนตอนนี้')) ?> ท่านสุดท้าย</span>
-        </div>
+        <?php if(!empty(get_field('วันปิดรับสมัคร'))): ?>
+          <div class="flex h-14 p-4 rounded-lg" style="background-color:#FFD950; color: #262145;">
+            <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-clock.svg" alt="">
+            <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก <?= $dateleft ?></span>
+          </div>
+        <?php endif;?>
+        <?php if(!empty(get_field('จำนวนคนที่รับสมัคร'))): ?>
+          <div class="flex p-4">
+            <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-person.svg" alt="">
+            <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;"><?= intval(get_field('จำนวนคนที่รับสมัคร')) - intval(get_field('จำนวนคนตอนนี้')) ?> ท่านสุดท้าย</span>
+          </div>
+        <?php endif;?>
       </div>
       <!-- <a href="" class="w-full lg:w-1/2 px-4">
         <div class="w-full lg:h-96 h-56 flex items-center justify-center rounded-xl relative bg-gray-400">
@@ -149,23 +153,27 @@
         <style>iframe{width: 100% !important;height: 450px !important;}</style>
         <?= get_field('วิดีโอ') ?>
       </div>
-      <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
-      <p><?= get_field('รายละเอียด') ?></p>
-
-      <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">ผู้สอน</p>
-      <p><?= get_field('ผู้สอน') ?></p>
-
-      <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
-      <?php foreach ($เนื้อหาของคอร์สนี้ as $key => $part) : ?>
-        <p>Part <?= $key + 1 ?>: <?= $part['ชื่อ_part'] ?></p>
-      <?php endforeach; ?>
+      <?php if(!empty(get_field('รายละเอียด'))): ?>
+        <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
+        <p><?= get_field('รายละเอียด') ?></p>
+      <?php endif;?>
+      <?php if(!empty(get_field('ผู้สอน'))): ?>
+        <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">ผู้สอน</p>
+        <p><?= get_field('ผู้สอน') ?></p>
+      <?php endif;?>
+      <?php if(!empty($เนื้อหาของคอร์สนี้)): ?>
+        <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
+        <?php foreach ($เนื้อหาของคอร์สนี้ as $key => $part) : ?>
+          <p>Part <?= $key + 1 ?>: <?= $part['ชื่อ_part'] ?></p>
+        <?php endforeach; ?>
+      <?php endif;?>
 
     </div>
   </section>
 
   <section id="register" class="text-white py-16 w-full flex items-center flex-col" style="background-color: #FFD950; color:#262145;">
-    <p class="text-5xl font-bold pb-4">ลงทะเบียนเรียน</p>
-    <a href="<?= get_site_url() ?>/courses-register" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
+    <p class="text-3xl font-bold pb-4">ลงทะเบียนเรียน</p>
+    <a href="<?= get_site_url() ?>/courses-register" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
       ลงทะเบียน
     </a>
   </section>

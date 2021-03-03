@@ -176,7 +176,7 @@
           <!-- GOOGLE MAP -->
         </div>
         <script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhKE9MOf0H3VwfJJAgS_gjS9oPdkHfZQ&callback=initMap&libraries=&v=weekly"
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly"
           async
         ></script>
         <hr class="my-5" />

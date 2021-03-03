@@ -208,7 +208,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
           <a target="_blank" href="https://maps.google.com/?q=<?= get_field('ปักหมุดแผนที่')['lat'] ?>,<?= get_field('ปักหมุดแผนที่')['lng'] ?>" class="text-base mt-1 font-bold">เปิดใน Google Maps</a>
         </div>
         <div id="map" style="background-color:#C4C4C4;" class="flex items-center justify-center h-96"></div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfhKE9MOf0H3VwfJJAgS_gjS9oPdkHfZQ&callback=initMap&libraries=&v=weekly" async></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly" async></script>
       <?php endif; ?>
     </section>
     <?php
