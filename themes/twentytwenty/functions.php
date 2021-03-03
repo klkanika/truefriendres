@@ -915,3 +915,39 @@ function get_restaurant_json_ajax()
 	wp_die();
 }
 
+add_action('wp_ajax_get_posts_by_acf_field_json_ajax', 'get_posts_by_acf_field_json_ajax');
+add_action('wp_ajax_nopriv_get_posts_by_acf_field_json_ajax', 'get_posts_by_acf_field_json_ajax');
+
+function get_posts_by_acf_field_json_ajax()
+{
+	$postType = $_POST['postType'];
+	$postsPerPage = $_POST['postsPerPage'];
+	$categoryNo = $_POST['categoryNo'];
+	$acfField = $_POST['acf_field'];
+	$value = $_POST['value'];
+
+	$options = array(
+		'numberposts'	=> $postsPerPage,
+		'post_type'		=> $postType,
+		'category__in' => $categoryNo
+	);
+
+	if ($value) {
+		$options['meta_key'] = $acfField;
+		$options['meta_value'] = $value;
+		$options['meta_compare'] = 'LIKE';
+	}
+
+	$posts = get_posts($options);
+
+	if ($categoryNo == get_category_by_slug('restaurant101')->cat_ID) {
+		foreach ($posts as $key => $post) {
+			$post->pictureUrl = get_the_post_thumbnail_url($post->ID) ? get_the_post_thumbnail_url($post->ID)  :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+			$post->restaurantCategory = get_field('restaurant_101_category', $post->ID) ? get_field('restaurant_101_category', $post->ID)[0] : '';
+			$post->title = get_the_title($post->ID);
+		}
+	}
+
+	echo json_encode($posts);
+	wp_die();
+}
