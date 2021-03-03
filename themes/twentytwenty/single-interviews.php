@@ -37,18 +37,20 @@ $thisLink = get_permalink();
   <!-- Set up your HTML -->
   <section class="w-full">
     <div class="relative interview-cover">
+      <div class="absolute w-full h-full" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"></div>
+
       <div class="absolute bottom-0 w-full block lg:flex justify-center lg:px-0 px-6 py-6">
         <div class="flex lg:flex-row flex-col lg:items-center lg:justify-between lg:border-t border-white py-4 lg:w-1/2">
           <span class="text-2xl font-medium">Interview</span>
           <div class="flex items-center lg:pt-0 pt-6">
             <?php
-              $logo = get_field('intervieweeBusinessLogo');
-              if(!empty($logo)) :
+            $logo = get_field('intervieweeBusinessLogo');
+            if (!empty($logo)) :
             ?>
               <img src="<?= get_field('intervieweeBusinessLogo') ?>" alt="" class="w-12 h-12 rounded-full object-cover">
-            <?php else:?>
+            <?php else : ?>
               <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
-            <?php endif;?>
+            <?php endif; ?>
             <div class="flex flex-col ml-2">
               <span><?= get_field('interviewee') ?></span>
               <span><?= get_field('intervieweeBusiness') ?></span>

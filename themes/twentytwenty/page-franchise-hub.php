@@ -19,7 +19,10 @@ $args = array(
   'order'   => 'DESC'
 );
 $franchise_type = get_categories($args);
-
+$franchiseTypeId = isset($_GET['type']) ? $_GET['type'] : null;
+if (!get_term_by('id', $franchiseTypeId, 'franchise_type')) {
+  $franchiseTypeId = null;
+}
 $franchisesObject = Post::getPostsByCategory('franchises', null, 5, 0, null);
 $franchises = $franchisesObject->posts
 
@@ -58,11 +61,16 @@ $franchises = $franchisesObject->posts
   <!-- banner -->
   <section id="banner" class="swiper-container relative">
     <div class="swiper-wrapper">
-      <a href="" class="swiper-slide banner">
-        <img class="object-cover w-full h-full" src="<?= get_theme_file_uri() ?>/assets/images/cover-franchise.png" />
-      </a>
+      <?php foreach (array_slice($franchises, 0, 5) as $franchise) : ?>
+        <a href="<?= $franchise->link ?>" class="swiper-slide banner">
+          <img class="object-cover w-full h-full" src="<?= $franchise->featuredImage ?>" />
+        </a>
+      <?php endforeach; ?>
     </div>
+
+    <div class="absolute w-full h-full bottom-0" style="z-index: 9; background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.3));"></div>
     <div class="absolute w-full left-0 bottom-0 z-10 banner__title">
+
       <div class="md:ml-12 ml-5 md:mr-12 mr-32 md:mb-5 mb-6">
         <div class="text-xl font-light">เฟรนชายยอดนิยม</div>
         <div class="md:text-2xl text-xl font-semibold">Most Hit Franchise</div>
@@ -85,7 +93,7 @@ $franchises = $franchisesObject->posts
     </div>
     <div id="hilite-franchise" class="swiper-container franchise">
       <div class="swiper-wrapper">
-        <?php foreach (array_slice($franchises, 0, 9) as $index => $franchise) : ?>
+        <?php foreach (array_slice($franchises, 0, 10) as $index => $franchise) : ?>
           <div class="swiper-slide">
             <div class="slide">
               <div class="number">#<?= $index + 1 ?></div>
@@ -128,15 +136,15 @@ $franchises = $franchisesObject->posts
     </div>
     <div class="swiper-container cat-swiper mb-8">
       <div class="swiper-wrapper md:pl-20 pl-4">
-        <div style="width: auto;" class="swiper-slide tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+        <div style="width: auto;" class="swiper-slide new-type <?= !$franchiseTypeId ? 'tab-active' : 'tab' ?> rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
         <?php foreach ($franchise_type as $type) : ?>
-          <div style="width: auto;" class="swiper-slide tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
+          <div style="width: auto;" class="swiper-slide new-type <?= $franchiseTypeId == $type->term_id ? 'tab-active' : 'tab' ?> rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
     <div id="new-franchise" class="swiper-container franchise franchise-normal">
       <div class="swiper-wrapper md:px-16 px-0">
-        <?php foreach ($franchises as $index => $franchise) : ?>
+        <?php foreach (array_slice($franchises, 0, 10) as $index => $franchise) : ?>
           <div class="swiper-slide">
             <div class="slide">
               <div class="swiper-content">
@@ -290,7 +298,7 @@ $franchises = $franchisesObject->posts
         <?php endforeach; ?>
       </div>
       <div class="flex items-center justify-center py-8">
-        <button class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
+        <button id="#loadmore" class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
       </div>
     </div>
   </section>
@@ -313,37 +321,134 @@ $franchises = $franchisesObject->posts
   ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  var Banner = new Swiper('#banner', {
-    loop: true,
-    navigation: {
-      nextEl: '#banner .swiper-button-next',
-      prevEl: '#banner .swiper-button-prev',
-    },
-  });
+  $(document).ready(function() {
 
-  const catSwiper = new Swiper('.cat-swiper', {
-    loop: false,
-    slidesPerView: 'auto',
-    spaceBetween: 10,
-  });
+    let fracnhiseType = '';
+    var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
+    let allPosts = <?= $franchisesObject->posts_count ?>;
+    let currentPosts = 10;
+    let postsPerPage = 10;
+    let loadMoreBtn = $("#loadmore");
 
-  const hilite = new Swiper('#hilite-franchise', {
-    slidesPerView: 'auto',
-    spaceBetween: 10,
-    freeMode: true,
-  });
-
-  const franchise = new Swiper('.franchise-normal', {
-    spaceBetween: 0,
-    breakpoints: {
-      0: {
-        slidesPerView: 1.1,
-      },
-      992: {
-        slidesPerView: 2.7,
-      },
+    if (allPosts > currentPosts) {
+      loadMoreBtn.show();
+    } else {
+      loadMoreBtn.hide()
     }
+
+    $(".new-type").click(function() {
+      console.log("5555")
+      if ($(this).attr('value') != fracnhiseType) {
+        currentPosts = 0;
+        fracnhiseType = $(this).attr('value');
+        getPostByFranchiseType(false);
+        if (allPosts > currentPosts) {
+          loadMoreBtn.show();
+        } else {
+          loadMoreBtn.hide();
+        }
+      }
+    });
+
+    const getPostByFranchiseType = (append) => {
+      var request = {
+        'action': 'get_posts_by_cat_json_ajax',
+        'postType': 'franchises',
+        'postsPerPage': postsPerPage,
+        'offset': currentPosts,
+        'categoryNo': fracnhiseType,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          currentPosts += postsObject.posts.length;
+          allPosts = postsObject.posts_count;
+          const posts = postsObject.posts;
+          // if (!append) {
+          //   $("#new-franchise .swiper-wrapper").html('');
+          // }
+          // if (posts.length > 0) {
+          //   posts.map((franchise, i) => {
+          //     $("#new-franchise .swiper-wrapper").append(`
+          //     <div class="swiper-slide">
+          //       <div class="slide">
+          //         <div class="swiper-content">
+          //           <div class="swiper-content-label">
+          //             <?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?>
+          //             <br /><b><?= $franchise->ชื่อธุรกิจ ?></b>
+          //           </div>
+          //           <div class="swiper-content-label">สาขา<br />
+          //             <b>
+          //               <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
+          //             </b>
+          //           </div>
+          //           <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
+          //         </div>
+          //         <div class="first-img">
+          //           <?php if (count($franchise->รูปภาพ) > 0) : ?>
+          //             <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
+          //           <?php else : ?>
+          //             <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
+          //           <?php endif ?>
+          //         </div>
+          //         <div class="others-img">
+          //           <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
+          //             <img src="<?= $img->รูป ?>" class="object-cover" />
+          //           <?php } ?>
+          //           <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
+          //             <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
+          //           <?php } ?>
+          //         </div>
+          //       </div>
+          //     </div>
+          //               `);
+          //   })
+          // } else {
+          //   $("#new-franchise .swiper-wrapper").html(`<div class="flex justify-center items-center">ไม่พบ Supplier ในประเภทธุรกิจนี้</div>`);
+          // }
+        }
+      })
+    }
+
+    var Banner = new Swiper('#banner', {
+      loop: true,
+      navigation: {
+        nextEl: '#banner .swiper-button-next',
+        prevEl: '#banner .swiper-button-prev',
+      },
+    });
+
+    const catSwiper = new Swiper('.cat-swiper', {
+      loop: false,
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+    });
+
+    const hilite = new Swiper('#hilite-franchise', {
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+      freeMode: true,
+    });
+
+    const franchise = new Swiper('.franchise-normal', {
+      spaceBetween: 0,
+      breakpoints: {
+        0: {
+          slidesPerView: 1.1,
+        },
+        992: {
+          slidesPerView: 2.7,
+        },
+      }
+    });
   });
 </script>
 
