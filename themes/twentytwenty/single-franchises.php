@@ -15,6 +15,7 @@
   $รูปภาพ = get_field('รูปภาพ');
   $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
   $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
+  $franchiseProducts = wp_get_post_terms(get_the_ID(), 'franchise_product');
   $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
   $contact = [];
   $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
@@ -174,36 +175,68 @@
         </div>
       </div>
 
-      <!-- <div class="border-b border-gray-300 py-8">
-        <p class="text-gray-500 mb-2">ความเป็นมา</p>
-        <p class="text-xl"><?= get_field('ความเป็นมา') ?></p>
-      </div>
+      <?php if (get_field('ความเป็นมา')) : ?>
+        <div class="border-b border-gray-300 py-8">
+          <p class="text-gray-500 mb-2">ความเป็นมา</p>
+          <p class="text-xl"><?= get_field('ความเป็นมา') ?></p>
+        </div>
+      <?php endif; ?>
 
-      <?php foreach (["สินค้าและบริการ", "จำนวนสาขา", "อัตราการขยายสาขา", "การลงทุน", "คุณสมบัติผู้สลงทุน", "สิ่งที่ได้รับ", "อื่นๆ"] as $item) : ?>
-        <div class="border-b border-gray-300 py-4">
-          <div class="flex items-center justify-between">
-            <p class="text-gray-500 mb-2">
-              <?= $item ?>
+      <?php if (!empty($franchiseProducts)) : ?>
+        <div class="border-b border-gray-300 py-4 ">
+          <div class="flex items-center justify-between collapse cursor-pointer">
+            <p class="text-gray-500 mb-2 w-full">
+              สินค้าและบริการ
             </p>
-            <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon" />
+            <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon transform rotate-180" />
           </div>
+          <div class="py-2">
+            <?php foreach ($franchiseProducts as $product) : ?>
+              <span class="border rounded-full px-4 py-1 text-center mr-2" style="border-color: #262145; min-width: 5rem;"><?= $product->name ?></span>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      <?php endif; ?>
+
+      <?php foreach (["จำนวน_franchise_c" => "จำนวนสาขา", "อัตราการขยายสาขา_5_ปีย้อนหลัง" => "อัตราการขยายสาขา (5 ปีย้อนหลัง)", "การลงทุน" => "การลงทุน", "คุณสมบัติผู้ลงทุน" => "คุณสมบัติผู้สลงทุน", "สิ่งที่_franchise_c_จะได้รับ" => "สิ่งที่ได้รับ", "อื่นๆ" => "อื่นๆ"] as $key => $value) : ?>
+        <?php if (!get_field($key)) continue; ?>
+        <div class="border-b border-gray-300 py-4 ">
+          <div class="flex items-center justify-between collapse cursor-pointer">
+            <p class="text-gray-500 mb-2 w-full">
+              <?= $value ?>
+            </p>
+            <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon transform rotate-180" />
+          </div>
+
+          <?php if ($key == "อัตราการขยายสาขา_5_ปีย้อนหลัง") : ?>
+            <p class="text-xl"><?= get_field($key)['จำนวนสาขา'] ?></p>
+          <?php else : ?>
+            <p class="text-xl"><?= get_field($key) ?></p>
+          <?php endif; ?>
         </div>
       <?php endforeach; ?>
 
       <div class="py-4">
-        <div class="flex items-center justify-between">
-          <p class="text-gray-500 mb-2">
+        <div class="flex items-center justify-between collapse  cursor-pointer">
+          <p class="text-gray-500 mb-2 w-full">
             ติดต่อเจ้าของแฟรนไชส์
           </p>
-          <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon" />
+          <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon transform rotate-180" />
         </div>
-        <?php foreach ($contact as $key => $value) : ?>
-          <div class="flex items-center border-b border-gray-300 py-2">
-            <p class="font-bold lg:w-1/4 w-1/3"><?= $key ?></p>
-            <p class=""><?= $value ?></p>
-          </div>
-        <?php endforeach ?>
-      </div> -->
+        <div>
+          <?php foreach ($contact as $key => $value) : ?>
+            <?php if (!$value) continue; ?>
+            <div class="flex items-center border-b border-gray-300 py-2">
+              <p class="font-bold lg:w-1/4 w-1/3"><?= $key ?></p>
+              <?php if (in_array($key, ["facebook", "twitter", "website", "line"])) : ?>
+                <a href="<?= str_starts_with($value, "http") ? "" : "https://" ?><?= $value ?>" target="_blank" class=""><?= $value ?></a>
+              <?php else : ?>
+                <p class=""><?= $value ?></p>
+              <?php endif ?>
+            </div>
+          <?php endforeach ?>
+        </div>
+      </div>
 
       <div class="border-b border-gray-300 py-8 -mx-4">
         <div class="flex items-center justify-between mb-2 lg:mx-0 mx-4">
@@ -251,6 +284,15 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $(document).ready(function() {
+
+    $('.collapse').next().toggle(false)
+    $('.collapse-icon').toggleClass('rotate-180', false)
+
+    $('.collapse').click(function(e) {
+      const target = $(e.target)
+      const isOpen = target.closest('.collapse').next().toggle().is(':visible')
+      $(this).find('.collapse-icon').toggleClass('rotate-180', isOpen)
+    })
 
     const swiper = new Swiper('.swiper-container', {
       slidesPerView: 'auto',
