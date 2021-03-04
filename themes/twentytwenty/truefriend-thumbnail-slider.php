@@ -8,7 +8,7 @@ $count_material = wp_count_posts($post_type)->publish;
         <div class="flex lg:items-center font-semibold">
             <form id="thumbnail-search">
                 <div style="border:1px solid #062241;background-color:#f2f2f2" class="rounded-full flex justify-center hidden mr-6" id="thumbnail-search-field">
-                    <input type="text" class="rounded-full h-12 px-4" placeholder="search..." style="background-color:inherit" id="thumbnail-input" />
+                    <input type="text" class="rounded-full h-12 px-4 focus:outline-none" placeholder="search..." style="background-color:inherit" id="thumbnail-input" />
                     <button type="submit" class="cursor-pointer pr-2">
                         <img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
                     </button>
