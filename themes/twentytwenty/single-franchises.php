@@ -208,7 +208,7 @@
             <img src="<?= get_theme_file_uri() ?>/assets/images/collapse.svg" class="collapse-icon transform rotate-180" />
           </div>
 
-          <?php if ($key == "อัตราการขยายสาขา_5_ปีย้อนหลัง") : ?>
+          <?php if ($key === "อัตราการขยายสาขา_5_ปีย้อนหลัง") : ?>
             <p class="text-xl"><?= get_field($key)['จำนวนสาขา'] ?></p>
           <?php else : ?>
             <p class="text-xl"><?= get_field($key) ?></p>
@@ -229,7 +229,7 @@
             <div class="flex items-center border-b border-gray-300 py-2">
               <p class="font-bold lg:w-1/4 w-1/3"><?= $key ?></p>
               <?php if (in_array($key, ["facebook", "twitter", "website", "line"])) : ?>
-                <a href="<?= str_starts_with($value, "http") ? "" : "https://" ?><?= $value ?>" target="_blank" class=""><?= $value ?></a>
+                <a href="<?= substr($value, 0, 4) === "http" ? "" : "https://" ?><?= $value ?>" target="_blank" class=""><?= $value ?></a>
               <?php else : ?>
                 <p class=""><?= $value ?></p>
               <?php endif ?>
