@@ -132,13 +132,13 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
     <section class="lg:mx-48 lg:mx-4 mt-16" id="content" style="color:#062241">
       <div class="w-full flex lg:mx-0">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
-          <div class="flex items-center justify-center">
-            <a class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;" href="<?= get_site_url() ?>/supplier-hub">Supplier hub</a>
+          <div class="flex items-center justify-start flex-wrap">
+            <a class="text-xs rounded-full text-sm px-4 py-2 mb-2" style="background-color: #FEDA52;" href="<?= get_site_url() ?>/supplier-hub">Supplier hub</a>
             <?php foreach ($supplierTypes as $supplierType) : ?>
-              <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
+              <a href="<?= get_site_url() ?>/supplier-hub?type=<?= $supplierType->term_id?>" class="relative rounded-full text-sm px-4 py-2 ml-2 mb-2 text-white flex items-center cursor-pointer select-none" style="background-color: #062241;">
                 <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $supplierType) ? get_field('pictureUrl', $supplierType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
                 <span class="ml-6 text-xs"><?= $supplierType->name ?></span>
-              </div>
+              </a>
             <?php endforeach ?>
           </div>
         </div>

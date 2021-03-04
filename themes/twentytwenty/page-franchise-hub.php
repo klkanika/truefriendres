@@ -49,12 +49,12 @@ $franchises = $franchisesObject->posts
   <!-- franchise hub title -->
   <section class="pt-32 w-full" style="color: #262145;">
     <div class="flex flex-col items-center justify-center border-b border-gray-300 pb-12">
-      <div class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Franchise สำหรับทำธุรกิจไว้ทนี่ที่เดียว</div>
+      <div class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Franchise สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</div>
       <div class="lg:text-6xl text-5xl font-bold tracking-tighter mt-2">Franchise hub</div>
       <div class="flex items-center justify-center flex-wrap mt-4">
-        <a href=""><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
-        <a href=""><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
-        <a href=""><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></a>
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('franchise-hub'))) ?>"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('franchise-hub'))) ?>"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
+        <div copytoclipboard="<?= get_permalink(get_page_by_path('franchise-hub')) ?>" class="btn-copytoclipboard"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>
       </div>
     </div>
   </section>
