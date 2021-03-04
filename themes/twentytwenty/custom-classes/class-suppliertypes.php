@@ -12,7 +12,8 @@ class SupplierType
         $terms = get_terms(array(
             'taxonomy' => 'suppliertypes',
             'hide_empty' => false,
-            'order' => 'ASC'
+            'orderby' => 'count',
+            'order' => 'DESC'
         ));
         $countTerms = 0;
         $supplierTypes = [];

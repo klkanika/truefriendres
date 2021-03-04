@@ -20,6 +20,7 @@ $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
 $galleryCatId = get_category_by_slug('gallery')->cat_ID;
 $galleryPosts = Post::getPostsByCategory('post', get_category_by_slug('gallery')->cat_ID, 4, 0, null);
 $supplierTypes = SupplierType::getSupplierTypes(20);
+$supplierPosts = Post::getPostsByCategory('suppliers', null, 1, 0, null);
 // categories of posts (input as slug)
 $postCategories = array('news', 'marketing', 'knowledge');
 $postObjects = array();
@@ -115,37 +116,48 @@ foreach ($postCategories as $postCategory) {
             <div class="mb-1 flex justify-between lg:pr-8">
                 <p class="font-bold text-2xl">Supplier Hub</p>
                 <div class="flex items-center">
-                    <p class="font-bold mr-8 hidden lg:block">ค้นหา</p>
-                    <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierTypes->posts_count ?>)</a>
+                    <form id="supplier-type-search">
+                        <div style="border:1px solid #062241;background-color:#f2f2f2;color:#262145;" class="rounded-full flex justify-center mr-6 hidden" id="supplier-type-search-field">
+                            <input type="text" class="rounded-full h-12 px-4" placeholder="search..." style="background-color:inherit" id="supplier-type-input" />
+                            <button type="submit" class="cursor-pointer pr-2">
+                                <img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+                            </button>
+                        </div>
+                    </form>
+                    <p class="font-bold mr-8 hidden lg:block cursor-pointer" id="supplier-type-search-btn"> ค้นหา</p>
+                    <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierPosts->posts_count < 1000 ? $supplierPosts->posts_count : '999+' ?>)</a>
                 </div>
             </div>
             <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
         </div>
         <div class="lg:block hidden">
-            <div id="5thSlider" class="owl-carousel " style="border-color:#E9E9E9">
-                <?php
-                foreach ($supplierTypes->supplierTypes as $supplierType) :
-                    if ((int)$supplierType->supplierTypeCount > 0) :
-                ?>
-                        <a href="<?= $supplierType->link ?>">
-                            <div class="relative" style="height:40vh;">
-                                <div style="height:40vh;">
-                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+            <!-- <div id="5thSlider" class="owl-carousel " style="border-color:#E9E9E9"> -->
+            <div class="swiper-container supplier-container" style="border-color:#E9E9E9">
+                <div class="swiper-wrapper supplier-wrapper" id="supplier-wrapper">
+                    <?php
+                    foreach ($supplierTypes->supplierTypes as $supplierType) :
+                        if ((int)$supplierType->supplierTypeCount > 0) :
+                    ?>
+                            <a href="<?= $supplierType->link ?>" class="swiper-slide">
+                                <div class="relative" style="height:40vh;">
+                                    <div style="height:40vh;">
+                                        <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+                                    </div>
+                                    <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
+                                        <?php if ((int)$supplierType->supplierTypeCount < 99) {
+                                            echo $supplierType->supplierTypeCount;
+                                        } else {
+                                            echo '99+';
+                                        } ?>
+                                    </div>
+                                    <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                        <p><?= $supplierType->name ?></p>
+                                    </div>
                                 </div>
-                                <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
-                                    <?php if ((int)$supplierType->supplierTypeCount < 99) {
-                                        echo $supplierType->supplierTypeCount;
-                                    } else {
-                                        echo '99+';
-                                    } ?>
-                                </div>
-                                <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
-                                    <p><?= $supplierType->name ?></p>
-                                </div>
-                            </div>
-                        </a>
-                <?php endif;
-                endforeach; ?>
+                            </a>
+                    <?php endif;
+                    endforeach; ?>
+                </div>
             </div>
         </div>
         <div class="lg:hidden">
@@ -293,15 +305,13 @@ foreach ($postCategories as $postCategory) {
             dots: false,
         });
 
-        $("#5thSlider").owlCarousel({
-            items: 5.25,
-            loop: true,
-            // autoplay: true,
-            autoplayHoverPause: true,
-            slideBy: 2,
-            margin: 30,
-            dots: false,
-        });
+        const supplier_swiper_setting = {
+            slidesPerView: 5.5,
+            spaceBetween: 15,
+            loop: false,
+        };
+
+        let supplier_swiper = new Swiper('.supplier-container', supplier_swiper_setting);
 
         $(".toTheLeft").click(function() {
             let carousel = $(this).attr('referTo')
@@ -317,6 +327,53 @@ foreach ($postCategories as $postCategory) {
             $(".tab-button").removeClass('tab-button-active')
             $(this).addClass('tab-button-active')
         })
+
+        $("#supplier-type-search-btn").click(function() {
+            $(this).hide();
+            $("#supplier-type-search-field").show();
+            $("#supplier-type-input").focus();
+        })
+
+        $("#supplier-type-search").submit(function() {
+            const keyword = $("#supplier-type-input").val();
+            var request = {
+                'action': 'get_cat_by_name_json_ajax',
+                'keyword': keyword,
+                'taxonomy': 'suppliertypes',
+            };
+
+            $.ajax({
+                type: "POST",
+                url: ajaxurl,
+                data: request,
+                async: false,
+                dataType: "json",
+                success: function(postsObject) {
+                    console.log(postsObject);
+                    supplier_swiper.destroy();
+                    $("#supplier-wrapper").html(``);
+                    postsObject.map((material, i) => {
+                        $("#supplier-wrapper").append(`
+                            <a href="${material.link}" class="swiper-slide">
+                                <div class="relative" style="height:40vh;">
+                                    <div style="height:40vh;">
+                                        <img class="object-cover w-full h-full rounded-xl" src="${material.pictureUrl}" />
+                                    </div>
+                                    <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
+                                        ${material.category_count < 100 ? material.category_count : '99+'}
+                                    </div>
+                                    <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                        <p>${material.name}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        `);
+                    })
+                    supplier_swiper = new Swiper('.supplier-container', supplier_swiper_setting);
+                }
+            })
+            return false;
+        });
 
         var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
         let allGalleryPosts = <?= $galleryPosts->posts_count ?>;
@@ -352,6 +409,7 @@ foreach ($postCategories as $postCategory) {
                 async: false,
                 dataType: "json",
                 success: function(postsObject) {
+                    console.log(postsObject)
                     currentGalleryPosts += postsObject.posts.length;
                     const posts = postsObject.posts;
                     posts.map((thePost, key) => {
