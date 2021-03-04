@@ -14,7 +14,7 @@
 <?php
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-suppliertypes.php');
-$stickyPosts = Post::getStickyPosts(5);
+$stickyPosts = Post::getStickyPosts('post',5);
 $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
 // $interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, null);
 $galleryCatId = get_category_by_slug('gallery')->cat_ID;

@@ -11,7 +11,7 @@ class Post
     var $interviewee;
     var $intervieweeBusiness;
 
-    public static function getStickyPosts($postsPerPage)
+    public static function getStickyPosts($postType, $postsPerPage)
     {
         $posts = [];
         $sticky = get_option('sticky_posts');
@@ -20,10 +20,11 @@ class Post
         if (!empty($sticky)) {
             $args = array(
                 'posts_per_page' => $postsPerPage,
+                'post_type' => $postType,
                 'post__in'  => $sticky,
                 'post_status'      => 'publish',
                 'ignore_sticky_posts' => 1,
-                'order'    => 'DESC'
+                'order'    => 'DESC',
             );
 
             $the_query = new WP_Query($args);
@@ -78,8 +79,8 @@ class Post
         if (count($posts) < $postsPerPage) {
             $args2 = array(
                 'posts_per_page' => ($postsPerPage - count($posts)),
+                'post_type' => $postType,
                 'post_status'      => 'publish',
-                'post_type' => 'post',
                 'post__not_in'  => $sticky,
                 'order'    => 'DESC'
             );
@@ -98,7 +99,8 @@ class Post
         return $posts;
     }
 
-    public static function test(){
+    public static function test()
+    {
         return true;
     }
 
@@ -143,7 +145,7 @@ class Post
                 )
             );
         }
-    
+
 
         if ($except != null) {
             $args['post__not_in'] = $except;

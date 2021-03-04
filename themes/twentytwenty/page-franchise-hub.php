@@ -23,6 +23,7 @@ $franchiseTypeId = isset($_GET['type']) ? $_GET['type'] : null;
 if (!get_term_by('id', $franchiseTypeId, 'franchise_type')) {
   $franchiseTypeId = null;
 }
+$stickyPosts = Post::getStickyPosts('franchises', 5);
 $franchisesObject = Post::getPostsByCategory('franchises', null, 5, 0, null);
 $franchises = $franchisesObject->posts
 
@@ -61,23 +62,23 @@ $franchises = $franchisesObject->posts
   <!-- banner -->
   <section id="banner" class="swiper-container relative">
     <div class="swiper-wrapper">
-      <?php foreach (array_slice($franchises, 0, 5) as $franchise) : ?>
+      <?php foreach ($stickyPosts as $franchise) : ?>
         <a href="<?= $franchise->link ?>" class="swiper-slide banner">
           <img class="object-cover w-full h-full" src="<?= $franchise->featuredImage ?>" />
         </a>
       <?php endforeach; ?>
     </div>
 
-    <div class="absolute w-full h-full bottom-0" style="z-index: 9; background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.3));"></div>
-    <div class="absolute w-full left-0 bottom-0 z-10 banner__title">
+    <div class="absolute w-full h-full bottom-0 pointer-events-none" style="z-index: 9; background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.3));"></div>
+    <div class="absolute w-full left-0 bottom-0 z-10 banner__title pointer-events-none">
 
       <div class="md:ml-12 ml-5 md:mr-12 mr-32 md:mb-5 mb-6">
         <div class="text-xl font-light">เฟรนชายยอดนิยม</div>
         <div class="md:text-2xl text-xl font-semibold">Most Hit Franchise</div>
       </div>
       <!-- Add Arrows -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next pointer-events-auto"></div>
+      <div class="swiper-button-prev pointer-events-auto"></div>
     </div>
   </section>
 
@@ -430,7 +431,6 @@ $franchises = $franchisesObject->posts
     const catSwiper = new Swiper('.cat-swiper', {
       loop: false,
       slidesPerView: 'auto',
-      spaceBetween: 10,
     });
 
     const hilite = new Swiper('#hilite-franchise', {
