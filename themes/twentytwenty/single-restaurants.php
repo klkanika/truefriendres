@@ -139,14 +139,14 @@
             <?= get_field('telInfo')['telNo'] ?> (<?= get_field('telInfo')['telOwner'] ?>)
           </a>
         </p>
-      <?endif;?>
+      <?php endif;?>
     </div>
     <div class="lg:mt-12 mt-8">
       <?php if (!empty(get_field('restaurantDetail'))):?>
         <p class="text-gray-500 mb-2">รายละเอียด</p>
         <p class="text-xl"><?= get_field('restaurantDetail') ?></p>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <div class="lg:hidden flex justify-end">
         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink()) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt=""></a>
         <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink()) ?>"><img class="w-5 h-5 ml-4" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt=""></a>
@@ -161,7 +161,7 @@
           <?php endforeach; ?>
         </div>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <p class="text-gray-500 mb-2">เวลาเปิดร้าน</p>
       <?php foreach ($restaurant_available as $ra) : ?>
         <p class="text-xl"><?= $ra['restaurantDay'] ?> <?= $ra['restaurantOpen'] ?> - <?= $ra['restaurantClose'] ?> น.</p>
@@ -180,7 +180,7 @@
           async
         ></script>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <?php if (!empty($restaurant_products)):?>
         <p class="text-gray-500 mb-2">เมนูแนะนำ</p>
         <div class="flex">
@@ -191,7 +191,7 @@
           <?php endforeach; ?>
         </div>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <p class="text-gray-500 lg:mb-2">ช่วงราคา</p>
       <p class="lg:text-xl"><?= get_field('ช่วงราคาอาหาร')['priceStart'] ?> - <?= get_field('ช่วงราคาอาหาร')['priceEnd'] ?> บาท</p>
         <hr class="my-5" />
@@ -204,7 +204,7 @@
         <p class="text-gray-500 lg:mb-2">จำนวนที่นั่ง</p>
         <p class="lg:text-xl">มากกว่า <?= get_field('seat') ?> ที่นั่ง</p>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <?php if (!empty($restaurant_products)):?>
         <p class="text-gray-500 lg:mb-2">สิ่งอำนวยความสะดวก</p>
         <div class="flex flex-wrap lg:mt-0 mt-4">
@@ -213,17 +213,17 @@
           <?php endforeach; ?>
         </div>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <?php if (!empty(get_field('จำนวนสาขา'))):?>
         <p class="text-gray-500 mb-2">จำนวนสาขา</p>
         <p class="text-xl"><?= get_field('จำนวนสาขา') ?> สาขา (ข้อมูลเมื่อ <?= get_field('branchCountLastUpdate') ?>)</p>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <?php if (!empty(get_field('ข้อมูลเพิ่มเติมอื่นๆ'))):?>
         <p class="text-gray-500 mb-2">ข้อมูลเพิ่มเติมอื่นๆ</p>
         <p class="text-xl"><?= get_field('ข้อมูลเพิ่มเติมอื่นๆ') ?></p>
         <hr class="my-5" />
-      <?endif;?>
+      <?php endif;?>
       <?php if (!empty(get_field('ช่องทางติดตาม')['facebook_page']) && !empty(get_field('ช่องทางติดตาม')['line'])):?>
         <div class="pb-8">
           <p class="lg:text-gray-500 mb-2">Social Media</p>
@@ -234,17 +234,17 @@
                   <span class="font-semibold">Facebook: </span><?= get_field('ช่องทางติดตาม')['facebook_page'] ?>
                 </a>
               </p>
-            <?endif;?>
+            <?php endif;?>
             <?php if (!empty(get_field('ช่องทางติดตาม')['line'])):?>
               <p>
                 <a target="_blank" href="https://line.me/ti/p/~<?= get_field('ช่องทางติดตาม')['line']?>">
                   <span class="font-semibold">Line: </span><?= get_field('ช่องทางติดตาม')['line'] ?>
                 </a>
               </p>
-            <?endif;?>
+            <?php endif;?>
           </div>
         </div>
-        <?endif;?>
+        <?php endif;?>
     </div>
   </section>
   <div class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">

@@ -11,17 +11,17 @@
 
 <body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
   <?php
-    include 'truefriend-header.php';
-    $รูปภาพ = get_field('รูปภาพ');
-    $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
-    $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
-    $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
-    $contact = [];
-    $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
-    foreach ($ข้อมูลติดต่อ as $key => $ข้อมูล) {
-      $contact[$key] = $ข้อมูล;
-    }
-    ?>
+  include 'truefriend-header.php';
+  $รูปภาพ = get_field('รูปภาพ');
+  $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
+  $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
+  $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
+  $contact = [];
+  $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
+  foreach ($ข้อมูลติดต่อ as $key => $ข้อมูล) {
+    $contact[$key] = $ข้อมูล;
+  }
+  ?>
   <style>
     #headder {
       background: transparent;
@@ -32,8 +32,8 @@
       fill: var(--primary);
     }
 
-    #suppliers-content .swiper-button-next,
-    #suppliers-content .swiper-button-prev {
+    #franchise-content .swiper-button-next,
+    #franchise-content .swiper-button-prev {
       background-color: #fff;
       border-radius: 100%;
       width: 40px;
@@ -43,50 +43,48 @@
       justify-content: center;
     }
 
-    #suppliers-content .swiper-button-next:after,
-    #suppliers-content .swiper-button-prev:after {
+    #franchise-content .swiper-button-next:after,
+    #franchise-content .swiper-button-prev:after {
       font-size: 15px;
       color: #000;
     }
 
-    #suppliers-content .swiper-button-disabled {
+    #franchise-content .swiper-button-disabled {
       display: none;
     }
 
-    #suppliers-content .swiper-button-next {
+    #franchise-content .swiper-button-next {
       right: 1rem;
     }
 
-    #suppliers-content .swiper-button-prev {
+    #franchise-content .swiper-button-prev {
       left: 1rem;
     }
 
-    #suppliers-content .banner-slide {
+    #franchise-content .banner-slide {
       width: 35%;
       height: 18rem;
     }
 
     @media (max-width:992px) {
 
-      #suppliers-content .swiper-button-next,
-      #suppliers-content .swiper-button-prev {
+      #franchise-content .swiper-button-next,
+      #franchise-content .swiper-button-prev {
         display: none;
       }
 
-      #suppliers-content .banner-slide {
+      #franchise-content .banner-slide {
         width: 80%;
       }
     }
   </style>
-
-  
   <!-- Set up your HTML -->
-  <section id="suppliers-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
+  <section id="franchise-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
     <div class="swiper-container">
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
         <?php foreach ($รูปภาพ as $รูป) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูป['รูป']['url'] ?>" alt="" /></div>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูป['รูป'] ?>" alt="" /></div>
         <?php endforeach ?>
 
       </div>
@@ -240,11 +238,11 @@
     </a>
   </div>
   <?php
-    $footerbgcolor = '#f2f2f2';
-    $footercolor = '#19181F';
-    $footerheadercolor = 'rgba(0,0,0,0.5)';
-    $footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
-    ?>
+  $footerbgcolor = '#f2f2f2';
+  $footercolor = '#19181F';
+  $footerheadercolor = 'rgba(0,0,0,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 

@@ -340,7 +340,6 @@ $franchises = $franchisesObject->posts
     }
 
     $(".new-type").click(function() {
-      console.log("5555")
       if ($(this).attr('value') != fracnhiseType) {
         currentPosts = 0;
         fracnhiseType = $(this).attr('value');
@@ -372,48 +371,50 @@ $franchises = $franchisesObject->posts
           currentPosts += postsObject.posts.length;
           allPosts = postsObject.posts_count;
           const posts = postsObject.posts;
-          // if (!append) {
-          //   $("#new-franchise .swiper-wrapper").html('');
-          // }
-          // if (posts.length > 0) {
-          //   posts.map((franchise, i) => {
-          //     $("#new-franchise .swiper-wrapper").append(`
-          //     <div class="swiper-slide">
-          //       <div class="slide">
-          //         <div class="swiper-content">
-          //           <div class="swiper-content-label">
-          //             <?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?>
-          //             <br /><b><?= $franchise->ชื่อธุรกิจ ?></b>
-          //           </div>
-          //           <div class="swiper-content-label">สาขา<br />
-          //             <b>
-          //               <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
-          //             </b>
-          //           </div>
-          //           <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
-          //         </div>
-          //         <div class="first-img">
-          //           <?php if (count($franchise->รูปภาพ) > 0) : ?>
-          //             <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
-          //           <?php else : ?>
-          //             <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
-          //           <?php endif ?>
-          //         </div>
-          //         <div class="others-img">
-          //           <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
-          //             <img src="<?= $img->รูป ?>" class="object-cover" />
-          //           <?php } ?>
-          //           <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
-          //             <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
-          //           <?php } ?>
-          //         </div>
-          //       </div>
-          //     </div>
-          //               `);
-          //   })
-          // } else {
-          //   $("#new-franchise .swiper-wrapper").html(`<div class="flex justify-center items-center">ไม่พบ Supplier ในประเภทธุรกิจนี้</div>`);
-          // }
+          if (!append) {
+            $("#new-franchise .swiper-wrapper").html('');
+          }
+          if (posts.length > 0) {
+            posts.map((supplier, i) => {
+              console.log(supplier)
+              // ตรงนี้น่าจะยังผิดอยู่
+              $("#new-franchise .swiper-wrapper").append(`
+              <div class="swiper-slide">
+                <div class="slide">
+                  <div class="swiper-content">
+                    <div class="swiper-content-label">
+                      <?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?>
+                      <br /><b><?= $franchise->ชื่อธุรกิจ ?></b>
+                    </div>
+                    <div class="swiper-content-label">สาขา<br />
+                      <b>
+                        <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
+                      </b>
+                    </div>
+                    <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
+                  </div>
+                  <div class="first-img">
+                    <?php if (count($franchise->รูปภาพ) > 0) : ?>
+                      <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
+                    <?php else : ?>
+                      <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
+                    <?php endif ?>
+                  </div>
+                  <div class="others-img">
+                    <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
+                      <img src="<?= $img->รูป ?>" class="object-cover" />
+                    <?php } ?>
+                    <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
+                      <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
+                        `);
+            })
+          } else {
+            $("#new-franchise .swiper-wrapper").html(`<div class="flex justify-center items-center">ไม่พบ Supplier ในประเภทธุรกิจนี้</div>`);
+          }
         }
       })
     }
