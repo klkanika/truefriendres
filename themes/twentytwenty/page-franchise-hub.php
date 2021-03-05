@@ -26,9 +26,8 @@ if (!get_term_by('id', $franchiseTypeId, 'franchise_type')) {
 $stickyPosts = Post::getStickyPosts('franchises', 5);
 $mostHitFranchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null, 'จำนวน_franchise_c', 'DESC');
 $mostHitFranchises = $mostHitFranchisesObject->posts;
-$franchisesObject = Post::getPostsByCategory('franchises', null, 5, 0, null);
-$franchises = $franchisesObject->posts
-
+$newFranchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null);
+$newFranchises = $newFranchisesObject->posts;
 ?>
 
 <body class="w-full">
@@ -109,47 +108,15 @@ $franchises = $franchisesObject->posts
     </div>
     <div class="swiper-container cat-swiper mb-8">
       <div class="swiper-wrapper md:pl-20 pl-4">
-        <div style="width: auto;" class="swiper-slide new-type <?= !$franchiseTypeId ? 'tab-active' : 'tab' ?> rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+        <div style="width: auto;" class="swiper-slide new-type tab tab-active rounded-full px-8 py-1 cursor-pointer" value="">ทั้งหมด</div>
         <?php foreach ($franchise_type as $type) : ?>
-          <div style="width: auto;" class="swiper-slide new-type <?= $franchiseTypeId == $type->term_id ? 'tab-active' : 'tab' ?> rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
+          <div style="width: auto;" class="swiper-slide new-type tab rounded-full px-8 py-1 ml-4 cursor-pointer" value="<?= $type->term_id ?>"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
     <div id="new-franchise" class="swiper-container franchise franchise-normal">
-      <div class="swiper-wrapper md:px-16 px-0">
-        <?php foreach (array_slice($franchises, 0, 10) as $index => $franchise) : ?>
-          <div class="swiper-slide">
-            <div class="slide">
-              <div class="swiper-content">
-                <div class="swiper-content-label">
-                  <?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?>
-                  <br /><b><?= $franchise->ชื่อธุรกิจ ?></b>
-                </div>
-                <div class="swiper-content-label">สาขา<br />
-                  <b>
-                    <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
-                  </b>
-                </div>
-                <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
-              </div>
-              <div class="first-img">
-                <?php if (count($franchise->รูปภาพ) > 0) : ?>
-                  <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
-                <?php else : ?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
-                <?php endif ?>
-              </div>
-              <div class="others-img">
-                <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
-                  <img src="<?= $img->รูป ?>" class="object-cover" />
-                <?php } ?>
-                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
-                <?php } ?>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
+      <div class="swiper-wrapper md:px-16 px-0" id="new-wrapper">
+        <!-- will be generate by js -->
       </div>
     </div>
   </section>
@@ -164,45 +131,15 @@ $franchises = $franchisesObject->posts
     </div>
     <div class="swiper-container cat-swiper mb-8">
       <div class="swiper-wrapper md:pl-20 pl-4">
-        <div style="width: auto;" class="swiper-slide tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+        <div style="width: auto;" class="swiper-slide new-type2 tab tab-active rounded-full px-8 py-1 cursor-pointer" value="">ทั้งหมด</div>
         <?php foreach ($franchise_type as $type) : ?>
-          <div style="width: auto;" class="swiper-slide tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
+          <div style="width: auto;" class="swiper-slide new-type2 tab rounded-full px-8 py-1 ml-4 cursor-pointer" value="<?= $type->term_id ?>"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
-    <div id="other-franchise" class="swiper-container franchise franchise-normal">
-      <div class="swiper-wrapper md:px-16 px-0">
-        <?php foreach ($franchises as $index => $franchise) : ?>
-          <div class="swiper-slide">
-            <div class="slide">
-              <div class="swiper-content">
-                <div class="swiper-content-label"><?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?><br /><b><?= $franchise->ชื่อธุรกิจ ?></b></div>
-                <div class="swiper-content-label">สาขา<br />
-                  <b>
-                    <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
-                  </b>
-                </div>
-                <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
-              </div>
-              <div class="first-img">
-                <?php if (count($franchise->รูปภาพ) > 0) : ?>
-                  <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
-                <?php else : ?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
-                <?php endif ?>
-              </div>
-              <div class="others-img">
-                <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $index => $img) { ?>
-                  <img src="<?= $img->รูป ?>" class="object-cover" />
-                <?php } ?>
-                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
-                <?php } ?>
-              </div>
-
-            </div>
-          </div>
-        <?php endforeach; ?>
+    <div class="swiper-container franchise franchise-normal" id="new-franchise2">
+      <div class="swiper-wrapper md:px-16 px-0" id="new-wrapper2">
+        <!-- will be generate by js -->
       </div>
     </div>
   </section>
@@ -301,7 +238,7 @@ $franchises = $franchisesObject->posts
 
     let fracnhiseType = '';
     var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
-    let allPosts = <?= $franchisesObject->posts_count ?>;
+    let allPosts = <?= $franchisesObject->posts_count ? $franchisesObject->posts_count : 0 ?>;
     let currentPosts = 10;
     let postsPerPage = 10;
     let loadMoreBtn = $("#loadmore");
@@ -310,86 +247,6 @@ $franchises = $franchisesObject->posts
       loadMoreBtn.show();
     } else {
       loadMoreBtn.hide()
-    }
-
-    $(".new-type").click(function() {
-      if ($(this).attr('value') != fracnhiseType) {
-        currentPosts = 0;
-        fracnhiseType = $(this).attr('value');
-        getPostByFranchiseType(false);
-        if (allPosts > currentPosts) {
-          loadMoreBtn.show();
-        } else {
-          loadMoreBtn.hide();
-        }
-      }
-    });
-
-    const getPostByFranchiseType = (append) => {
-      var request = {
-        'action': 'get_posts_by_cat_json_ajax',
-        'postType': 'franchises',
-        'postsPerPage': postsPerPage,
-        'offset': currentPosts,
-        'categoryNo': fracnhiseType,
-      };
-
-      $.ajax({
-        type: "POST",
-        url: ajaxurl,
-        data: request,
-        async: false,
-        dataType: "json",
-        success: function(postsObject) {
-          currentPosts += postsObject.posts.length;
-          allPosts = postsObject.posts_count;
-          const posts = postsObject.posts;
-          if (!append) {
-            $("#new-franchise .swiper-wrapper").html('');
-          }
-          if (posts.length > 0) {
-            posts.map((supplier, i) => {
-              console.log(supplier)
-              // ตรงนี้น่าจะยังผิดอยู่
-              $("#new-franchise .swiper-wrapper").append(`
-              <div class="swiper-slide">
-                <div class="slide">
-                  <div class="swiper-content">
-                    <div class="swiper-content-label">
-                      <?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?>
-                      <br /><b><?= $franchise->ชื่อธุรกิจ ?></b>
-                    </div>
-                    <div class="swiper-content-label">สาขา<br />
-                      <b>
-                        <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
-                      </b>
-                    </div>
-                    <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
-                  </div>
-                  <div class="first-img">
-                    <?php if (count($franchise->รูปภาพ) > 0) : ?>
-                      <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
-                    <?php else : ?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
-                    <?php endif ?>
-                  </div>
-                  <div class="others-img">
-                    <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
-                      <img src="<?= $img->รูป ?>" class="object-cover" />
-                    <?php } ?>
-                    <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
-                    <?php } ?>
-                  </div>
-                </div>
-              </div>
-                        `);
-            })
-          } else {
-            $("#new-franchise .swiper-wrapper").html(`<div class="flex justify-center items-center">ไม่พบ Supplier ในประเภทธุรกิจนี้</div>`);
-          }
-        }
-      })
     }
 
     var Banner = new Swiper('#banner', {
@@ -405,13 +262,25 @@ $franchises = $franchisesObject->posts
       slidesPerView: 'auto',
     });
 
-    let hilite = new Swiper('#hilite-franchise', {
+    let hilite_franchise = new Swiper('#hilite-franchise', {
       slidesPerView: 'auto',
       spaceBetween: 10,
       freeMode: true,
     });
 
-    const franchise = new Swiper('.franchise-normal', {
+    let new_franchise = new Swiper('#new_franchise', {
+      spaceBetween: 0,
+      breakpoints: {
+        0: {
+          slidesPerView: 1.1,
+        },
+        992: {
+          slidesPerView: 2.7,
+        },
+      }
+    });
+
+    let new_franchise2 = new Swiper('#new_franchise2', {
       spaceBetween: 0,
       breakpoints: {
         0: {
@@ -444,20 +313,68 @@ $franchises = $franchisesObject->posts
         async: false,
         dataType: "json",
         success: function(postsObject) {
-          postsObject && postsObject.posts && generateMostHit(postsObject.posts);
+          postsObject && postsObject.posts && generateFranchises(postsObject.posts, '#mosthit-wrapper', '#hilite-franchise', true);
         }
       })
     });
 
-    const generateMostHit = (franchises) => {
-      $("#mosthit-wrapper").html('');
-      hilite.destroy();
+    $(".new-type").click(function() {
+      $(".new-type").removeClass('tab-active');
+      $(this).addClass('tab-active');
+      const value = $(this).attr('value');
+      var request = {
+        'action': 'get_posts_by_cat_json_ajax',
+        'postType': 'franchises',
+        'postsPerPage': 10,
+        'offset': 0,
+        'categoryNo': value,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          postsObject && postsObject.posts && generateFranchises(postsObject.posts, '#new-wrapper', '#new-franchise', false);
+        }
+      })
+    });
+
+    $(".new-type2").click(function() {
+      $(".new-type2").removeClass('tab-active');
+      $(this).addClass('tab-active');
+      const value = $(this).attr('value');
+      var request = {
+        'action': 'get_posts_by_cat_json_ajax',
+        'postType': 'franchises',
+        'postsPerPage': 10,
+        'offset': 0,
+        'categoryNo': value,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          postsObject && postsObject.posts && generateFranchises(postsObject.posts, '#new-wrapper2', '#new-franchise2', false);
+        }
+      })
+    });
+
+    const generateFranchises = (franchises, DOMObjectName, slideName, firstObjectMatters) => {
+      const DOMObject = $(`${DOMObjectName}`);
+      DOMObject.html('');
       franchises.map((franchise, index) => {
-        $("#mosthit-wrapper").append(`
+        DOMObject.append(`
         <div class="swiper-slide">
-            <div class="top-0 left-0 ${index === 0 ? 'w-12 h-12 text-xl' : 'w-10 h-10 text-base'} font-bold rounded-full flex justify-center items-center absolute ml-4" style=" ${index === 0 ? 'color:var(--primary);background-color:#dfdfdf;' : 'color:white;background-color:#464356;'}">#${index + 1}</div>
-            <a class="p-2 rounded-xl block" style="border: 1px solid #CFCFCF;${index === 0 ? '' : 'background-color:#464356;'}" href="${franchise.link}">
-              ${index === 0 && '<?= !wp_is_mobile() ?>' == 1 ? `
+            ${firstObjectMatters ? `<div class="top-0 left-0 ${index === 0 ? 'w-12 h-12 text-xl' : 'w-10 h-10 text-base'} font-bold rounded-full flex justify-center items-center absolute ml-4" style=" ${index === 0 ? 'color:var(--primary);background-color:#dfdfdf;' : 'color:white;background-color:#464356;'}">#${index + 1}</div>` : ``}
+            <a class="p-2 rounded-xl block" style="border: 1px solid #CFCFCF;${index === 0 || !firstObjectMatters ? '' : 'background-color:#464356;'}" href="${franchise.link}">
+              ${index === 0 && '<?= !wp_is_mobile() ?>' == 1 && firstObjectMatters ? `
                 <div class="flex gap-x-3 h-80">
                   <div style="flex:4;">
                     <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].รูป ? franchise.รูปภาพ[0].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="">
@@ -479,26 +396,28 @@ $franchises = $franchisesObject->posts
                   <div>ค่าสมัคร<br /><b class="text-xl">${franchise.ค่าสมัคร}</b></div>
                 </div>`
                 :
-                `<div class="flex flex-wrap">
-                  <div class="flex w-full h-60">
-                    <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].รูป ? franchise.รูปภาพ[0].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full pb-2" alt="">
-                  </div>
-                  <div class="flex h-20 gap-x-1">
-                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].รูป ? franchise.รูปภาพ[1].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].รูป ? franchise.รูปภาพ[2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].รูป ? franchise.รูปภาพ[3].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full w-1/4 overflow-hidden relative">
-                      <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
-                      <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
-                      <div class="h-full w-full overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                `<div class="flex flex-wrap ${firstObjectMatters ? '' : 'flex-wrap-reverse'}">
+                  <div class="flex flex-wrap">
+                    <div class="flex w-full h-60">
+                      <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].รูป ? franchise.รูปภาพ[0].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full pb-2" alt="">
                     </div>
-                   </div>
-                </div>
-                <div class="flex justify-between items-center text-base h-20 mx-2">
-                  <div><b class="text-xl">${franchise.ชื่อธุรกิจ}</b></div>
-                  <div class="flex justify-between gap-x-8">
-                    <div>สาขา<br /><b class="text-xl">${franchise.จำนวนสาขา}</b></div>
-                    <div>ค่าสมัคร<br /><b class="text-xl">${franchise.ค่าสมัคร}</b></div>
+                    <div class="flex h-20 gap-x-1">
+                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].รูป ? franchise.รูปภาพ[1].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].รูป ? franchise.รูปภาพ[2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].รูป ? franchise.รูปภาพ[3].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                      <div class="h-full w-1/4 overflow-hidden relative">
+                        <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
+                        <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
+                        <div class="h-full w-full overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center text-base h-20 mx-2 w-full">
+                    <div><b class="text-xl">${franchise.ชื่อธุรกิจ}</b></div>
+                    <div class="flex justify-between gap-x-8">
+                      <div>สาขา<br /><b class="text-xl">${franchise.จำนวนสาขา}</b></div>
+                      <div>ค่าสมัคร<br /><b class="text-xl">${franchise.ค่าสมัคร}</b></div>
+                    </div>
                   </div>
                 </div>`}
             </a>
@@ -506,14 +425,30 @@ $franchises = $franchisesObject->posts
         `);
       });
 
-      hilite = new Swiper('#hilite-franchise', {
-        slidesPerView: 'auto',
-        spaceBetween: 10,
-        freeMode: true,
-      });
+      if (firstObjectMatters) {
+        new Swiper(slideName, {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          freeMode: true,
+        });
+      } else {
+        new Swiper(slideName, {
+          spaceBetween: 0,
+          breakpoints: {
+            0: {
+              slidesPerView: 1.1,
+            },
+            992: {
+              slidesPerView: 2.7,
+            },
+          }
+        });
+      }
     }
 
-    generateMostHit(<?= json_encode($mostHitFranchises) ?>);
+    generateFranchises(<?= json_encode($mostHitFranchises) ?>, "#mosthit-wrapper", "#hilite-franchise", true);
+    generateFranchises(<?= json_encode($newFranchises) ?>, "#new-wrapper", "#new-franchise", false);
+    generateFranchises(<?= json_encode($newFranchises) ?>, "#new-wrapper2", "#new-franchise2", false);
 
   });
 </script>
