@@ -864,8 +864,10 @@ function get_posts_by_cat_json_ajax()
 	$categoryNo = $_POST['categoryNo'];
 	$offset = $_POST['offset'];
 	$postsPerPage = $_POST['postsPerPage'];
+	$orderBy = $_POST['orderBy'];
+	$order = $_POST['order'];
 
-	$posts = Post::getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, null);
+	$posts = Post::getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, null, $orderBy ? $orderBy : false, $order ? $order : false);
 
 	echo json_encode($posts);
 	wp_die();

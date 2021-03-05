@@ -24,6 +24,8 @@ if (!get_term_by('id', $franchiseTypeId, 'franchise_type')) {
   $franchiseTypeId = null;
 }
 $stickyPosts = Post::getStickyPosts('franchises', 5);
+$mostHitFranchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null, 'จำนวน_franchise_c', 'DESC');
+$mostHitFranchises = $mostHitFranchisesObject->posts;
 $franchisesObject = Post::getPostsByCategory('franchises', null, 5, 0, null);
 $franchises = $franchisesObject->posts
 
@@ -86,45 +88,15 @@ $franchises = $franchisesObject->posts
   <section id="hilite" class="text-white py-12 md:pl-16 pl-0" style="background-color: #23212e;">
     <div class="swiper-container cat-swiper mb-8">
       <div class="swiper-wrapper pl-4 md:pl-0">
-        <div style="width: auto;" class="swiper-slide hit-tab-active rounded-full px-8 py-1 cursor-pointer">ทั้งหมด</div>
+        <div style="width:auto;" class="swiper-slide hit-tab hit-tab-active rounded-full px-8 py-1 cursor-pointer" value="">ทั้งหมด</div>
         <?php foreach ($franchise_type as $type) : ?>
-          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer"><?= $type->name ?></div>
+          <div style="width: auto;" class="swiper-slide hit-tab rounded-full px-8 py-1 ml-4 cursor-pointer" value="<?= $type->term_id ?>"><?= $type->name ?></div>
         <?php endforeach; ?>
       </div>
     </div>
     <div id="hilite-franchise" class="swiper-container franchise">
-      <div class="swiper-wrapper">
-        <?php foreach (array_slice($franchises, 0, 10) as $index => $franchise) : ?>
-          <div class="swiper-slide">
-            <div class="slide">
-              <div class="number">#<?= $index + 1 ?></div>
-              <div class="first-img">
-                <?php if (count($franchise->รูปภาพ) > 0) : ?>
-                  <img src="<?= $franchise->รูปภาพ[0]->รูป ?>" class="object-cover" />
-                <?php else : ?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" class="object-cover" />
-                <?php endif ?>
-              </div>
-              <div class="others-img">
-                <?php foreach (array_slice($franchise->รูปภาพ, 1, 4) as $img) { ?>
-                  <img src="<?= $img->รูป ?>" class="object-cover" />
-                <?php } ?>
-                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
-                <?php } ?>
-              </div>
-              <div class="swiper-content">
-                <div class="swiper-content-name"><?= $franchise->ชื่อธุรกิจ ?></div>
-                <div class="swiper-content-label">สาขา<br />
-                  <b>
-                    <?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?>
-                  </b>
-                </div>
-                <div class="swiper-content-label">ค่าสมัคร<br /><b><?= $franchise->ค่าสมัคร ?></b></div>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
+      <div class="swiper-wrapper" id="mosthit-wrapper">
+        <!-- will be generate by js -->
       </div>
     </div>
   </section>
@@ -433,7 +405,7 @@ $franchises = $franchisesObject->posts
       slidesPerView: 'auto',
     });
 
-    const hilite = new Swiper('#hilite-franchise', {
+    let hilite = new Swiper('#hilite-franchise', {
       slidesPerView: 'auto',
       spaceBetween: 10,
       freeMode: true,
@@ -450,6 +422,91 @@ $franchises = $franchisesObject->posts
         },
       }
     });
+
+    $(".hit-tab").click(function() {
+      $(".hit-tab").removeClass('hit-tab-active');
+      $(this).addClass('hit-tab-active');
+      const value = $(this).attr('value');
+      var request = {
+        'action': 'get_posts_by_cat_json_ajax',
+        'postType': 'franchises',
+        'postsPerPage': 10,
+        'offset': 0,
+        'categoryNo': value,
+        'orderBy': 'จำนวน_franchise_c',
+        'order': 'DESC'
+      };
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          postsObject && postsObject.posts && generateMostHit(postsObject.posts);
+        }
+      })
+    });
+
+    const generateMostHit = (franchises) => {
+      $("#mosthit-wrapper").html('');
+      hilite.destroy();
+      franchises.map((franchise, index) => {
+        $("#mosthit-wrapper").append(`
+        <div class="swiper-slide">
+            <div class="top-0 left-0 ${index === 0 ? 'w-12 h-12 text-xl' : 'w-10 h-10 text-base'} font-bold rounded-full flex justify-center items-center absolute ml-4" style=" ${index === 0 ? 'color:var(--primary);background-color:#dfdfdf;' : 'color:white;background-color:#464356;'}">#${index + 1}</div>
+            <div class="p-2 rounded-xl" style="border: 1px solid #CFCFCF;${index === 0 ? '' : 'background-color:#464356;'}">
+              ${index === 0 && '<?= !wp_is_mobile() ?>' == 1 ? `
+                <div class="flex gap-x-3 h-80">
+                  <div style="flex:4;">
+                    <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].รูป ? franchise.รูปภาพ[0].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="">
+                  </div>
+                  <div class="flex flex-col flex-1 gap-y-2 h-full">
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].รูป ? franchise.รูปภาพ[1].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].รูป ? franchise.รูปภาพ[2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].รูป ? franchise.รูปภาพ[3].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                  </div>
+                </div>
+                <div class="flex justify-center gap-x-12 items-center text-base h-20">
+                  <div>สาขา<br /><b class="text-xl">${franchise.จำนวนสาขา}</b></div>
+                  <div><b class="text-2xl">${franchise.ชื่อธุรกิจ}</b></div>
+                  <div>ค่าสมัคร<br /><b class="text-xl">${franchise.ค่าสมัคร}</b></div>
+                </div>`
+                :
+                `<div class="flex flex-wrap">
+                  <div class="flex w-full h-60">
+                    <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].รูป ? franchise.รูปภาพ[0].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full pb-2" alt="">
+                  </div>
+                  <div class="flex h-20 gap-x-1">
+                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].รูป ? franchise.รูปภาพ[1].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].รูป ? franchise.รูปภาพ[2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].รูป ? franchise.รูปภาพ[3].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center text-base h-20 mx-2">
+                  <div><b class="text-xl">${franchise.ชื่อธุรกิจ}</b></div>
+                  <div class="flex justify-between gap-x-8">
+                    <div>สาขา<br /><b class="text-xl">${franchise.จำนวนสาขา}</b></div>
+                    <div>ค่าสมัคร<br /><b class="text-xl">${franchise.ค่าสมัคร}</b></div>
+                  </div>
+                </div>`}
+            </div>
+          </div>
+        `);
+      });
+
+      hilite = new Swiper('#hilite-franchise', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        freeMode: true,
+      });
+    }
+
+    generateMostHit(<?= json_encode($mostHitFranchises) ?>);
+
   });
 </script>
 

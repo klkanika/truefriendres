@@ -104,7 +104,7 @@ class Post
         return true;
     }
 
-    public static function getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, $except)
+    public static function getPostsByCategory($postType, $categoryNo, $postsPerPage, $offset, $except, $orderField = false, $order = false)
     {
         $args = array(
             'post_type' => $postType,
@@ -112,6 +112,15 @@ class Post
             'post_status' =>  'publish',
             'ignore_sticky_posts' => 1,
         );
+
+        if ($orderField) {
+            $args['meta_key'] = $orderField;
+            $args['orderby'] = 'meta_value';
+        }
+
+        if ($order) {
+            $args['order'] = $order;
+        }
 
         if ($postsPerPage != null) {
             $args['posts_per_page'] = $postsPerPage;
@@ -140,6 +149,14 @@ class Post
             $args['tax_query'] = array(
                 array(
                     'taxonomy' => 'restaurant_type',
+                    'field' => 'term_id',
+                    'terms' => $categoryNo
+                )
+            );
+        } else if (($postType === 'franchises') && $categoryNo != null) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'franchise_type',
                     'field' => 'term_id',
                     'terms' => $categoryNo
                 )
