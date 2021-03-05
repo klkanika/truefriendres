@@ -456,7 +456,7 @@ $franchises = $franchisesObject->posts
         $("#mosthit-wrapper").append(`
         <div class="swiper-slide">
             <div class="top-0 left-0 ${index === 0 ? 'w-12 h-12 text-xl' : 'w-10 h-10 text-base'} font-bold rounded-full flex justify-center items-center absolute ml-4" style=" ${index === 0 ? 'color:var(--primary);background-color:#dfdfdf;' : 'color:white;background-color:#464356;'}">#${index + 1}</div>
-            <div class="p-2 rounded-xl" style="border: 1px solid #CFCFCF;${index === 0 ? '' : 'background-color:#464356;'}">
+            <a class="p-2 rounded-xl block" style="border: 1px solid #CFCFCF;${index === 0 ? '' : 'background-color:#464356;'}" href="${franchise.link}">
               ${index === 0 && '<?= !wp_is_mobile() ?>' == 1 ? `
                 <div class="flex gap-x-3 h-80">
                   <div style="flex:4;">
@@ -493,7 +493,7 @@ $franchises = $franchisesObject->posts
                     <div>ค่าสมัคร<br /><b class="text-xl">${franchise.ค่าสมัคร}</b></div>
                   </div>
                 </div>`}
-            </div>
+            </a>
           </div>
         `);
       });
