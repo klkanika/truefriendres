@@ -887,7 +887,7 @@ function get_cat_by_name_json_ajax()
 	);
 
 	$categories = get_categories($args);
-	if ($_POST['taxonomy'] === 'suppliertypes') {
+	if ($_POST['taxonomy'] === 'suppliertypes' || $_POST['taxonomy'] === 'franchise_type') {
 		foreach ($categories as $key => $cat) {
 			$cat->pictureUrl = get_field('pictureUrl', $cat) ? get_field('pictureUrl', $cat) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
 		}

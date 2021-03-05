@@ -259,6 +259,8 @@
   $thumbnail_slider_sub_title = 'แหล่งรวมเบอร์ติดต่อ Franchise ประเภทต่างๆ';
   $thumbnail_slider_type = 'franchise-hub';
   $thumbnail_slider_material = $franchisetypes;
+  $post_type = 'franchises';
+  $category_name = 'franchise_type';
   include 'truefriend-thumbnail-slider.php';
   ?>
 
