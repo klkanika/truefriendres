@@ -466,7 +466,11 @@ $franchises = $franchisesObject->posts
                     <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].รูป ? franchise.รูปภาพ[1].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
                     <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].รูป ? franchise.รูปภาพ[2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
                     <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].รูป ? franchise.รูปภาพ[3].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full overflow-hidden relative">
+                      <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
+                      <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
+                      <img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="">
+                    </div>
                   </div>
                 </div>
                 <div class="flex justify-center gap-x-12 items-center text-base h-20">
@@ -483,8 +487,12 @@ $franchises = $franchisesObject->posts
                     <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].รูป ? franchise.รูปภาพ[1].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
                     <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].รูป ? franchise.รูปภาพ[2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
                     <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].รูป ? franchise.รูปภาพ[3].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                  </div>
+                    <div class="h-full w-1/4 overflow-hidden relative">
+                      <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
+                      <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
+                      <div class="h-full w-full overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].รูป ? franchise.รูปภาพ[4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    </div>
+                   </div>
                 </div>
                 <div class="flex justify-between items-center text-base h-20 mx-2">
                   <div><b class="text-xl">${franchise.ชื่อธุรกิจ}</b></div>
