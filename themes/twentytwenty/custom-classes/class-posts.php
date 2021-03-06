@@ -242,7 +242,8 @@ class Post
         if ($postType === 'franchises') {
             $thePost->ชื่อธุรกิจ = get_field('ชื่อธุรกิจ');
             $thePost->จำนวนสาขา = get_field('จำนวน_franchise_c');
-            $thePost->ค่าสมัคร = get_field('ค่าแฟรนไชส์ต่อปี');
+            $thePost->ประเภทธุรกิจ = get_the_terms(get_the_ID(), 'franchise_type') && get_the_terms(get_the_ID(), 'franchise_type')[0] ? get_the_terms(get_the_ID(), 'franchise_type')[0]->name : '';
+            $thePost->ค่าสมัคร = get_field('franchise_price');
             $thePost->รูปภาพ = get_field('รูปภาพ');
         }
 

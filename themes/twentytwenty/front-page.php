@@ -340,6 +340,9 @@ foreach ($postCategories as $postCategory) {
                 'action': 'get_cat_by_name_json_ajax',
                 'keyword': keyword,
                 'taxonomy': 'suppliertypes',
+                'orderby': 'count',
+                'order': 'DESC',
+                'number': '100',
             };
 
             $.ajax({

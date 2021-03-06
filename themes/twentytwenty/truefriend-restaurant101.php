@@ -89,9 +89,12 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
           'action': 'get_posts_by_acf_field_json_ajax',
           'postType': 'post',
           'postsPerPage': 20,
-          'acf_field': 'restaurant_101_category',
-          'value': value,
-          'categoryNo': <?= get_category_by_slug('restaurant101')->cat_ID ?>
+          'categoryNo': <?= get_category_by_slug('restaurant101')->cat_ID ?>,
+          'acf_fields': [{
+            field: 'restaurant_101_category',
+            compare: 'LIKE',
+            value: value,
+          }]
         };
 
         $.ajax({
@@ -101,6 +104,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
           async: false,
           dataType: "json",
           success: function(postsObject) {
+            console.log(postsObject)
             res101_swiper.destroy();
             $("#res101-wrapper").html(``);
             postsObject.map((thePost, i) => {

@@ -71,6 +71,9 @@ $count_material = wp_count_posts($post_type)->publish;
                 'action': 'get_cat_by_name_json_ajax',
                 'keyword': keyword,
                 'taxonomy': '<?= $category_name ?>',
+                'orderby': 'count',
+                'order': 'DESC',
+                'number': '100',
             };
 
             $.ajax({

@@ -28,6 +28,8 @@ $mostHitFranchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, n
 $mostHitFranchises = $mostHitFranchisesObject->posts;
 $newFranchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null);
 $newFranchises = $newFranchisesObject->posts;
+$franchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null);
+$franchises = $newFranchisesObject->posts;
 ?>
 
 <body class="w-full">
@@ -152,63 +154,36 @@ $newFranchises = $newFranchisesObject->posts;
       <div class="flex lg:flex-row flex-col-reverse mx-4 md:mx-0">
         <div class="flex items-center">
           <div class="border border-gray-300 rounded-full px-2 py-1 w-32">
-            <select class="bg-transparent w-full">
+            <select class="bg-transparent w-full filterable" id="type">
               <option value="">ประเภทธุรกิจ</option>
               <?php foreach ($franchise_type as $type) { ?>
-                <option value=""><?= $type->name ?></option>
+                <option value="<?= $type->term_id ?>"><?= $type->name ?></option>
               <?php } ?>
             </select>
           </div>
           <div class="ml-2 border border-gray-300 rounded-full px-2 py-1 w-32">
-            <select class="bg-transparent w-full">
+            <select class="bg-transparent w-full filterable" id="price">
               <option value="">ค่าเปิด</option>
+              <option value="<=10000">&lt; 10,000</option>
+              <option value=">=10001,<=50000">10,001 ~ 50,000</option>
+              <option value=">=50001,<=100000">50,001 ~ 100,000</option>
+              <option value=">=100001">&gt; 100,001</option>
             </select>
           </div>
         </div>
         <div class="lg:ml-auto lg:w-auto lg:my-0 my-4 w-full flex items-center bg-transparent border border-gray-300 rounded-full px-4 py-1">
           <img class="w-4 h-4 mr-2" src="<?= get_theme_file_uri() ?>/assets/images/search-blue.svg" alt="">
-          <input type="text" class="bg-transparent focus:outline-none" placeholder="ค้นหาชื่อ Franchise">
+          <input type="text" class="bg-transparent focus:outline-none filterable" placeholder="ค้นหาชื่อ Franchise" id="keyword">
         </div>
       </div>
-      <div class="py-8">
-        <div class="hidden md:flex items-center py-4">
-          <div class="w-5/12">ชื่อ</div>
-          <div class="w-2/12">ประเภทธุรกิจ</div>
-          <div class="w-2/12">จำนวนสาขา</div>
-          <div class="w-2/12">ค่าเปิด</div>
-        </div>
-        <?php foreach ($franchises as $index => $franchise) : ?>
-          <div class="border-b border-gray-300 p-4 md:px-0 font-light">
-            <a href="">
-              <div class="flex flex-wrap items-center mb-4 text-base ">
-                <div class="w-full md:w-5/12 text-2xl font-semibold"><?= $franchise->ชื่อธุรกิจ ?></div>
-                <div class="w-4/12 md:w-2/12"><?= wp_get_post_terms($franchise->id, "franchise_type")[0]->name ?></div>
-                <div class="w-4/12 md:w-2/12"><?= $franchise->จำนวนสาขา > 999 ? "999+" : $franchise->จำนวนสาขา ?> สาขา</div>
-                <div class="w-4/12 md:w-2/12"><?= $franchise->ค่าสมัคร ?> บาท</div>
-                <div class="hidden md:w-1/12 md:flex justify-end"><img class="w-4 h-4" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt=""></div>
-              </div>
-              <div class="lists-imgs">
-                <?php foreach (array_slice($franchise->รูปภาพ, 0, 5) as $index => $img) : ?>
-                  <div class="item <?= $index > 2 ? 'hidden md:block' : '' ?>">
-                    <div class="item-more"><?= count($franchise->รูปภาพ) - 5 ?>+</div>
-                    <img class="object-cover w-full h-full" src="<?= $img->รูป ?>" alt="">
-                  </div>
-                <?php endforeach; ?>
-                <?php foreach (count($franchise->รูปภาพ) < 5 ? range(0, 5 - count($franchise->รูปภาพ) - 1) : [] as $index) { ?>
-                  <div class="item">
-                    <img src="<?= get_theme_file_uri() ?>/assets/images/gray.png" alt="">
-                  </div>
-                <?php } ?>
-              </div>
-            </a>
-            <?php if (in_array($index, [1, 5])) : ?>
-              <?php include 'truefriend-advertisement-small.php'; ?>
-            <?php endif; ?>
-          </div>
-        <?php endforeach; ?>
+      <div class="py-8 lg:px-0 px-4">
+        <table id="resTable" class="w-full restaurant-table">
+          <tbody class="cursor-pointer">
+          </tbody>
+        </table>
       </div>
       <div class="flex items-center justify-center py-8">
-        <button id="#loadmore" class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
+        <button id="loadmore" class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
       </div>
     </div>
   </section>
@@ -233,6 +208,7 @@ $newFranchises = $newFranchisesObject->posts;
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
 
@@ -242,6 +218,10 @@ $newFranchises = $newFranchisesObject->posts;
     let currentPosts = 10;
     let postsPerPage = 10;
     let loadMoreBtn = $("#loadmore");
+    let type = '';
+    let price = '';
+    let keyword = '';
+    const franchises = <?= json_encode($franchises) ?>;
 
     if (allPosts > currentPosts) {
       loadMoreBtn.show();
@@ -450,6 +430,185 @@ $newFranchises = $newFranchisesObject->posts;
     generateFranchises(<?= json_encode($newFranchises) ?>, "#new-wrapper", "#new-franchise", false);
     generateFranchises(<?= json_encode($newFranchises) ?>, "#new-wrapper2", "#new-franchise2", false);
 
+    const fetchFranchise = (destroy, offset) => {
+      const request = {
+        'action': 'get_posts_by_acf_field_json_ajax',
+        'postType': 'franchises',
+        'postsPerPage': 10,
+        'offset': offset
+      };
+
+      const acf_fields = [];
+
+      if (type) {
+        request['taxonomies'] = [{
+          taxonomy: 'franchise_type',
+          field: 'id',
+          terms: type,
+        }]
+      };
+
+      if (keyword) {
+        acf_fields.push({
+          field: 'ชื่อธุรกิจ',
+          compare: 'LIKE',
+          value: keyword,
+        })
+      }
+
+      if (price) {
+        const prices = price.split(',');
+        prices.map((d, i) => {
+          acf_fields.push({
+            field: 'franchise_price',
+            compare: d.substr(0, 2),
+            value: d.substr(2),
+          })
+        });
+      }
+
+      if (acf_fields.length > 0) {
+        request['acf_fields'] = acf_fields;
+      }
+
+      $.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: request,
+        async: false,
+        dataType: "json",
+        success: function(postsObject) {
+          if (destroy) {
+            currentPosts = postsObject.length;
+          } else {
+            currentPosts += postsObject.length;
+          }
+
+          allPosts = postsObject && postsObject[0] ? postsObject[0].total : 0
+          generateTable(postsObject, destroy)
+        },
+      });
+    }
+
+    const data = [];
+    $(".filterable").change(function() {
+      type = $("#type").val();
+      price = $("#price").val();
+      keyword = $("#keyword").val();
+      loadMoreBtn.hide();
+      fetchFranchise(true, 0)
+      if (allPosts > currentPosts) {
+        loadMoreBtn.show();
+      }
+    });
+
+    $.extend($.fn.dataTable.defaults, {
+      searching: false,
+      ordering: true
+    });
+
+    let theTable = $('#resTable').DataTable({
+      order: [
+        [4, "desc"]
+      ],
+      paging: false,
+      info: false,
+      responsive: true,
+      columns: [{
+          title: "ชื่อ",
+          render: function(data) {
+            return `<b>${data}</b>`;
+          },
+          width: "40%",
+          className: 'text-left'
+        },
+        {
+          title: "ประเภทธุรกิจ",
+          width: "20%",
+          className: 'text-left',
+          render: function(data) {
+            return data ? data : '-'
+          }
+        },
+        {
+          title: "จำนวนสาขา",
+          render: function(data) {
+            return data ? data + ' สาขา' : '-';
+          },
+          width: "20%",
+          className: 'text-left'
+        },
+        {
+          title: "ค่าเปิด",
+          render: function(data) {
+            return data ? data + ' บาท' : '-';
+          },
+          width: "20%",
+          className: 'text-left'
+        },
+        {
+          title: "",
+          render: function(data) {
+            return `<img class="w-4 h-4 mr-2" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">`;
+          }
+        }
+      ],
+    });
+
+    const generateTable = (franchises, destroy = false) => {
+
+      if (destroy) {
+        theTable.clear()
+      }
+
+      franchises.map((d, i) => {
+        const row = theTable.row.add([
+          d['ชื่อธุรกิจ'],
+          d['ประเภทธุรกิจ'],
+          parseInt(d['จำนวนสาขา']),
+          parseFloat(d['ค่าสมัคร']),
+          d['link'],
+        ])
+        row.child(`
+        <a href="${d['link'] || d['guid']}" class="flex gap-x-2 pb-6 mb-4 pt-4 border-b" style="border-color:rgba(0,0,0,0.12)">
+          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][0]?d['รูปภาพ'][0].รูป:'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}"/></div>
+          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][1]?d['รูปภาพ'][1].รูป:'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}"/></div>
+          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl relative">
+            <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center lg:hidden ${d['รูปภาพ'].length > 3 ? '' : 'hidden'}">${d['รูปภาพ'].length - 3}+</div>
+            <div class="w-full h-full absolute text-white text-xl flex items-center justify-center lg:hidden ${d['รูปภาพ'].length > 3 ? '' : 'hidden'}">${d['รูปภาพ'].length - 3}+</div>
+            <div class="h-full w-full overflow-hidden"><img src="${d['รูปภาพ'][2] && d['รูปภาพ'][2].รูป ? d['รูปภาพ'][2].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+          </div>
+          <div class="lg:w-1/5 w-1/4 h-36 lg:block hidden overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][3]?d['รูปภาพ'][3].รูป:'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}"/></div>
+          <div class="h-full lg:w-1/5 w-1/4 lg:h-36 rounded-xl overflow-hidden relative lg:block hidden">
+            <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${d['รูปภาพ'].length > 5 ? '' : 'hidden'}">${d['รูปภาพ'].length - 5}+</div>
+            <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${d['รูปภาพ'].length > 5 ? '' : 'hidden'}">${d['รูปภาพ'].length - 5}+</div>
+            <div class="h-full w-full overflow-hidden"><img src="${d['รูปภาพ'][4] && d['รูปภาพ'][4].รูป ? d['รูปภาพ'][4].รูป : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+          </div>
+        </a>
+        ${(i+1) % 5 === 0 ? ` <div class="pb-6 mb-4 border-b" style="border-color:rgba(0,0,0,0.12)"><?php include 'truefriend-advertisement-small.php'; ?></div>` : ''}
+        `).show()
+      });
+
+      theTable.draw(destroy)
+    };
+
+    $('#resTable tbody').on('click', 'tr', function() {
+      var data = theTable.row(this).data();
+      location.href = data[4];
+    });
+
+    generateTable(franchises, true);
+
+    loadMoreBtn.click(() => {
+      loadMoreBtn.hide();
+      fetchFranchise(false, currentPosts)
+      if (allPosts > currentPosts) {
+        loadMoreBtn.show();
+      }
+    });
+
+    $("#type").val(<?= $_GET['type'] ?>);
+    $("#type").trigger('change');
   });
 </script>
 

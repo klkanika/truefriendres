@@ -147,7 +147,7 @@
         </div>
         <div class="border-b border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ค่าแฟรนไชส์</p>
-          <p class="text-xl"><?= get_field('ค่าแฟรนไชส์ต่อปี') ? get_field('ค่าแฟรนไชส์ต่อปี') : '-' ?></p>
+          <p class="text-xl"><?= get_field('franchise_price') ? get_field('franchise_price') : '-' ?></p>
         </div>
         <div class="border-b border-gray-300 py-8">
           <p class="text-gray-500 mb-2">ระยะเวลาคืนทุน</p>

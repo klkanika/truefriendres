@@ -880,9 +880,9 @@ function get_cat_by_name_json_ajax()
 {
 	$args = array(
 		'taxonomy' => $_POST['taxonomy'],
-		'orderby' => 'count',
-		'order'   => 'DESC',
-		'number' => 100,
+		'orderby' => $_POST['orderby'],
+		'order' => $_POST['order'],
+		'number' => $_POST['number'],
 		'name__like' => $_POST['keyword']
 	);
 
@@ -925,27 +925,68 @@ function get_posts_by_acf_field_json_ajax()
 	$postType = $_POST['postType'];
 	$postsPerPage = $_POST['postsPerPage'];
 	$categoryNo = $_POST['categoryNo'];
-	$acfField = $_POST['acf_field'];
-	$value = $_POST['value'];
+	$acfFields = $_POST['acf_fields'];
+	$taxonomies = $_POST['taxonomies'];
+	$offset = $_POST['offset'];
 
 	$options = array(
 		'numberposts'	=> $postsPerPage,
 		'post_type'		=> $postType,
-		'category__in' => $categoryNo
+		'category__in' => $categoryNo,
+		'offset' => $offset
 	);
 
-	if ($value) {
-		$options['meta_key'] = $acfField;
-		$options['meta_value'] = $value;
-		$options['meta_compare'] = 'LIKE';
+	if ($acfFields && count($acfFields) > 0) {
+		$meta_query = array('relation' => 'AND');
+		foreach ($acfFields as $key => $acfField) {
+			array_push(
+				$meta_query,
+				array(
+					'key' => $acfField['field'],
+					'compare' => $acfField['compare'],
+					'value' => is_numeric($acfField['value']) ? intval($acfField['value']) : $acfField['value'],
+					'type'    => is_numeric($acfField['value']) ? 'numeric' : 'char',
+				)
+			);
+		}
+		$options['meta_query'] = $meta_query;
+	}
+
+	if ($taxonomies != null && count($taxonomies) > 0) {
+		foreach ($taxonomies as $key => $taxonomy) {
+			$tax_query = array('relation' => 'AND');
+			array_push(
+				$tax_query,
+				array(
+					'taxonomy' => $taxonomy['taxonomy'],
+					'field' => $taxonomy['field'],
+					'terms' => $taxonomy['terms'],
+				)
+			);
+		}
+		$options['tax_query'] = $tax_query;
 	}
 
 	$posts = get_posts($options);
+	$postsObject = new WP_Query($options);
+	if ($posts && $posts[0]) {
+		$posts[0]->total = $postsObject->found_posts;
+	}
+
+	if ($postType === 'franchises') {
+		foreach ($posts as $key => $post) {
+			$post->ชื่อธุรกิจ = get_field('ชื่อธุรกิจ', $post->ID);
+			$post->จำนวนสาขา = get_field('จำนวน_franchise_c', $post->ID);
+			$post->ค่าสมัคร = get_field('franchise_price', $post->ID);
+			$post->ประเภทธุรกิจ = get_the_terms($post->ID, 'franchise_type') ? get_the_terms($post->ID, 'franchise_type')[0]->name : '';
+			$post->รูปภาพ =  get_field('รูปภาพ', $post->ID);
+		}
+	}
 
 	if ($categoryNo == get_category_by_slug('restaurant101')->cat_ID) {
 		foreach ($posts as $key => $post) {
 			$post->pictureUrl = get_the_post_thumbnail_url($post->ID) ? get_the_post_thumbnail_url($post->ID)  :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
-			$post->restaurantCategory = get_field('restaurant_101_category', $post->ID) ? get_field('restaurant_101_category', $post->ID)[0] : '';
+			$post->restaurantCategory = get_field('restaurant_101_category', $post->ID) && get_field('restaurant_101_category', $post->ID)[0] ? get_field('restaurant_101_category', $post->ID)[0] : '';
 			$post->title = get_the_title($post->ID);
 		}
 	}
