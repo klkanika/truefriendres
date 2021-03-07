@@ -280,7 +280,7 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
 
   <section id="register" class="text-white py-16 w-full flex items-center flex-col" style="background-color: #FFD950; color:#262145;">
     <p class="text-3xl font-bold pb-4">ลงทะเบียนเรียน</p>
-    <a href="<?= get_site_url() ?>/courses-register" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
+    <a href="<?= get_site_url() ?>/courses-register?courseId=<?=get_the_ID()?>" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
       ลงทะเบียน
     </a>
   </section>

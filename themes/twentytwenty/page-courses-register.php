@@ -13,6 +13,25 @@
 </head>
 
 <?php
+
+$courseId = $_GET['courseId'];
+if (isset($courseId)) {
+  $coursePost = get_post($courseId);
+  if ($coursePost) {
+    $endDate = get_field('วันปิดรับสมัคร', $courseId);
+    if (date("Y-m-d") > $endDate) {
+      header("location: " . get_site_url() . '/' . 'courses');
+      exit(0);
+    }
+  } else {
+    header("location: " . get_site_url() . '/' . 'courses');
+    exit(0);
+  }
+} else {
+  header("location: " . get_site_url() . '/' . 'courses');
+  exit(0);
+}
+
 require_once('custom-classes/class-posts.php');
 $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
 $CoursesRegisterPosts = array_filter($recentPosts->posts, function ($p) {
@@ -30,14 +49,14 @@ $form = [
     "label" => "ข้อมูลทั่วไป",
     "form" => [
       [
-        "name"         => "",
+        "name"         => "general_info-name",
         "label"       => "ชื่อ - นามสกุล",
         "placeholder" => "ชื่อ - นามสกุล",
         "type"        => "input",
         "required"    => false
       ],
       [
-        "name"         => "",
+        "name"         => "general_info-gender",
         "label"       => "เพศ",
         "placeholder" => "",
         "type"        => "select",
@@ -45,21 +64,21 @@ $form = [
         "required"    => false
       ],
       [
-        "name"         => "",
+        "name"         => "general_info-email",
         "label"       => "อีเมล",
         "placeholder" => "อีเมล",
         "type"        => "input",
         "required"    => false
       ],
       [
-        "name"         => "",
+        "name"         => "general_info-tel",
         "label"       => "เบอร์โทรศัพท์",
         "placeholder" => "เบอร์โทรศัพท์",
         "type"        => "input",
         "required"    => false
       ],
       [
-        "name"         => "",
+        "name"         => "general_info-line_id",
         "label"       => "Line ID",
         "placeholder" => "Line ID",
         "type"        => "input",
@@ -72,39 +91,40 @@ $form = [
     "label" => "ข้อมูลร้าน",
     "form" => [
       [
-        "name"         => "",
+        "name"        => "restaurant_info-name",
         "label"       => "ชื่อร้าน",
         "placeholder" => "ชื่อร้าน",
         "type"        => "input",
         "required"    => true
       ],
       [
-        "name"         => "",
+        "name"         => "restaurant_info-location",
         "label"       => "ที่ตั้งร้าน",
         "placeholder" => "ที่ตั้งร้าน",
         "type"        => "input",
         "required"    => true
       ],
       [
-        "name"         => "",
+        "name"         => "restaurant_info-type",
         "label"       => "ประเภทร้าน",
         "placeholder" => "ประเภทร้าน",
         "type"        => "input",
         "required"    => true
       ],
       [
-        "name"         => "",
+        "name"         => "restaurant_info-seat",
         "label"       => "จำนวนที่นั่งในร้าน",
         "placeholder" => "จำนวนที่นั่งในร้าน",
         "type"        => "input",
         "required"    => false
       ],
       [
-        "name"         => "",
+        "name"         => "restaurant_info-revenue",
         "label"       => "ยอดขายต่อเดือน",
         "placeholder" => "",
         "type"        => "select",
-        "options"      => ["10,000 - 50,000 บาท"],
+        "options"      => ["10,000 - 50,000 บาท", "50,001 - 100,000 บาท", "100,001 - 200,000 บาท", "200,001 บาทขึ้นไป"],
+        "values"     => [1, 2, 3, 4],
         "required"    => true
       ],
     ],
@@ -114,11 +134,12 @@ $form = [
     "label" => "ข้อมูลอื่นๆ",
     "form" => [
       [
-        "name"         => "",
+        "name"         => "other_info-coregistrator-name[]",
         "label"       => "ชื่อ นามสกุล ผู้สมัครร่วม",
         "placeholder" => "ชื่อ นามสกุล",
         "type"        => "input",
-        "required"    => false
+        "required"    => false,
+        "id" => "co-field"
       ],
       [
         "name"         => "",
@@ -135,7 +156,7 @@ $form = [
         "required"    => false
       ],
       [
-        "name"         => "",
+        "name"         => "other_info-payment_slip",
         "label"       => "แจ้งชำระเงิน",
         "placeholder" => "",
         "type"        => "upload-slip",
@@ -187,7 +208,7 @@ $form = [
         <div class="font-light pr-2">ลงทะเบียน</div>
         <div class="font-bold">สมัครลงคอร์ส</div>
       </div>
-      <p class="text-3xl md:text-6xl font-bold pb-2">บริหารร้านอาหารให้โตแบบก้าวกระโดด</p>
+      <p class="text-3xl md:text-6xl font-bold pb-2"><?= get_field('ชื่อ', $courseId) ?></p>
       <p class="text-sm md:text-base">หลังจากที่แอดมินได้ Approve แล้วข้อมูลของคุณจะลงไปที่ Website</p>
       <div class="block md:flex font-bold py-8 lg:py-10">
         <div class="flex mb-4 lg:mb-0">
@@ -204,7 +225,7 @@ $form = [
         </div>
       </div>
 
-      <form action="<?= get_site_url() ?>/wp-admin/admin-post.php" method="post">
+      <form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate>
         <?php foreach ($form as $i => $f) : ?>
           <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i ?>">
             <div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i ?>)">
@@ -232,19 +253,19 @@ $form = [
                         case "select": ?>
                           <select value="" name="<?= $input['name'] ?>" class="py-2 px-4 border rounded-lg w-full lg:w-auto" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
                             <option value="">เลือก</option>
-                            <?php foreach ($input['options'] as $option) : ?>
-                              <option value="<?= $option ?>"><?= $option ?></option>
+                            <?php foreach ($input['options'] as $key => $option) : ?>
+                              <option value="<?= $input['values'][$key] ? $input['values'][$key] : $option ?>"><?= $option ?></option>
                             <?php endforeach; ?>
                           </select>
                         <?php break;
                         case "input": ?>
-                          <input value="" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
+                          <input value="" id="<?= $input['id'] ?>" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
                         <?php break;
                         case "textarea": ?>
                           <textarea rows="4" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?>></textarea>
                         <?php break;
                         case "btn-add-applicants": ?>
-                          <button class="rounded-lg border-2 w-full flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none">
+                          <button type="button" id="addco" class="rounded-lg border-2 w-full flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none">
                             + เพิ่มผู้สมัครร่วม
                           </button>
                         <?php break;
@@ -265,7 +286,7 @@ $form = [
                           </div>
                         <?php break;
                         case "upload-slip": ?>
-                          <button class="w-full md:w-1/2 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none">
+                          <button type="button" class="w-full md:w-1/2 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none">
                             <div class="flex items-center justify-center">
                               <img class="w-4 h-4 md:w-6 md:h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-upload.svg" />
                             </div>
@@ -295,7 +316,8 @@ $form = [
         <?php endforeach; ?>
         <hr class="mx-8">
         <div class="flex items-center justify-center">
-        <input type="hidden" name="action" value="courses_register">
+          <input type="hidden" name="action" value="courses_register">
+          <input type="hidden" name="course" value="<?= $courseId ?>">
           <button type="submit" class="h-14 w-full md:w-1/3 rounded-full p-4" style="background-color:#FFD950; color: #262145;">ลงทะเบียน</button>
         </div>
       </form>
@@ -316,4 +338,13 @@ $form = [
     $('.collapse').removeClass('open')
     $(`.collapse[collapse=${step}]`).addClass('open')
   }
+
+  $("#form").on('submit', function() {
+    const fields = $(this).serializeArray()
+    console.log(fields)
+  })
+
+  $("#addco").click(function() {
+    console.log($("#co-field").parent().append(`<input value="" name="other_info-coregistrator-name[]" placeholder="ชื่อ นามสกุล" class="py-2 px-4 mt-2 border rounded-lg w-full">`))
+  })
 </script>
