@@ -876,7 +876,6 @@ function courses_register_process()
 			foreach ($value as $v) {
 				array_push($formatValue, array($field => $v));
 			}
-			var_dump($formatValue);
 			update_field(
 				$group1,
 				array(
@@ -901,6 +900,7 @@ function courses_register_process()
 		}
 	}
 
+	header("location: " . get_site_url() . "/courses?success=true");
 	exit();
 }
 

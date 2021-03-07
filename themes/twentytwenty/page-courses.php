@@ -12,8 +12,12 @@
 </head>
 
 <?php
-$onlineClient = get_field( 'online_course_client',get_the_ID() );
-$offlineClient = get_field( 'offline_course_client',get_the_ID() );
+$success = $_GET['success'];
+if (isset($success)) {
+  echo '<script>alert("สมัครเรียบร้อยแล้ว สนใจคอร์สเรียนอื่นเพิ่มเติม... บลาๆ (เดี๋ยวตรงนี้ใส่เป็น snackbar)")</script>';
+}
+$onlineClient = get_field('online_course_client', get_the_ID());
+$offlineClient = get_field('offline_course_client', get_the_ID());
 
 require_once('custom-classes/class-posts.php');
 $onlineTermId = get_term_by('name', 'online', 'course_type')->term_id;
@@ -58,7 +62,7 @@ $coursesPosts = [
       <div class="swiper-wrapper md:pl-8 pl-4 pb-16">
         <!-- Slides -->
         <?php foreach ($allPosts->posts as $i => $thePost) : ?>
-          <a href="<?=$thePost->link?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
+          <a href="<?= $thePost->link ?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
             <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" />
             <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
@@ -108,37 +112,37 @@ $coursesPosts = [
           <p class="text-sm md:text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-sm md:text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
-        <?php if(!empty($offlineClient)): ?>
-        <div class="px-6 md:px-0">
-          <div class="font-bold mb-4">Our Client</div>
-          <div class="flex">
-            <?php foreach($offlineClient as $key => $thePost) : ?>
-              <?php $margin = 0.5*-1*$key;?>
-              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
-                <?php else:?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
-                <?php endif;?>
-                <div class="tooltiptext">
-                  <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):?>
-                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                    <?php else:?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
-                    <?php endif;?>
-                    <div class="ml-4">
-                      <div><?=$thePost['customer_name']?></div>
-                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+        <?php if (!empty($offlineClient)) : ?>
+          <div class="px-6 md:px-0">
+            <div class="font-bold mb-4">Our Client</div>
+            <div class="flex">
+              <?php foreach ($offlineClient as $key => $thePost) : ?>
+                <?php $margin = 0.5 * -1 * $key; ?>
+                <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
+                  <?php if (!empty($thePost['icon_image'])) : ?>
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                  <?php else : ?>
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                  <?php endif; ?>
+                  <div class="tooltiptext">
+                    <div class="flex items-center mb-4">
+                      <?php if (!empty($thePost['customer_image'])) : ?>
+                        <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php else : ?>
+                        <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                      <?php endif; ?>
+                      <div class="ml-4">
+                        <div><?= $thePost['customer_name'] ?></div>
+                        <div class="font-bold"><?= $thePost['brand_name'] ?></div>
+                      </div>
                     </div>
+                    <p><?= $thePost['review'] ?></p>
                   </div>
-                  <p><?=$thePost['review']?></p>
                 </div>
-              </div>
-            <?php endforeach; ?>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
       </div>
       <div class="px-6 md:px-0 w-2/4 hidden md:flex items-center justify-center">
         <img src="<?= get_theme_file_uri() ?>/assets/images/courses-offline.png" />
@@ -149,7 +153,7 @@ $coursesPosts = [
       <div class="swiper-wrapper pl-6 md:pl-20 pb-16">
         <!-- Slides -->
         <?php foreach ($offlinePosts->posts as $i => $thePost) : ?>
-          <a href="<?=$thePost->link?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
+          <a href="<?= $thePost->link ?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
             <img class="object-cover w-full h-full rounded-xl opacity-30" src="<?= $thePost->featuredImage ?>" />
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
@@ -190,37 +194,37 @@ $coursesPosts = [
           <p class="text-sm md:text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-sm md:text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
-        <?php if(!empty($onlineClient)): ?>
-        <div class="px-6 md:px-0">
-          <div class="font-bold mb-4">Our Client</div>
-          <div class="flex">
-            <?php foreach($onlineClient as $key => $thePost) : ?>
-              <?php $margin = 0.5*-1*$key;?>
-              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
-                <?php else:?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
-                <?php endif;?>
-                <div class="tooltiptext">
-                  <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):?>
-                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                    <?php else:?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
-                    <?php endif;?>
-                    <div class="ml-4">
-                      <div><?=$thePost['customer_name']?></div>
-                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+        <?php if (!empty($onlineClient)) : ?>
+          <div class="px-6 md:px-0">
+            <div class="font-bold mb-4">Our Client</div>
+            <div class="flex">
+              <?php foreach ($onlineClient as $key => $thePost) : ?>
+                <?php $margin = 0.5 * -1 * $key; ?>
+                <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
+                  <?php if (!empty($thePost['icon_image'])) : ?>
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                  <?php else : ?>
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                  <?php endif; ?>
+                  <div class="tooltiptext">
+                    <div class="flex items-center mb-4">
+                      <?php if (!empty($thePost['customer_image'])) : ?>
+                        <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php else : ?>
+                        <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                      <?php endif; ?>
+                      <div class="ml-4">
+                        <div><?= $thePost['customer_name'] ?></div>
+                        <div class="font-bold"><?= $thePost['brand_name'] ?></div>
+                      </div>
                     </div>
+                    <p><?= $thePost['review'] ?></p>
                   </div>
-                  <p><?=$thePost['review']?></p>
                 </div>
-              </div>
-            <?php endforeach; ?>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center pl-16">
         <img src="<?= get_theme_file_uri() ?>/assets/images/courses-online.png" />
@@ -231,7 +235,7 @@ $coursesPosts = [
       <div class="swiper-wrapper pl-6 md:pl-20 pb-16">
         <!-- Slides -->
         <?php foreach ($onlinePosts->posts as $i => $thePost) : ?>
-          <a href="<?=$thePost->link?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
+          <a href="<?= $thePost->link ?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
             <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" />
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>

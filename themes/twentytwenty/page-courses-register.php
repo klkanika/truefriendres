@@ -13,7 +13,7 @@
 </head>
 
 <?php
-
+$revenue_options = get_field_object('field_6044a32b41884')['choices'];
 $courseId = $_GET['courseId'];
 if (isset($courseId)) {
   $coursePost = get_post($courseId);
@@ -123,8 +123,8 @@ $form = [
         "label"       => "ยอดขายต่อเดือน",
         "placeholder" => "",
         "type"        => "select",
-        "options"      => ["10,000 - 50,000 บาท", "50,001 - 100,000 บาท", "100,001 - 200,000 บาท", "200,001 บาทขึ้นไป"],
-        "values"     => [1, 2, 3, 4],
+        "options"      => array_values($revenue_options),
+        "values"     => array_keys($revenue_options),
         "required"    => true
       ],
     ],
@@ -333,6 +333,7 @@ $form = [
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js"></script>
 <script>
   function showStep(step) {
     $('.collapse').removeClass('open')
@@ -369,6 +370,12 @@ $form = [
       } else {
         $(this).find('.status').attr('src', '<?= get_theme_file_uri() ?>/assets/images/icon-info.svg')
       }
+    });
+  });
+
+  $(document).ready(function() {
+    Snackbar.show({
+      text: 'Example notification text.'
     });
   });
 </script>
