@@ -28,6 +28,12 @@ $courseDetail = [
   ],
 ];
 
+$end = new DateTime(get_field('วันปิดรับสมัคร'));
+$today = new DateTime();
+$interval = $today->diff($end);
+$left = intval($interval->format('%a'));
+$dateleft =  ($left + 1) . ' วัน';
+
 $courseDetail = [];
 foreach (get_field('เนื้อหาของคอร์สนี้') as $key => $part) {
   $tmp_array = ["header" => "Part " . ($key + 1) . ': ' . $part['ชื่อ_part']];
@@ -203,18 +209,18 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
       </div>
       <p class="text-2xl md:text-5xl font-bold my-6"><?= get_field('ชื่อ') ?></p>
       <div class="flex mb-2 md:mb-6">
-        <?php if(!empty(get_field('วันปิดรับสมัคร'))): ?>
+        <?php if (!empty(get_field('วันปิดรับสมัคร'))) : ?>
           <div type="submit" class="flex h-14 p-4 rounded-lg" style="background-color:#FFD950; color: #262145;">
             <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-clock.svg" alt="">
             <span class="text-sm md:text-base pl-2 font-bold">ปิดรับสมัครในอีก <?= $dateleft ?></span>
           </div>
-        <?php endif;?>
-        <?php if(!empty(get_field('จำนวนคนที่รับสมัคร'))): ?>
+        <?php endif; ?>
+        <?php if (!empty(get_field('จำนวนคนที่รับสมัคร'))) : ?>
           <div class="flex p-4">
             <img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/icon-person.svg" alt="">
             <span class="text-sm md:text-base pl-2 font-bold" style="color: #B82020;"><?= intval(get_field('จำนวนคนที่รับสมัคร')) - intval(get_field('จำนวนคนตอนนี้')) ?> ท่านสุดท้าย</span>
           </div>
-        <?php endif;?>
+        <?php endif; ?>
       </div>
       <!-- <a href="" class="w-full lg:w-1/2 px-4">
         <div class="w-full lg:h-96 h-56 flex items-center justify-center rounded-xl relative bg-gray-400">
@@ -222,18 +228,23 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
         </div>
       </a> -->
       <div class="flex justify-center">
-      <style>iframe{width: 100% !important;height: 450px !important;}</style>
+        <style>
+          iframe {
+            width: 100% !important;
+            height: 450px !important;
+          }
+        </style>
         <?= get_field('วิดีโอ') ?>
       </div>
-      <?php if(!empty(get_field('รายละเอียด'))): ?>
+      <?php if (!empty(get_field('รายละเอียด'))) : ?>
         <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">รายละเอียด</p>
         <p><?= get_field('รายละเอียด') ?></p>
-      <?php endif;?>
-      <?php if(!empty(get_field('ผู้สอน'))): ?>
+      <?php endif; ?>
+      <?php if (!empty(get_field('ผู้สอน'))) : ?>
         <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">ผู้สอน</p>
         <p><?= get_field('ผู้สอน') ?></p>
-      <?php endif;?>
-      <?php if(!empty($courseDetail)): ?>
+      <?php endif; ?>
+      <?php if (!empty($courseDetail)) : ?>
         <p class="text-sm text-gray-400 pb-2 mt-4 mb-2 md:mt-6 md:mb-4">เนื้อหาของคอร์สนี้</p>
         <div class="block md:hidden">
           <?php foreach ($courseDetail as $i => $detail) : ?>
@@ -242,7 +253,7 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
               <label <?php if ($i == 0) : ?> class="block p-2 leading-normal cursor-pointer rounded-none border-t-2 border-b-2 mb-2" <?php else : ?>class="block p-2 leading-normal cursor-pointer rounded-none border-b-2 mb-2" <?php endif; ?> for="tab-multi-<?= $i ?>">
                 <span class="font-bold"><?= $detail['header'] ?></span>
               </label>
-              <?php if(!empty($detail['line'])):?>
+              <?php if (!empty($detail['line'])) : ?>
                 <div class="tab-content overflow-hidden leading-normal rounded-none">
                   <?php foreach ($detail['line'] as $lineDetail) : ?>
                     <p class="pl-2 py-2"><?= $lineDetail ?></p>
@@ -259,7 +270,7 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
               <label class="block p-2 leading-normal rounded-none border-t-2 border-b-2 mb-2">
                 <span class="font-bold"><?= $detail['header'] ?></span>
               </label>
-              <?php if(!empty($detail['line'])):?>
+              <?php if (!empty($detail['line'])) : ?>
                 <div class="overflow-hidden leading-normal rounded-none">
                   <?php foreach ($detail['line'] as $lineDetail) : ?>
                     <p class="pl-2 py-2 flex justify-between">
@@ -272,7 +283,7 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
             <?php endforeach; ?>
           </div>
         </div>
-      <?php endif;?>
+      <?php endif; ?>
 
 
     </div>
@@ -280,7 +291,7 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
 
   <section id="register" class="text-white py-16 w-full flex items-center flex-col" style="background-color: #FFD950; color:#262145;">
     <p class="text-3xl font-bold pb-4">ลงทะเบียนเรียน</p>
-    <a href="<?= get_site_url() ?>/courses-register?courseId=<?=get_the_ID()?>" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
+    <a href="<?= get_site_url() ?>/courses-register?courseId=<?= get_the_ID() ?>" class="h-10 rounded-full w-4/12 flex items-center justify-center p-2 hover:bg-gray-50 focus:outline-none" style="background-color:#FFFFFF; color: #000000;">
       ลงทะเบียน
     </a>
   </section>

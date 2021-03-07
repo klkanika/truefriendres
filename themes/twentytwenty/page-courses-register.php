@@ -45,7 +45,7 @@ $CoursesRegisterPosts = array_filter($recentPosts->posts, function ($p) {
 
 $form = [
   [
-    "icon" => "info",
+    "icon" => "check",
     "label" => "ข้อมูลทั่วไป",
     "form" => [
       [
@@ -87,7 +87,7 @@ $form = [
     ],
   ],
   [
-    "icon" => "check",
+    "icon" => "info",
     "label" => "ข้อมูลร้าน",
     "form" => [
       [
@@ -230,7 +230,7 @@ $form = [
           <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i ?>">
             <div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i ?>)">
               <div class="flex w-full">
-                <img class="mr-4" src="<?= get_theme_file_uri() ?>/assets/images/icon-<?= $f['icon'] ?>.svg" />
+                <img class="mr-4 status" src="<?= get_theme_file_uri() ?>/assets/images/icon-<?= $f['icon'] ?>.svg" />
                 <div class="font-semibold">
                   <?= $f['label'] ?>
                 </div>
@@ -339,12 +339,36 @@ $form = [
     $(`.collapse[collapse=${step}]`).addClass('open')
   }
 
+  //focus on required field
   $("#form").on('submit', function() {
     const fields = $(this).serializeArray()
-    console.log(fields)
+    let requiredField = $(":input[required]").filter(function() {
+      return !this.value;
+    }).first();
+
+    if (requiredField.length > 0) {
+      $('.collapse').removeClass('open')
+      requiredField.closest('.collapse').addClass('open')
+      requiredField.focus()
+      return false
+    }
   })
 
   $("#addco").click(function() {
-    console.log($("#co-field").parent().append(`<input value="" name="other_info-coregistrator-name[]" placeholder="ชื่อ นามสกุล" class="py-2 px-4 mt-2 border rounded-lg w-full">`))
+    $("#co-field").parent().append(`<input value="" name="other_info-coregistrator-name[]" placeholder="ชื่อ นามสกุล" class="py-2 px-4 mt-2 border rounded-lg w-full">`)
   })
+
+  $(":input").change(() => {
+    $(".collapse").each(function() {
+      let fields = $(this).find(':input[required]').filter(function() {
+        return !this.value;
+      })
+
+      if (fields.length === 0) {
+        $(this).find('.status').attr('src', '<?= get_theme_file_uri() ?>/assets/images/icon-check.svg')
+      } else {
+        $(this).find('.status').attr('src', '<?= get_theme_file_uri() ?>/assets/images/icon-info.svg')
+      }
+    });
+  });
 </script>
