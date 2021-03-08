@@ -80,6 +80,9 @@ body {
 button:focus {
   outline: unset !important;
 }
+*:focus {
+  outline: unset !important;
+}
 
 /* The checkbox */
 .checkbox {
