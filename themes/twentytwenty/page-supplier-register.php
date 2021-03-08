@@ -298,14 +298,14 @@ $form = [
 													<div class="flex flex-wrap" style="border-radius:4px;box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);">
 														<div class="flex items-center border-b w-full p-4" style="border-color:rgba(0, 0, 0, 0.08);"><input type="checkbox" id="delivery-place" value="all" class="mr-3 delivery-place"> <label for="delivery-place"> จัดส่งทั่วประเทศ </label></div>
 														<?php foreach ($provinces as $key => $sector) { ?>
-															<div class="flex flex-wrap justify-between w-full items-center p-4 border-b" style="border-color:rgba(0, 0, 0, 0.08);">
-																<div class="flex justify-between w-full items-center mb-4">
+															<div class="flex flex-wrap justify-between w-full items-center px-8 pt-4 border-b sector-tab cursor-pointer" style="border-color:rgba(0, 0, 0, 0.08);">
+																<div class="flex justify-between w-full items-center mb-4 province-collapse">
 																	<div class="flex items-center">
 																		<input type="checkbox" id="<?= $key ?>" value="<?= $key ?>" class="mr-3 sector delivery-place"> <label for="<?= $key ?>"> <?= $key ?> </label>
 																	</div>
-																	<img class="cursor-pointer" src="<?= get_theme_file_uri() . "/assets/images/collapse.svg" ?>" />
+																	<img class="cursor-pointer transform" src="<?= get_theme_file_uri() . "/assets/images/collapse.svg" ?>" />
 																</div>
-																<div class="flex flex-wrap w-full px-8">
+																<div class="flex flex-wrap w-full px-8 sector-collapse hidden">
 																	<?php foreach ($sector as $province) { ?>
 																		<div class="flex items-center w-1/3 mb-4" style="border-color:rgba(0, 0, 0, 0.08);">
 																			<input type="checkbox" name="provinces[]" id="<?= $province ?>" sector="<?= $key ?>" value="<?= $province ?>" class="mr-3 <?= $key ?> delivery-place province"> <label for="<?= $province ?>"> <?= $province ?> </label>
@@ -416,7 +416,6 @@ $form = [
 			})
 		} else {
 			$(`.sector`).each(function() {
-				console.log('in')
 				if (!$(this).prop('checked')) {
 					$("#delivery-place").prop('checked', false);
 					return false;
@@ -452,5 +451,10 @@ $form = [
 
 	$("p").on('click', '.deletebox', function() {
 		$(this).parent().remove();
+	});
+
+	$(".sector-tab").click(function() {
+		$(this).find('.sector-collapse').toggleClass('hidden');
+		$(this).find('.transform').toggleClass('rotate-180');
 	});
 </script>
