@@ -853,14 +853,16 @@ function supplier_register_process()
 	exit();
 }
 
-add_action('admin_post_nopriv_courses_register', 'courses_register_process');
-add_action('admin_post_courses_register', 'courses_register_process');
+add_action('admin_post_nopriv_common_register', 'common_register_process');
+add_action('admin_post_common_register', 'common_register_process');
 
-function courses_register_process()
+function common_register_process()
 {
+	echo $_POST['title'];
+	echo $_POST['id'];
 	$my_post = array(
-		'post_title' => $_POST['general_info-name'] . ' for ' . get_field('ชื่อ', $_POST['course']),
-		'post_type' => 'course_register',
+		'post_title' => $_POST['general_info-name'] . ' for ' . get_field($_POST['title'], $_POST['id']),
+		'post_type' => $_POST['post_type'],
 		'post_status' =>  'submitted'
 	);
 
@@ -900,7 +902,7 @@ function courses_register_process()
 		}
 	}
 
-	header("location: " . get_site_url() . "/courses?success=true");
+	header("location: " . get_site_url() . '/' . $_POST['redirect']);
 	exit();
 }
 

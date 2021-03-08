@@ -316,8 +316,11 @@ $form = [
         <?php endforeach; ?>
         <hr class="mx-8">
         <div class="flex items-center justify-center">
-          <input type="hidden" name="action" value="courses_register">
-          <input type="hidden" name="course" value="<?= $courseId ?>">
+          <input type="hidden" name="action" value="common_register" />
+          <input type="hidden" name="id" value="<?= $courseId ?>" />
+          <input type="hidden" name="title" value="ชื่อ" />
+          <input type="hidden" name="post_type" value="course_register" />
+          <input type="hidden" name="redirect" value="courses?success=true" />
           <button type="submit" class="h-14 w-full md:w-1/3 rounded-full p-4" style="background-color:#FFD950; color: #262145;">ลงทะเบียน</button>
         </div>
       </form>
@@ -370,12 +373,6 @@ $form = [
       } else {
         $(this).find('.status').attr('src', '<?= get_theme_file_uri() ?>/assets/images/icon-info.svg')
       }
-    });
-  });
-
-  $(document).ready(function() {
-    Snackbar.show({
-      text: 'Example notification text.'
     });
   });
 </script>
