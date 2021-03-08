@@ -430,7 +430,7 @@ $form = [
 
 	function generateSupplier() {
 		$("#supplier-repeater").append(`
-			<div class="flex flex-wrap p-8 mb-4 relative" style="border-radius:4px;box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);">
+			<div class="flex flex-wrap p-8 mb-8 relative" style="border-radius:4px;box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);">
 				<div class="absolute right-0 top-0 -mr-2 -mt-2 cursor-pointer deletebox"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
 				<div class="w-full mb-2">ชื่อ</div>
 				<input required value="" name="something1[]" class="py-2 px-4 border rounded-lg w-full mb-3" />
