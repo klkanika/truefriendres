@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
+	*:focus {
+		outline: unset !important;
+	}
 	.fourthSliderClass {
 		height: 30vh;
 	}
@@ -105,6 +108,21 @@
 		text-align:center;
 		z-index: 40;
 	}
+	#burger-menu{
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+		background-color: #fff;
+		color: var(--primary);
+		height: 100vh;
+		padding: 3% 0;
+	}
+	#burger-menu a:hover{
+		font-weight: 600;
+		font-size: 1.5rem;
+	}
 </style>
 <script>
 	// The debounce function receives our function as a parameter
@@ -183,9 +201,37 @@
                 });
             }
 	}
+
+	function burger(){
+		$('#burger-menu').toggle();
+	}
 </script>
 <div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 lg:pt-4 lg:pb-4 p-4 z-40">
-	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar">
+	<div id="burger-menu" class="w-full md:w-96">
+		<div class="flex justify-end px-8 mb-4">
+			<svg x="0px" y="0px"viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
+				<circle style="fill:#FFD950" cx="20" cy="20" r="20"/>
+				<polygon style="fill:#272245" points="30.7,11.2 29.5,10 20.6,18.9 12.2,10.6 11,11.8 19.3,20.2 11,28.5 12.2,29.7 20.6,21.4 29.5,30.3 
+				30.7,29.1 21.8,20.2 "/>
+			</svg>
+		</div>
+		<?php $menus = [
+			['link'=> '', 'label'=>'home'],
+			['link'=> 'services', 'label'=>'service'],
+			['link'=> 'knowledge', 'label'=>'knowledge'],
+			['link'=> 'restaurant-101', 'label'=>'Restaurant 101'],
+			['link'=> 'interviews', 'label'=>'interview'],
+			['link'=> 'vdo', 'label'=>'Video'],
+			['link'=> 'infohub', 'label'=>'info hub'],
+			['link'=> 'courses', 'label'=>'courses'],
+			['link'=> 'documents', 'label'=>'documents'],
+			['link'=> 'contact-us', 'label'=>'contact us'],
+		];?>
+		<?php foreach($menus as $menu):?>
+			<a href="<?= get_site_url().'/'.$menu['link'] ?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
+			<?php endforeach;?>
+	</div>
+	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar" onclick="burger()">
 		<path class="st0" d="M18.2,12.4c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H0.6c-0.2,0-0.3-0.1-0.4-0.2
 		C0.1,13.2,0,13,0,12.8s0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2h17.1C17.9,12.2,18,12.3,18.2,12.4z M17.7,6.1H0.6
 		c-0.2,0-0.3,0.1-0.4,0.2C0.1,6.4,0,6.6,0,6.7C0,6.9,0.1,7,0.2,7.2c0.1,0.1,0.3,0.2,0.4,0.2h17.1c0.2,0,0.3-0.1,0.4-0.2
