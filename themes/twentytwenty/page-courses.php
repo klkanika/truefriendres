@@ -12,10 +12,6 @@
 </head>
 
 <?php
-$success = $_GET['success'];
-if (isset($success)) {
-  echo '<script>alert("สมัครเรียบร้อยแล้ว สนใจคอร์สเรียนอื่นเพิ่มเติม... บลาๆ (เดี๋ยวตรงนี้ใส่เป็น snackbar)")</script>';
-}
 $onlineClient = get_field('online_course_client', get_the_ID());
 $offlineClient = get_field('offline_course_client', get_the_ID());
 
