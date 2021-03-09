@@ -770,6 +770,10 @@ function twentytwenty_get_elements_array()
 	return apply_filters('twentytwenty_get_elements_array', $elements);
 }
 
+
+add_action('admin_post_nopriv_franchise_register', 'common_register_process');
+add_action('admin_post_franchise_register', 'common_register_process');
+
 add_action('admin_post_nopriv_supplier_register', 'supplier_register_process');
 add_action('admin_post_supplier_register', 'supplier_register_process');
 
