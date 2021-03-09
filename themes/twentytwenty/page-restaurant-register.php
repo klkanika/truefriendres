@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Register</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-   	<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.default.css" />
+		<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 	
 	<script>
     // Initialize and add the map
