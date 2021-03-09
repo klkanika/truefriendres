@@ -76,54 +76,58 @@
 	</script>
 </head>
 <?php
+$facilities_options = get_field_object('field_60465ea42bdeb')['choices'];
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-provinces.php');
-$country_options = get_field_object('field_60259abbdd155')['choices'];
-$facilities_options = get_field_object('field_60465ea42bdeb')['choices'];
-$startPrice_options = get_field_object('field_60465e5e2bde9')['choices'];
-$endPrice_options = get_field_object('field_60465e7c2bdea')['choices'];
 
-$terms = get_terms(array(
-	'taxonomy' => 'franchise_type',
-	'hide_empty' => false,
-));
-$resTypeOptions = [];
-$facilitiesOptions = [];
-$startPriceOptions = [];
-$endPriceOptions = [];
-$countryOptions = [];
-
-// echo '<pre>';
-foreach ($terms as $key) {
-	array_push($resTypeOptions, [
+$franchiseType = array_map(function ($key) {
+	return [
 		"value" => $key->term_id,
 		"name" => $key->name
-	]);
-}
-foreach ($facilities_options as $key) {
-	array_push($facilitiesOptions, [
+	];
+}, get_terms(array(
+	'taxonomy' => 'franchise_type',
+	'hide_empty' => false,
+)));
+
+$franchiseStyle = array_map(function ($key) {
+	return [
+		"value" => $key->term_id,
+		"name" => $key->name
+	];
+}, get_terms(array(
+	'taxonomy' => 'franchise_style',
+	'hide_empty' => false,
+)));
+
+$franchiseProduct = array_map(function ($key) {
+	return [
+		"value" => $key->term_id,
+		"name" => $key->name
+	];
+}, get_terms(array(
+	'taxonomy' => 'franchise_product',
+	'hide_empty' => false,
+)));
+
+$countryOptions = array_map(function ($key) {
+	return [
 		"value" => $key,
 		"name" => $key
-	]);
-}
-foreach ($startPrice_options as $key) {
-	array_push($startPriceOptions, [
-		"value" => $key,
-		"name" => $key
-	]);
-}
-foreach ($endPrice_options as $key) {
-	array_push($endPriceOptions, [
-		"value" => $key,
-		"name" => $key
-	]);
-}
-foreach ($country_options as $key) {
-	array_push($countryOptions, [
-		"value" => $key,
-		"name" => $key
-	]);
-}
+	];
+}, get_field_object('field_60259abbdd155')['choices']);
+
+// echo '<pre>';
+$franchiseBranchPolicy = array_map(function ($key) {
+	return [
+		"value" => $key->term_id,
+		"name" => $key->name
+	];
+}, get_terms(array(
+	'taxonomy' => 'franchise_branch_policy',
+	'hide_empty' => false,
+)));
+
 // print_r($facilitiesOptions);
 // print_r($terms);
 $form = [
@@ -136,7 +140,7 @@ $form = [
 				"label" 			=> "ประเภทกิจการ",
 				"placeholder" 		=> "",
 				"type"				=> "select",
-				"options"			=> $resTypeOptions,
+				"options"			=> $franchiseType,
 				"required"			=> true
 			],
 			[
@@ -144,7 +148,7 @@ $form = [
 				"label" 			=> "ลักษณะกิจการ",
 				"placeholder" 		=> "",
 				"type"				=> "select",
-				"options"			=> $resTypeOptions,
+				"options"			=> $franchiseStyle,
 				"required"			=> true
 			],
 			[
@@ -159,7 +163,7 @@ $form = [
 				"label" 			=> "ลักษณะสินค้าและบริการ",
 				"placeholder" 		=> "",
 				"type"				=> "selectTag",
-				"options"			=> $resTypeOptions,
+				"options"			=> $franchiseProduct,
 				"required"			=> true
 			],
 			[
@@ -265,7 +269,7 @@ $form = [
 				"label" 			=> "นโยบาย การขยายสาขา",
 				"placeholder" 		=> "",
 				"type"				=> "multiCheck",
-				"options" 			=> $facilitiesOptions,
+				"options" 			=> $franchiseBranchPolicy,
 				"checkFor"		=> "branch_policy",
 				"required"			=> false
 			],
@@ -385,7 +389,7 @@ $form = [
 				"name" 				=> "head_office-province",
 				"label" 			=> "จังหวัด",
 				"placeholder" 		=> "",
-				"type"				=> "input",
+				"type"				=> "province",
 				"required"			=> false
 			],
 			[
@@ -550,6 +554,16 @@ $form = [
 														<?php endforeach; ?>
 													</select>
 												<?php break;
+												case "province": ?>
+													<select value="" name="<?= $input['name'] ?>" class="py-2 px-4 border rounded-lg w-full lg:w-auto" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
+														<option value="">เลือก</option>
+														<?php foreach ($provinces as $sector) : ?>
+															<?php foreach ($sector as $province) : ?>
+																<option value="<?= $province ?>"><?= $province ?></option>
+															<?php endforeach; ?>
+														<?php endforeach; ?>
+													</select>
+												<?php break;
 												case "input": ?>
 													<input value="" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
 												<?php break;
@@ -560,9 +574,10 @@ $form = [
 													<input type="number" value="" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
 												<?php break;
 												case "fee": ?>
-													<input type="number" value="" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
-													<select class="py-2 px-4 border rounded-lg w-1/5">
-														<option value="">ต่อปี</option>
+													<input type="number" value="" name="<?= $input['name'] ?>-<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
+													<select name="<?= $input['name'] ?>-unit" class="py-2 px-4 border rounded-lg w-1/5">
+														<option value="percent">% ต่อปี</option>
+														<option value="baht">บาทต่อปี</option>
 													</select>
 												<?php break;
 												case "price-duration": ?>
@@ -631,11 +646,11 @@ $form = [
 				<?php endforeach; ?>
 				<hr class="mx-8">
 				<div class="my-6 text-center">
-					<input type="hidden" name="action" value="restaurant_register" />
+					<input type="hidden" name="action" value="franchise_register" />
 					<input type="hidden" name="id" value="" />
 					<input type="hidden" name="title" value="ชื่อ" />
-					<input type="hidden" name="post_type" value="restaurant_register" />
-					<input type="hidden" name="redirect" value="restaurant-hub" />
+					<input type="hidden" name="post_type" value="franchise_register" />
+					<input type="hidden" name="redirect" value="franchise-hub" />
 					<button type="submit" class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="background: #FFD950;">ลงทะเบียน</button>
 				</div>
 			</form>
