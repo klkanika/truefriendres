@@ -853,6 +853,89 @@ function supplier_register_process()
 	exit();
 }
 
+add_action('admin_post_nopriv_restaurant_register', 'restaurant_register_process');
+add_action('admin_post_restaurant_register', 'restaurant_register_process');
+
+function restaurant_register_process()
+{
+	echo $_POST['title'];
+	echo $_POST['id'];
+	$my_post = array(
+		'post_title' => $_POST['general_info-name'],
+		'post_type' => $_POST['post_type'],
+		'post_status' =>  'submitted'
+	);
+
+	$the_post_id = wp_insert_post($my_post);
+
+	foreach ($_POST as $key => $value) {
+		$name = explode("-", $key);
+		if ($name === "other_info-facilities[]" || $name === "general_info-restaurant_type[]"){
+			$group1 = $name[0];
+			$group2 = $name[1];
+			$formatValue = [];
+			foreach ($value as $v) {
+				array_push($formatValue, array($v));
+			}
+			update_field(
+				$group1,
+				array(
+					$group2 => $formatValue
+				),
+				$the_post_id
+			);
+		}
+		else if ($name === "general_info-map") {
+			$group1 = $name[0];
+			$group2 = $name[1];
+			update_field(
+				$group1,
+				array(
+					$group2 => array(
+						"address" => $value['address'], 
+						"lat" => $value['lat'], 
+						"lng" => $lng,
+					)
+				),
+				$the_post_id
+			);
+		}
+		else if (count($name) > 2) {
+			$group1 = $name[0];
+			$group2 = $name[1];
+			$field = $name[2];
+			update_field(
+				$group1,
+				array(
+					$group2 => 
+					array(
+						$field => $value
+					),
+				),
+				$the_post_id
+			);
+		} else if (count($name) > 1) {
+			$group = $name[0];
+			$field = $name[1];
+			update_field(
+				$group,
+				array(
+					$field => $value
+				),
+				$the_post_id
+			);
+		} else {
+			$group = null;
+			$field = $name[0];
+			update_field($field, $value, $the_post_id);
+		}
+	}
+
+	header("location: " . get_site_url() . '/' . $_POST['redirect']);
+	exit();
+}
+
+
 add_action('admin_post_nopriv_common_register', 'common_register_process');
 add_action('admin_post_common_register', 'common_register_process');
 
