@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Register</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-   	<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.default.css" />
+		<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 	
 	<script>
     // Initialize and add the map
@@ -148,7 +148,7 @@ $form = [
 				"label" 			=> "ปักหมุดแผนที่",
 				"placeholder" 		=> "",
 				"type"				=> "map",
-				"required"			=> true
+				"required"			=> false
 			],
 			[
 				"name" 				=> "general_info-open_time",
@@ -169,6 +169,13 @@ $form = [
 				"label" 			=> "จำนวนที่นั่ง",
 				"placeholder" 		=> "จำนวนที่นั่ง",
 				"type"				=> "number",
+				"required"			=> false
+			],
+			[
+				"name" 				=> "general_info-tel",
+				"label" 			=> "เบอร์ติดต่อ",
+				"placeholder" 		=> "เบอร์ติดต่อ",
+				"type"				=> "input",
 				"required"			=> false
 			],
 		],
@@ -262,7 +269,7 @@ $form = [
 				
 			</section>
 			<section>
-
+			<input class="text-input" name="avatar_user" type="file" id="avatar_user" multiple="true"/>
 			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate>
 				<?php foreach($form as $i => $f): ?>
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i?>">

@@ -57,23 +57,6 @@
       <div class="text-sm flex flex-col flex-1 flex-grow gap-3 max-w-md lg:my-0 my-16">
         <?= the_content() ?>
       </div>
-      <!-- <form action="#" class="text-sm flex flex-col flex-1 flex-grow gap-3 max-w-md lg:my-0 my-16">
-        <span class="text-sm font-semibold">ติดต่อเรื่อง</span>
-        <div class="contact-topic flex gap-2 mb-4">
-          <input id="topicMarketing" name="topic" type="radio" value="marketing" checked="checked">
-          <label class="rounded-lg text-sm px-4 text-center py-3" for="topicMarketing">Marketing</label>
-
-          <input id="topicConsult" name="topic" type="radio" value="consult">
-          <label class="rounded-lg text-sm px-4 text-center py-3" for="topicConsult">Consult</label>
-          
-        </div>
-        <input name="name" type="text" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="ชื่อ">
-        <input name="phone" type="text" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="เบอร์โทรศัพท์">
-        <input name="email" type="email" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="อีเมล">
-        <input name="line" type="text" class="rounded-lg border border-gray-500 px-4 py-auto h-10" style="background-color: #F2F2F2;" placeholder="Line ID">
-        <textarea name="meaasge" rows="3" class="rounded-lg border border-gray-500 px-4 py-1" style="background-color: #F2F2F2;" placeholder="รายละเอียด"></textarea>
-        <button type="submit" class="h-10 rounded-full" style="background-color:#FFD950; color: #262145;">ส่งข้อความ</button>
-      </form> -->
     </div>
     
   </section>
