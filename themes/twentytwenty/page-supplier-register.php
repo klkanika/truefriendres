@@ -8,6 +8,7 @@
 	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.default.css" />
+	<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
 <?php
 $country_options = get_field_object('field_60259abbdd155')['choices'];
@@ -16,7 +17,8 @@ require_once('custom-classes/class-provinces.php');
 $args = array(
 	'taxonomy' => 'suppliertypes',
 	'orderby' => 'name',
-	'order'   => 'ASC'
+	'order'   => 'ASC',
+	'hide_empty' => false,
 );
 $suppliertypes = get_categories($args);
 $supplierOptions = [];
@@ -48,7 +50,7 @@ $form = [
 		"label" => "ข้อมูลทั่วไป",
 		"form" => [
 			[
-				"name" 				=> "",
+				"name" 				=> "taxonomy-suppliertypes",
 				"label" 			=> "ประเภทกิจการ",
 				"placeholder" => "",
 				"type"				=> "select",
@@ -63,7 +65,7 @@ $form = [
 				"required"		=> true
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "taxonomy-suppliergoods",
 				"label" 			=> "สินค้าที่จำหน่าย",
 				"placeholder" 		=> "",
 				"type"				=> "selectTag",
@@ -107,7 +109,7 @@ $form = [
 				"required"		=> false
 			],
 			[
-				"name"         => "แหล่งจัดส่ง",
+				"name"         => "",
 				"label"			=> "แหล่งจัดส่ง Supplier",
 				"btn-label"       => "เพิ่มแหล่งจัดส่ง",
 				"icon"        => get_theme_file_uri() . "/assets/images/plus-icon.svg",
@@ -324,7 +326,7 @@ $form = [
 																<div class="flex flex-wrap w-full px-8 sector-collapse hidden">
 																	<?php foreach ($sector as $province) { ?>
 																		<div class="flex items-center w-1/3 mb-4" style="border-color:rgba(0, 0, 0, 0.08);">
-																			<input type="checkbox" name="provinces[]" id="<?= $province ?>" sector="<?= $key ?>" value="<?= $province ?>" class="mr-3 <?= $key ?> delivery-place province"> <label for="<?= $province ?>"> <?= $province ?> </label>
+																			<input type="checkbox" name="สถานที่จัดส่ง[]" id="<?= $province ?>" sector="<?= $key ?>" value="<?= $province ?>" class="mr-3 <?= $key ?> delivery-place province"> <label for="<?= $province ?>"> <?= $province ?> </label>
 																		</div>
 																	<?php } ?>
 																</div>
@@ -339,7 +341,7 @@ $form = [
 													<select multiple="multiple" id="selectize" value="" name="<?= $input['name'] ?>[]" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
 														<option value="">กรอกลักษณะสินค้า</option>
 														<?php foreach ($input['options'] as $option) : ?>
-															<option value="<?= $option['value'] ?>"><?= $option['name'] ?></option>
+															<option value="<?= $option['name'] ?>"><?= $option['name'] ?></option>
 														<?php endforeach; ?>
 													</select>
 											<?php break;
@@ -461,11 +463,12 @@ $form = [
 			<div class="flex flex-wrap p-8 mb-8 relative" style="border-radius:4px;box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);">
 				<div class="absolute right-0 top-0 -mr-2 -mt-2 cursor-pointer deletebox"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
 				<div class="w-full mb-2">ชื่อ</div>
-				<input required value="" name="something1[]" class="py-2 px-4 border rounded-lg w-full mb-3" />
+				<input required value="" name="แหล่งจัดส่ง-ชื่อ[${boxIdx}]" class="py-2 px-4 border rounded-lg w-full mb-3" />
 				<div class="w-full mb-2">ที่อยู่</div>
-				<input required value="" name="something2[]" class="py-2 px-4 border rounded-lg w-full mb-3" />
+				<input required value="" name="แหล่งจัดส่ง-ที่อยู่[${boxIdx}]" class="py-2 px-4 border rounded-lg w-full mb-3" />
 				<div class="flex items-center mt-2">
-					<input type="checkbox" name="something3[]" class="mr-3" id="${boxIdx}"> <label for="${boxIdx++}"> สถานที่จัดส่งหลัก </label>
+					<input type="hidden" value="0" name="แหล่งจัดส่ง-สถานที่จัดส่งหลัก[${boxIdx}]" class="mr-3">
+					<input type="checkbox" value="1" name="แหล่งจัดส่ง-สถานที่จัดส่งหลัก[${boxIdx}]" class="mr-3" id="${boxIdx}"> <label for="${boxIdx++}"> สถานที่จัดส่งหลัก </label>
 				</div>
 			</div>
 		`)
