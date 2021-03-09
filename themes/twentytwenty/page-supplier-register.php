@@ -91,8 +91,7 @@ $form = [
 				"name" 				=> "รูปภาพ",
 				"label" 			=> "รูปภาพ",
 				"placeholder" => "",
-				"type"				=> "select",
-				"options"			=> ["ร้านอาหาร", "ร้านกาแฟ"],
+				"type"				=> "upload",
 				"required"		=> false
 			],
 		],
@@ -272,7 +271,8 @@ $form = [
 
 		</section>
 		<section>
-			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" method="post" id="form" novalidate>
+			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" method="post" id="form" novalidate enctype="multipart/form-data">
+				<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" multiple onchange="upload(event)">
 				<?php foreach ($form as $i => $f) : ?>
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i ?>">
 						<div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i ?>)">
@@ -344,6 +344,16 @@ $form = [
 															<option value="<?= $option['name'] ?>"><?= $option['name'] ?></option>
 														<?php endforeach; ?>
 													</select>
+												<?php break;
+												case "upload": ?>
+													<div class="flex flex-wrap" id="showpic">
+														<button type="button" class="w-full mb-3 md:w-1/3 h-24 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none" id="uploadimg">
+															<div class="flex items-center justify-center">
+																<img class="w-4 h-4 md:w-6 md:h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-upload.svg" />
+															</div>
+															<p class="my-2">เพิ่มรูปภาพ</p>
+														</button>
+													</div>
 											<?php break;
 												default:
 											endswitch; ?>
@@ -484,10 +494,31 @@ $form = [
 		$(this).parent().remove();
 	});
 
+	$("div").on('click', '.deletepic', function() {
+		$("#form").append(`<input name="fileNotToUpload[]" type="number" value="${$(this).attr('imgIndex')}" class="hidden" >`);
+		$(this).parent().remove();
+	})
+
 	$(".sector-tab").click(function() {
 		$(this).find('.sector-collapse').toggleClass('hidden');
 		$(this).find('.transform').toggleClass('rotate-180');
 	});
+
+	let imgIndex = 0;
+
+	function upload(event) {
+		const files = event.target.files;
+		for (let i = 0; i < event.target.files.length; i++) {
+			let src = URL.createObjectURL(event.target.files[i]);
+			$("#showpic").append(`
+				<div class="w-1/3 h-24 px-3 mb-3 l-2 relative">
+					<img src="${src}" class="w-full h-full object-cover rounded-lg" />
+					<div class="absolute top-0 right-0 mr-1 -mt-2 cursor-pointer deletepic" imgIndex="${imgIndex++}"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+				</div>
+			`);
+		}
+		$("#form").append('<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" onchange="upload(event)" multiple>');
+	}
 
 	$(document).ready(function() {
 		$('#selectize').selectize({
@@ -500,6 +531,10 @@ $form = [
 					text: input
 				}
 			}
+		});
+
+		$("#uploadimg").click(function() {
+			$(".file-upload:last").trigger('click');
 		});
 	});
 </script>

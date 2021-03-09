@@ -1010,6 +1010,22 @@ add_action('admin_post_common_register', 'common_register_process');
 
 function common_register_process()
 {
+
+	$target_dir = "../wp-content/uploads/frontend-img/";
+	$fileNotToUpload = $_POST['fileNotToUpload'];
+	foreach ($_FILES['fileToUpload']['name'] as $index => $file) {
+		if (!in_array($index, $fileNotToUpload)) {
+			$imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"][$index], PATHINFO_EXTENSION));
+			while (true) {
+				$filename = $target_dir . uniqid(rand(), true) . '.' . $imageFileType;
+				if (!file_exists($filename)) {
+					break;
+				}
+			}
+			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$index], $filename);
+		}
+	}
+
 	if ($_POST['post_type'] === 'course_register') {
 		$my_post = array(
 			'post_type' => $_POST['post_type'],
