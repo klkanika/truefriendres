@@ -136,7 +136,7 @@ $form = [
 		"label" => "ข้อมูลทั่วไป",
 		"form" => [
 			[
-				"name" 				=> "general_info-franchise_type",
+				"name" 				=> "taxonomy-franchise_type",
 				"label" 			=> "ประเภทกิจการ",
 				"placeholder" 		=> "",
 				"type"				=> "select",
@@ -144,7 +144,7 @@ $form = [
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-franchise_style",
+				"name" 				=> "taxonomy-franchise_style",
 				"label" 			=> "ลักษณะกิจการ",
 				"placeholder" 		=> "",
 				"type"				=> "select",
@@ -159,7 +159,7 @@ $form = [
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-franchise_product",
+				"name" 				=> "taxonomy-franchise_product",
 				"label" 			=> "ลักษณะสินค้าและบริการ",
 				"placeholder" 		=> "",
 				"type"				=> "selectTag",
@@ -265,7 +265,7 @@ $form = [
 				"type" 				=> "hr",
 			],
 			[
-				"name" 				=> "general_info-branch_policy",
+				"name" 				=> "taxonomy-branch_policy",
 				"label" 			=> "นโยบาย การขยายสาขา",
 				"placeholder" 		=> "",
 				"type"				=> "multiCheck",
@@ -343,13 +343,13 @@ $form = [
 				"type"				=> "textarea",
 				"required"			=> false
 			],
-			// [
-			// 	"name" 				=> "general_info-images",
-			// 	"label" 			=> "รูปภาพ",
-			// 	"placeholder" 		=> "",
-			// 	"type"				=> "textarea",
-			// 	"required"			=> false
-			// ],
+			[
+				"name" 				=> "general_info-images",
+				"label" 			=> "รูปภาพ",
+				"placeholder" 		=> "",
+				"type"				=> "upload",
+				"required"			=> false
+			],
 		],
 	],
 	[
@@ -576,7 +576,7 @@ $form = [
 												case "fee": ?>
 													<input type="number" value="" name="<?= $input['name'] ?>-<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
 													<select name="<?= $input['name'] ?>-unit" class="py-2 px-4 border rounded-lg w-1/5">
-														<option value="percent">% ต่อปี</option>
+														<option selected value="percent">% ต่อปี</option>
 														<option value="baht">บาทต่อปี</option>
 													</select>
 												<?php break;
@@ -627,6 +627,16 @@ $form = [
 													<div id="map" style="background-color:#C4C4C4;" class="flex items-center justify-center h-96"></div>
 													<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly" async></script>
 													<input type="hidden" id="general_info-map" name="general_info-map" />
+												<?php break;
+												case "upload": ?>
+													<div class="flex flex-wrap" id="showpic">
+														<button type="button" class="w-full mb-3 md:w-1/3 h-24 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none" id="uploadimg">
+															<div class="flex items-center justify-center">
+																<img class="w-4 h-4 md:w-6 md:h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-upload.svg" />
+															</div>
+															<p class="my-2">เพิ่มรูปภาพ</p>
+														</button>
+													</div>
 											<?php break;
 												default:
 											endswitch; ?>
@@ -700,7 +710,7 @@ $form = [
 	});
 
 	$(document).ready(function() {
-		$('#general_info-franchise_product').selectize({
+		$('#taxonomy-franchise_product').selectize({
 			plugins: ['remove_button'],
 			delimiter: ',',
 			persist: false,
