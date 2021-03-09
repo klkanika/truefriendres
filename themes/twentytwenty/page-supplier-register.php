@@ -7,6 +7,7 @@
 	<title>Suppliers Register</title>
 	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.default.css" />
 </head>
 <?php
 $country_options = get_field_object('field_60259abbdd155')['choices'];
@@ -27,6 +28,20 @@ $restaurantCategories = $restaurantCategoriesObject['choices'];
 
 $suppliersObject = Post::getPostsByCategory('suppliers', null, 10, 0, null);
 $suppliers = $suppliersObject->posts;
+
+$terms = get_terms(array(
+	'taxonomy' => 'suppliergoods',
+	'hide_empty' => false,
+));
+
+$suppliergoods = [];
+
+foreach ($terms as $key) {
+	array_push($suppliergoods, [
+		"value" => $key->term_id,
+		"name" => $key->name
+	]);
+}
 $form = [
 	[
 		"icon" => "info",
@@ -41,7 +56,7 @@ $form = [
 				"required"		=> true
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "ชื่อธุรกิจ",
 				"label" 			=> "ชื่อธุรกิจ",
 				"placeholder" => "ชื่อธุรกิจ",
 				"type"				=> "input",
@@ -50,19 +65,20 @@ $form = [
 			[
 				"name" 				=> "",
 				"label" 			=> "สินค้าที่จำหน่าย",
-				"placeholder" => "กรอกลักษณะสินค้า",
-				"type"				=> "input",
-				"required"		=> true
+				"placeholder" 		=> "",
+				"type"				=> "selectTag",
+				"options"			=> $suppliergoods,
+				"required"			=> true
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "แนะนำธุรกิจ",
 				"label" 			=> "แนะนำธุรกิจ",
 				"placeholder" => "",
 				"type"				=> "textarea",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "ประเทศ",
 				"label" 			=> "ประเทศ",
 				"placeholder" => "",
 				"type"				=> "select",
@@ -70,7 +86,7 @@ $form = [
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รูปภาพ",
 				"label" 			=> "รูปภาพ",
 				"placeholder" => "",
 				"type"				=> "select",
@@ -84,14 +100,14 @@ $form = [
 		"label" => "การจัดส่ง",
 		"form" => [
 			[
-				"name" 				=> "",
+				"name" 				=> "สถานที่จัดส่ง",
 				"label" 			=> "สถานที่จัดส่ง",
 				"placeholder" => "",
 				"type"				=> "delivery-place",
 				"required"		=> false
 			],
 			[
-				"name"         => "",
+				"name"         => "แหล่งจัดส่ง",
 				"label"			=> "แหล่งจัดส่ง Supplier",
 				"btn-label"       => "เพิ่มแหล่งจัดส่ง",
 				"icon"        => get_theme_file_uri() . "/assets/images/plus-icon.svg",
@@ -113,35 +129,35 @@ $form = [
 		"label" => "โซเชียลมีเดีย",
 		"form" => [
 			[
-				"name" 				=> "",
+				"name" 				=> "โซเชียลมีเดีย-facebook",
 				"label" 			=> "Facebook",
 				"placeholder" => "Facebook ของ Supplier",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "โซเชียลมีเดีย-line",
 				"label" 			=> "Line",
 				"placeholder" => "Line ของ Supplier",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "โซเชียลมีเดีย-twitter",
 				"label" 			=> "Twitter",
 				"placeholder" => "Twitter ของ Supplier",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "โซเชียลมีเดีย-instagram",
 				"label" 			=> "Instagram",
 				"placeholder" => "Instagram ของ Supplier",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "โซเชียลมีเดีย-website",
 				"label" 			=> "Website",
 				"placeholder" => "Website ของ Supplier",
 				"type"				=> "input",
@@ -154,49 +170,49 @@ $form = [
 		"label" => "รายละเอียดเจ้าของธุรกิจ",
 		"form" => [
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-ชื่อ",
 				"label" 			=> "ชื่อ",
 				"placeholder" => "ชื่อ",
 				"type"				=> "input",
 				"required"		=> true
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-เบอร์โทร",
 				"label" 			=> "เบอร์โทร",
 				"placeholder" => "เบอร์โทร",
 				"type"				=> "input",
 				"required"		=> true
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-email",
 				"label" 			=> "Email",
 				"placeholder" => "Email",
 				"type"				=> "input",
 				"required"		=> true
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-facebook",
 				"label" 			=> "Facebook",
 				"placeholder" => "Facebook",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-line",
 				"label" 			=> "Line",
 				"placeholder" => "Line",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-twitter",
 				"label" 			=> "Twitter",
 				"placeholder" => "Twitter",
 				"type"				=> "input",
 				"required"		=> false
 			],
 			[
-				"name" 				=> "",
+				"name" 				=> "รายละเอียดเจ้าของธุรกิจ-instagram",
 				"label" 			=> "Instagram",
 				"placeholder" => "Instagram",
 				"type"				=> "input",
@@ -318,6 +334,14 @@ $form = [
 												<?php break;
 												case "supplier-repeater": ?>
 													<p id="supplier-repeater"></p>
+												<?php break;
+												case "selectTag": ?>
+													<select multiple="multiple" id="selectize" value="" name="<?= $input['name'] ?>[]" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
+														<option value="">กรอกลักษณะสินค้า</option>
+														<?php foreach ($input['options'] as $option) : ?>
+															<option value="<?= $option['value'] ?>"><?= $option['name'] ?></option>
+														<?php endforeach; ?>
+													</select>
 											<?php break;
 												default:
 											endswitch; ?>
@@ -344,7 +368,10 @@ $form = [
 				</div> -->
 				<hr class="mx-8">
 				<div class="my-6 text-center">
-					<input type="hidden" name="action" value="supplier_register">
+					<input type="hidden" name="action" value="common_register" />
+					<input type="hidden" name="title" value="ชื่อธุรกิจ" />
+					<input type="hidden" name="post_type" value="suppliers" />
+					<input type="hidden" name="redirect" value="supplier-hub" />
 					<button type="submit" class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="background: #FFD950;">ลงทะเบียน</button>
 				</div>
 			</form>
@@ -356,6 +383,7 @@ $form = [
 </html>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js></script>
 <script>
 	function showStep(step) {
 		$('.collapse').removeClass('open')
@@ -456,5 +484,19 @@ $form = [
 	$(".sector-tab").click(function() {
 		$(this).find('.sector-collapse').toggleClass('hidden');
 		$(this).find('.transform').toggleClass('rotate-180');
+	});
+
+	$(document).ready(function() {
+		$('#selectize').selectize({
+			plugins: ['remove_button'],
+			delimiter: ',',
+			persist: false,
+			create: function(input) {
+				return {
+					value: input,
+					text: input
+				}
+			}
+		});
 	});
 </script>

@@ -143,3 +143,32 @@ button:focus {
 .checkbox input:checked ~ .checkmark:after {
   display: block;
 }
+
+.selectize-input {
+  box-shadow: none !important;
+  padding: 0.7rem !important;
+  border-radius: 0.5rem;
+  border-color: #e5e7eb;
+}
+
+.selectize-input > input {
+  font-size: 1.025rem;
+}
+.selectize-control.multi .selectize-input [data-value] {
+  background: var(--primary);
+  border: 0;
+  font-size: 1.025rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem !important;
+  border-radius: 20px;
+}
+.selectize-control.plugin-remove_button [data-value] .remove {
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  justify-content: center;
+  font-weight: 100;
+  font-size: 1rem;
+  margin-left: 10px;
+  position: inherit;
+}

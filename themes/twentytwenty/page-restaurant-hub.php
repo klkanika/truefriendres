@@ -75,6 +75,18 @@
       max-width: 1000px;
       margin: 0 auto;
     }
+    #resTable th svg{
+      fill: #bababa;
+    }
+    #resTable th.sorting_asc,
+    #resTable th.sorting_desc{
+      color: #065FC0;
+      font-weight: 600;
+    }
+    #resTable th.sorting_asc .asc,
+    #resTable th.sorting_desc .desc{
+      fill: #065FC0;
+    }
   </style>
   <!-- Set up your HTML -->
   <section class="pt-32 w-full" style="color: #262145;">
@@ -119,36 +131,104 @@
         <table id="resTable" class="w-full restaurant-table">
           <thead>
             <tr>
-              <th>ชื่อ</th>
-              <th>ประเภทธุรกิจ</th>
-              <th>จำนวนสาขา</th>
-              <th>จังหวัด</th>
-              <th>เบอร์โทรศัพท์</th>
+              <th>
+                <div class="flex items-center cursor-pointer">
+                  <div>ชื่อ</div>
+                  <div class="ml-2">
+                    <svg x="0px" y="0px" class="w-2 h-2 asc">
+                      <path d="M7.7,4.6L4.1,1L0.5,4.6L0,4.1L4.1,0l4.1,4.1L7.7,4.6z"/>
+                    </svg>
+                    <svg x="0px" y="0px" class="w-2 h-2 desc">
+                      <path d="M0.5,0l3.6,3.6L7.7,0l0.5,0.5L4.1,4.6L0,0.5L0.5,0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </th>
+              <th>
+                <div class="flex items-center cursor-pointer">
+                  <div>ประเภทธุรกิจ</div>
+                  <div class="ml-2">
+                    <svg x="0px" y="0px" class="w-2 h-2 asc">
+                      <path d="M7.7,4.6L4.1,1L0.5,4.6L0,4.1L4.1,0l4.1,4.1L7.7,4.6z"/>
+                    </svg>
+                    <svg x="0px" y="0px" class="w-2 h-2 desc">
+                      <path d="M0.5,0l3.6,3.6L7.7,0l0.5,0.5L4.1,4.6L0,0.5L0.5,0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </th>
+              <th>
+                <div class="flex items-center cursor-pointer">
+                  <div>จำนวนสาขา</div>
+                  <div class="ml-2">
+                    <svg x="0px" y="0px" class="w-2 h-2 asc">
+                      <path d="M7.7,4.6L4.1,1L0.5,4.6L0,4.1L4.1,0l4.1,4.1L7.7,4.6z"/>
+                    </svg>
+                    <svg x="0px" y="0px" class="w-2 h-2 desc">
+                      <path d="M0.5,0l3.6,3.6L7.7,0l0.5,0.5L4.1,4.6L0,0.5L0.5,0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </th>
+              <th>
+                <div class="flex items-center cursor-pointer">
+                  <div>จังหวัด</div>
+                  <div class="ml-2">
+                    <svg x="0px" y="0px" class="w-2 h-2 asc">
+                      <path d="M7.7,4.6L4.1,1L0.5,4.6L0,4.1L4.1,0l4.1,4.1L7.7,4.6z"/>
+                    </svg>
+                    <svg x="0px" y="0px" class="w-2 h-2 desc">
+                      <path d="M0.5,0l3.6,3.6L7.7,0l0.5,0.5L4.1,4.6L0,0.5L0.5,0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </th>
+              <th>
+                <div class="flex items-center cursor-pointer">
+                  <div>เบอร์โทรศัพท์</div>
+                  <div class="ml-2">
+                    <svg x="0px" y="0px" class="w-2 h-2 asc">
+                      <path d="M7.7,4.6L4.1,1L0.5,4.6L0,4.1L4.1,0l4.1,4.1L7.7,4.6z"/>
+                    </svg>
+                    <svg x="0px" y="0px" class="w-2 h-2 desc">
+                      <path d="M0.5,0l3.6,3.6L7.7,0l0.5,0.5L4.1,4.6L0,0.5L0.5,0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </th>
               <th></th>
             </tr>
           </thead>
           <tbody id="content-table">
             <?php foreach ($restaurants as $res) : ?>
-              <tr class="border-b border-gray-300">
+              <tr class="border-b border-gray-300 cursor-pointer">
                 <td class="font-bold pb-3 pt-2">
+                <a href="<?= $res->link ?>" class="block">
                   <?= $res->ชื่อร้าน ?>
+                </a>
                 </td>
                 <td>
+                <a href="<?= $res->link ?>" class="block">
                   <?= $res->ประเภทธุรกิจ ? $res->ประเภทธุรกิจ : '-' ?>
+                </a>
                 </td>
                 <td>
+                <a href="<?= $res->link ?>" class="block">
                   <?= $res->จำนวนสาขา ? $res->จำนวนสาขา . ' สาขา' : '-' ?>
+                </a>
                 </td>
                 <td>
+                <a href="<?= $res->link ?>" class="block">
                   <?= $res->จังหวัด ? $res->จังหวัด : '-' ?>
+                </a>
                 </td>
                 <td>
-                  <a href="tel:<?= $res->เบอร์โทรศัพท์ ?>">
+                  <a href="tel:<?= $res->เบอร์โทรศัพท์ ?>" class="block">
                     <?= $res->เบอร์โทรศัพท์ ? $res->เบอร์โทรศัพท์ : '-' ?>
                   </a>
                 </td>
                 <td>
-                  <a href="<?= $res->link ?>">
+                  <a href="<?= $res->link ?>" class="block">
                     <img class="w-4 h-4 mr-2" src="<?= get_theme_file_uri() ?>/assets/images/right.svg" alt="">
                   </a>
                 </td>

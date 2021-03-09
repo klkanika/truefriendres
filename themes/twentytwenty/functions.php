@@ -870,7 +870,7 @@ function restaurant_register_process()
 
 	foreach ($_POST as $key => $value) {
 		$name = explode("-", $key);
-		if ($name === "other_info-facilities[]" || $name === "general_info-restaurant_type[]"){
+		if ($name === "other_info-facilities[]" || $name === "general_info-restaurant_type[]") {
 			$group1 = $name[0];
 			$group2 = $name[1];
 			$formatValue = [];
@@ -884,30 +884,28 @@ function restaurant_register_process()
 				),
 				$the_post_id
 			);
-		}
-		else if ($name === "general_info-map") {
+		} else if ($name === "general_info-map") {
 			$group1 = $name[0];
 			$group2 = $name[1];
 			update_field(
 				$group1,
 				array(
 					$group2 => array(
-						"address" => $value['address'], 
-						"lat" => $value['lat'], 
+						"address" => $value['address'],
+						"lat" => $value['lat'],
 						"lng" => $lng,
 					)
 				),
 				$the_post_id
 			);
-		}
-		else if (count($name) > 2) {
+		} else if (count($name) > 2) {
 			$group1 = $name[0];
 			$group2 = $name[1];
 			$field = $name[2];
 			update_field(
 				$group1,
 				array(
-					$group2 => 
+					$group2 =>
 					array(
 						$field => $value
 					),
@@ -941,13 +939,19 @@ add_action('admin_post_common_register', 'common_register_process');
 
 function common_register_process()
 {
-	echo $_POST['title'];
-	echo $_POST['id'];
-	$my_post = array(
-		'post_title' => $_POST['general_info-name'] . ' for ' . get_field($_POST['title'], $_POST['id']),
-		'post_type' => $_POST['post_type'],
-		'post_status' =>  'submitted'
-	);
+	if ($_POST['post_type'] === 'course_register') {
+		$my_post = array(
+			'post_type' => $_POST['post_type'],
+			'post_status' =>  'submitted',
+			'post_title' => $_POST['general_info-name'] . ' for ' . get_field($_POST['title'], $_POST['id'])
+		);
+	} else {
+		$my_post = array(
+			'post_type' => $_POST['post_type'],
+			'post_status' =>  'submitted',
+			'post_title' => $_POST[$_POST['title']]
+		);
+	}
 
 	$the_post_id = wp_insert_post($my_post);
 
@@ -985,8 +989,8 @@ function common_register_process()
 		}
 	}
 
-	header("location: " . get_site_url() . '/' . $_POST['redirect']);
-	exit();
+	// header("location: " . get_site_url() . '/' . $_POST['redirect']);
+	// exit();
 }
 
 require_once('custom-classes/class-posts.php');
