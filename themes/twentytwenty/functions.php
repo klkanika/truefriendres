@@ -776,7 +776,6 @@ add_action('admin_post_supplier_register', 'supplier_register_process');
 function supplier_register_process()
 {
 	/* here you must put your code */
-	var_dump($_REQUEST['action']);
 	$ประเภทกิจการ = $_POST['ประเภทกิจการ'];
 	$ชื่อธุรกิจ = $_POST['ชื่อธุรกิจ'];
 	$สินค้าที่จำหน่าย = $_POST['สินค้าที่จำหน่าย']; //เป็น autocomplete เดี๋ยวค่อยจัดการ
@@ -975,13 +974,31 @@ function common_register_process()
 		} else if (count($name) > 1) {
 			$group = $name[0];
 			$field = $name[1];
-			update_field(
-				$group,
-				array(
-					$field => $value
-				),
-				$the_post_id
-			);
+			if ($group === 'taxonomy') {
+				wp_set_object_terms($the_post_id, $value, $field);
+			} else {
+				if (is_array($value)) {
+					$repeater = [];
+					foreach ($value as $v) {
+						array_push($repeater, array(
+							$field => $v,
+						));
+					}
+					update_field(
+						$group,
+						$repeater,
+						$the_post_id
+					);
+				} else {
+					update_field(
+						$group,
+						array(
+							$field => $value
+						),
+						$the_post_id
+					);
+				}
+			}
 		} else {
 			$group = null;
 			$field = $name[0];
@@ -989,8 +1006,8 @@ function common_register_process()
 		}
 	}
 
-	// header("location: " . get_site_url() . '/' . $_POST['redirect']);
-	// exit();
+	header("location: " . get_site_url() . '/' . $_POST['redirect']);
+	exit();
 }
 
 require_once('custom-classes/class-posts.php');
