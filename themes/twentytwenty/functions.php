@@ -956,21 +956,7 @@ function restaurant_register_process()
 
 	foreach ($_POST as $key => $value) {
 		$name = explode("-", $key);
-		if ($name === "other_info-facilities[]" || $name === "general_info-restaurant_type[]") {
-			$group1 = $name[0];
-			$group2 = $name[1];
-			$formatValue = [];
-			foreach ($value as $v) {
-				array_push($formatValue, array($v));
-			}
-			update_field(
-				$group1,
-				array(
-					$group2 => $formatValue
-				),
-				$the_post_id
-			);
-		} else if (count($name) > 2) {
+		if (count($name) > 2) {
 			$group1 = $name[0];
 			$group2 = $name[1];
 			$field = $name[2];
