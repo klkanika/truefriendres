@@ -302,10 +302,10 @@ $form = [
 				"required"			=> false
 			],
 			[
-				"name" 				=> "อัตราการขยายสาขา_5_ปีย้อนหลัง-จำนวนสาขา",
+				"name" 				=> "อัตราการขยายสาขา_5_ปีย้อนหลัง-ปี_พศ",
 				"label" 			=> "อัตราการขยายสาขา ( 5 ปีย้อนหลัง )",
-				"placeholder" 		=> "",
-				"type"				=> "number",
+				"placeholder" 		=> "พ.ศ.",
+				"type"				=> "growth",
 				"required"			=> true
 			],
 			[
@@ -573,6 +573,10 @@ $form = [
 												<?php break;
 												case "number": ?>
 													<input type="number" value="" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
+												<?php break;
+												case "growth": ?>
+													<input type="number" value="" name="อัตราการขยายสาขา_5_ปีย้อนหลัง-ปี_พศ" placeholder="พ.ศ." class="py-2 px-4 border rounded-lg w-2-5" <?= $input['required'] ? "required" : "" ?> />
+													<input type="number" value="" name="อัตราการขยายสาขา_5_ปีย้อนหลัง-จำนวนสาขา" placeholder="จำนวนสาขา" class="py-2 px-4 border rounded-lg w-2-5" <?= $input['required'] ? "required" : "" ?> />
 												<?php break;
 												case "fee": ?>
 													<input type="number" value="" name="<?= $input['name'] ?>-value" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
