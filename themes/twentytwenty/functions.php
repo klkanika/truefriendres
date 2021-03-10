@@ -1032,7 +1032,6 @@ add_action('admin_post_common_register', 'common_register_process');
 
 function common_register_process()
 {
-	echo '<pre>';
 	if ($_POST['post_type'] === 'course_register') {
 		$my_post = array(
 			'post_type' => $_POST['post_type'],
@@ -1052,47 +1051,72 @@ function common_register_process()
 	$target_dir = "../wp-content/uploads/frontend-img/";
 	$fileNotToUpload = $_POST['fileNotToUpload'];
 	$attached = [];
-	foreach ($_FILES['fileToUpload']['name'] as $index => $file) {
-		if (!in_array($index, $fileNotToUpload) && !empty($file)) {
-			$imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"][$index], PATHINFO_EXTENSION));
-			while (true) {
-				$filename = $target_dir . uniqid(rand(), true) . '.' . $imageFileType;
-				if (!file_exists($filename)) {
-					break;
-				}
+	if ($_POST['post_type'] === 'course_register') {
+		$imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"][0], PATHINFO_EXTENSION));
+		while (true) {
+			$filename = $target_dir . uniqid(rand(), true) . '.' . $imageFileType;
+			if (!file_exists($filename)) {
+				break;
 			}
-			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$index], $filename);
-
-			//create attachment
-			$filetype = wp_check_filetype(basename($filename), null);
-			$wp_upload_dir = wp_upload_dir();
-			$attachment = array(
-				'guid'           => basename($filename),
-				'post_mime_type' => $filetype['type'],
-				'post_title'     => basename($filename),
-				'post_content'   => '',
-				'post_status'    => 'inherit'
-			);
-			$attach_id = wp_insert_attachment($attachment, $filename, $the_post_id);
-
-			array_push(
-				$attached,
-				array(
-					'image' => $attach_id
-				)
-			);
 		}
+		move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][0], $filename);
+		$filetype = wp_check_filetype(basename($filename), null);
+		$wp_upload_dir = wp_upload_dir();
+		$attachment = array(
+			'guid'           => basename($filename),
+			'post_mime_type' => $filetype['type'],
+			'post_title'     => basename($filename),
+			'post_content'   => '',
+			'post_status'    => 'inherit'
+		);
+		$attach_id = wp_insert_attachment($attachment, $filename, $the_post_id);
+		update_field(
+			'other_info',
+			array(
+				'payment_slip' => $attach_id
+			),
+			$the_post_id
+		);
+	} else {
+		foreach ($_FILES['fileToUpload']['name'] as $index => $file) {
+			if (!in_array($index, $fileNotToUpload) && !empty($file)) {
+				$imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"][$index], PATHINFO_EXTENSION));
+				while (true) {
+					$filename = $target_dir . uniqid(rand(), true) . '.' . $imageFileType;
+					if (!file_exists($filename)) {
+						break;
+					}
+				}
+				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$index], $filename);
+
+				//create attachment
+				$filetype = wp_check_filetype(basename($filename), null);
+				$wp_upload_dir = wp_upload_dir();
+				$attachment = array(
+					'guid'           => basename($filename),
+					'post_mime_type' => $filetype['type'],
+					'post_title'     => basename($filename),
+					'post_content'   => '',
+					'post_status'    => 'inherit'
+				);
+				$attach_id = wp_insert_attachment($attachment, $filename, $the_post_id);
+
+				array_push(
+					$attached,
+					array(
+						'image' => $attach_id
+					)
+				);
+			}
+		}
+		update_field(
+			'รูปภาพ',
+			$attached,
+			$the_post_id
+		);
 	}
 
-	update_field(
-		'รูปภาพ',
-		$attached,
-		$the_post_id
-	);
-
 	foreach ($_POST as $key => $value) {
-		var_dump($key);
-		var_dump($value);
 		$name = explode("-", $key);
 		if (count($name) > 2) {
 			$group1 = $name[0];
@@ -1160,8 +1184,8 @@ function common_register_process()
 		}
 	}
 
-	// header("location: " . get_site_url() . '/' . $_POST['redirect']);
-	// exit();
+	header("location: " . get_site_url() . '/' . $_POST['redirect']);
+	exit();
 }
 
 require_once('custom-classes/class-posts.php');
