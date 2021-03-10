@@ -7,6 +7,30 @@
   <title>Franchise Detail</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+  <script>
+    // Initialize and add the map
+    let map;
+
+    function initMap() {
+      var lat = '<?php echo get_field('ปักหมุดแผนที่')['lat']; ?>';
+      var lng = '<?php echo get_field('ปักหมุดแผนที่')['lng']; ?>';
+      // The location of Uluru
+      const uluru = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
+      };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: uluru,
+      });
+      // The marker, positioned at Uluru
+      const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+      });
+    }
+  </script>
 </head>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
@@ -85,7 +109,7 @@
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
         <?php foreach ($รูปภาพ as $รูป) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูป['รูป'] ?>" alt="" /></div>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูป['image'] ?>" alt="" /></div>
         <?php endforeach ?>
 
       </div>
@@ -137,7 +161,7 @@
         <div class="border-b border-gray-300 py-8">
           <p class="text-gray-500 mb-2">รูปแบบธุรกิจ</p>
           <?php foreach ($นโยบาย_การขยายสาขา as $key => $นโยบาย) : ?>
-            <p class="text-xl"><?= $นโยบาย ?></p>
+            <p class="text-xl"><?= $นโยบาย->name ?></p>
           <?php endforeach ?>
           <?php
           if (count($นโยบาย_การขยายสาขา) === 0) {
@@ -198,7 +222,7 @@
         </div>
       <?php endif; ?>
 
-      <?php foreach (["จำนวน_franchise_c" => "จำนวนสาขา", "อัตราการขยายสาขา_5_ปีย้อนหลัง" => "อัตราการขยายสาขา (5 ปีย้อนหลัง)", "การลงทุน" => "การลงทุน", "คุณสมบัติผู้ลงทุน" => "คุณสมบัติผู้สลงทุน", "สิ่งที่_franchise_c_จะได้รับ" => "สิ่งที่ได้รับ", "อื่นๆ" => "อื่นๆ"] as $key => $value) : ?>
+      <?php foreach (["จำนวน_franchise_c" => "จำนวนสาขา", "อัตราการขยายสาขา_5_ปีย้อนหลัง" => "อัตราการขยายสาขา (5 ปีย้อนหลัง)", "การลงทุน" => "การลงทุน", "คุณสมบัติผู้ลงทุน" => "คุณสมบัติผู้ลงทุน", "สิ่งที่_franchise_c_จะได้รับ" => "สิ่งที่ได้รับ", "อื่นๆ" => "อื่นๆ"] as $key => $value) : ?>
         <?php if (!get_field($key)) continue; ?>
         <div class="border-b border-gray-300 py-4 ">
           <div class="flex items-center justify-between collapse cursor-pointer">
@@ -238,15 +262,17 @@
         </div>
       </div>
 
-      <div class="border-b border-gray-300 py-8 -mx-4">
+      <?php if (!empty(get_field('ปักหมุดแผนที่'))) : ?>
         <div class="flex items-center justify-between mb-2 lg:mx-0 mx-4">
           <p class="text-gray-500 mb-2">สถานที่และเส้นทาง</p>
-          <a href="#" class="font-semibold">เปิดใน Google Map</a>
+          <a target="_blank" href="https://maps.google.com/?q=<?= get_field('ปักหมุดแผนที่')['lat'] ?>,<?= get_field('ปักหมุดแผนที่')['lng'] ?>" class="font-semibold">เปิดใน Google Map</a>
         </div>
-        <div class="w-full bg-gray-300 flex items-center justify-center" style="height: 60vh;">
-          GOOGLE MAP
+        <div id="map" style="height: 60vh;">
+          <!-- GOOGLE MAP -->
         </div>
-      </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly" async></script>
+        <hr class="my-5" />
+      <?php endif; ?>
   </section>
   <?php
   $args = array(

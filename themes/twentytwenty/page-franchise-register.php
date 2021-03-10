@@ -348,7 +348,7 @@ $form = [
 				"label" 			=> "รูปภาพ",
 				"placeholder" 		=> "",
 				"type"				=> "upload",
-				"required"			=> true
+				"required"			=> false
 			],
 		],
 	],
@@ -520,7 +520,7 @@ $form = [
 
 		</section>
 		<section>
-			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate>
+			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate enctype="multipart/form-data">
 				<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" multiple onchange="upload(event)">
 				<?php foreach ($form as $i => $f) : ?>
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i ?>">
@@ -585,8 +585,8 @@ $form = [
 													<div class="flex flex-wrap border rounded-lg">
 														<?php foreach ($input['options'] as $option) { ?>
 															<div class="flex items-center p-4" style="border-color:rgba(0, 0, 0, 0.08);">
-																<input type="checkbox" name="<?= $input['name'] ?>" value="<?= $option['value'] ?>" class="mr-3">
-																<label for="<?= $input['checkFor'] ?>"><?= $option['name'] ?></label>
+																<input type="checkbox" name="<?= $input['name'] ?>" value="<?= $option['name'] ?>" class="mr-3" id="<?= $option['name'] ?>">
+																<label for="<?= $option['name'] ?>"><?= $option['name'] ?></label>
 															</div>
 														<?php } ?>
 													</div>
@@ -602,7 +602,7 @@ $form = [
 												case "map": ?>
 													<div id="map" style="background-color:#C4C4C4;" class="flex items-center justify-center h-96"></div>
 													<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly" async></script>
-													<input type="hidden" id="general_info-map" name="general_info-map" />
+													<input type="hidden" id="ปักหมุดแผนที่" name="ปักหมุดแผนที่" />
 												<?php break;
 												case "upload": ?>
 													<div class="flex flex-wrap" id="showpic">

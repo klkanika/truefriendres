@@ -1002,21 +1002,21 @@ function restaurant_register_process()
 		} else {
 			$group = null;
 			$field = $name[0];
-			if($field === "ปักหมุดแผนที่"){
-				if($value){
-					$tempData = str_replace("\\", "",$value);
+			if ($field === "ปักหมุดแผนที่") {
+				if ($value) {
+					$tempData = str_replace("\\", "", $value);
 					$cleanData = json_decode($tempData, true);
 					update_field(
-						$field, 
+						$field,
 						array(
 							"address" => $cleanData['address'],
 							"lat" => $cleanData['lat'],
 							"lng" => $cleanData['lng'],
-						), 
+						),
 						$the_post_id
 					);
 				}
-			}else{
+			} else {
 				update_field($field, $value, $the_post_id);
 			}
 		}
@@ -1140,7 +1140,23 @@ function common_register_process()
 		} else {
 			$group = null;
 			$field = $name[0];
-			update_field($field, $value, $the_post_id);
+			if ($field === "ปักหมุดแผนที่") {
+				if ($value) {
+					$tempData = str_replace("\\", "", $value);
+					$cleanData = json_decode($tempData, true);
+					update_field(
+						$field,
+						array(
+							"address" => $cleanData['address'],
+							"lat" => $cleanData['lat'],
+							"lng" => $cleanData['lng'],
+						),
+						$the_post_id
+					);
+				}
+			} else {
+				update_field($field, $value, $the_post_id);
+			}
 		}
 	}
 
