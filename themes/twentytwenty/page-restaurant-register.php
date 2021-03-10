@@ -7,7 +7,7 @@
     <title>Restaurant Register</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.default.css" />
-		<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
+	<link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 	
 	<script>
     // Initialize and add the map
@@ -60,12 +60,15 @@
   </script>
 </head>
 <?php
-$facilities_options = get_field_object('field_60465ea42bdeb')['choices'];
 $startPrice_options = get_field_object('field_60465e5e2bde9')['choices'];
 $endPrice_options = get_field_object('field_60465e7c2bdea')['choices'];
 require_once('custom-classes/class-posts.php');
 $terms = get_terms(array(
 	'taxonomy' => 'restaurant_type',
+	'hide_empty' => false,
+));
+$facilities_options = get_terms(array(
+	'taxonomy' => 'restaurant_facility',
 	'hide_empty' => false,
 ));
 $resTypeOptions = [];
@@ -82,8 +85,8 @@ foreach ($terms as $key) {
 }
 foreach ($facilities_options as $key) {
 	array_push($facilitiesOptions, [
-		"value" => $key,
-		"name" => $key
+		"value" => $key->term_id,
+		"name" => $key->name
 	]);
 }
 foreach ($startPrice_options as $key) {
@@ -136,13 +139,13 @@ $form = [
 				"type"				=> "number",
 				"required"			=> false
 			],
-			// [
-			// 	"name" 				=> "general_info-images",
-			// 	"label" 			=> "รูปภาพ",
-			// 	"placeholder" 		=> "",
-			// 	"type"				=> "input",
-			// 	"required"			=> true
-			// ],
+			[
+				"name" 				=> "general_info-images",
+				"label" 			=> "รูปภาพ",
+				"placeholder" 		=> "",
+				"type"				=> "images",
+				"required"			=> false
+			],
 			[
 				"name" 				=> "general_info-map",
 				"label" 			=> "ปักหมุดแผนที่",
@@ -184,14 +187,13 @@ $form = [
 		"icon" => "info",
 		"label" => "ข้อมูลอื่นๆ",
 		"form" => [
-			// [
-			// 	"name" 				=> "other_info-recommend_menus",
-			// 	"label" 			=> "เมนูแนะนำ",
-			// 	"placeholder"		=> "",
-			// 	"type"				=> "select",
-			// 	"options"			=> ["ร้านอาหาร", "ร้านกาแฟ"],
-			// 	"required"			=> true
-			// ],
+			[
+				"name" 				=> "other_info-recommend_menus",
+				"label" 			=> "เมนูแนะนำ",
+				"placeholder"		=> "",
+				"type"				=> "recommend-menus",
+				"required"			=> true
+			],
 			[
 				"name" 				=> "other_info-price",
 				"label" 			=> "ช่วงราคาอาหาร",
@@ -269,8 +271,10 @@ $form = [
 				
 			</section>
 			<section>
-			<input class="text-input" name="avatar_user" type="file" id="avatar_user" multiple="true"/>
-			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate>
+			
+			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate enctype="multipart/form-data">
+				<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" multiple onchange="upload(event)">
+				<input type="file" accept="image/*" class="file-upload-recommend hidden" name="fileToUploadRecommendMenu[]" multiple onchange="uploadRecommendMenu(event)">
 				<?php foreach($form as $i => $f): ?>
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i?>">
 						<div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i?>)">
@@ -358,11 +362,32 @@ $form = [
         											<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly" async></script>
 													<input type="hidden" id="general_info-map" name="general_info-map" />
 												<?php break;
+												case "images": ?>
+													<div class="flex flex-wrap" id="showpic">
+														<button type="button" class="w-full mb-3 md:w-1/3 h-24 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none" id="uploadimg">
+															<div class="flex items-center justify-center">
+																<img class="w-4 h-4 md:w-6 md:h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-upload.svg" />
+															</div>
+															<p class="my-2">เพิ่มรูปภาพ</p>
+														</button>
+													</div>
+													<?php break;
+												case "recommend-menus": ?>
+													<div class="flex flex-wrap" id="showpicRecommendMenu">
+														<button type="button" class="w-full mb-3 md:w-1/3 h-24 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none" id="uploadimgRecommendMenu">
+															<div class="flex items-center justify-center">
+																<img class="w-4 h-4 md:w-6 md:h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-upload.svg" />
+															</div>
+															<p class="my-2">เพิ่มรูปภาพ</p>
+														</button>
+													</div>
+												<?php break;
 													default:
 										endswitch; ?>
 									</div>
 								</div>
 							<?php endforeach; ?>
+							
 							</div>
 							<?php if($i < count($form)-1):?>
 								<hr class="mx-4 lg:mx-8"/>
@@ -442,4 +467,53 @@ $form = [
 			}
 		});
 	});
+
+	$("div").on('click', '.deletepic', function() {
+		$("#form").append(`<input name="fileNotToUpload[]" type="number" value="${$(this).attr('imgIndex')}" class="hidden" >`);
+		$(this).parent().remove();
+	});
+
+	$("div").on('click', '.deletepicRecommendMenu', function() {
+		$("#form").append(`<input name="fileNotToUpload[]" type="number" value="${$(this).attr('imgIndexRecommendMenu')}" class="hidden" >`);
+		$(this).parent().remove();
+	});
+
+	let imgIndex = 0;
+	let imgIndexRecommendMenu = 0;
+
+	function upload(event) {
+		const files = event.target.files;
+		for (let i = 0; i < event.target.files.length; i++) {
+			let src = URL.createObjectURL(event.target.files[i]);
+			$("#showpic").append(`
+				<div class="w-1/3 h-24 px-3 mb-3 l-2 relative">
+					<img src="${src}" class="w-full h-full object-cover rounded-lg" />
+					<div class="absolute top-0 right-0 mr-1 -mt-2 cursor-pointer deletepic" imgIndex="${imgIndex++}"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+				</div>
+			`);
+		}
+		$("#form").append('<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" onchange="upload(event)" multiple>');
+	}
+
+	function uploadRecommendMenu(event) {
+		const files = event.target.files;
+		for (let i = 0; i < event.target.files.length; i++) {
+			let src = URL.createObjectURL(event.target.files[i]);
+			$("#showpicRecommendMenu").append(`
+				<div class="w-1/3 h-24 px-3 mb-3 l-2 relative">
+					<img src="${src}" class="w-full h-full object-cover rounded-lg" />
+					<div class="absolute top-0 right-0 mr-1 -mt-2 cursor-pointer deletepicRecommendMenu" imgIndex="${imgIndexRecommendMenu++}"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+				</div>
+			`);
+		}
+		$("#form").append('<input type="file" accept="image/*" class="file-upload-recommend hidden" name="fileToUploadRecommendMenu[]" onchange="uploadRecommendMenu(event)" multiple>');
+	}
+	
+	$("#uploadimg").click(function() {
+		$(".file-upload:last").trigger('click');
+	});
+	$("#uploadimgRecommendMenu").click(function() {
+		$(".file-upload-recommend:last").trigger('click');
+	});
+	
 </script>
