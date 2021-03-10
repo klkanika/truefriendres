@@ -71,7 +71,7 @@
 		}
 
 		function setAddressMarker(position) {
-			$('[name=general_info-map]').val(JSON.stringify(position));
+			$('[name=ปักหมุดแผนที่]').val(JSON.stringify(position));
 		}
 	</script>
 </head>
@@ -152,7 +152,7 @@ $form = [
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-name",
+				"name" 				=> "ชื่อธุรกิจ",
 				"label" 			=> "ชื่อธุรกิจ",
 				"placeholder" 		=> "ชื่อ",
 				"type"				=> "input",
@@ -170,35 +170,35 @@ $form = [
 				"type" 				=> "hr",
 			],
 			[
-				"name" 				=> "general_info-year_begin",
+				"name" 				=> "ปีที่ก่อตั้ง",
 				"label" 			=> "ปีที่ก่อตั้ง",
 				"placeholder" 		=> "พ.ศ.",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-year_franchise",
+				"name" 				=> "ปีที่เริ่มขายแฟรนชายส์",
 				"label" 			=> "ปีที่เริ่มขายเฟรนไชส์",
 				"placeholder" 		=> "พ.ศ.",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-franchise_about",
+				"name" 				=> "แนะนำธุรกิจ",
 				"label" 			=> "แนะนำธุรกิจ",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-franchise_history",
+				"name" 				=> "ความเป็นมา",
 				"label" 			=> "ความเป็นมา",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-country",
+				"name" 				=> "ประเทศ",
 				"label" 			=> "ประเทศ",
 				"placeholder" => "",
 				"type"				=> "select",
@@ -206,56 +206,56 @@ $form = [
 				"required"		=> false
 			],
 			[
-				"name" 				=> "general_info-franchise_price",
+				"name" 				=> "franchise_price",
 				"label" 			=> "ค่าแฟรนไชส์ต่อปี",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-franchise_license_price",
+				"name" 				=> "ค่าไลเซนส์",
 				"label" 			=> "ค่าไลเซนส์",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-contract_period",
+				"name" 				=> "ระยะเวลาสัญญา",
 				"label" 			=> "ระยะเวลาสัญญา",
 				"placeholder" 		=> "1 ปี",
 				"type"				=> "input",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-royalty_fee",
+				"name" 				=> "ค่า_royalty_fee",
 				"label" 			=> "ค่า Royalty Free",
 				"placeholder" 		=> "",
 				"type"				=> "fee",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-marketing_fee",
+				"name" 				=> "ค่า_marketing_fee",
 				"label" 			=> "ค่า Marketing Free",
 				"placeholder" 		=> "",
 				"type"				=> "fee",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-bail",
+				"name" 				=> "เงินประกัน",
 				"label" 			=> "เงินประกัน",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-funds",
+				"name" 				=> "งบการลงทุน",
 				"label" 			=> "งบการลงทุน",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-cashflow",
+				"name" 				=> "เงินทุนหมุนเวียนต่อปี",
 				"label" 			=> "เงินทุนหมุนเวียนต่อปี",
 				"placeholder" 		=> "",
 				"type"				=> "number",
@@ -265,7 +265,7 @@ $form = [
 				"type" 				=> "hr",
 			],
 			[
-				"name" 				=> "taxonomy-branch_policy",
+				"name" 				=> "taxonomy-franchise_branch_policy",
 				"label" 			=> "นโยบาย การขยายสาขา",
 				"placeholder" 		=> "",
 				"type"				=> "multiCheck",
@@ -274,81 +274,81 @@ $form = [
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-branch_amount",
+				"name" 				=> "จำนวนสาขาสำนักงานใหญ่",
 				"label" 			=> "จำนวนสาขาสำนักงานใหญ่",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-branch_list",
+				"name" 				=> "รายชื่อสาขาสำนักงานใหญ่",
 				"label" 			=> "รายชื่อสาขาสำนักงานใหญ่",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-franchise_c_amount",
+				"name" 				=> "จำนวน_franchise_c",
 				"label" 			=> "จำนวน Franchise C",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-franchise_c_list",
+				"name" 				=> "รายชื่อ_franchise_c",
 				"label" 			=> "รายชื่อสาขา Franchise C",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-scale_rate",
+				"name" 				=> "อัตราการขยายสาขา_5_ปีย้อนหลัง-จำนวนสาขา",
 				"label" 			=> "อัตราการขยายสาขา ( 5 ปีย้อนหลัง )",
 				"placeholder" 		=> "",
 				"type"				=> "number",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-investment",
+				"name" 				=> "การลงทุน",
 				"label" 			=> "การลงทุน",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-payback",
+				"name" 				=> "ระยะเวลาคืนทุน",
 				"label" 			=> "ระยะเวลาคืนทุน",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-qualification",
+				"name" 				=> "คุณสมบัติผู้ลงทุน",
 				"label" 			=> "คุณสมบัติผู้ลงทุน",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-franchise_c_benefit",
+				"name" 				=> "สิ่งที่_franchise_c_จะได้รับ",
 				"label" 			=> "สิ่งที่ Franchise C จะได้รับ",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-other",
+				"name" 				=> "อื่นๆ",
 				"label" 			=> "อื่นๆ",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-images",
+				"name" 				=> "รูปภาพ",
 				"label" 			=> "รูปภาพ",
 				"placeholder" 		=> "",
 				"type"				=> "upload",
-				"required"			=> false
+				"required"			=> true
 			],
 		],
 	],
@@ -357,57 +357,57 @@ $form = [
 		"label" => "แผนที่สำนักงานใหญ่",
 		"form" => [
 			[
-				"name" 				=> "head_office-name",
+				"name" 				=> "ชื่อบริษัท",
 				"label" 			=> "ชื่อบริษัท",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "head_office-address",
+				"name" 				=> "ที่อยู่",
 				"label" 			=> "ที่อยู่",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "head_office-region",
+				"name" 				=> "ภาค",
 				"label" 			=> "ภาค",
 				"placeholder" 		=> "",
 				"type"				=> "select",
 				"options"			=> [
-					["value" => "center", "name" => "กลาง"],
-					["value" => "north", "name" => "เหนือ"],
-					["value" => "south", "name" => "ใต้"],
-					["value" => "east", "name" => "ตะวันออก"],
-					["value" => "west", "name" => "ตะวันตก"],
-					["value" => "northeast", "name" => "ภาคกลาง"],
+					["value" => "ภาคกลาง", "name" => "ภาคกลาง"],
+					["value" => "ภาคเหนือ", "name" => "ภาคเหนือ"],
+					["value" => "ภาคใต้", "name" => "ภาคใต้"],
+					["value" => "ภาคตะวันออก", "name" => "ภาคตะวันออก"],
+					["value" => "ภาคตะวันตก", "name" => "ภาคตะวันตก"],
+					["value" => "ภาคตะวันออกเฉียงเหนือ", "name" => "ภาคตะวันออกเฉียงเหนือ"],
 				],
 				"required"			=> false
 			],
 			[
-				"name" 				=> "head_office-province",
+				"name" 				=> "จังหวัด",
 				"label" 			=> "จังหวัด",
 				"placeholder" 		=> "",
 				"type"				=> "province",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "head_office-district",
+				"name" 				=> "อำเภอ",
 				"label" 			=> "อำเภอ",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "head_office-sub_district",
+				"name" 				=> "ตำบล",
 				"label" 			=> "ตำบล",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "head_office-map",
+				"name" 				=> "ปักหมุดแผนที่",
 				"label" 			=> "ปักหมุดแผนที่",
 				"placeholder" 		=> "",
 				"type"				=> "map",
@@ -420,49 +420,49 @@ $form = [
 		"label" => "ติดต่อเจ้าของแฟรนไชส์",
 		"form" => [
 			[
-				"name" 				=> "contact-name",
+				"name" 				=> "ข้อมูลติดต่อ-ชื่อ",
 				"label" 			=> "ชื่อ",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "contact-tel",
+				"name" 				=> "ข้อมูลติดต่อ-เบอร์โทร",
 				"label" 			=> "เบอร์โทร",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "contact-email",
+				"name" 				=> "ข้อมูลติดต่อ-email",
 				"label" 			=> "Email",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "contact-facebook",
+				"name" 				=> "ข้อมูลติดต่อ-facebook",
 				"label" 			=> "Facebook",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "contact-line",
+				"name" 				=> "ข้อมูลติดต่อ-line",
 				"label" 			=> "Line",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "contact-twitter",
+				"name" 				=> "ข้อมูลติดต่อ-twitter",
 				"label" 			=> "Twitter",
 				"placeholder" 		=> "",
 				"type"				=> "input",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "contact-instagram",
+				"name" 				=> "ข้อมูลติดต่อ-instagram",
 				"label" 			=> "Instagram",
 				"placeholder" 		=> "",
 				"type"				=> "input",
@@ -521,6 +521,7 @@ $form = [
 		</section>
 		<section>
 			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate>
+				<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" multiple onchange="upload(event)">
 				<?php foreach ($form as $i => $f) : ?>
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i ?>">
 						<div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i ?>)">
@@ -575,35 +576,10 @@ $form = [
 												<?php break;
 												case "fee": ?>
 													<input type="number" value="" name="<?= $input['name'] ?>-<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
-													<select name="<?= $input['name'] ?>-unit" class="py-2 px-4 border rounded-lg w-1/5">
-														<option selected value="percent">% ต่อปี</option>
-														<option value="baht">บาทต่อปี</option>
+													<select name="<?= $input['name'] ?>-หน่วย" class="py-2 px-4 border rounded-lg w-1/5">
+														<option selected value="% ต่อปี">% ต่อปี</option>
+														<option value="บาทต่อปี">บาทต่อปี</option>
 													</select>
-												<?php break;
-												case "price-duration": ?>
-													<div class="flex">
-														<select value="" name="other_info-price-price_start" class="py-2 px-4 mr-2 border rounded-lg" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
-															<option value="">เลือก</option>
-															<?php foreach ($startPriceOptions as $option) : ?>
-																<option value="<?= $option['value'] ?>"><?= $option['name'] ?></option>
-															<?php endforeach; ?>
-														</select>
-														<!-- <input type="number" value="" name="other_info-price-price_start" class="py-2 px-4 border rounded-lg" <?= $input['required'] ? "required" : "" ?>/> -->
-														-
-														<select value="" name="other_info-price-price_end" class="py-2 px-4 ml-2 border rounded-lg" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
-															<option value="">เลือก</option>
-															<?php foreach ($endPriceOptions as $option) : ?>
-																<option value="<?= $option['value'] ?>"><?= $option['name'] ?></option>
-															<?php endforeach; ?>
-														</select>
-														<!-- <input type="number" value="" name="other_info-price-price_end" class="py-2 px-4 border rounded-lg" <?= $input['required'] ? "required" : "" ?>/> -->
-													</div>
-												<?php break;
-												case "social": ?>
-													<input value="" name="other_info-social-facebook" placeholder="Facebook Page" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
-													<input value="" name="other_info-social-line" placeholder="Line" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
-													<input value="" name="other_info-social-website" placeholder="Website" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
-													<input value="" name="other_info-social-instragram" placeholder="Instagram" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
 												<?php break;
 												case "multiCheck": ?>
 													<div class="flex flex-wrap border rounded-lg">
@@ -656,10 +632,10 @@ $form = [
 				<?php endforeach; ?>
 				<hr class="mx-8">
 				<div class="my-6 text-center">
-					<input type="hidden" name="action" value="franchise_register" />
+					<input type="hidden" name="action" value="common_register" />
 					<input type="hidden" name="id" value="" />
-					<input type="hidden" name="title" value="ชื่อ" />
-					<input type="hidden" name="post_type" value="franchise_register" />
+					<input type="hidden" name="title" value="ชื่อธุรกิจ" />
+					<input type="hidden" name="post_type" value="franchises" />
 					<input type="hidden" name="redirect" value="franchise-hub" />
 					<button type="submit" class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="background: #FFD950;">ลงทะเบียน</button>
 				</div>
@@ -709,6 +685,27 @@ $form = [
 		});
 	});
 
+	$("div").on('click', '.deletepic', function() {
+		$("#form").append(`<input name="fileNotToUpload[]" type="number" value="${$(this).attr('imgIndex')}" class="hidden" >`);
+		$(this).parent().remove();
+	})
+
+	let imgIndex = 0;
+
+	function upload(event) {
+		const files = event.target.files;
+		for (let i = 0; i < event.target.files.length; i++) {
+			let src = URL.createObjectURL(event.target.files[i]);
+			$("#showpic").append(`
+				<div class="w-1/3 h-24 px-3 mb-3 l-2 relative">
+					<img src="${src}" class="w-full h-full object-cover rounded-lg" />
+					<div class="absolute top-0 right-0 mr-1 -mt-2 cursor-pointer deletepic" imgIndex="${imgIndex++}"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+				</div>
+			`);
+		}
+		$("#form").append('<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" onchange="upload(event)" multiple>');
+	}
+
 	$(document).ready(function() {
 		$('#taxonomy-franchise_product').selectize({
 			plugins: ['remove_button'],
@@ -720,6 +717,11 @@ $form = [
 					text: input
 				}
 			}
+		});
+
+
+		$("#uploadimg").click(function() {
+			$(".file-upload:last").trigger('click');
 		});
 	});
 </script>
