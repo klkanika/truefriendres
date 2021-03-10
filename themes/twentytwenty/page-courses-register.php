@@ -225,7 +225,7 @@ $form = [
         </div>
       </div>
 
-      <form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate>
+      <form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate enctype="multipart/form-data">
         <?php foreach ($form as $i => $f) : ?>
           <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-4 collapse <?= $i === 0 ? "open" : ""; ?>" collapse="<?= $i ?>">
             <div class="py-6 px-6 lg:px-8 flex justify-between cursor-pointer" onclick="showStep(<?= $i ?>)">
@@ -280,18 +280,19 @@ $form = [
                                 <p class="font-bold text-lg">ธนาคารไทยพาณิชย์</p>
                                 <p class="text-sm mb-4">บริษัท เพื่อนแท้ร้านอาหาร</p>
                                 <p class="font-bold">เลขบัญชี 987654321</p>
-                                <p class="font-bold text-lg">10,000 บาท</p>
+                                <p class="font-bold text-lg"><?= get_field('price', $courseId) ?> บาท</p>
                               </div>
                             </div>
                           </div>
                         <?php break;
                         case "upload-slip": ?>
-                          <button type="button" class="w-full md:w-1/2 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none">
+                          <button type="button" class="w-full md:w-1/2 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none" id="uploadimg">
                             <div class="flex items-center justify-center">
                               <img class="w-4 h-4 md:w-6 md:h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-upload.svg" />
                             </div>
                             <p class="my-2">อัพโหลดสลิป</p>
                           </button>
+                          <input type="file" accept="image/*" id="file-upload" class="hidden" name="fileToUpload[]">
                         <?php break;
                         case "btn-pay-later": ?>
                           <button class="h-10 rounded-full w-full flex items-center justify-center p-2 font-bold hover:bg-gray-50 focus:outline-none" style="background-color:#262145; color: #DBDBDB;">
@@ -375,5 +376,17 @@ $form = [
         $(this).find('.status').attr('src', '<?= get_theme_file_uri() ?>/assets/images/icon-info.svg')
       }
     });
+  });
+
+  $("#uploadimg").click(function() {
+    $("#file-upload").trigger('click');
+  });
+
+  $("#file-upload").change(function() {
+    if ($(this).val()) {
+      $('#uploadimg').css('background-color', '#008000');
+    } else {
+      $('#uploadimg').css('background-color', '');
+    }
   });
 </script>
