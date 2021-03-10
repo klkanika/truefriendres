@@ -871,6 +871,104 @@ function restaurant_register_process()
 
 	$the_post_id = wp_insert_post($my_post);
 
+	//image
+	$target_dir = "../wp-content/uploads/frontend-img/";
+	$fileNotToUpload = $_POST['fileNotToUpload'];
+	$attached = [];
+	foreach ($_FILES['fileToUpload']['name'] as $index => $file) {
+		if (!in_array($index, $fileNotToUpload) && !empty($file)) {
+			$imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"][$index], PATHINFO_EXTENSION));
+			while (true) {
+				$filename = $target_dir . uniqid(rand(), true) . '.' . $imageFileType;
+				if (!file_exists($filename)) {
+					break;
+				}
+			}
+			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$index], $filename);
+
+			//create attachment
+			$filetype = wp_check_filetype(basename($filename), null);
+			$wp_upload_dir = wp_upload_dir();
+			$attachment = array(
+				'guid'           => basename($filename),
+				'post_mime_type' => $filetype['type'],
+				'post_title'     => basename($filename),
+				'post_content'   => '',
+				'post_status'    => 'inherit'
+			);
+			$attach_id = wp_insert_attachment($attachment, $filename, $the_post_id);
+
+			array_push(
+				$attached,
+				array(
+					'image' => $attach_id
+				)
+			);
+		}
+	}
+
+	if(count($attached)){
+		update_field(
+			'general_info',
+			array(
+				'images' => $attached
+			),
+			$the_post_id
+			// 'field_60465a2f96b8c',
+			// $attached,
+			// $the_post_id
+		);
+	}
+
+	//recommend_menus
+	$target_dir_recommend = "../wp-content/uploads/frontend-img/";
+	$fileNotToUploadRecommendMenu = $_POST['fileNotToUploadRecommendMenu'];
+	$attached_recommend = [];
+	foreach ($_FILES['fileToUploadRecommendMenu']['name'] as $index => $file) {
+		if (!in_array($index, $fileNotToUploadRecommendMenu) && !empty($file)) {
+			$imageFileTypeRecommend = strtolower(pathinfo($_FILES["fileToUploadRecommendMenu"]["name"][$index], PATHINFO_EXTENSION));
+			while (true) {
+				$filenameRecommend = $target_dir_recommend . uniqid(rand(), true) . '.' . $imageFileTypeRecommend;
+				if (!file_exists($filenameRecommend)) {
+					break;
+				}
+			}
+			move_uploaded_file($_FILES["fileToUploadRecommendMenu"]["tmp_name"][$index], $filenameRecommend);
+
+			//create attachment
+			$filetypeRecommend = wp_check_filetype(basename($filenameRecommend), null);
+			$wp_upload_dir_recommend = wp_upload_dir();
+			$attachmentRecommend = array(
+				'guid'           => basename($filenameRecommend),
+				'post_mime_type' => $filetypeRecommend['type'],
+				'post_title'     => basename($filenameRecommend),
+				'post_content'   => '',
+				'post_status'    => 'inherit'
+			);
+			$attach_id_recommend = wp_insert_attachment($attachmentRecommend, $filenameRecommend, $the_post_id);
+
+			array_push(
+				$attached_recommend,
+				array(
+					'menu_image' => $attach_id_recommend
+				)
+			);
+		}
+	}
+
+	if(count($attached_recommend)){
+		update_field(
+			'other_info',
+			array(
+				'recommend_menus' => $attached_recommend
+			),
+			$the_post_id
+			// 'field_60465dc62bde6',
+			// $attached_recommend,
+			// $the_post_id
+		);
+	}
+
 	foreach ($_POST as $key => $value) {
 		$name = explode("-", $key);
 		if ($name === "other_info-facilities[]" || $name === "general_info-restaurant_type[]") {
