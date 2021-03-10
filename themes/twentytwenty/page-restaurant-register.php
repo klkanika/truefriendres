@@ -192,7 +192,7 @@ $form = [
 				"label" 			=> "เมนูแนะนำ",
 				"placeholder"		=> "",
 				"type"				=> "recommend-menus",
-				"required"			=> true
+				"required"			=> false
 			],
 			[
 				"name" 				=> "other_info-price",
@@ -474,7 +474,7 @@ $form = [
 	});
 
 	$("div").on('click', '.deletepicRecommendMenu', function() {
-		$("#form").append(`<input name="fileNotToUpload[]" type="number" value="${$(this).attr('imgIndexRecommendMenu')}" class="hidden" >`);
+		$("#form").append(`<input name="fileNotToUploadRecommendMenu[]" type="number" value="${$(this).attr('imgIndexRecommendMenu')}" class="hidden" >`);
 		$(this).parent().remove();
 	});
 
