@@ -960,13 +960,14 @@ function restaurant_register_process()
 			$group1 = $name[0];
 			$group2 = $name[1];
 			$field = $name[2];
+			$formatValue = [];
+			foreach ($value as $v) {
+				array_push($formatValue, array($field => $v));
+			}
 			update_field(
 				$group1,
 				array(
-					$group2 =>
-					array(
-						$field => $value
-					),
+					$group2 => $formatValue
 				),
 				$the_post_id
 			);

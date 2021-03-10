@@ -74,13 +74,17 @@ $facilities_options = get_terms(array(
 	'taxonomy' => 'restaurant_facility',
 	'hide_empty' => false,
 ));
+$product_options = get_terms(array(
+	'taxonomy' => 'restaurant_product',
+	'hide_empty' => false,
+));
 $resTypeOptions = [];
 $facilitiesOptions = [];
+$productOptions = [];
 $provinceOptions = [];
 $restaurantDayOptions = [];
 $restaurantDeliveryDayOptions = [];
 
-// echo '<pre>';
 foreach ($terms as $key) {
 	array_push($resTypeOptions, [
 		"value" => $key->term_id,
@@ -89,6 +93,12 @@ foreach ($terms as $key) {
 }
 foreach ($facilities_options as $key) {
 	array_push($facilitiesOptions, [
+		"value" => $key->term_id,
+		"name" => $key->name
+	]);
+}
+foreach ($product_options as $key) {
+	array_push($productOptions, [
 		"value" => $key->term_id,
 		"name" => $key->name
 	]);
@@ -137,6 +147,14 @@ $form = [
 				"type"				=> "selectTag",
 				"options"			=> $resTypeOptions,
 				"required"			=> true
+			],
+			[
+				"name" 				=> "taxonomy-restaurant_product",
+				"label" 			=> "สินค้า",
+				"placeholder" 		=> "",
+				"type"				=> "selectTag",
+				"options"			=> $productOptions,
+				"required"			=> false
 			],
 			[
 				"name" 				=> "จำนวนสาขา",
@@ -626,6 +644,17 @@ $form = [
 			$(".file-upload-recommend:last").trigger('click');
 		});
 		$('#taxonomy-restaurant_type').selectize({
+			plugins: ['remove_button'],
+			delimiter: ',',
+			persist: false,
+			create: function(input) {
+				return {
+					value: input,
+					text: input
+				}
+			}
+		});
+		$('#taxonomy-restaurant_product').selectize({
 			plugins: ['remove_button'],
 			delimiter: ',',
 			persist: false,
