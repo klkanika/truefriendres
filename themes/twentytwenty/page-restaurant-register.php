@@ -32,10 +32,10 @@
 					if (results[0]) {
 						setAddressMarker({'address': results[0].formatted_address, 'lat': latlng.lat, 'lng': latlng.lng});
 					}else{
-						setAddressMarker({'address': '', 'lat': latlng.lat, 'lng': latlng.lng} );
+						setAddressMarker({'address': '', 'lat': latlng.lat, 'lng': latlng.lng});
 					}
 				}else{
-					setAddressMarker({'address': '', 'lat': latlng.lat, 'lng': latlng.lng} );
+					setAddressMarker({'address': '', 'lat': latlng.lat, 'lng': latlng.lng});
 				}
 			}
 		);
@@ -55,13 +55,16 @@
 		map.panTo(position);
 	}
 	function setAddressMarker(position) {
-		$('[name=general_info-map]').val(JSON.stringify(position)); 
+		$('[name=ปักหมุดแผนที่]').val(JSON.stringify(position)); 
+		console.log($('[name=ปักหมุดแผนที่]').val());
 	}
   </script>
 </head>
 <?php
-$startPrice_options = get_field_object('field_60465e5e2bde9')['choices'];
-$endPrice_options = get_field_object('field_60465e7c2bdea')['choices'];
+$province_options = get_field_object('field_5fdf438de276f')['choices'];
+$restaurantDay_options = get_field_object('field_5fdf49967e0f6')['choices'];
+$restaurantDeliveryDay_options = get_field_object('field_5fdf4b9e3090f')['choices'];
+
 require_once('custom-classes/class-posts.php');
 $terms = get_terms(array(
 	'taxonomy' => 'restaurant_type',
@@ -73,8 +76,9 @@ $facilities_options = get_terms(array(
 ));
 $resTypeOptions = [];
 $facilitiesOptions = [];
-$startPriceOptions = [];
-$endPriceOptions = [];
+$provinceOptions = [];
+$restaurantDayOptions = [];
+$restaurantDeliveryDayOptions = [];
 
 // echo '<pre>';
 foreach ($terms as $key) {
@@ -89,97 +93,134 @@ foreach ($facilities_options as $key) {
 		"name" => $key->name
 	]);
 }
-foreach ($startPrice_options as $key) {
-	array_push($startPriceOptions, [
+foreach ($province_options as $key) {
+	array_push($provinceOptions, [
 		"value" => $key,
 		"name" => $key
 	]);
 }
-foreach ($endPrice_options as $key) {
-	array_push($endPriceOptions, [
+foreach ($restaurantDay_options as $key) {
+	array_push($restaurantDayOptions, [
 		"value" => $key,
 		"name" => $key
 	]);
 }
-// print_r($facilitiesOptions);
-// print_r($terms);
+foreach ($restaurantDeliveryDay_options as $key) {
+	array_push($restaurantDeliveryDayOptions, [
+		"value" => $key,
+		"name" => $key
+	]);
+}
 $form = [
 	[
 		"icon" => "info",
 		"label" => "ข้อมูลทั่วไป",
 		"form" => [
 			[
-				"name" 				=> "general_info-owner_name",
+				"name" 				=> "ชื่อ_นามสกุล",
 				"label" 			=> "ชื่อ นามสกุล",
 				"placeholder" 		=> "ชื่อ นามสกุล",
 				"type"				=> "input",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-name",
+				"name" 				=> "ชื่อร้าน",
 				"label" 			=> "ชื่อร้าน",
 				"placeholder" 		=> "ชื่อร้าน",
 				"type"				=> "input",
 				"required"			=> true
 			],
       		[
-				// "name" 				=> "general_info-restaurant_type",
-				"name" 				=> "general_info-restaurant_type",
+				"name" 				=> "taxonomy-restaurant_type",
 				"label" 			=> "ประเภทร้าน",
 				"placeholder" 		=> "",
-				// "type"				=> "select",
 				"type"				=> "selectTag",
 				"options"			=> $resTypeOptions,
 				"required"			=> true
 			],
 			[
-				"name" 				=> "general_info-number_of_branch",
+				"name" 				=> "จำนวนสาขา",
 				"label" 			=> "จำนวนสาขา",
 				"placeholder" 		=> "จำนวนสาขา",
 				"type"				=> "number",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-images",
+				"name" 				=> "branchCountLastUpdate",
+				"label" 			=> "อัปเดตจำนวนสาขาล่าสุดเมื่อ",
+				"placeholder" 		=> "อัปเดตจำนวนสาขาล่าสุดเมื่อ",
+				"type"				=> "date",
+				"required"			=> false
+			],
+			[
+				"name" 				=> "รูปภาพ",
 				"label" 			=> "รูปภาพ",
 				"placeholder" 		=> "",
 				"type"				=> "images",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-map",
+				"name" 				=> "ปักหมุดแผนที่",
 				"label" 			=> "ปักหมุดแผนที่",
 				"placeholder" 		=> "",
 				"type"				=> "map",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-open_time",
-				"label" 			=> "เวลาเปิดร้าน",
-				"placeholder" 		=> "เวลาเปิดร้าน",
-				"type"				=> "input",
+				"name"         	=> "",
+				"label"			=> "เวลาเปิด-ปิดร้าน",
+				"btn-label"     => "เพิ่มเวลาเปิด-ปิดร้าน",
+				"icon"        	=> get_theme_file_uri() . "/assets/images/plus-icon.svg",
+				"placeholder" 	=> "",
+				"type"        	=> "restaurantAvailableButton",
+				"required"    	=> false
+			],
+			[
+				"name" 				=> "restaurantAvailable",
+				"type"				=> "restaurantAvailable",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-delivery_time",
-				"label" 			=> "เวลาเปิด-ปิด เดลิเวอรี่",
-				"placeholder" 		=> "เวลาเปิด-ปิด เดลิเวอรี่",
-				"type"				=> "input",
+				"name"         	=> "",
+				"label"			=> "เวลาเปิด-ปิด เดลิเวอรี่",
+				"btn-label"     => "เพิ่มเเวลาเปิด-ปิด เดลิเวอรี่",
+				"icon"        	=> get_theme_file_uri() . "/assets/images/plus-icon.svg",
+				"placeholder" 	=> "",
+				"type"        	=> "restaurantDeliveryAvailableButton",
+				"required"    	=> false
+			],
+			[
+				"name" 				=> "restaurantDeliveryAvailable",
+				"type"				=> "restaurantDeliveryAvailable",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-capacity",
+				"name" 				=> "seat",
 				"label" 			=> "จำนวนที่นั่ง",
 				"placeholder" 		=> "จำนวนที่นั่ง",
 				"type"				=> "number",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "general_info-tel",
-				"label" 			=> "เบอร์ติดต่อ",
-				"placeholder" 		=> "เบอร์ติดต่อ",
-				"type"				=> "input",
+				"name" 				=> "telInfo",
+				"label" 			=> "ข้อมูลเบอร์โทรศัพท์",
+				"placeholder" 		=> "ข้อมูลเบอร์โทรศัพท์",
+				"type"				=> "telInfo",
 				"required"			=> false
+			],
+			[
+				"name" 				=> "restaurantDetail",
+				"label" 			=> "รายละเอียดร้านอาหาร",
+				"placeholder" 		=> "รายละเอียดร้านอาหาร",
+				"type"				=> "textarea",
+				"required"			=> false
+			],
+			[
+				"name" 				=> "province",
+				"label" 			=> "จังหวัด",
+				"placeholder" 		=> "จังหวัด",
+				"type"				=> "select",
+				"options"			=> $provinceOptions,
 			],
 		],
 	],
@@ -188,21 +229,21 @@ $form = [
 		"label" => "ข้อมูลอื่นๆ",
 		"form" => [
 			[
-				"name" 				=> "other_info-recommend_menus",
+				"name" 				=> "เมนูแนะนำ",
 				"label" 			=> "เมนูแนะนำ",
 				"placeholder"		=> "",
 				"type"				=> "recommend-menus",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "other_info-price",
+				"name" 				=> "ช่วงราคาอาหาร",
 				"label" 			=> "ช่วงราคาอาหาร",
 				"placeholder" 		=> "ช่วงราคาอาหาร",
 				"type"				=> "price-duration",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "other_info-facilities",
+				"name" 				=> "taxonomy-restaurant_facility",
 				"label" 			=> "สิ่งอำนวนความสะดวก",
 				"placeholder" 		=> "",
 				"type"				=> "facilities",
@@ -210,14 +251,14 @@ $form = [
 				"required"			=> false
 			],
 			[
-				"name" 				=> "other_info-social",
+				"name" 				=> "ช่องทางติดตาม",
 				"label" 			=> "ช่องทางติดตาม",
 				"placeholder" 		=> "",
 				"type"				=> "social",
 				"required"			=> false
 			],
 			[
-				"name" 				=> "other_info-others",
+				"name" 				=> "ข้อมูลเพิ่มเติมอื่นๆ",
 				"label" 			=> "ข้อมูลเพิ่มเติมอื่นๆ",
 				"placeholder" 		=> "",
 				"type"				=> "textarea",
@@ -249,28 +290,29 @@ $form = [
 				display: block;
 			}
     </style>
-    <section class="text-white pt-32 lg:pb-20 lg:px-48 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
-			<section class="w-full flex flex-col px-6 lg:px-0">
-				<h2 class="lg:text-2xl text-sm mb-2">ลงทะเบียน ร้านอาหาร</h2>
-				<h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mb-4">Register Restaurant</h1>
-				<p class="lg:text-base">หลังจากที่แอดมินได้ Approve แล้วข้อมูลของคุณจะลงไปที่ Website</p>
-				<div class="flex flex-wrap mt-8 mb-16">
-					<div class="font-bold text-lg flex items-center mb-3 w-full lg:w-auto lg:mb-0 lg:mr-8">
-						<img class="w-8 h-8 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
-						ขยายฐานลูกค้า
-					</div>
-					<div class="font-bold text-lg flex items-center mb-3 w-full lg:w-auto lg:mb-0 lg:mr-8">
-						<img class="w-8 h-8 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
-						สมัครฟรี
-					</div>
-					<div class="font-bold text-lg flex items-center w-full lg:w-auto">
-						<img class="w-8 h-8 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
-						ได้ SEO ไปในตัว
-					</div>
+    <section class="text-white pt-32 pb-4 lg:pb-20 lg:px-48 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
+		<section class="w-full flex flex-col px-6 lg:px-0">
+			<h2 class="lg:text-2xl text-sm mb-2">ลงทะเบียน ร้านอาหาร</h2>
+			<h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mb-4">Register Restaurant</h1>
+			<p class="lg:text-base">หลังจากที่แอดมินได้ Approve แล้วข้อมูลของคุณจะลงไปที่ Website</p>
+			<div class="flex flex-wrap mt-8 mb-16">
+				<div class="font-bold text-lg flex items-center mb-3 w-full lg:w-auto lg:mb-0 lg:mr-8">
+					<img class="w-8 h-8 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+					ขยายฐานลูกค้า
 				</div>
-				
-			</section>
-			<section>
+				<div class="font-bold text-lg flex items-center mb-3 w-full lg:w-auto lg:mb-0 lg:mr-8">
+					<img class="w-8 h-8 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+					สมัครฟรี
+				</div>
+				<div class="font-bold text-lg flex items-center w-full lg:w-auto">
+					<img class="w-8 h-8 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/service-check-gold.svg" alt="">
+					ได้ SEO ไปในตัว
+				</div>
+			</div>
+			
+		</section>
+		
+		<section>
 			
 			<form action="<?= get_site_url() ?>/wp-admin/admin-post.php" id="form" method="post" novalidate enctype="multipart/form-data">
 				<input type="file" accept="image/*" class="file-upload hidden" name="fileToUpload[]" multiple onchange="upload(event)">
@@ -316,34 +358,22 @@ $form = [
 												<?php break;
 												case "price-duration": ?>
 												<div class="flex">
-													<select value="" name="other_info-price-price_start" class="py-2 px-4 mr-2 border rounded-lg" style="min-width: 50%;" <?= $input['required'] ? "required": ""?>>
-														<option value="">เลือก</option>
-														<?php foreach($startPriceOptions as $option):?>
-															<option value="<?= $option['value']?>"><?= $option['name']?></option>
-														<?php endforeach; ?>
-													</select>
-													<!-- <input type="number" value="" name="other_info-price-price_start" class="py-2 px-4 border rounded-lg" <?= $input['required'] ? "required": ""?>/> -->
+													<input type="number" value="" placeholder="ราคาเริ่มต้น" name="ช่วงราคาอาหาร-priceStart" class="py-2 px-4 mr-2 border rounded-lg" <?= $input['required'] ? "required": ""?>/>
 													-
-													<select value="" name="other_info-price-price_end" class="py-2 px-4 ml-2 border rounded-lg" style="min-width: 50%;" <?= $input['required'] ? "required": ""?>>
-														<option value="">เลือก</option>
-														<?php foreach($endPriceOptions as $option):?>
-															<option value="<?= $option['value']?>"><?= $option['name']?></option>
-														<?php endforeach; ?>
-													</select>
-													<!-- <input type="number" value="" name="other_info-price-price_end" class="py-2 px-4 border rounded-lg" <?= $input['required'] ? "required": ""?>/> -->
+													<input type="number" value="" placeholder="ราคาสิ้นสุด" name="ช่วงราคาอาหาร-priceEnd" class="py-2 px-4 ml-2 border rounded-lg" <?= $input['required'] ? "required": ""?>/>
 												</div>
 												<?php break;
 												case "social": ?>
-													<input value="" name="other_info-social-facebook" placeholder="Facebook Page" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
-													<input value="" name="other_info-social-line" placeholder="Line" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
-													<input value="" name="other_info-social-website" placeholder="Website" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
-													<input value="" name="other_info-social-instragram" placeholder="Instagram" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
+													<input value="" name="ช่องทางติดตาม-facebook_page" placeholder="Facebook Page" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
+													<input value="" name="ช่องทางติดตาม-line" placeholder="Line" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
+													<input value="" name="ช่องทางติดตาม-website" placeholder="Website" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
+													<input value="" name="ช่องทางติดตาม-instagram" placeholder="Instagram" class="my-2 py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required": ""?>/>
 												<?php break;
 												case "facilities": ?>
 													<div class="flex flex-wrap border rounded-lg" >
 														<?php foreach ($input['options'] as $option) { ?>
 															<div class="flex items-center p-4" style="border-color:rgba(0, 0, 0, 0.08);">
-																<input type="checkbox" name="other_info-facilities[]" value="<?= $option['value']?>" class="mr-3"> 
+																<input type="checkbox" name="<?= $input['name'] ?>[]" value="<?= $option['name']?>" class="mr-3"> 
 																<label for="facilities"><?= $option['name']?></label>
 															</div>
 														<?php } ?>
@@ -353,14 +383,14 @@ $form = [
 													<select multiple="multiple" id="<?= $input['name'] ?>" value="" name="<?= $input['name'] ?>[]" style="min-width: 50%;" <?= $input['required'] ? "required": ""?>>
 														<option value="">เลือก</option>
 														<?php foreach($input['options'] as $option):?>
-															<option value="<?= $option['value']?>"><?= $option['name']?></option>
+															<option value="<?= $option['name']?>"><?= $option['name']?></option>
 														<?php endforeach; ?>
 													</select>
 												<?php break;
 												case "map": ?>
 													<div id="map" style="background-color:#C4C4C4;" class="flex items-center justify-center h-96"></div>
         											<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3pXEQOhjrbzcdYXvB-K6T336pRJx0XJ0&callback=initMap&libraries=&v=weekly" async></script>
-													<input type="hidden" id="general_info-map" name="general_info-map" />
+													<input type="hidden" id="ปักหมุดแผนที่" name="<?= $input['name'] ?>" />
 												<?php break;
 												case "images": ?>
 													<div class="flex flex-wrap" id="showpic">
@@ -371,7 +401,7 @@ $form = [
 															<p class="my-2">เพิ่มรูปภาพ</p>
 														</button>
 													</div>
-													<?php break;
+												<?php break;
 												case "recommend-menus": ?>
 													<div class="flex flex-wrap" id="showpicRecommendMenu">
 														<button type="button" class="w-full mb-3 md:w-1/3 h-24 p-2 md:p-4 block items-center justify-center border-2 rounded-lg hover:bg-gray-50 focus:outline-none" id="uploadimgRecommendMenu">
@@ -381,6 +411,29 @@ $form = [
 															<p class="my-2">เพิ่มรูปภาพ</p>
 														</button>
 													</div>
+												<?php break;
+												case "telInfo": ?>
+													<div class="block md:flex">
+														<input value="" name="telInfo-telNo" class="py-2 px-4 mb-2 md:mr-2 border rounded-lg" placeholder="เบอร์โทรศัพท์" <?= $input['required'] ? "required": ""?>/>
+														<input value="" name="telInfo-telOwner" class="py-2 px-4 mb-2 md:ml-2 border rounded-lg" placeholder="ชื่อเจ้าของเบอร์โทรศัพท์" <?= $input['required'] ? "required": ""?>/>
+													</div>
+												<?php break;
+												case "date": ?>
+													<div class="flex">
+														<input type="date" id="<?= $input['name'] ?>" name="<?= $input['name'] ?>" class="py-2 px-4 mr-2 border rounded-lg" <?= $input['required'] ? "required": ""?>>
+													</div>
+												<?php break;
+												case "restaurantAvailableButton": ?>
+													<button type="button" id="addbox" class="flex items-center text-base font-bold"><?= isset($input['icon']) ? '<img class="w-5 h-5 mr-3" src="' . $input['icon'] . '" />' : '' ?> <?= $input['btn-label'] ?></button>
+												<?php break;
+												case "restaurantAvailable": ?>
+													<p id="restaurantAvailable-repeater"></p>
+												<?php break;
+												case "restaurantDeliveryAvailableButton": ?>
+													<button type="button" id="addboxDelivery" class="flex items-center text-base font-bold"><?= isset($input['icon']) ? '<img class="w-5 h-5 mr-3" src="' . $input['icon'] . '" />' : '' ?> <?= $input['btn-label'] ?></button>
+												<?php break;
+												case "restaurantDeliveryAvailable": ?>
+													<p id="restaurantDeliveryAvailable-repeater"></p>
 												<?php break;
 													default:
 										endswitch; ?>
@@ -404,7 +457,7 @@ $form = [
 					<input type="hidden" name="action" value="restaurant_register" />
 					<input type="hidden" name="id" value="" />
 					<input type="hidden" name="title" value="ชื่อ" />
-					<input type="hidden" name="post_type" value="restaurant_register" />
+					<input type="hidden" name="post_type" value="restaurants" />
 					<input type="hidden" name="redirect" value="restaurant-hub" />
 					<button type="submit" class="rounded-full px-8 py-3 px-28 bg-white text-lg" style="background: #FFD950;">ลงทะเบียน</button>
 				</div>
@@ -454,20 +507,76 @@ $form = [
 		});
 	});
 
-	$(document).ready(function(){
-		$('#general_info-restaurant_type').selectize({
-			plugins: ['remove_button'],
-			delimiter: ',',
-			persist: false,
-			create: function(input) {
-				return {
-					value: input,
-					text: input
-				}
-			}
-		});
+	let boxIdx = 0;
+	let boxIdxDelivery = 0;
+
+	function generateRestaurantAvailable() {
+		console.log('start', boxIdx);
+		$("#restaurantAvailable-repeater").append(`
+			<div class="flex flex-wrap md:block p-8 mb-8 relative" style="border-radius:4px;box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);">
+				<div class="absolute right-0 top-0 -mr-2 -mt-2 cursor-pointer deletebox"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+				<div class="flex my-2">
+					<span class="text-gray-500 mr-2">วันเปิด: </span>
+					<select value="" name="restaurantAvailable-restaurantDay[${boxIdx}]" class="py-2 px-4 border rounded-lg w-full lg:w-auto" style="min-width: 50%;" <?= $input['required'] ? "required": ""?>>
+						<option value="">เลือก</option>
+						<?php foreach($restaurantDayOptions as $option):?>
+							<option value="<?= $option['value']?>"><?= $option['name']?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="flex my-2">
+					<span class="text-gray-500 mr-2">เวลาเปิด: </span><input type="time" name="restaurantAvailable-restaurantOpen[${boxIdx}]" class="py-2 px-4 mr-2 border rounded-lg" <?= $input['required'] ? "required": ""?>>
+				</div>
+				<div class="flex">
+					<span class="text-gray-500 mr-2">เวลาปิด: </span><input type="time" name="restaurantAvailable-restaurantClose[${boxIdx++}]" class="py-2 px-4 mr-2 border rounded-lg" <?= $input['required'] ? "required": ""?>>
+				</div>
+			</div>
+		`);
+	}
+
+	function generateRestaurantDeliveryAvailable() {
+		console.log('start', boxIdx);
+		$("#restaurantDeliveryAvailable-repeater").append(`
+			<div class="flex flex-wrap md:block p-8 mb-8 relative" style="border-radius:4px;box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);">
+				<div class="absolute right-0 top-0 -mr-2 -mt-2 cursor-pointer deleteboxDelivery"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+				<div class="flex my-2">
+					<span class="text-gray-500 mr-2">วันเปิด: </span>
+					<select value="" name="restaurantDeliveryAvailable-restaurantDeliveryDay[${boxIdxDelivery}]" class="py-2 px-4 border rounded-lg w-full lg:w-auto" style="min-width: 50%;" <?= $input['required'] ? "required": ""?>>
+						<option value="">เลือก</option>
+						<?php foreach($restaurantDeliveryDayOptions as $option):?>
+							<option value="<?= $option['value']?>"><?= $option['name']?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="flex my-2">
+					<span class="text-gray-500 mr-2">เวลาเปิด: </span><input type="time" name="restaurantDeliveryAvailable-restaurantDeliveryOpen[${boxIdxDelivery}]" class="py-2 px-4 mr-2 border rounded-lg" <?= $input['required'] ? "required": ""?>>
+				</div>
+				<div class="flex">
+					<span class="text-gray-500 mr-2">เวลาปิด: </span><input type="time" name="restaurantDeliveryAvailable-restaurantDeliveryClose[${boxIdxDelivery++}]" class="py-2 px-4 mr-2 border rounded-lg" <?= $input['required'] ? "required": ""?>>
+				</div>
+			</div>
+		`);
+	}
+
+	generateRestaurantAvailable();
+	generateRestaurantDeliveryAvailable();
+
+
+	$("#addbox").click(function() {
+		generateRestaurantAvailable();
+	});
+	$("#addboxDelivery").click(function() {
+		generateRestaurantDeliveryAvailable();
 	});
 
+	$("p").on('click', '.deletebox', function() {
+		$(this).parent().remove();
+	});
+	$("p").on('click', '.deleteboxDelivery', function() {
+		$(this).parent().remove();
+	});
+
+	//รูปภาพ && เมนูแนะนำ
 	$("div").on('click', '.deletepic', function() {
 		$("#form").append(`<input name="fileNotToUpload[]" type="number" value="${$(this).attr('imgIndex')}" class="hidden" >`);
 		$(this).parent().remove();
@@ -502,18 +611,31 @@ $form = [
 			$("#showpicRecommendMenu").append(`
 				<div class="w-1/3 h-24 px-3 mb-3 l-2 relative">
 					<img src="${src}" class="w-full h-full object-cover rounded-lg" />
-					<div class="absolute top-0 right-0 mr-1 -mt-2 cursor-pointer deletepicRecommendMenu" imgIndex="${imgIndexRecommendMenu++}"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
+					<div class="absolute top-0 right-0 mr-1 -mt-2 cursor-pointer deletepicRecommendMenu" imgIndexRecommendMenu="${imgIndexRecommendMenu++}"><img src="<?= get_theme_file_uri() ?>/assets/images/circle-cross.svg" alt=""></div>
 				</div>
 			`);
 		}
 		$("#form").append('<input type="file" accept="image/*" class="file-upload-recommend hidden" name="fileToUploadRecommendMenu[]" onchange="uploadRecommendMenu(event)" multiple>');
 	}
 	
-	$("#uploadimg").click(function() {
-		$(".file-upload:last").trigger('click');
-	});
-	$("#uploadimgRecommendMenu").click(function() {
-		$(".file-upload-recommend:last").trigger('click');
+	$(document).ready(function(){
+		$("#uploadimg").click(function() {
+			$(".file-upload:last").trigger('click');
+		});
+		$("#uploadimgRecommendMenu").click(function() {
+			$(".file-upload-recommend:last").trigger('click');
+		});
+		$('#taxonomy-restaurant_type').selectize({
+			plugins: ['remove_button'],
+			delimiter: ',',
+			persist: false,
+			create: function(input) {
+				return {
+					value: input,
+					text: input
+				}
+			}
+		});
 	});
 	
 </script>

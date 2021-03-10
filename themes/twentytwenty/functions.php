@@ -857,10 +857,8 @@ add_action('admin_post_restaurant_register', 'restaurant_register_process');
 
 function restaurant_register_process()
 {
-	echo $_POST['title'];
-	echo $_POST['id'];
 	$my_post = array(
-		'post_title' => $_POST['general_info-name'],
+		'post_title' => $_POST['ชื่อร้าน'],
 		'post_type' => $_POST['post_type'],
 		'post_status' =>  'submitted'
 	);
@@ -897,7 +895,7 @@ function restaurant_register_process()
 			array_push(
 				$attached,
 				array(
-					'image' => $attach_id
+					'รูป' => $attach_id
 				)
 			);
 		}
@@ -905,14 +903,9 @@ function restaurant_register_process()
 
 	if(count($attached)){
 		update_field(
-			'general_info',
-			array(
-				'images' => $attached
-			),
+			'รูปภาพ',
+			$attached,
 			$the_post_id
-			// 'field_60465a2f96b8c',
-			// $attached,
-			// $the_post_id
 		);
 	}
 
@@ -946,7 +939,8 @@ function restaurant_register_process()
 			array_push(
 				$attached_recommend,
 				array(
-					'menu_image' => $attach_id_recommend
+					'menuName' => 'menuName',
+					'menuPic' => $attach_id_recommend
 				)
 			);
 		}
@@ -954,14 +948,9 @@ function restaurant_register_process()
 
 	if(count($attached_recommend)){
 		update_field(
-			'other_info',
-			array(
-				'recommend_menus' => $attached_recommend
-			),
+			'เมนูแนะนำ',
+			$attached_recommend,
 			$the_post_id
-			// 'field_60465dc62bde6',
-			// $attached_recommend,
-			// $the_post_id
 		);
 	}
 
@@ -978,20 +967,6 @@ function restaurant_register_process()
 				$group1,
 				array(
 					$group2 => $formatValue
-				),
-				$the_post_id
-			);
-		} else if ($name === "general_info-map") {
-			$group1 = $name[0];
-			$group2 = $name[1];
-			update_field(
-				$group1,
-				array(
-					$group2 => array(
-						"address" => $value['address'],
-						"lat" => $value['lat'],
-						"lng" => $lng,
-					)
 				),
 				$the_post_id
 			);
@@ -1012,17 +987,51 @@ function restaurant_register_process()
 		} else if (count($name) > 1) {
 			$group = $name[0];
 			$field = $name[1];
-			update_field(
-				$group,
-				array(
-					$field => $value
-				),
-				$the_post_id
-			);
+			if ($group === 'taxonomy') {
+				wp_set_object_terms($the_post_id, $value, $field);
+			} else {
+				if (is_array($value)) {
+					$repeater = [];
+					foreach ($value as $v) {
+						array_push($repeater, array(
+							$field => $v,
+						));
+					}
+					update_field(
+						$group,
+						$repeater,
+						$the_post_id
+					);
+				} else {
+					update_field(
+						$group,
+						array(
+							$field => $value
+						),
+						$the_post_id
+					);
+				}
+			}
 		} else {
 			$group = null;
 			$field = $name[0];
-			update_field($field, $value, $the_post_id);
+			if($field === "ปักหมุดแผนที่"){
+				if($value){
+					$tempData = str_replace("\\", "",$value);
+					$cleanData = json_decode($tempData, true);
+					update_field(
+						$field, 
+						array(
+							"address" => $cleanData['address'],
+							"lat" => $cleanData['lat'],
+							"lng" => $cleanData['lng'],
+						), 
+						$the_post_id
+					);
+				}
+			}else{
+				update_field($field, $value, $the_post_id);
+			}
 		}
 	}
 
