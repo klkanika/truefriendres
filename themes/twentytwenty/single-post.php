@@ -57,7 +57,7 @@
         <?php include 'truefriend-sponsored.php'; ?>
       </div>
     </div>
-    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background-color:rgba(255,255,255,0.8)">
+    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 40%);">
       <button class="rounded-full text-white py-3 lg:px-28 px-14" style="background-color: #262145;" id="readnext">READ NEXT</button>
     </div>
   </section>
