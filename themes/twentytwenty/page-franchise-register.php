@@ -227,14 +227,14 @@ $form = [
 				"required"			=> true
 			],
 			[
-				"name" 				=> "ค่า_royalty_fee",
+				"name" 				=> "royalty_fee",
 				"label" 			=> "ค่า Royalty Free",
 				"placeholder" 		=> "",
 				"type"				=> "fee",
 				"required"			=> true
 			],
 			[
-				"name" 				=> "ค่า_marketing_fee",
+				"name" 				=> "marketing_fee",
 				"label" 			=> "ค่า Marketing Free",
 				"placeholder" 		=> "",
 				"type"				=> "fee",
@@ -551,7 +551,7 @@ $form = [
 													<select value="" name="<?= $input['name'] ?>" class="py-2 px-4 border rounded-lg w-full lg:w-auto" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
 														<option value="">เลือก</option>
 														<?php foreach ($input['options'] as $option) : ?>
-															<option value="<?= $option['value'] ?>"><?= $option['name'] ?></option>
+															<option value="<?= $option['name'] ?>"><?= $option['name'] ?></option>
 														<?php endforeach; ?>
 													</select>
 												<?php break;
@@ -575,8 +575,8 @@ $form = [
 													<input type="number" value="" name="<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-full" <?= $input['required'] ? "required" : "" ?> />
 												<?php break;
 												case "fee": ?>
-													<input type="number" value="" name="<?= $input['name'] ?>-<?= $input['name'] ?>" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
-													<select name="<?= $input['name'] ?>-หน่วย" class="py-2 px-4 border rounded-lg w-1/5">
+													<input type="number" value="" name="<?= $input['name'] ?>-value" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
+													<select name="<?= $input['name'] ?>-unit" class="py-2 px-4 border rounded-lg w-1/5">
 														<option selected value="% ต่อปี">% ต่อปี</option>
 														<option value="บาทต่อปี">บาทต่อปี</option>
 													</select>
@@ -595,7 +595,7 @@ $form = [
 													<select multiple="multiple" id="<?= $input['name'] ?>" value="" name="<?= $input['name'] ?>[]" style="min-width: 50%;" <?= $input['required'] ? "required" : "" ?>>
 														<option value="">เลือก</option>
 														<?php foreach ($input['options'] as $option) : ?>
-															<option value="<?= $option['value'] ?>"><?= $option['name'] ?></option>
+															<option value="<?= $option['name'] ?>"><?= $option['name'] ?></option>
 														<?php endforeach; ?>
 													</select>
 												<?php break;

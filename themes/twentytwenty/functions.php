@@ -903,7 +903,7 @@ function restaurant_register_process()
 		}
 	}
 
-	if(count($attached)){
+	if (count($attached)) {
 		update_field(
 			'general_info',
 			array(
@@ -952,7 +952,7 @@ function restaurant_register_process()
 		}
 	}
 
-	if(count($attached_recommend)){
+	if (count($attached_recommend)) {
 		update_field(
 			'other_info',
 			array(
@@ -1036,6 +1036,7 @@ add_action('admin_post_common_register', 'common_register_process');
 
 function common_register_process()
 {
+	echo '<pre>';
 	if ($_POST['post_type'] === 'course_register') {
 		$my_post = array(
 			'post_type' => $_POST['post_type'],
@@ -1094,6 +1095,8 @@ function common_register_process()
 	);
 
 	foreach ($_POST as $key => $value) {
+		var_dump($key);
+		var_dump($value);
 		$name = explode("-", $key);
 		if (count($name) > 2) {
 			$group1 = $name[0];

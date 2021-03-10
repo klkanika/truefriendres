@@ -16,7 +16,7 @@
   $franchiseTypes = wp_get_post_terms(get_the_ID(), 'franchise_type');
   $franchiseStyles = wp_get_post_terms(get_the_ID(), 'franchise_style');
   $franchiseProducts = wp_get_post_terms(get_the_ID(), 'franchise_product');
-  $นโยบาย_การขยายสาขา = get_field('นโยบาย_การขยายสาขา');
+  $นโยบาย_การขยายสาขา = wp_get_post_terms(get_the_ID(), 'franchise_branch_policy');
   $contact = [];
   $ข้อมูลติดต่อ = get_field('ข้อมูลติดต่อ');
   foreach ($ข้อมูลติดต่อ as $key => $ข้อมูล) {
@@ -163,7 +163,7 @@
         </div>
         <div class="border-b border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ค่า Royalty Free</p>
-          <p class="text-xl"><?= get_field('ค่า_royalty_fee') ? get_field('ค่า_royalty_fee')['ค่า_royalty_fee'] . ' ' . get_field('ค่า_royalty_fee')['หน่วย'] : '-' ?></p>
+          <p class="text-xl"><?= get_field('royalty_fee') ? get_field('royalty_fee')['value'] . ' ' . get_field('royalty_fee')['unit'] : '-' ?></p>
         </div>
         <div class="border-gray-300 py-8">
           <p class="text-gray-500 mb-2">ประเทศ</p>
@@ -171,7 +171,7 @@
         </div>
         <div class="border-gray-300 py-8 lg:border-l lg:pl-16">
           <p class="text-gray-500 mb-2">ค่า Marketing Free</p>
-          <p class="text-xl"><?= get_field('ค่า_marketing_fee') ? get_field('ค่า_marketing_fee')['ค่า_marketing_fee'] . ' ' . get_field('ค่า_marketing_fee')['หน่วย'] : '-' ?></p>
+          <p class="text-xl"><?= get_field('marketing_fee') ? get_field('marketing_fee')['value'] . ' ' . get_field('marketing_fee')['unit'] : '-' ?></p>
         </div>
       </div>
 
