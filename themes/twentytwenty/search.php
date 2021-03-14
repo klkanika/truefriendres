@@ -10,9 +10,8 @@
 </head>
 <?php
 require_once('custom-classes/class-posts.php');
-$catId = get_category_by_slug('knowledge')->cat_ID;
-$knowledgePostsObject = Post::getPostsByCategory('post', $catID, 9, 0, null);
-$knowledgePosts = $knowledgePostsObject->posts;
+$PostsObject = Post::searchPosts(get_search_query(), 9, 0);
+$Posts = $PostsObject->posts;
 ?>
 
 <body class="w-full">
@@ -20,38 +19,33 @@ $knowledgePosts = $knowledgePostsObject->posts;
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full" style="background-color: #262145;">
     <div class="flex flex-col my-8 lg:px-40 px-8">
-      <span class="text-xl mb-2 font-thin">คลังความรู้</span>
-      <span class="text-5xl font-extrabold">Knowledge</span>
-    </div>
-    <div class="border-t border-gray-500 lg:px-32 lg:mx-8 px-8 py-5 flex lg:justify-start justify-center gap-4">
-      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('knowledge'))) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
-      <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('knowledge'))) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-      <div copytoclipboard="<?= get_permalink(get_page_by_path('knowledge')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
+      <span class="text-xl mb-2 font-thin">Search</span>
+      <span class="text-5xl font-extrabold"><?=get_search_query()?></span>
     </div>
     <div class="bg-white">
-      <?php if(!empty($catId)) :?>
+      <?php if(!empty(get_search_query()) && !empty($PostsObject->posts_count)) :?>
         <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
-          <?php foreach ($knowledgePosts as $thePost) : 
+          <?php foreach ($Posts as $thePost) : 
             $image = $defaultImage;
             if(file_exists($thePost->featuredImage)){
-                $image = $thePost->featuredImage ;
+              $image = $thePost->featuredImage ;
             }
             ?>
             <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
-              <div class="lg:h-72 h-56">
-                <img class="rounded-lg object-cover w-full h-full" src="<?= $image ?>" alt="">
-              </div>
-              <div class="font-semibold text-lg"><?= $thePost->title ?></div>
-              <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
+            <div class="lg:h-72 h-56">
+              <img class="rounded-lg object-cover w-full h-full" src="<?= $image ?>" alt="">
+            </div>
+            <div class="font-semibold text-lg"><?= $thePost->title ?></div>
+            <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
             </a>
           <?php endforeach; ?>
         </div>
         <div class="bg-white text-center text-xs py-12">
           <button class="rounded-full text-white px-8 py-3 px-28 hidden" style="background-color: #262145;" id="loadmore">LOAD MORE</button>
         </div>
-      <?php else: ?>
-        <p class="text-center w-full">ไม่พบข้อมูล</p>
-      <?php endif; ?>
+     	 <?php else: ?>
+        	<p class="text-center w-full text-black py-24">ไม่พบข้อมูล</p>
+      	<?php endif; ?>
     </div>
   </section>
   <?php include 'truefriend-footer.php'; ?>
@@ -59,12 +53,11 @@ $knowledgePosts = $knowledgePostsObject->posts;
 
 </html>
 
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $(document).ready(function() {
     var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
-    let allPosts = <?= $knowledgePostsObject->posts_count ?>;
+    let allPosts = <?= $PostsObject->posts_count ?>;
     let currentPosts = 9;
     let postsPerPage = 9;
     let loadMoreBtn = $("#loadmore");
@@ -83,11 +76,10 @@ $knowledgePosts = $knowledgePostsObject->posts;
 
     const loadMorePost = (postsPerPage) => {
       var request = {
-        'action': 'get_posts_by_cat_json_ajax',
-        'postType': 'post',
+        'action': 'search_posts_json_ajax',
         'postsPerPage': postsPerPage,
+        'keyword': '<?= get_search_query() ?>',
         'offset': currentPosts,
-        'categoryNo': <?= get_category_by_slug('knowledge')->cat_ID ?>,
       };
 
       $.ajax({
@@ -99,11 +91,12 @@ $knowledgePosts = $knowledgePostsObject->posts;
         success: function(postsObject) {
           currentPosts += postsObject.posts.length;
           const posts = postsObject.posts;
+		  const defaultImage = "<?= $defaultImage ?>";
           posts.map((thePost, i) => {
             $("#posts").append(`
             <a href="${thePost.link}" class="flex flex-col gap-4">
               <div class="lg:h-72 h-56">
-                <img class="rounded-lg object-cover w-full h-full" src="${thePost.featuredImage}" alt="">
+			  	      <img id="img-${thePost.id}" class="rounded-lg object-cover w-full h-full" src="${thePost.featuredImage}" alt="" onerror="document.getElementById('img-'+${thePost.id}).src = '${defaultImage}'">
               </div>
               <div class="font-semibold text-lg">${thePost.title}</div>
               <div class="" style="color: rgba(6, 34, 65, 0.4)">${thePost.date}</div>

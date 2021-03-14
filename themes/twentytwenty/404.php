@@ -1,36 +1,36 @@
-<?php
-/**
- * The template for displaying the 404 template in the Twenty Twenty theme.
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
+<!DOCTYPE html>
+<html lang="en">
 
-get_header();
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Not Found</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
+</head>
+<?php
+$searchQuery = get_search_query();
 ?>
 
-<main id="site-content" role="main">
+<body class="w-full">
+  <?php include 'truefriend-header.php'; ?>
+  <!-- Set up your HTML -->
+  <section class="text-white pt-32 w-full" style="background-color: #262145;">
+	<?php if(!empty($searchQuery)) :?>
+		<div class="flex flex-col my-8 lg:px-40 px-8">
+			<span class="text-xl mb-2 font-thin">Search</span>
+			<span class="text-5xl font-extrabold"><?=$searchQuery ?></span>
+		</div>
+	<?php else :?>
+		<div class="flex flex-col my-8 lg:px-40 px-8">
+			<span class="text-5xl font-extrabold">Page Not Found</span>
+		</div>
+	<?php endif; ?>
+    <div class="bg-white text-black mx-auto">
+		<p class="text-center w-full py-24">ไม่พบข้อมูล</p>
+    </div>
+  </section>
+  <?php include 'truefriend-footer.php'; ?>
+</body>
 
-	<div class="section-inner thin error404-content">
-
-		<h1 class="entry-title"><?php _e( 'Page Not Found', 'twentytwenty' ); ?></h1>
-
-		<div class="intro-text"><p><?php _e( 'The page you were looking for could not be found. It might have been removed, renamed, or did not exist in the first place.', 'twentytwenty' ); ?></p></div>
-
-		<?php
-		get_search_form(
-			array(
-				'label' => __( '404 not found', 'twentytwenty' ),
-			)
-		);
-		?>
-
-	</div><!-- .section-inner -->
-
-</main><!-- #site-content -->
-
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
-
-<?php
-get_footer();
+</html>

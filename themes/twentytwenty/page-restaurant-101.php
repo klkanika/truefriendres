@@ -3,7 +3,8 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-$restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 8, 0, null);
+$catId = get_category_by_slug('restaurant101')->cat_ID;
+$restaurant101PostsObject = Post::getPostsByCategory('post', $catId, 8, 0, null);
 $restaurant101Posts = $restaurant101PostsObject->posts;
 ?>
 
@@ -78,26 +79,30 @@ $restaurant101Posts = $restaurant101PostsObject->posts;
         </div>
       </section>
     </section>
-    <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
-      <?php foreach ($restaurant101Posts as $thePost) : ?>
-        <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
-          <div class="p-6 w-full">
-            <div class="w-full relative flex items-center h-48 lg:h-64">
-              <!-- <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('<?= $thePost->featuredImage ?>')"></div> -->
-              <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
-              <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-              <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
-                <p class="text-xs"><?= $thePost->restaurantCategory[0] ?></p>
-                <p class="lg:text-base text-sm mt-2"><?= $thePost->title; ?></p>
+    <?php if(!empty($catId)) :?>
+      <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
+        <?php foreach ($restaurant101Posts as $thePost) : ?>
+          <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
+            <div class="p-6 w-full">
+              <div class="w-full relative flex items-center h-48 lg:h-64">
+                <!-- <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('<?= $thePost->featuredImage ?>')"></div> -->
+                <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
+                <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
+                <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
+                  <p class="text-xs"><?= $thePost->restaurantCategory[0] ?></p>
+                  <p class="lg:text-base text-sm mt-2"><?= $thePost->title; ?></p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      <?php endforeach ?>
-    </section>
-    <div class="flex w-full justify-center mt-8">
-      <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
-    </div>
+          </a>
+        <?php endforeach ?>
+      </section>
+      <div class="flex w-full justify-center mt-8">
+        <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
+      </div>
+    <?php else: ?>
+      <p class="text-center w-full">ไม่พบข้อมูล</p>
+    <?php endif; ?>
   </section>
   <?php include 'truefriend-footer.php'; ?>
 </body>

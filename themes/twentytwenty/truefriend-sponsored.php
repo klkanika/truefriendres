@@ -12,6 +12,7 @@ $adsPosts = array_values(array_filter($adsObjects->posts, function ($p) {
 }));
 $adsPostCount = count($adsPosts);
 $randomAds = rand(0, ($adsPostCount-1)); 
+$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
 ?>
 <div class="mb-8">
   <div class="border-b pb-2 mb-4 font-semibold tracking-wide">Sponsored by</div>
@@ -27,7 +28,7 @@ $randomAds = rand(0, ($adsPostCount-1));
   <div class="flex flex-col gap-4">
     <?php foreach (get_categories() as $key => $category) :
       if ($category->count > 0 && $key < 5) : ?>
-        <a href="/category/<?= $category->slug ?>" class="flex justify-between items-center font-thin">
+        <a href="<?= get_category_link( $category->cat_ID ) ?>" class="flex justify-between items-center font-thin">
           <span><?= $category->name ?></span>
           <img src="<?= get_theme_file_uri() ?>/assets/images/right.png" class="cursor-pointer w-2" />
         </a>
@@ -90,6 +91,9 @@ if ($query->have_posts()) {
       <?php
         $thumbnailId = get_post_thumbnail_id($thePost);
         $image = wp_get_attachment_url($thumbnailId, 'thumbnail');
+        if(!file_exists($image)){
+          $image = $defaultImage;
+        }
         $link = get_permalink($thePost);
         $postDate = date_format(date_create($thePost->post_date),"d/m/Y");
       ?>

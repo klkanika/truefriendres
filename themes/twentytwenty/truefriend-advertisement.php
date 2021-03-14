@@ -19,5 +19,8 @@ $randomAds = rand(0, ($adsPostCount-1));
       <img class="hidden md:flex w-full h-48 object-cover" src="<?=  $adsPosts[$randomAds]->adsImage ?>" alt="">
       <img class="md:hidden w-full h-48 object-cover" src="<?=  $adsPosts[$randomAds]->adsMobileImage ?>" alt="">
       </a>
+  <?php }
+  else { ?>
+    <p>ไม่มีโฆษณา</p>
   <?php } ?>
 </section>

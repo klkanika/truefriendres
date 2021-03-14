@@ -1,3 +1,6 @@
+<?php 
+	$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+?>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
@@ -170,7 +173,7 @@
 
 	$(document).on('click','.btn-copytoclipboard',function(event){
 		event.preventDefault();
-		CopyToClipboard($(this).attr('copytoclipboard'), true, "Value copied");
+		CopyToClipboard($(this).attr('copytoclipboard'), true, "คัดลอก");
 	});
 
 	function CopyToClipboard(value, showNotification, notificationText) {
@@ -228,7 +231,7 @@
 			['link'=> 'contact-us', 'label'=>'contact us'],
 		];?>
 		<?php foreach($menus as $menu):?>
-			<a href="<?= get_site_url().'/'.$menu['link'] ?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
+			<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
 			<?php endforeach;?>
 	</div>
 	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar" onclick="burger()">
@@ -240,7 +243,7 @@
 		C0,0.8,0.1,0.9,0.2,1C0.3,1.2,0.4,1.2,0.6,1.2z" />
 	</svg>
 	<div class="logo flex items-center lg:ml-8">
-		<div style="width: 35px;"><?php twentytwenty_site_logo(); ?></div>
+		<div style="width: 35px;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div>
 		<a href="<?= get_site_url() ?>/">
 			<div class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
 		</a>

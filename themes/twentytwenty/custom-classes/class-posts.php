@@ -250,6 +250,35 @@ class Post
         return $thePost;
     }
 
+    public static function searchPosts($keyword, $postsPerPage, $offset)
+    {
+        $args = array( 
+            's' => $keyword,
+            'offset' => $offset,
+        );
+        if ($postsPerPage != null) {
+            $args['posts_per_page'] = $postsPerPage;
+        }
+        
+        $query = new WP_Query($args);
+
+        $posts = [];
+        if ($query->have_posts()) {
+            $tq = $query->found_posts;
+            while ($query->have_posts()) {
+                $query->the_post();
+                $thePost = Post::getPost($postType, null);
+                array_push($posts, $thePost);
+            }
+        }
+
+        return
+            json_decode('{
+                "posts" : ' . json_encode($posts) . ',' .
+                '"posts_count" : ' .  $query->found_posts .
+                '}');
+    }
+
     // function getPostBySlug( $slug, $post_type = "post" ) {
     //     $query = new WP_Query(
     //         array(

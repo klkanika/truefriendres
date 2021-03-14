@@ -1329,3 +1329,18 @@ function get_posts_by_acf_field_json_ajax()
 	echo json_encode($posts);
 	wp_die();
 }
+
+add_action('wp_ajax_search_posts_json_ajax', 'search_posts_json_ajax');
+add_action('wp_ajax_nopriv_search_posts_json_ajax', 'search_posts_json_ajax');
+
+function search_posts_json_ajax()
+{
+	$keyword = $_POST['keyword'];
+	$postsPerPage = $_POST['postsPerPage'];
+	$offset = $_POST['offset'];
+
+	$posts = Post::searchPosts($keyword, $postsPerPage, $offset);
+
+	echo json_encode($posts);
+	wp_die();
+}

@@ -14,14 +14,12 @@
 <?php
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-suppliertypes.php');
-$stickyPosts = Post::getStickyPosts('post',5);
+$stickyPosts = Post::getStickyPosts('post', 5);
 $recentPosts = Post::getPostsByCategory('post', null, 12, 0, null);
-// $interviewPosts = Post::getPostsByCategory('interviews', null, 12, 0, null);
 $galleryCatId = get_category_by_slug('gallery')->cat_ID;
 $galleryPosts = Post::getPostsByCategory('post', get_category_by_slug('gallery')->cat_ID, 4, 0, null);
 $supplierTypes = SupplierType::getSupplierTypes(20);
 $supplierPosts = Post::getPostsByCategory('suppliers', null, 1, 0, null);
-// categories of posts (input as slug)
 $postCategories = array('news', 'marketing', 'knowledge');
 $postObjects = array();
 foreach ($postCategories as $postCategory) {
@@ -37,6 +35,24 @@ foreach ($postCategories as $postCategory) {
         ));
     }
 }
+$terms = get_terms(array(
+    'taxonomy' => 'suppliertypes',
+    'hide_empty' => false,
+    'orderby' => 'count',
+    'order' => 'DESC'
+));
+$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+// echo '<pre>';
+// foreach ($stickyPosts as $thePost) {
+//     $filename = $thePost->featuredImage;
+//     // $image = get_theme_file_uri()."/assets/images/img-default.jpg";
+//     if (file_exists($filename)) {
+// echo "The file $filename exists<br/>";
+// } else {
+// echo "The file $filename does not exist<br/>";
+// }
+// }
+// print_r($terms);
 ?>
 
 <body class="w-full">
@@ -58,59 +74,86 @@ foreach ($postCategories as $postCategory) {
             }
         }
     </style>
-    <section id="section-1stSlider" class="relative">
-        <div id="1stSlider" class="owl-carousel">
-            <?php
-            foreach ($stickyPosts as $thePost) {
-            ?>
-                <div class="relative banner">
-                    <a href="<?= $thePost->link ?>">
-                        <img class="object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" />
-                        <div class="absolute left-0 bottom-0 banner__title">
-                            <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
-                                <div onclick="window.open('<?= get_site_url() ?>/<?= $thePost->categories[0]->slug ?>','_self')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
-                                <p class="text-white lg:text-2xl text-xl"><?= $thePost->title ?></p>
+    <!--Sticky Slide -->
+    <?php if(!empty($stickyPosts)) :?>
+        <section id="section-1stSlider" class="relative">
+            <div id="1stSlider" class="owl-carousel">
+                <?php
+                foreach ($stickyPosts as $thePost) {
+                    $image = $defaultImage;
+                    if(file_exists($thePost->featuredImage)){
+                        $image = $thePost->featuredImage ;
+                    }
+                ?>
+                    <div class="relative banner">
+                        <a href="<?= $thePost->link ?>">
+                            <img class="object-cover w-full h-full" src="<?= $image ?>" />
+                            <div class="absolute left-0 bottom-0 banner__title">
+                                <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
+                                    <div onclick="window.open('<?= get_site_url() ?>/<?= $thePost->categories[0]->slug ?>','_self')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
+                                    <p class="text-white lg:text-2xl text-xl"><?= $thePost->title ?></p>
+                                </div>
                             </div>
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
+            <!-- 1st navigator -->
+            <div class="absolute flex items-center justify-between w-16 right-0 bottom-0 lg:mr-8 mr-5 lg:mb-10 mb-6 z-20">
+                <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left.svg" referTo="1stSlider" class="cursor-pointer toTheLeft" />
+                <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" referTo="1stSlider" class="cursor-pointer toTheRight" />
+            </div>
+        </section>
+    <?php else: ?>
+        <div class="relative banner">
+                <img class="object-cover w-full h-full" src="<?= $defaultImage ?>" />
+                <div class="absolute left-0 bottom-0 banner__title">
+                    <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
+                        <div class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;">ไม่พบข้อมูล</div>
+                    </div>
+                </div>
+        </div>
+    <?php endif; ?>
+
+    <!--Last update Post Slide -->
+    <?php if(!empty($recentPosts->posts_count)) :?>
+        <section id="section-2ndSlider" class="pt-8 pb-10 lg:pl-8 lg:pr-8 pl-4" style="color:#062241">
+            <div class="mb-4 flex justify-between">
+                <p class="font-bold text-2xl">Last update</p>
+                <!-- 2nd navigator -->
+                <div class="items-center justify-between w-16 hidden lg:flex">
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="2ndSlider" class="cursor-pointer toTheLeft" />
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" referTo="2ndSlider" class="cursor-pointer toTheRight" />
+                </div>
+            </div>
+            <div id="2ndSlider" class="owl-carousel">
+                <?php
+                foreach ($recentPosts->posts as $thePost) {
+                    $image = $defaultImage;
+                    if(file_exists($thePost->featuredImage)){
+                        $image = $thePost->featuredImage ;
+                    }
+                ?>
+                    <a href="<?= $thePost->link ?>">
+                        <div class="relative">
+                            <div style="height:30vh">
+                                <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" />
+                            </div>
+                            <p class="mt-4"> <?= $thePost->title ?> </p>
                         </div>
                     </a>
-                </div>
-            <?php } ?>
-        </div>
-        <!-- 1st navigator -->
-        <div class="absolute flex items-center justify-between w-16 right-0 bottom-0 lg:mr-8 mr-5 lg:mb-10 mb-6 z-20">
-            <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left.svg" referTo="1stSlider" class="cursor-pointer toTheLeft" />
-            <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" referTo="1stSlider" class="cursor-pointer toTheRight" />
-        </div>
-    </section>
-    <section id="section-2ndSlider" class="pt-8 pb-10 lg:pl-8 lg:pr-8 pl-4" style="color:#062241">
-        <div class="mb-4 flex justify-between">
-            <p class="font-bold text-2xl">Last update</p>
-            <!-- 2nd navigator -->
-            <div class="items-center justify-between w-16 hidden lg:flex">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="2ndSlider" class="cursor-pointer toTheLeft" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" referTo="2ndSlider" class="cursor-pointer toTheRight" />
+                <?php
+                }
+                ?>
             </div>
-        </div>
-        <div id="2ndSlider" class="owl-carousel">
-            <?php
-            foreach ($recentPosts->posts as $thePost) {
-            ?>
-                <a href="<?= $thePost->link ?>">
-                    <div class="relative">
-                        <div style="height:30vh">
-                            <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
-                        </div>
-                        <p class="mt-4"> <?= $thePost->title ?> </p>
-                    </div>
-                </a>
-            <?php
-            }
-            ?>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
+
     <?php include 'truefriend-advertisement.php'; ?>
     <?php include 'truefriend-interview.php'; ?>
     <?php include 'truefriend-restaurant101.php'; ?>
+    
+    <!--Supplier Hub-->
     <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" style="background-color:#262145;">
         <div class="lg:mb-12 mb-8">
             <div class="mb-1 flex justify-between lg:pr-8">
@@ -124,39 +167,44 @@ foreach ($postCategories as $postCategory) {
                             </button>
                         </div>
                     </form>
-                    <p class="font-bold mr-8 hidden lg:block cursor-pointer" id="supplier-type-search-btn"> ค้นหา</p>
-                    <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierPosts->posts_count < 1000 ? $supplierPosts->posts_count : '999+' ?>)</a>
+                    <?php if(!empty($supplierPosts->posts_count)): ?>
+                        <p class="font-bold mr-8 hidden lg:block cursor-pointer" id="supplier-type-search-btn"> ค้นหา</p>
+                        <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierPosts->posts_count < 1000 ? $supplierPosts->posts_count : '999+' ?>)</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
         </div>
         <div class="lg:block hidden">
-            <!-- <div id="5thSlider" class="owl-carousel " style="border-color:#E9E9E9"> -->
             <div class="swiper-container supplier-container" style="border-color:#E9E9E9">
                 <div class="swiper-wrapper supplier-wrapper" id="supplier-wrapper">
                     <?php
-                    foreach ($supplierTypes->supplierTypes as $supplierType) :
-                        if ((int)$supplierType->supplierTypeCount > 0) :
-                    ?>
-                            <a href="<?= $supplierType->link ?>" class="swiper-slide">
-                                <div class="relative" style="height:40vh;">
-                                    <div style="height:40vh;">
-                                        <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+                    if(!empty($supplierTypes->posts_count) && !empty($supplierPosts->posts_count)):
+                        foreach ($supplierTypes->supplierTypes as $supplierType) :
+                            if ((int)$supplierType->supplierTypeCount > 0) :
+                        ?>
+                                <a href="<?= $supplierType->link ?>" class="swiper-slide">
+                                    <div class="relative" style="height:40vh;">
+                                        <div style="height:40vh;">
+                                            <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+                                        </div>
+                                        <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
+                                            <?php if ((int)$supplierType->supplierTypeCount < 99) {
+                                                echo $supplierType->supplierTypeCount;
+                                            } else {
+                                                echo '99+';
+                                            } ?>
+                                        </div>
+                                        <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                            <p><?= $supplierType->name ?></p>
+                                        </div>
                                     </div>
-                                    <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
-                                        <?php if ((int)$supplierType->supplierTypeCount < 99) {
-                                            echo $supplierType->supplierTypeCount;
-                                        } else {
-                                            echo '99+';
-                                        } ?>
-                                    </div>
-                                    <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
-                                        <p><?= $supplierType->name ?></p>
-                                    </div>
-                                </div>
-                            </a>
-                    <?php endif;
-                    endforeach; ?>
+                                </a>
+                        <?php endif;
+                        endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center w-full">ไม่พบข้อมูล</p>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
@@ -182,6 +230,8 @@ foreach ($postCategories as $postCategory) {
         </div>
     </section>
     <?php include 'truefriend-advertisement.php'; ?>
+
+    <!--News & Marketing & Knowledge Post-->
     <section id="section-blogs" class="pt-12 lg:ml-8 lg:mr-2 ml-4 mr-4 lg:pb-16 pb-12 flex flex-wrap" style="color:#062241">
         <?php
         foreach ($postObjects as $postObject) {
@@ -198,10 +248,14 @@ foreach ($postCategories as $postCategory) {
                     for ($i = 0; $i < count($posts); $i++) {
                         $thePost = $posts[$i];
                         if ($i === 0) {
+                            $image = $defaultImage;
+                            if(file_exists($thePost->featuredImage)){
+                                $image = $thePost->featuredImage ;
+                            }
                 ?>
                             <div onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
                                 <div class="mb-4" style="height:30vh">
-                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
+                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" />
                                 </div>
                                 <p><?= $thePost->title ?></p>
                             </div>
@@ -222,6 +276,8 @@ foreach ($postCategories as $postCategory) {
         }
         ?>
     </section>
+
+    <!-- Gallery -->
     <section class="text-white" style="background-color:#19181F;">
         <div class="pt-16 lg:ml-8 lg:mr-8 ml-4 mr-4 lg:pb-16 pb-10 lg:text-base text-xs">
             <p class="text-2xl mb-16 text-center">G A L L E R Y</p>
@@ -236,22 +292,22 @@ foreach ($postCategories as $postCategory) {
                             </div>
                         </a>
                 <?php endforeach;
-                endif; ?>
+                else: ?>
+                    <p class="text-center w-full">ไม่พบข้อมูล</p>
+                <?endif; ?>
             </div>
             <div class="flex justify-center">
                 <p class="mt-4 select-none cursor-pointer hidden" id="loadmore">Load More</p>
             </div>
         </div>
     </section>
+
     <?php include 'truefriend-footer.php'; ?>
 </body>
-
-</html>
-
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
-<script>
+
+<script type="text/javascript">
     $(window).resize(function() {
         $("#2ndSlider").trigger('destroy.owl.carousel');
         $("#2ndSlider").owlCarousel({
@@ -276,108 +332,110 @@ foreach ($postCategories as $postCategory) {
         });
     });
 
-    $(document).ready(function() {
-        $("#1stSlider").owlCarousel({
-            items: 1,
-            loop: true,
-            // autoplay: true,
-            autoplayHoverPause: true,
-            dots: false,
-        });
+    $("#1stSlider").owlCarousel({
+        items: 1,
+        loop: true,
+        // autoplay: true,
+        autoplayHoverPause: true,
+        dots: false,
+    });
 
-        $("#2ndSlider").owlCarousel({
-            items: $(window).width() < 1024 ? 1.3 : 4,
-            loop: true,
-            // autoplay: true,
-            autoplayHoverPause: true,
-            slideBy: 2,
-            margin: 20,
-            dots: false,
-        });
+    $("#2ndSlider").owlCarousel({
+        items: $(window).width() < 1024 ? 1.3 : 4,
+        loop: true,
+        // autoplay: true,
+        autoplayHoverPause: true,
+        slideBy: 2,
+        margin: 20,
+        dots: false,
+    });
 
-        $("#3rdSlider").owlCarousel({
-            items: $(window).width() < 1024 ? 1.3 : 4,
-            loop: true,
-            // autoplay: true,
-            autoplayHoverPause: true,
-            slideBy: 2,
-            margin: 20,
-            dots: false,
-        });
+    $("#3rdSlider").owlCarousel({
+        items: $(window).width() < 1024 ? 1.3 : 4,
+        // loop: true,
+        // autoplay: true,
+        autoplayHoverPause: true,
+        slideBy: 2,
+        margin: 20,
+        dots: false,
+    });
 
-        const supplier_swiper_setting = {
-            slidesPerView: 5.5,
-            spaceBetween: 15,
-            loop: false,
+    $(".toTheLeft").click(function() {
+        let carousel = $(this).attr('referTo')
+        $(`#${carousel}`).trigger('prev.owl.carousel');
+    });
+
+    $(".toTheRight").click(function() {
+        let carousel = $(this).attr('referTo')
+        $(`#${carousel}`).trigger('next.owl.carousel');
+    });
+
+    //Restaurant 101
+    $(".tab-button").click(function() {
+        $(".tab-button").removeClass('tab-button-active')
+        $(this).addClass('tab-button-active')
+    })
+
+    //Supplier
+    const supplier_swiper_setting = {
+        slidesPerView: 5.5,
+        spaceBetween: 15,
+        loop: false,
+    };
+
+    let supplier_swiper = new Swiper('.supplier-container', supplier_swiper_setting);
+    $("#supplier-type-search-btn").click(function() {
+        $(this).hide();
+        $("#supplier-type-search-field").show();
+        $("#supplier-type-input").focus();
+    })
+
+    $("#supplier-type-search").submit(function() {
+        const keyword = $("#supplier-type-input").val();
+        var request = {
+            'action': 'get_cat_by_name_json_ajax',
+            'keyword': keyword,
+            'taxonomy': 'suppliertypes',
+            'orderby': 'count',
+            'order': 'DESC',
+            'number': '100',
         };
 
-        let supplier_swiper = new Swiper('.supplier-container', supplier_swiper_setting);
-
-        $(".toTheLeft").click(function() {
-            let carousel = $(this).attr('referTo')
-            $('#' + carousel).trigger('prev.owl.carousel');
-        });
-
-        $(".toTheRight").click(function() {
-            let carousel = $(this).attr('referTo')
-            $('#' + carousel).trigger('next.owl.carousel');
-        });
-
-        $(".tab-button").click(function() {
-            $(".tab-button").removeClass('tab-button-active')
-            $(this).addClass('tab-button-active')
-        })
-
-        $("#supplier-type-search-btn").click(function() {
-            $(this).hide();
-            $("#supplier-type-search-field").show();
-            $("#supplier-type-input").focus();
-        })
-
-        $("#supplier-type-search").submit(function() {
-            const keyword = $("#supplier-type-input").val();
-            var request = {
-                'action': 'get_cat_by_name_json_ajax',
-                'keyword': keyword,
-                'taxonomy': 'suppliertypes',
-                'orderby': 'count',
-                'order': 'DESC',
-                'number': '100',
-            };
-
-            $.ajax({
-                type: "POST",
-                url: ajaxurl,
-                data: request,
-                async: false,
-                dataType: "json",
-                success: function(postsObject) {
-                    console.log(postsObject);
-                    supplier_swiper.destroy();
-                    $("#supplier-wrapper").html(``);
-                    postsObject.map((material, i) => {
-                        $("#supplier-wrapper").append(`
-                            <a href="${material.link}" class="swiper-slide">
-                                <div class="relative" style="height:40vh;">
-                                    <div style="height:40vh;">
-                                        <img class="object-cover w-full h-full rounded-xl" src="${material.pictureUrl}" />
-                                    </div>
-                                    <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
-                                        ${material.category_count < 100 ? material.category_count : '99+'}
-                                    </div>
-                                    <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
-                                        <p>${material.name}</p>
-                                    </div>
+        $.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: request,
+            async: false,
+            dataType: "json",
+            success: function(postsObject) {
+                supplier_swiper.destroy();
+                $("#supplier-wrapper").html(``);
+                postsObject.map((material, i) => {
+                    $("#supplier-wrapper").append(`
+                        <a href="${material.link}" class="swiper-slide">
+                            <div class="relative" style="height:40vh;">
+                                <div style="height:40vh;">
+                                    <img class="object-cover w-full h-full rounded-xl" src="${material.pictureUrl}" />
                                 </div>
-                            </a>
-                        `);
-                    })
-                    supplier_swiper = new Swiper('.supplier-container', supplier_swiper_setting);
-                }
-            })
-            return false;
-        });
-
+                                <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
+                                    ${material.category_count < 100 ? material.category_count : '99+'}
+                                </div>
+                                <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                    <p>${material.name}</p>
+                                </div>
+                            </div>
+                        </a>
+                    `);
+                })
+                supplier_swiper = new Swiper('.supplier-container', supplier_swiper_setting);
+            }
+        })
+        return false;
+    });
+</script>
+<script>
+    //Loadmore
+    $(document).ready(function() {
         var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
         let allGalleryPosts = <?= $galleryPosts->posts_count ?>;
         let currentGalleryPosts = 4;
@@ -390,19 +448,19 @@ foreach ($postCategories as $postCategory) {
 
         loadMoreBtn.click(() => {
             loadMoreBtn.hide();
-            getPostByType('post', <?= get_category_by_slug('gallery')->cat_ID ?>, galleryPostsPerPage, currentGalleryPosts);
+            getPostByType('post', <?= $galleryCatId ?>, galleryPostsPerPage, currentGalleryPosts);
             if (allGalleryPosts > currentGalleryPosts) {
                 loadMoreBtn.show();
             }
         });
 
-        const getPostByType = (postType, cat_ID, postsPerPage, offset) => {
+        const getPostByType = (postType, galleryCatId, postsPerPage, offset) => {
             var request = {
                 'action': 'get_posts_by_cat_json_ajax',
                 'postType': postType,
                 'postsPerPage': postsPerPage,
                 'offset': offset,
-                'categoryNo': cat_ID,
+                'categoryNo': galleryCatId,
             };
 
             $.ajax({

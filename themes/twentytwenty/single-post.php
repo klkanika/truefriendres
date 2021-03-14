@@ -1,3 +1,15 @@
+
+<?php
+// echo is_user_logged_in();
+// if (is_user_logged_in()) {
+//   show_admin_bar(true);
+// }
+show_admin_bar(true);
+// if ( ! current_user_can( 'manage_options' ) ) {
+//   add_filter('show_admin_bar', '__return_false');
+//   }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +34,7 @@
     array_push($cat_ID, $category->cat_ID);
   endforeach;
   $thisLink = get_permalink();
+  $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
   ?>
   <style>
     #headder {
@@ -32,8 +45,9 @@
   <section class="relative w-full">
     <div class="lg:pl-12 pl-4 lg:pr-12 pr-4 lg:pb-10 pb-6 pt-28 text-center" style="background-color: #262145;">
       <div class="flex flex-wrap justify-center mb-6">
-        <?php foreach (get_the_category() as $category) : ?>
-          <a href="/category/<?= $category->slug ?>" class="select-none rounded-full text-center lg:w-44 w-32 p-2 m-1 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $category->cat_name ?></a>
+        <?php 
+        foreach (get_the_category() as $category) : ?>
+          <a href="<?= get_category_link( $category->cat_ID ) ?>" class="select-none rounded-full text-center lg:w-44 w-32 p-2 m-1 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $category->cat_name ?></a>
         <?php endforeach; ?>
       </div>
       <div class="text-white lg:text-3xl text-xl mx-auto"><?= the_title() ?></div>
@@ -43,16 +57,21 @@
         <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
       </div>
     </div>
-    <?php if (!empty(get_the_post_thumbnail_url())) : ?>
+    <?php if (!empty(get_the_post_thumbnail_url())) : 
+        $image = $defaultImage;
+        if(file_exists(get_the_post_thumbnail_url())){
+            $image = get_the_post_thumbnail_url() ;
+        } 
+      ?>
       <div class="relative">
-        <img class="object-cover w-full h-full" src="<?php get_the_post_thumbnail_url() ? the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' ?>" />
+        <img class="object-cover w-full h-full" src="<?=$image?>" />
       </div>
     <?php endif ?>
   </section>
   <!-- overflow-hidden max-h-screen -->
   <section class="w-full lg:p-20 px-4 py-8 relative max-h-screen overflow-hidden" style="color: #062241;" id="content-section">
-    <div class="flex lg:flex-row flex-col lg:gap-28">
-      <div class="flex-1 text-base flex flex-col gap-4"><?= the_content() ?></div>
+    <div class="flex lg:flex-row flex-col lg:gap-10">
+      <div class="lg:w-3/4 flex-1 text-base flex flex-col gap-4"><?= the_content() ?></div>
       <div class="lg:w-1/4 flex flex-col gap-8 lg:mt-0 mt-16 lg:block hidden">
         <?php include 'truefriend-sponsored.php'; ?>
       </div>
@@ -85,10 +104,15 @@
     <div id="relatedSlider" class="owl-carousel">
       <?php
       $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
-      if ($related) foreach ($related->posts as $key => $category) : ?>
+      if ($related) foreach ($related->posts as $key => $category) : 
+        $image = $defaultImage;
+        if(file_exists($category->featuredImage)){
+            $image = $category->featuredImage ;
+        }
+      ?>
         <a href="<?= $category->link ?>" class="block">
           <div style="height:250px;" class="mb-2">
-            <img class="object-cover w-full h-full rounded" src="<?= $category->featuredImage ?>" />
+            <img class="object-cover w-full h-full rounded" src="<?= $image ?>" />
           </div>
           <span class="text-sm"><?= $category->title ?></span>
         </a>
