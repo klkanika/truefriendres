@@ -7,6 +7,7 @@
 	*:focus {
 		outline: unset !important;
 	}
+
 	.fourthSliderClass {
 		height: 30vh;
 	}
@@ -98,7 +99,7 @@
 
 	.copy-notification {
 		color: #ffffff;
-		background-color: rgba(0,0,0,0.8);
+		background-color: rgba(0, 0, 0, 0.8);
 		padding: 20px;
 		border-radius: 30px;
 		position: fixed;
@@ -108,10 +109,11 @@
 		margin-top: -30px;
 		margin-left: -85px;
 		display: none;
-		text-align:center;
+		text-align: center;
 		z-index: 40;
 	}
-	#burger-menu{
+
+	#burger-menu {
 		display: none;
 		position: fixed;
 		top: 0;
@@ -122,7 +124,8 @@
 		height: 100vh;
 		padding: 3% 0;
 	}
-	#burger-menu a:hover{
+
+	#burger-menu a:hover {
 		font-weight: 600;
 		font-size: 1.5rem;
 	}
@@ -171,7 +174,7 @@
 		}, 1000);
 	});
 
-	$(document).on('click','.btn-copytoclipboard',function(event){
+	$(document).on('click', '.btn-copytoclipboard', function(event) {
 		event.preventDefault();
 		CopyToClipboard($(this).attr('copytoclipboard'), true, "คัดลอก");
 	});
@@ -184,38 +187,41 @@
 		$temp.remove();
 
 		if (typeof showNotification === 'undefined') {
-                showNotification = true;
-            }
-            if (typeof notificationText === 'undefined') {
-                notificationText = "Copied to clipboard";
-            }
+			showNotification = true;
+		}
+		if (typeof notificationText === 'undefined') {
+			notificationText = "Copied to clipboard";
+		}
 
-            var notificationTag = $("div.copy-notification");
-            if (showNotification && notificationTag.length == 0) {
-                notificationTag = $("<div/>", { "class": "copy-notification", text: notificationText });
-                $("body").append(notificationTag);
+		var notificationTag = $("div.copy-notification");
+		if (showNotification && notificationTag.length == 0) {
+			notificationTag = $("<div/>", {
+				"class": "copy-notification",
+				text: notificationText
+			});
+			$("body").append(notificationTag);
 
-                notificationTag.fadeIn("slow", function () {
-                    setTimeout(function () {
-                        notificationTag.fadeOut("slow", function () {
-                            notificationTag.remove();
-                        });
-                    }, 1000);
-                });
-            }
+			notificationTag.fadeIn("slow", function() {
+				setTimeout(function() {
+					notificationTag.fadeOut("slow", function() {
+						notificationTag.remove();
+					});
+				}, 1000);
+			});
+		}
 	}
 
-	function burger(){
+	function burger() {
 		$('#burger-menu').toggle();
 	}
 </script>
 <div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 lg:pt-4 lg:pb-4 p-4 z-40">
 	<div id="burger-menu" class="w-full md:w-96">
 		<div class="flex justify-end px-8 mb-4">
-			<svg x="0px" y="0px"viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
-				<circle style="fill:#FFD950" cx="20" cy="20" r="20"/>
+			<svg x="0px" y="0px" viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
+				<circle style="fill:#FFD950" cx="20" cy="20" r="20" />
 				<polygon style="fill:#272245" points="30.7,11.2 29.5,10 20.6,18.9 12.2,10.6 11,11.8 19.3,20.2 11,28.5 12.2,29.7 20.6,21.4 29.5,30.3 
-				30.7,29.1 21.8,20.2 "/>
+				30.7,29.1 21.8,20.2 " />
 			</svg>
 		</div>
 		<?php $menus = [
@@ -233,6 +239,20 @@
 		<?php foreach($menus as $menu):?>
 			<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
 			<?php endforeach;?>
+			['link' => '', 'label' => 'home'],
+			['link' => 'services', 'label' => 'service'],
+			['link' => 'knowledge', 'label' => 'knowledge'],
+			['link' => 'restaurant-101', 'label' => 'Restaurant 101'],
+			['link' => 'interviews', 'label' => 'interview'],
+			['link' => 'vdo', 'label' => 'Video'],
+			['link' => 'infohub', 'label' => 'info hub'],
+			['link' => 'courses', 'label' => 'courses'],
+			['link' => 'documents', 'label' => 'documents'],
+			['link' => 'contact-us', 'label' => 'contact us'],
+		]; ?>
+		<?php foreach ($menus as $menu) : ?>
+			<a href="<?= get_site_url() . '/' . $menu['link'] ?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label'] ?></a>
+		<?php endforeach; ?>
 	</div>
 	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar" onclick="burger()">
 		<path class="st0" d="M18.2,12.4c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H0.6c-0.2,0-0.3-0.1-0.4-0.2
@@ -263,7 +283,7 @@
 			</svg>
 		</a>
 
-		<form method="get">
+		<form method="get" action="<?= get_site_url() ?>">
 			<div id="searchbox" class="rounded-full flex items-center top-4 right-4" style="background-color:#FFD950;">
 				<input class="rounded-full pl-6 hidden m-0 border-0 h-12" type="text" style="background-color:#FFD950;color:#262145;" placeholder="search..." id="searchInput" name="s" />
 				<button type="button" class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
@@ -279,8 +299,10 @@
 	$("#magni").click(() => {
 		let searchInput = $("#searchInput");
 		searchInput.show();
-		if(ismobile){
-			$('#searchbox').css({position:'absolute'});
+		if (ismobile) {
+			$('#searchbox').css({
+				position: 'absolute'
+			});
 		}
 		searchInput.focus();
 		if (searchInput.val()) {
