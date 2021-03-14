@@ -42,17 +42,6 @@ $terms = get_terms(array(
     'order' => 'DESC'
 ));
 $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
-// echo '<pre>';
-// foreach ($stickyPosts as $thePost) {
-//     $filename = $thePost->featuredImage;
-//     // $image = get_theme_file_uri()."/assets/images/img-default.jpg";
-//     if (file_exists($filename)) {
-// echo "The file $filename exists<br/>";
-// } else {
-// echo "The file $filename does not exist<br/>";
-// }
-// }
-// print_r($terms);
 ?>
 
 <body class="w-full">
