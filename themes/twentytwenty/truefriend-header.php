@@ -1,5 +1,7 @@
 <?php 
+	wp_head();
 	$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+	$is_admin = current_user_can('manage_options'); 
 ?>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -215,7 +217,7 @@
 		$('#burger-menu').toggle();
 	}
 </script>
-<div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 lg:pt-4 lg:pb-4 p-4 z-40">
+<div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-4'?> lg:pb-4 p-4 z-40">
 	<div id="burger-menu" class="w-full md:w-96">
 		<div class="flex justify-end px-8 mb-4">
 			<svg x="0px" y="0px" viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
@@ -235,24 +237,11 @@
 			['link'=> 'courses', 'label'=>'courses'],
 			['link'=> 'documents', 'label'=>'documents'],
 			['link'=> 'contact-us', 'label'=>'contact us'],
-		];?>
+		];
+		?>
 		<?php foreach($menus as $menu):?>
 			<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
-			<?php endforeach;?>
-			['link' => '', 'label' => 'home'],
-			['link' => 'services', 'label' => 'service'],
-			['link' => 'knowledge', 'label' => 'knowledge'],
-			['link' => 'restaurant-101', 'label' => 'Restaurant 101'],
-			['link' => 'interviews', 'label' => 'interview'],
-			['link' => 'vdo', 'label' => 'Video'],
-			['link' => 'infohub', 'label' => 'info hub'],
-			['link' => 'courses', 'label' => 'courses'],
-			['link' => 'documents', 'label' => 'documents'],
-			['link' => 'contact-us', 'label' => 'contact us'],
-		]; ?>
-		<?php foreach ($menus as $menu) : ?>
-			<a href="<?= get_site_url() . '/' . $menu['link'] ?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label'] ?></a>
-		<?php endforeach; ?>
+		<?php endforeach;?>
 	</div>
 	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar" onclick="burger()">
 		<path class="st0" d="M18.2,12.4c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H0.6c-0.2,0-0.3-0.1-0.4-0.2
@@ -310,3 +299,9 @@
 		}
 	});
 </script>
+
+<div>
+<?php
+	wp_body_open();
+?>	
+</div>

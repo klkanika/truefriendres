@@ -1344,3 +1344,18 @@ function search_posts_json_ajax()
 	echo json_encode($posts);
 	wp_die();
 }
+
+function clear_styles_and_scripts() {
+	global $wp_scripts;
+	global $wp_styles;
+	$styles_to_keep = array("wp-admin", "admin-bar", "dashicons", "open-sans");
+  
+	foreach( $wp_styles ->queue as $handle ) :
+	 if ( in_array($handle, $styles_to_keep) ) continue;
+	  wp_dequeue_style( $handle );
+	  wp_deregister_style( $handle );
+  
+	  endforeach;
+  
+}
+add_action( 'wp_enqueue_scripts', 'clear_styles_and_scripts', 100 );

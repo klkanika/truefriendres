@@ -1,15 +1,4 @@
 
-<?php
-// echo is_user_logged_in();
-// if (is_user_logged_in()) {
-//   show_admin_bar(true);
-// }
-show_admin_bar(true);
-// if ( ! current_user_can( 'manage_options' ) ) {
-//   add_filter('show_admin_bar', '__return_false');
-//   }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
