@@ -283,7 +283,7 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                 <?php endforeach;
                 else: ?>
                     <p class="text-center w-full">ไม่พบข้อมูล</p>
-                <?endif; ?>
+                <?php endif; ?>
             </div>
             <div class="flex justify-center">
                 <p class="mt-4 select-none cursor-pointer hidden" id="loadmore">Load More</p>
