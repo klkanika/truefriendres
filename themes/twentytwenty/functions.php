@@ -1346,16 +1346,22 @@ function search_posts_json_ajax()
 }
 
 function clear_styles_and_scripts() {
-	global $wp_scripts;
-	global $wp_styles;
-	$styles_to_keep = array("wp-admin", "admin-bar", "dashicons", "open-sans");
-  
-	foreach( $wp_styles ->queue as $handle ) :
-	 if ( in_array($handle, $styles_to_keep) ) continue;
-	  wp_dequeue_style( $handle );
-	  wp_deregister_style( $handle );
-  
-	  endforeach;
+
+	$wp_scripts = wp_scripts();
+    $wp_styles  = wp_styles();
+    $themes_uri = get_theme_root_uri();
+
+    foreach ( $wp_scripts->registered as $wp_script ) {
+        if ( strpos( $wp_script->src, $themes_uri ) !== false ) {
+            wp_deregister_script( $wp_script->handle );
+        }
+    }
+
+    foreach ( $wp_styles->registered as $wp_style ) {
+        if ( strpos( $wp_style->src, $themes_uri ) !== false ) {
+            wp_deregister_style( $wp_style->handle );
+        }
+    }
   
 }
 add_action( 'wp_enqueue_scripts', 'clear_styles_and_scripts', 100 );

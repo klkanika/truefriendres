@@ -44,3 +44,5 @@
 		<p class="lg:text-base text-xs"><a href="tel:0917804724">091 780 4724</a></p>
 	</div>
 </div>
+
+<?php wp_footer(); ?>

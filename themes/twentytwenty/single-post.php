@@ -1,4 +1,7 @@
 
+<?php 
+	$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,11 +26,17 @@
     array_push($cat_ID, $category->cat_ID);
   endforeach;
   $thisLink = get_permalink();
-  $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+  
   ?>
   <style>
     #headder {
       background: #262145;
+    }
+
+    .noImg {
+      background-color: #D3D3D3 !important;
+      width: 150px !important;
+      height: 150px !important;
     }
   </style>
   <!-- Set up your HTML -->
@@ -116,7 +125,7 @@
   <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
-  <script>
+  <script type="text/javascript">
     const copyToClipboard = str => {
       const el = document.createElement('textarea');
       el.value = str;
@@ -127,6 +136,10 @@
     };
 
     $(document).ready(function() {
+      $("img").on("error", function() {
+        $(this).addClass('noImg');
+      });
+      
       $("#relatedSlider").owlCarousel({
         items: $(window).width() < 1024 ? 1.3 : 3,
         loop: true,
