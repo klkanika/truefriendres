@@ -124,7 +124,7 @@ class Restaurant
         $thePost->title = get_the_title();
         $thePost->link = get_the_permalink();
         $thePost->categories = get_the_category();
-        $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+        $thePost->featuredImage = get_the_post_thumbnail_url() && file_exists(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');
         $thePost->numberDate = get_the_date('d/m/Y');
         $thePost->ชื่อร้าน = get_field('ชื่อร้าน');

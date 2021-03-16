@@ -41,7 +41,7 @@ class SupplierType
         return
             json_decode('{
                 "supplierTypes" : ' . json_encode($supplierTypes) . ',' .
-                '"posts_count" : ' .  count($countTerms) .
+                '"posts_count" : ' .  $countTerms .
                 '}');
     }
 }
