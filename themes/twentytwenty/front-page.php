@@ -41,7 +41,7 @@ $terms = get_terms(array(
     'orderby' => 'count',
     'order' => 'DESC'
 ));
-$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 ?>
 
 <body class="w-full">
@@ -64,14 +64,14 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
         }
     </style>
     <!--Sticky Slide -->
-    <?php if(!empty($stickyPosts)) :?>
+    <?php if (!empty($stickyPosts)) : ?>
         <section id="section-1stSlider" class="relative">
             <div id="1stSlider" class="owl-carousel">
                 <?php
                 foreach ($stickyPosts as $thePost) {
                     $image = $defaultImage;
-                    if(file_exists($thePost->featuredImage)){
-                        $image = $thePost->featuredImage ;
+                    if (file_exists($thePost->featuredImage)) {
+                        $image = $thePost->featuredImage;
                     }
                 ?>
                     <div class="relative banner">
@@ -93,19 +93,19 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                 <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" referTo="1stSlider" class="cursor-pointer toTheRight" />
             </div>
         </section>
-    <?php else: ?>
+    <?php else : ?>
         <div class="relative banner">
-                <img class="object-cover w-full h-full" src="<?= $defaultImage ?>" />
-                <div class="absolute left-0 bottom-0 banner__title">
-                    <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
-                        <div class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;">ไม่พบข้อมูล</div>
-                    </div>
+            <img class="object-cover w-full h-full" src="<?= $defaultImage ?>" />
+            <div class="absolute left-0 bottom-0 banner__title">
+                <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
+                    <div class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;">ไม่พบข้อมูล</div>
                 </div>
+            </div>
         </div>
     <?php endif; ?>
 
     <!--Last update Post Slide -->
-    <?php if(!empty($recentPosts->posts_count)) :?>
+    <?php if (!empty($recentPosts->posts_count)) : ?>
         <section id="section-2ndSlider" class="pt-8 pb-10 lg:pl-8 lg:pr-8 pl-4" style="color:#062241">
             <div class="mb-4 flex justify-between">
                 <p class="font-bold text-2xl">Last update</p>
@@ -119,8 +119,8 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                 <?php
                 foreach ($recentPosts->posts as $thePost) {
                     $image = $defaultImage;
-                    if(file_exists($thePost->featuredImage)){
-                        $image = $thePost->featuredImage ;
+                    if (file_exists($thePost->featuredImage)) {
+                        $image = $thePost->featuredImage;
                     }
                 ?>
                     <a href="<?= $thePost->link ?>">
@@ -141,7 +141,7 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
     <?php include 'truefriend-advertisement.php'; ?>
     <?php include 'truefriend-interview.php'; ?>
     <?php include 'truefriend-restaurant101.php'; ?>
-    
+
     <!--Supplier Hub-->
     <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" style="background-color:#262145;">
         <div class="lg:mb-12 mb-8">
@@ -156,7 +156,7 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                             </button>
                         </div>
                     </form>
-                    <?php if(!empty($supplierPosts->posts_count)): ?>
+                    <?php if (!empty($supplierPosts->posts_count)) : ?>
                         <p class="font-bold mr-8 hidden lg:block cursor-pointer" id="supplier-type-search-btn"> ค้นหา</p>
                         <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierPosts->posts_count < 1000 ? $supplierPosts->posts_count : '999+' ?>)</a>
                     <?php endif; ?>
@@ -168,10 +168,10 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
             <div class="swiper-container supplier-container" style="border-color:#E9E9E9">
                 <div class="swiper-wrapper supplier-wrapper" id="supplier-wrapper">
                     <?php
-                    if(!empty($supplierTypes->posts_count) && !empty($supplierPosts->posts_count)):
+                    if (!empty($supplierTypes->posts_count) && !empty($supplierPosts->posts_count)) :
                         foreach ($supplierTypes->supplierTypes as $supplierType) :
                             if ((int)$supplierType->supplierTypeCount > 0) :
-                        ?>
+                    ?>
                                 <a href="<?= $supplierType->link ?>" class="swiper-slide">
                                     <div class="relative" style="height:40vh;">
                                         <div style="height:40vh;">
@@ -191,9 +191,9 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                                 </a>
                         <?php endif;
                         endforeach; ?>
-                    <?php else: ?>
+                    <?php else : ?>
                         <p class="text-center w-full">ไม่พบข้อมูล</p>
-                    <?php endif;?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -238,8 +238,8 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                         $thePost = $posts[$i];
                         if ($i === 0) {
                             $image = $defaultImage;
-                            if(file_exists($thePost->featuredImage)){
-                                $image = $thePost->featuredImage ;
+                            if (file_exists($thePost->featuredImage)) {
+                                $image = $thePost->featuredImage;
                             }
                 ?>
                             <div onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
@@ -280,8 +280,8 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
                                 <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
                             </div>
                         </a>
-                <?php endforeach;
-                else: ?>
+                    <?php endforeach;
+                else : ?>
                     <p class="text-center w-full">ไม่พบข้อมูล</p>
                 <?php endif; ?>
             </div>
@@ -290,7 +290,12 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
             </div>
         </div>
     </section>
-
+    <?php
+    $footerbgcolor = '#262145';
+    $footercolor = 'white';
+    $footerheadercolor = 'rgba(255,255,255,0.5)';
+    $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+    ?>
     <?php include 'truefriend-footer.php'; ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
