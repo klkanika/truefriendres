@@ -12,12 +12,12 @@
 </head>
 
 <?php
-$marketingClient = get_field( 'pr_marketing_client',get_the_ID() );
-$consultantClient = get_field( 'consultant',get_the_ID() );
-$traningClient = get_field( 'training',get_the_ID() );
+$marketingClient = get_field('pr_marketing_client', get_the_ID());
+$consultantClient = get_field('consultant', get_the_ID());
+$traningClient = get_field('training', get_the_ID());
 ?>
 
-<body  class="w-full">
+<body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full bg-contain" style="background-color: #262145;background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-grid.svg')">
@@ -46,7 +46,7 @@ $traningClient = get_field( 'training',get_the_ID() );
   <section id="prmarketing" class="px-6 md:px-0 md:pl-20 pt-20" style="background-color: #E5E5E5;color:#262145">
     <div class="md:flex  pb-16">
       <div class="md:hidden items-center justify-center">
-        <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png"/>
+        <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png" />
       </div>
       <div class="md:w-2/4">
         <p class="lg:text-left text-4xl font-bold">PR & Marketing</p>
@@ -68,53 +68,53 @@ $traningClient = get_field( 'training',get_the_ID() );
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
-        <?php if(!empty($marketingClient)): ?>
-        <div class="mb-8 md:mb-16">
-          <div class="font-bold mb-4">Our Client</div>
-          <div class="flex">
-            <?php foreach($marketingClient as $key => $thePost) : ?>
-              <?php $margin = 0.5*-1*$key;?>
-              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):
-                  $icon = $defaultImage;
-                  if(file_exists($thePost['icon_image'])){
-                      $icon = $thePost['icon_image'] ;
-                  }
+        <?php if (!empty($marketingClient)) : ?>
+          <div class="mb-8 md:mb-16">
+            <div class="font-bold mb-4">Our Client</div>
+            <div class="flex">
+              <?php foreach ($marketingClient as $key => $thePost) : ?>
+                <?php $margin = 0.5 * -1 * $key; ?>
+                <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
+                  <?php if (!empty($thePost['icon_image'])) :
+                    $icon = $defaultImage;
+                    if (file_exists($thePost['icon_image'])) {
+                      $icon = $thePost['icon_image'];
+                    }
                   ?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
-                <?php else:?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
-                <?php endif;?>
-                <div class="tooltiptext">
-                  <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):
-                      $customerImage = $defaultImage;
-                      if(file_exists($thePost['customer_image'])){
-                          $customerImage = $thePost['customer_image'] ;
-                      }
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
+                  <?php else : ?>
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                  <?php endif; ?>
+                  <div class="tooltiptext">
+                    <div class="flex items-center mb-4">
+                      <?php if (!empty($thePost['customer_image'])) :
+                        $customerImage = $defaultImage;
+                        if (file_exists($thePost['customer_image'])) {
+                          $customerImage = $thePost['customer_image'];
+                        }
                       ?>
-                      <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                    <?php else:?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
-                    <?php endif;?>
-                    <div class="ml-4">
-                      <div><?=$thePost['customer_name']?></div>
-                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php else : ?>
+                        <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                      <?php endif; ?>
+                      <div class="ml-4">
+                        <div><?= $thePost['customer_name'] ?></div>
+                        <div class="font-bold"><?= $thePost['brand_name'] ?></div>
+                      </div>
                     </div>
+                    <p><?= $thePost['review'] ?></p>
                   </div>
-                  <p><?=$thePost['review']?></p>
                 </div>
-              </div>
-            <?php endforeach; ?>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
         <div>
           <a href="<?= get_permalink(get_page_by_path('contact-us')) ?>" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
         </div>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center">
-        <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png"/>
+        <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png" />
       </div>
     </div>
     <div class="text-center mb-2 font-bold">สอบถามรายละเอียด PR & MARKETING</div>
@@ -138,7 +138,7 @@ $traningClient = get_field( 'training',get_the_ID() );
   <section class="px-6 md:px-0 md:pl-20 pt-6 md:pt-20 " style="background-color: #262145;color:#fff">
     <div class="md:flex  pb-16">
       <div class="md:hidden items-center justify-center -mx-6 mb-6">
-        <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png"/>
+        <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png" />
       </div>
       <div class="md:w-2/4">
         <p class="lg:text-left text-4xl font-bold">Consultant</p>
@@ -160,53 +160,53 @@ $traningClient = get_field( 'training',get_the_ID() );
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
-        <?php if(!empty($consultantClient)): ?>
-        <div class="mb-8 md:mb-16">
-          <div class="font-bold mb-4">Our Client</div>
-          <div class="flex">
-            <?php foreach($consultantClient as $key => $thePost) : ?>
-              <?php $margin = 0.5*-1*$key;?>
-              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):
-                  $icon = $defaultImage;
-                  if(file_exists($thePost['icon_image'])){
-                      $icon = $thePost['icon_image'] ;
-                  }
+        <?php if (!empty($consultantClient)) : ?>
+          <div class="mb-8 md:mb-16">
+            <div class="font-bold mb-4">Our Client</div>
+            <div class="flex">
+              <?php foreach ($consultantClient as $key => $thePost) : ?>
+                <?php $margin = 0.5 * -1 * $key; ?>
+                <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
+                  <?php if (!empty($thePost['icon_image'])) :
+                    $icon = $defaultImage;
+                    if (file_exists($thePost['icon_image'])) {
+                      $icon = $thePost['icon_image'];
+                    }
                   ?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
-                <?php else:?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
-                <?php endif;?>
-                <div class="tooltiptext">
-                  <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):
-                      $customerImage = $defaultImage;
-                      if(file_exists($thePost['customer_image'])){
-                          $customerImage = $thePost['customer_image'] ;
-                      }
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
+                  <?php else : ?>
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                  <?php endif; ?>
+                  <div class="tooltiptext">
+                    <div class="flex items-center mb-4">
+                      <?php if (!empty($thePost['customer_image'])) :
+                        $customerImage = $defaultImage;
+                        if (file_exists($thePost['customer_image'])) {
+                          $customerImage = $thePost['customer_image'];
+                        }
                       ?>
-                      <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                    <?php else:?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
-                    <?php endif;?>               
-                    <div class="ml-4">
-                      <div><?=$thePost['customer_name']?></div>
-                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php else : ?>
+                        <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                      <?php endif; ?>
+                      <div class="ml-4">
+                        <div><?= $thePost['customer_name'] ?></div>
+                        <div class="font-bold"><?= $thePost['brand_name'] ?></div>
+                      </div>
                     </div>
+                    <p><?= $thePost['review'] ?></p>
                   </div>
-                  <p><?=$thePost['review']?></p>
                 </div>
-              </div>
-            <?php endforeach; ?>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
         <div>
           <a href="<?= get_permalink(get_page_by_path('contact-us')) ?>" class="inline-block rounded-full font-bold py-3 px-16" style="background-color: #D4BD7D;color:#262145">Contact Us</a>
         </div>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center px-16">
-        <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png"/>
+        <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png" />
       </div>
     </div>
     <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Consultant</div>
@@ -230,7 +230,7 @@ $traningClient = get_field( 'training',get_the_ID() );
   <section class="px-6 md:px-0 md:pl-20 pt-20 bg-contain" style="background-color: #D4BD7D;color:#262145;background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-grid.svg')">
     <div class="md:flex  pb-16">
       <div class="md:hidden items-center justify-center">
-        <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png"/>
+        <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png" />
       </div>
       <div class="md:w-2/4">
         <p class="lg:text-left text-4xl font-bold">Training</p>
@@ -252,53 +252,53 @@ $traningClient = get_field( 'training',get_the_ID() );
           <p class="text-lg text-left mb-2 font-bold pb-4">“การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง</p>
           <p class="text-lg text-left font-thin">มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา “การตลาด” หนึ่งสำคัญที่คนทำร้านอาหารจำเป็นต้องทำ โดยเฉพาะยุคนี้ที่มีตัวเลือกร้านอาหารมากมายหากร้านเราไม่ทำการตลาดให้ผู้คนรู้จัก สนใจ โอกาสที่ร้านเราจะกลายเป็นตัวเลือกลูกค้าก็น้อยลง มันน่าเสียดายมาก ๆ หากเราลงทุนทำทุกอย่างเต็มที่ แต่สุดท้ายลูกค้าไม่เข้าร้านเพราะลูกค้าไม่รู้จักร้านเรา</p>
         </div>
-        <?php if(!empty($traningClient)): ?>
-        <div class="mb-8 md:mb-16">
-          <div class="font-bold mb-4">Our Client</div>
-          <div class="flex">
-            <?php foreach($traningClient as $key => $thePost) : ?>
-              <?php $margin = 0.5*-1*$key;?>
-              <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):
-                  $icon = $defaultImage;
-                  if(file_exists($thePost['icon_image'])){
-                      $icon = $thePost['icon_image'] ;
-                  }
+        <?php if (!empty($traningClient)) : ?>
+          <div class="mb-8 md:mb-16">
+            <div class="font-bold mb-4">Our Client</div>
+            <div class="flex">
+              <?php foreach ($traningClient as $key => $thePost) : ?>
+                <?php $margin = 0.5 * -1 * $key; ?>
+                <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
+                  <?php if (!empty($thePost['icon_image'])) :
+                    $icon = $defaultImage;
+                    if (file_exists($thePost['icon_image'])) {
+                      $icon = $thePost['icon_image'];
+                    }
                   ?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
-                <?php else:?>
-                  <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
-                <?php endif;?>
-                <div class="tooltiptext">
-                  <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):
-                      $customerImage = $defaultImage;
-                      if(file_exists($thePost['customer_image'])){
-                          $customerImage = $thePost['customer_image'] ;
-                      }
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
+                  <?php else : ?>
+                    <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                  <?php endif; ?>
+                  <div class="tooltiptext">
+                    <div class="flex items-center mb-4">
+                      <?php if (!empty($thePost['customer_image'])) :
+                        $customerImage = $defaultImage;
+                        if (file_exists($thePost['customer_image'])) {
+                          $customerImage = $thePost['customer_image'];
+                        }
                       ?>
-                      <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
-                    <?php else:?>
-                      <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
-                    <?php endif;?>
-                    <div class="ml-4">
-                      <div><?=$thePost['customer_name']?></div>
-                      <div class="font-bold"><?=$thePost['brand_name']?></div>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php else : ?>
+                        <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
+                      <?php endif; ?>
+                      <div class="ml-4">
+                        <div><?= $thePost['customer_name'] ?></div>
+                        <div class="font-bold"><?= $thePost['brand_name'] ?></div>
+                      </div>
                     </div>
+                    <p><?= $thePost['review'] ?></p>
                   </div>
-                  <p><?=$thePost['review']?></p>
                 </div>
-              </div>
-            <?php endforeach; ?>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
         <div>
           <a href="<?= get_permalink(get_page_by_path('contact-us')) ?>" class="inline-block rounded-full text-white font-bold py-3 px-16" style="background-color: #262145;">Contact Us</a>
         </div>
       </div>
       <div class="w-2/4 hidden md:flex items-center justify-center">
-        <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png"/>
+        <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png" />
       </div>
     </div>
     <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Training</div>
@@ -348,6 +348,12 @@ $traningClient = get_field( 'training',get_the_ID() );
       </div>
     </div>
   </section>
+  <?php
+  $footerbgcolor = '#19181F';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 
 
@@ -381,11 +387,12 @@ $traningClient = get_field( 'training',get_the_ID() );
     border-style: solid;
     border-color: transparent #fff transparent transparent;
   }
+
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
 
-  .slideClient{
+  .slideClient {
     padding: 15px;
     width: 100%;
     background-color: #fff;
@@ -394,28 +401,34 @@ $traningClient = get_field( 'training',get_the_ID() );
     margin: 14px;
     color: #262145;
   }
-  input:focus{
+
+  input:focus {
     outline: none;
   }
-  .contact-topic{
+
+  .contact-topic {
     margin-bottom: 10px;
   }
-  .contact-topic label{
+
+  .contact-topic label {
     font-size: .875rem;
     font-weight: 600;
     margin-bottom: 5px;
     display: block;
   }
-  .contact-topic ul{
+
+  .contact-topic ul {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -5px;
   }
-  .contact-topic ul li{
+
+  .contact-topic ul li {
     display: block;
     width: 33%;
     margin-bottom: 10px;
   }
+
   .contact-topic ul input[type="radio"] {
     display: none;
   }
@@ -437,11 +450,13 @@ $traningClient = get_field( 'training',get_the_ID() );
     background: #262145;
     color: white;
   }
-  .wpforms-label-hide{
+
+  .wpforms-label-hide {
     display: none;
   }
 
-  input,textarea{
+  input,
+  textarea {
     width: 100%;
     border-radius: .5rem;
     height: 3rem;
@@ -451,14 +466,15 @@ $traningClient = get_field( 'training',get_the_ID() );
     margin-bottom: 10px;
   }
 
-  textarea{
+  textarea {
     height: 6rem;
     padding: 1rem;
   }
-  .wpforms-submit{
+
+  .wpforms-submit {
     width: 100%;
     height: 2.5rem;
-    background-color:#FFD950;
+    background-color: #FFD950;
     color: #262145;
     border-radius: 20px;
     font-weight: 600;
@@ -468,7 +484,8 @@ $traningClient = get_field( 'training',get_the_ID() );
     .text-contact {
       font-size: 12vw;
     }
-    .contact-topic ul li{
+
+    .contact-topic ul li {
       width: 100%;
     }
   }
@@ -481,13 +498,13 @@ $traningClient = get_field( 'training',get_the_ID() );
 <script>
   $(document).ready(function() {
     $(".owl-carousel").owlCarousel({
-        items: $(window).width() < 1024 ? 1.3 : 4,
-        loop: true,
-        // autoplay: true,
-        autoplayHoverPause: true,
-        slideBy: 2,
-        margin: 16,
-        dots: false,
+      items: $(window).width() < 1024 ? 1.3 : 4,
+      loop: true,
+      // autoplay: true,
+      autoplayHoverPause: true,
+      slideBy: 2,
+      margin: 16,
+      dots: false,
     });
   });
 </script>
