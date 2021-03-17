@@ -98,6 +98,12 @@ $footerbgcolor = '#19181F';
   <div class="flex items-center justify-center py-8">
     <button id="loadmore" class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
   </div>
+  <?php
+  $footerbgcolor = '#191920';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 
