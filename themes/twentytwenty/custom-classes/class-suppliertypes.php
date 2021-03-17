@@ -35,7 +35,6 @@ class SupplierType
                 } else {
                     break;
                 }
-                var_dump($term, $countTerms);
             }
         }
 
