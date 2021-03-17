@@ -8,24 +8,30 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
-<body  class="w-full">
+
+<body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <style>
-    #headder{
+    #headder {
       background: transparent;
     }
-    .burger-bar,.balloon-chat{
+
+    .burger-bar,
+    .balloon-chat {
       fill: #262145;
     }
-    .logo{
+
+    .logo {
       color: #262145;
     }
-    #contact-us{
+
+    #contact-us {
       background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-b.svg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
     }
+
     @media (max-width: 992px) {
       #contact-us {
         background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-b-mobile.svg');
@@ -58,35 +64,46 @@
         <?= the_content() ?>
       </div>
     </div>
-    
+
   </section>
+  <?php
+  $footerbgcolor = '#262145';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 
 </html>
 
 <style>
-  input:focus{
+  input:focus {
     outline: none;
   }
-  .contact-topic{
+
+  .contact-topic {
     margin-bottom: 10px;
   }
-  .contact-topic label{
+
+  .contact-topic label {
     font-size: .875rem;
     font-weight: 600;
     margin-bottom: 5px;
     display: block;
   }
-  .contact-topic ul{
+
+  .contact-topic ul {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -5px;
   }
-  .contact-topic ul li{
+
+  .contact-topic ul li {
     display: block;
     width: 50%;
   }
+
   .contact-topic ul input[type="radio"] {
     display: none;
   }
@@ -108,11 +125,13 @@
     background: #262145;
     color: white;
   }
-  .wpforms-label-hide{
+
+  .wpforms-label-hide {
     display: none;
   }
 
-  input,textarea{
+  input,
+  textarea {
     width: 100%;
     border-radius: .5rem;
     height: 3rem;
@@ -122,21 +141,22 @@
     margin-bottom: 10px;
   }
 
-  textarea{
+  textarea {
     height: 6rem;
     padding: 1rem;
   }
-  .wpforms-submit{
+
+  .wpforms-submit {
     width: 100%;
     height: 2.5rem;
-    background-color:#FFD950;
+    background-color: #FFD950;
     color: #262145;
     border-radius: 20px;
     font-weight: 600;
   }
 
   @media (max-width: 1024px) {
-  .text-contact {
+    .text-contact {
       font-size: 12vw;
     }
   }
