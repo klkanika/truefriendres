@@ -44,14 +44,16 @@
     </section>
     <section class="lg:pl-32 lg:pr-32 pl-6 pr-6 -mx-4" id="card-list">
       <div class="w-full flex flex-wrap" id="posts">
-        <?php foreach ($videoPosts as $thePost): ?>
-          <a href="<?= $thePost->link ?>" class="w-full lg:w-1/2 px-4">
-            <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>')">
-              <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
-            </div>
-            <p class="mt-6 mb-8 text-base"><?= $thePost->title ?></p>
-          </a>
-        <?php endforeach ?>
+        <?php if ($videoPosts) { ?>
+          <?php foreach ($videoPosts as $thePost) : ?>
+            <a href="<?= $thePost->link ?>" class="w-full lg:w-1/2 px-4">
+              <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>')">
+                <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
+              </div>
+              <p class="mt-6 mb-8 text-base"><?= $thePost->title ?></p>
+            </a>
+          <?php endforeach ?>
+        <?php } ?>
       </div>
     </section>
     <div class="flex w-full justify-center mt-8 ">
