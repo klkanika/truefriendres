@@ -4,7 +4,7 @@
 require_once('custom-classes/class-posts.php');
 $interviewPostsObject = Post::getPostsByCategory('interviews', null, 8, 0, null);
 $interviewPosts = $interviewPostsObject->posts;
-$firstPost = $interviewPosts[0];
+$firstPost = $interviewPosts ? $interviewPosts[0] : null;
 array_shift($interviewPosts);
 $footerbgcolor = '#19181F';
 //Shift out for the first post
@@ -22,7 +22,7 @@ $footerbgcolor = '#19181F';
     }
 
     .interview-cover {
-      background: url('<?= $firstPost->featuredImage ?>') no-repeat;
+      background: url('<?= $firstPost ? $firstPost->featuredImage : '' ?>') no-repeat;
       background-size: auto 100%;
       background-position: top right;
       height: 80vh
