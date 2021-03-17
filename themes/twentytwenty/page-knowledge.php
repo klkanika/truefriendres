@@ -28,14 +28,14 @@ $knowledgePosts = $knowledgePostsObject->posts;
       <div copytoclipboard="<?= get_permalink(get_page_by_path('knowledge')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
     </div>
     <div class="bg-white">
-      <?php if(!empty(get_category_by_slug('knowledge')->cat_ID)) :?>
+      <?php if (!empty(get_category_by_slug('knowledge')->cat_ID)) : ?>
         <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
-          <?php foreach ($knowledgePosts as $thePost) : 
+          <?php foreach ($knowledgePosts as $thePost) :
             $image = $defaultImage;
-            if(file_exists($thePost->featuredImage)){
-                $image = $thePost->featuredImage ;
+            if (file_exists($thePost->featuredImage)) {
+              $image = $thePost->featuredImage;
             }
-            ?>
+          ?>
             <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
               <div class="lg:h-72 h-56">
                 <img class="rounded-lg object-cover w-full h-full" src="<?= $image ?>" alt="">
@@ -48,11 +48,17 @@ $knowledgePosts = $knowledgePostsObject->posts;
         <div class="bg-white text-center text-xs py-12">
           <button class="rounded-full text-white px-8 py-3 px-28 hidden" style="background-color: #262145;" id="loadmore">LOAD MORE</button>
         </div>
-      <?php else: ?>
+      <?php else : ?>
         <p class="text-center w-full">ไม่พบข้อมูล</p>
       <?php endif; ?>
     </div>
   </section>
+  <?php
+  $footerbgcolor = '#262145';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 
