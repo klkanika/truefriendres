@@ -105,8 +105,13 @@
         <!-- Slides -->
         <?php
         if ($อาเรย์รูปภาพ):
-          foreach ($อาเรย์รูปภาพ as $รูปภาพ) : ?>
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูปภาพ['รูป'] ?>" alt="" /></div>
+          foreach ($อาเรย์รูปภาพ as $รูปภาพ) : 
+            $image = $defaultImage;
+            if(file_exists($รูปภาพ['รูป'])){
+                $image = $รูปภาพ['รูป'] ;
+            }
+          ?>
+            <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $image ?>" alt="" /></div>
         <?php endforeach;
         endif; ?>
 
@@ -118,9 +123,14 @@
     <div class="flex items-center justify-between mt-12">
       <div class="flex items-center justify-center">
         <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Restautant hub</div>
-        <?php foreach ($restaurant_type as $rstype) : ?>
+        <?php foreach ($restaurant_type as $rstype) : 
+          $termImage = $defaultImage;
+          if(!empty(get_field('pictureUrl', $rstype)) && file_exists(get_field('pictureUrl', $rstype))){
+              $termImage = get_field('pictureUrl', $rstype) ;
+          }
+          ?>
           <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
-            <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $rstype) ? get_field('pictureUrl', $rstype) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
+            <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= $termImage ?>" alt="">
             <span class="ml-6 text-xs"><?= $rstype->name ?></span>
           </div>
         <?php endforeach; ?>
@@ -181,12 +191,17 @@
         ></script>
         <hr class="my-5" />
       <?php endif;?>
-      <?php if (!empty($restaurant_products)):?>
+      <?php if (!empty($เมนูแนะนำ)):?>
         <p class="text-gray-500 mb-2">เมนูแนะนำ</p>
         <div class="flex">
-          <?php foreach ($เมนูแนะนำ as $เมนู) : ?>
+          <?php foreach ($เมนูแนะนำ as $เมนู) : 
+            $menuImage = $defaultImage;
+            if(!empty($เมนู['menuPic']) && file_exists($เมนู['menuPic'])){
+                $menuImage = $เมนู['menuPic'] ;
+            }
+            ?>
             <a href="#">
-              <img src="<?= ($เมนู['menuPic']) ?>" alt="" class="h-40 mr-2 rounded-lg">
+              <img src="<?= $menuImage?>" alt="" class="h-40 mr-2 rounded-lg">
             </a>
           <?php endforeach; ?>
         </div>

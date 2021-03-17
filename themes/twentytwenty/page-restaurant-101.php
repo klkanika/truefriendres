@@ -3,8 +3,7 @@
 
 <?php
 require_once('custom-classes/class-posts.php');
-$catId = get_category_by_slug('restaurant101')->cat_ID;
-$restaurant101PostsObject = Post::getPostsByCategory('post', $catId, 8, 0, null);
+$restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 8, 0, null);
 $restaurant101Posts = $restaurant101PostsObject->posts;
 ?>
 
@@ -79,7 +78,7 @@ $restaurant101Posts = $restaurant101PostsObject->posts;
         </div>
       </section>
     </section>
-    <?php if(!empty($catId)) :?>
+    <?php if(!empty(get_category_by_slug('restaurant101')->cat_ID)) :?>
       <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
         <?php foreach ($restaurant101Posts as $thePost) : ?>
           <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">

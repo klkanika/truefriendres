@@ -202,7 +202,7 @@ class Post
         if ($postType === 'interviews') {
             $thePost->interviewee = get_field('interviewee');
             $thePost->intervieweeBusiness = get_field('intervieweeBusiness');
-            $thePost->intervieweeBusinessLogo = get_field('intervieweeBusinessLogo');
+            $thePost->intervieweeBusinessLogo = get_field('intervieweeBusinessLogo') && file_exists(get_field('intervieweeBusinessLogo')) ? get_field('intervieweeBusinessLogo') : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         }
 
         if ($postType === 'suppliers') {

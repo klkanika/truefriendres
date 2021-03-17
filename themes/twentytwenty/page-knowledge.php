@@ -10,8 +10,7 @@
 </head>
 <?php
 require_once('custom-classes/class-posts.php');
-$catId = get_category_by_slug('knowledge')->cat_ID;
-$knowledgePostsObject = Post::getPostsByCategory('post', $catID, 9, 0, null);
+$knowledgePostsObject = Post::getPostsByCategory('post', get_category_by_slug('knowledge')->cat_ID, 9, 0, null);
 $knowledgePosts = $knowledgePostsObject->posts;
 ?>
 
@@ -29,7 +28,7 @@ $knowledgePosts = $knowledgePostsObject->posts;
       <div copytoclipboard="<?= get_permalink(get_page_by_path('knowledge')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
     </div>
     <div class="bg-white">
-      <?php if(!empty($catId)) :?>
+      <?php if(!empty(get_category_by_slug('knowledge')->cat_ID)) :?>
         <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
           <?php foreach ($knowledgePosts as $thePost) : 
             $image = $defaultImage;

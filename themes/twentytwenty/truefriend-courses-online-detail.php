@@ -183,9 +183,14 @@ foreach (get_field('เนื้อหาของคอร์สนี้') as 
     <div class="swiper-container w-full">
       <div class="swiper-wrapper pl-4 md:pl-48">
         <!-- Slides -->
-        <?php foreach (get_field('รูปภาพ') as $รูป) : ?>
+        <?php foreach (get_field('รูปภาพ') as $รูป) : 
+          $image = $defaultImage;
+          if(file_exists($รูป['รูป']['url'])){
+              $image = $รูป['รูป']['url'] ;
+          }
+          ?>
           <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
-            <img class="object-cover w-full h-full" src="<?= $รูป['รูป']['url'] ?>" alt="" />
+            <img class="object-cover w-full h-full" src="<?= $image ?>" alt="" />
           </div>
         <?php endforeach; ?>
       </div>
