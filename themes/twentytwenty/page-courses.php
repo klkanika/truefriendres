@@ -115,15 +115,25 @@ $coursesPosts = [
               <?php foreach ($offlineClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) : ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                  <?php if (!empty($thePost['icon_image'])) : 
+                    $iconImage = $defaultImage;
+                    if(file_exists($thePost['icon_image'])){
+                        $customerImage = $thePost['icon_image'] ;
+                    }
+                    ?>
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $iconImage ?>" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) : ?>
-                        <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php if (!empty($thePost['customer_image'])) : 
+                        $customerImage = $defaultImage;
+                        if(file_exists($thePost['customer_image'])){
+                            $customerImage = $thePost['customer_image'] ;
+                        }
+                        ?>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>
@@ -197,15 +207,25 @@ $coursesPosts = [
               <?php foreach ($onlineClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) : ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                  <?php if (!empty($thePost['icon_image'])) : 
+                    $iconImage = $defaultImage;
+                    if(file_exists($thePost['icon_image'])){
+                        $customerImage = $thePost['icon_image'] ;
+                    }
+                    ?>
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $iconImage ?>" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) : ?>
-                        <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php if (!empty($thePost['customer_image'])) : 
+                        $customerImage = $defaultImage;
+                        if(file_exists($thePost['customer_image'])){
+                            $customerImage = $thePost['customer_image'] ;
+                        }
+                        ?>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>

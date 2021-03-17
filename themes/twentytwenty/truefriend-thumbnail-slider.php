@@ -26,12 +26,17 @@ $count_material = wp_count_posts($post_type)->publish;
 
     <div class="swiper-container thumbnail-container">
         <div class="swiper-wrapper" id="thumbnail-wrapper">
-            <?php foreach ($thumbnail_slider_material as $key => $material) : ?>
+            <?php foreach ($thumbnail_slider_material as $key => $material) : 
+                    $image = $defaultImage;
+                    if(!empty(get_field('pictureUrl', $material)) && file_exists(get_field('pictureUrl', $material))){
+                        $image = get_field('pictureUrl', $material) ;
+                    }
+                ?>
                 <?php if ($key % 20 === 0) { ?>
                     <div class="grid lg:grid-cols-5 grid-cols-1 gap-y-3 gap-x-4 py-8 swiper-slide <?= $key % 20 > 0 ? 'lg:flex hidden' : '' ?>">
                     <?php } ?>
                     <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>?type=<?= $material->term_id ?>" class="border-b border-gray-300 py-2 flex items-center">
-                        <img src="<?= get_field('pictureUrl', $material) ? get_field('pictureUrl', $material) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" class="w-12 h-12 rounded mr-2 object-cover" />
+                        <img src="<?= $image?>" class="w-12 h-12 rounded mr-2 object-cover" />
                         <div>
                             <p class="font-semibold"><?= $material->name ?></p>
                             <p class="text-sm"><?= $material->count ?> เบอร์โทร</p>

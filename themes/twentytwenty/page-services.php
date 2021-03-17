@@ -36,7 +36,7 @@ $traningClient = get_field( 'training',get_the_ID() );
     <div class=" lg:px-32 lg:mx-8 px-8 py-5 flex lg:justify-content-center justify-center gap-4">
       <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('services'))) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
       <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('services'))) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
-      <a copytoclipboard="<?= get_permalink(get_page_by_path('services')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
+      <a copytoclipboard="<?= get_permalink(get_page_by_path('services')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></a>
     </div>
 
     </div>
@@ -75,15 +75,25 @@ $traningClient = get_field( 'training',get_the_ID() );
             <?php foreach($marketingClient as $key => $thePost) : ?>
               <?php $margin = 0.5*-1*$key;?>
               <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                <?php if(!empty($thePost['icon_image'])):
+                  $icon = $defaultImage;
+                  if(file_exists($thePost['icon_image'])){
+                      $icon = $thePost['icon_image'] ;
+                  }
+                  ?>
+                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
                 <?php else:?>
                   <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                 <?php endif;?>
                 <div class="tooltiptext">
                   <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):?>
-                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                    <?php if(!empty($thePost['customer_image'])):
+                      $customerImage = $defaultImage;
+                      if(file_exists($thePost['customer_image'])){
+                          $customerImage = $thePost['customer_image'] ;
+                      }
+                      ?>
+                      <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
                     <?php else:?>
                       <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
                     <?php endif;?>
@@ -157,15 +167,25 @@ $traningClient = get_field( 'training',get_the_ID() );
             <?php foreach($consultantClient as $key => $thePost) : ?>
               <?php $margin = 0.5*-1*$key;?>
               <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                <?php if(!empty($thePost['icon_image'])):
+                  $icon = $defaultImage;
+                  if(file_exists($thePost['icon_image'])){
+                      $icon = $thePost['icon_image'] ;
+                  }
+                  ?>
+                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
                 <?php else:?>
                   <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                 <?php endif;?>
                 <div class="tooltiptext">
                   <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):?>
-                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                    <?php if(!empty($thePost['customer_image'])):
+                      $customerImage = $defaultImage;
+                      if(file_exists($thePost['customer_image'])){
+                          $customerImage = $thePost['customer_image'] ;
+                      }
+                      ?>
+                      <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
                     <?php else:?>
                       <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
                     <?php endif;?>               
@@ -239,15 +259,25 @@ $traningClient = get_field( 'training',get_the_ID() );
             <?php foreach($traningClient as $key => $thePost) : ?>
               <?php $margin = 0.5*-1*$key;?>
               <div class="tooltip" style="margin-left: <?= $margin."rem;"?>">
-                <?php if(!empty($thePost['icon_image'])):?>
-                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $thePost['icon_image'] ?>" />
+                <?php if(!empty($thePost['icon_image'])):
+                  $icon = $defaultImage;
+                  if(file_exists($thePost['icon_image'])){
+                      $icon = $thePost['icon_image'] ;
+                  }
+                  ?>
+                  <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
                 <?php else:?>
                   <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                 <?php endif;?>
                 <div class="tooltiptext">
                   <div class="flex items-center mb-4">
-                    <?php if(!empty($thePost['customer_image'])):?>
-                      <img src="<?= $thePost['customer_image'] ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                    <?php if(!empty($thePost['customer_image'])):
+                      $customerImage = $defaultImage;
+                      if(file_exists($thePost['customer_image'])){
+                          $customerImage = $thePost['customer_image'] ;
+                      }
+                      ?>
+                      <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
                     <?php else:?>
                       <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2"> 
                     <?php endif;?>
