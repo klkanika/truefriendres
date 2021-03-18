@@ -3,6 +3,7 @@ require_once('custom-classes/class-posts.php');
 $catId = get_category_by_slug('restaurant101')->cat_ID;
 $Restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 20, 0, null);
 $Restaurant101Posts = $Restaurant101PostsObject->posts;
+var_dump($Restaurant101Posts);
 ?>
 
   <section id="restaurant101" class="pt-8 lg:pl-8 pl-4 test" style="color:#062241;">
