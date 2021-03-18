@@ -64,7 +64,7 @@ $documents = $documentsObject->posts;
       <?php foreach ($documents as $key => $thePost) :
         $path_info = pathinfo($thePost->file);
         $extension='';
-        if(!empty($path_info)){
+        if(!empty($thePost->file)){
           $extension = $path_info['extension'];
           if ($extension === 'xls' || $extension === 'xlsx') {
             $extension = 'Excel';
@@ -156,7 +156,7 @@ $documents = $documentsObject->posts;
           posts.map((thePost, i) => {
             var re = /(?:\.([^.]+))?$/;
             let extension = '';
-            if(re.exec(thePost.file))
+            if(thePost.file)
               extension = re.exec(thePost.file)[1]; 
             if(extension){
               if (extension === 'xls' || extension === 'xlsx') {

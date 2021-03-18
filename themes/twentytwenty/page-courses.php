@@ -24,7 +24,9 @@ $offlinePosts = Post::getPostsByCategory('courses', $offlineTermId, null, 0, nul
 
 $coursesPosts = [
   "บริหารร้านอาหารให้โตแบบก้าวกระโดด", "บัญชีอย่างง่ายเพื่อเจ้าของกิจการ", "บริหารร้านอาหารให้โตแบบก้าวกระโดด", "บัญชีอย่างง่ายเพื่อเจ้าของกิจการ"
-]
+];
+
+
 ?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
@@ -63,7 +65,9 @@ $coursesPosts = [
             <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-              <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <?php if(!empty($thePost->terms)) : ?>
+                <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <?php endif; ?>
               <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
             </div>
           </a>
