@@ -44,7 +44,7 @@ if (count($relatedPosts) < 6) {
     array_push($exceptPostId, $thePost->id);
   endforeach;
 
-  $relatedPosts = array_merge($relatedPosts, Post::getPostsByCategory('post', null, 6 - count($relatedPosts), 0, array_merge([$postid], $exceptPostId))->posts);
+  $relatedPosts = array_merge($relatedPosts, Post::getPostsByCategory('post', null, 6 - count($relatedPosts), 0, array_merge([$currentPostId], $exceptPostId))->posts);
 }
 // //set back
 $time=strtotime($currentPost->post_date);
