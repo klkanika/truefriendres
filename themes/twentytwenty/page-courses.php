@@ -164,7 +164,9 @@ $coursesPosts = [
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-              <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <?php if(!empty($thePost->terms)) : ?>
+                <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
+              <?php endif; ?>
               <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
             </div>
           </a>
@@ -321,7 +323,12 @@ $coursesPosts = [
   </section>
 
 
-
+  <?php
+    $footerbgcolor = '#262145';
+    $footercolor = 'white';
+    $footerheadercolor = 'rgba(255,255,255,0.5)';
+    $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 
 

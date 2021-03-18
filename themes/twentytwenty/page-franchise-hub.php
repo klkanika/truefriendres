@@ -617,7 +617,7 @@ $franchises = $newFranchisesObject->posts;
       }
     });
 
-    $("#type").val(<?= $_GET['type'] ?>);
+    $("#type").val("<?= $_GET['type'] ?>"");
     $("#type").trigger('change');
 
     $("img").on("error", function() {

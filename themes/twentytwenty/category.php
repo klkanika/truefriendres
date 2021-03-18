@@ -51,6 +51,12 @@ $Posts = $PostsObject->posts;
       	<?php endif; ?>
     </div>
   </section>
+  <?php
+  $footerbgcolor = '#262145';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 

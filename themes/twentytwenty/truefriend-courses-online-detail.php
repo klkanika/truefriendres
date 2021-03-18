@@ -35,14 +35,16 @@ $left = intval($interval->format('%a'));
 $dateleft =  ($left + 1) . ' วัน';
 
 $courseDetail = [];
-foreach (get_field('เนื้อหาของคอร์สนี้') as $key => $part) {
-  $tmp_array = ["header" => "Part " . ($key + 1) . ': ' . $part['ชื่อ_part']];
-  $line = [];
-  foreach ($part['subpart'] as $key => $subpart) {
-    array_push($line, $subpart['ชื่อ_sub_part']);
+if(!empty(get_field('เนื้อหาของคอร์สนี้'))){
+  foreach (get_field('เนื้อหาของคอร์สนี้') as $key => $part) {
+    $tmp_array = ["header" => "Part " . ($key + 1) . ': ' . $part['ชื่อ_part']];
+    $line = [];
+    foreach ($part['subpart'] as $key => $subpart) {
+      array_push($line, $subpart['ชื่อ_sub_part']);
+    }
+    $tmp_array['line'] = $line;
+    array_push($courseDetail, $tmp_array);
   }
-  $tmp_array['line'] = $line;
-  array_push($courseDetail, $tmp_array);
 }
 ?>
 

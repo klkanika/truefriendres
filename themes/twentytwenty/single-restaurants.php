@@ -278,6 +278,12 @@
       ลงทะเบียน
     </a>
   </div>
+  <?php
+    $footerbgcolor = '#f2f2f2';
+    $footercolor = '#19181F';
+    $footerheadercolor = 'rgba(0,0,0,0.5)';
+    $footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
+    ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 

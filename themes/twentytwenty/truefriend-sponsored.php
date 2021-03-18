@@ -37,7 +37,7 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
   </div>
 </div>
 <?php
-$relatedPosts = Post::getPostsByCategory('post', $cat_ID, 6, 0, [$postId])->posts;
+$relatedPosts = Post::getPostsByCategory('post', $cat_ID, 6, 0, [$currentPostId])->posts;
 if (count($relatedPosts) < 6) {
   $exceptPostId = [];
   foreach ($relatedPosts as $key => $thePost) :

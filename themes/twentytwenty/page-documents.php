@@ -63,17 +63,20 @@ $documents = $documentsObject->posts;
     <div class="flex justify-center flex-wrap w-full md:w-3/4 mt-16 mb-12 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-y-4 md:gap-x-8" id="posts">
       <?php foreach ($documents as $key => $thePost) :
         $path_info = pathinfo($thePost->file);
-        $extension = $path_info['extension'];
-        if ($extension === 'xls' || $extension === 'xlsx') {
-          $extension = 'Excel';
-        } else if ($extension === 'pdf') {
-          $extension = 'PDF';
-        } else if ($extension === '.doc' || $extension === '.docx') {
-          $extension = 'Word';
+        $extension='';
+        if(!empty($path_info)){
+          $extension = $path_info['extension'];
+          if ($extension === 'xls' || $extension === 'xlsx') {
+            $extension = 'Excel';
+          } else if ($extension === 'pdf') {
+            $extension = 'PDF';
+          } else if ($extension === '.doc' || $extension === '.docx') {
+            $extension = 'Word';
+          }
         }
       ?>
         <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md shadow bg-white">
-          <?= $thePost->pictureUrl ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' . $thePost->pictureUrl . '" />' : '' ?>
+          <?= $thePost->pictureUrl && file_exists($thePost->pictureUrl) ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' . $thePost->pictureUrl . '" />' : '' ?>
           <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
             <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2"><?= $thePost->ชื่อ ?></h1>
             <h2 class="text-xs lg:text-sm lg:text-center"><?= $thePost->รายละเอียด ?></h2>
@@ -152,7 +155,9 @@ $documents = $documentsObject->posts;
           const posts = postsObject.posts;
           posts.map((thePost, i) => {
             var re = /(?:\.([^.]+))?$/;
-            let extension = re.exec(thePost.file)[1]; 
+            let extension = '';
+            if(re.exec(thePost.file))
+              extension = re.exec(thePost.file)[1]; 
             if(extension){
               if (extension === 'xls' || extension === 'xlsx') {
                 extension = 'Excel';
@@ -166,7 +171,7 @@ $documents = $documentsObject->posts;
             }
             $("#posts").append(`
             <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md shadow bg-white">
-              ${thePost.pictureUrl ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' + thePost.pictureUrl + '" />' : '' }
+              ${thePost.pictureUrl ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' + thePost.pictureUrl + '" onerror="this.style.display=`none`" />' : '' }
               <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
                 <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2">${thePost.ชื่อ}</h1>
                 <h2 class="text-xs lg:text-sm lg:text-center">${thePost.รายละเอียด}</h2>
@@ -187,5 +192,6 @@ $documents = $documentsObject->posts;
         }
       });
     }
+
   });
 </script>
