@@ -194,7 +194,7 @@ class Post
         $thePost->title = get_the_title();
         $thePost->link = get_the_permalink();
         $thePost->categories = get_the_category();
-        $thePost->featuredImage = get_the_post_thumbnail_url() && file_exists(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+        $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');
         $thePost->numberDate = get_the_date('d/m/Y');
         $thePost->restaurantCategory = get_field('restaurant_101_category');
@@ -252,14 +252,14 @@ class Post
 
     public static function searchPosts($keyword, $postsPerPage, $offset)
     {
-        $args = array( 
+        $args = array(
             's' => $keyword,
             'offset' => $offset,
         );
         if ($postsPerPage != null) {
             $args['posts_per_page'] = $postsPerPage;
         }
-        
+
         $query = new WP_Query($args);
 
         $posts = [];
