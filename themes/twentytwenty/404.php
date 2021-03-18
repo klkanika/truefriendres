@@ -30,6 +30,12 @@ $searchQuery = get_search_query();
 		<p class="text-center w-full py-24">ไม่พบข้อมูล</p>
     </div>
   </section>
+  <?php
+  $footerbgcolor = '#262145';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  ?>
   <?php include 'truefriend-footer.php'; ?>
 </body>
 

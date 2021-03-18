@@ -76,7 +76,7 @@
 	</script>
 </head>
 <?php
-$facilities_options = get_field_object('field_60465ea42bdeb')['choices'];
+$facilities_options = get_field_object('field_6047adb2118e9')['choices'];
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-provinces.php');
 
@@ -540,10 +540,14 @@ $form = [
 									<?php endif; ?>
 									<div class="flex flex-wrap mb-4">
 										<div class="lg:w-4/12 w-full pr-12 lg:text-right text-gray-500 py-2">
-											<?= $input['label'] ?>
-											<?php if ($input['required'] === true) { ?>
-												<span class="text-red-600">*</span>
-											<?php } ?>
+											<?php if(!empty($input['label'])) : ?>
+												<?= $input['label'] ?>
+											<?php endif; ?>
+											<?php if(!empty($input['required'])) : ?>
+												<?php if ($input['required'] === true) { ?>
+													<span class="text-red-600">*</span>
+												<?php } ?>
+											<?php endif; ?>
 										</div>
 										<div class="lg:w-8/12 w-full">
 											<?php switch ($input['type']):
@@ -646,6 +650,12 @@ $form = [
 			</form>
 		</section>
 	</section>
+	<?php
+	$footerbgcolor = '#f2f2f2';
+	$footercolor = '#19181F';
+	$footerheadercolor = 'rgba(0,0,0,0.5)';
+	$footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
+	?>
 	<?php include 'truefriend-footer.php'; ?>
 </body>
 

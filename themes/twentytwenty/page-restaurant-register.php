@@ -350,10 +350,14 @@ $form = [
 							<?php foreach($f['form'] as $input): ?>
 								<div class="flex flex-wrap mb-4">
 									<div class="lg:w-4/12 w-full pr-12 lg:text-right text-gray-500 py-2">
-										<?= $input['label']?>
-										<?php if ($input['required'] === true) { ?>
-											<span class="text-red-600">*</span>
-										<?php } ?>
+										<?php if(!empty($input['label'])) : ?>
+											<?= $input['label']?>
+										<?php endif; ?>
+										<?php if(!empty($input['required'])) : ?>
+											<?php if ($input['required'] === true) { ?>
+												<span class="text-red-600">*</span>
+											<?php } ?>
+										<?php endif; ?>
 									</div>
 									<div class="lg:w-8/12 w-full">
 										<?php switch($input['type']):
@@ -482,6 +486,12 @@ $form = [
 			</form>
 		</section>
     </section>
+	<?php
+	$footerbgcolor = '#262145';
+	$footercolor = 'white';
+	$footerheadercolor = 'rgba(255,255,255,0.5)';
+	$footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+	?>
     <?php include 'truefriend-footer.php'; ?>
 </body>
 

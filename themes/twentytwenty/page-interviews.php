@@ -42,7 +42,7 @@ $footerbgcolor = '#19181F';
   </style>
 </head>
 
-<body style="font-family: 'Noto Sans Thai', sans-serif;background-color: #19181F;" class="text-white w-full">
+<body style="background-color: #19181F;" class="text-white w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <?php if ($firstPost) { ?>
