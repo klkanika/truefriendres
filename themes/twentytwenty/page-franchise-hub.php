@@ -412,13 +412,12 @@ $franchises = $newFranchisesObject->posts;
           </div>
         `);
       });
-
       if (firstObjectMatters) {
-        new Swiper(slideName, {
-          slidesPerView: 'auto',
-          spaceBetween: 10,
-          freeMode: true,
-        });
+          new Swiper(slideName, {
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+            freeMode: true,
+          });
       } else {
         new Swiper(slideName, {
           spaceBetween: 0,
@@ -617,7 +616,7 @@ $franchises = $newFranchisesObject->posts;
       }
     });
 
-    $("#type").val("<?= $_GET['type'] ?>"");
+    $("#type").val("<?= $_GET['type'] ?>");
     $("#type").trigger('change');
 
     $("img").on("error", function() {
