@@ -76,7 +76,6 @@
 	</script>
 </head>
 <?php
-$facilities_options = get_field_object('field_6047adb2118e9')['choices'];
 require_once('custom-classes/class-posts.php');
 require_once('custom-classes/class-provinces.php');
 
@@ -651,10 +650,10 @@ $form = [
 		</section>
 	</section>
 	<?php
-	$footerbgcolor = '#f2f2f2';
-	$footercolor = '#19181F';
-	$footerheadercolor = 'rgba(0,0,0,0.5)';
-	$footerlogo = get_theme_file_uri() . '/assets/images/logo-blue.svg';
+	$footerbgcolor = '#262145';
+	$footercolor = 'white';
+	$footerheadercolor = 'rgba(255,255,255,0.5)';
+	$footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
 	?>
 	<?php include 'truefriend-footer.php'; ?>
 </body>

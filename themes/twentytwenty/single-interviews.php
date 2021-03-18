@@ -32,7 +32,7 @@ require_once('custom-classes/class-posts.php');
 $thisLink = get_permalink();
 ?>
 
-<body style="font-family: 'Noto Sans Thai', sans-serif;background-color: #19181F;" class="text-white w-full">
+<body style="background-color: #19181F;" class="text-white w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="w-full">
