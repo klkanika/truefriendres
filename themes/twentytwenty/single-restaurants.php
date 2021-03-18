@@ -85,6 +85,11 @@
       height: 18rem;
     }
 
+    #suppliers-content .banner-slide-menu {
+      width: 35%;
+      height: 10rem;
+    }
+
     @media (max-width:992px) {
 
       #suppliers-content .swiper-button-next,
@@ -95,12 +100,16 @@
       #suppliers-content .banner-slide {
         width: 80%;
       }
+
+      #suppliers-content .banner-slide-menu {
+        width: 80%;
+      }
     }
   </style>
 
   <!-- Set up your HTML -->
   <section id="suppliers-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
-    <div class="swiper-container">
+    <div class="swiper-container pictureSlider">
       <div class="swiper-wrapper pl-4">
         <!-- Slides -->
         <?php
@@ -191,19 +200,18 @@
         ></script>
         <hr class="my-5" />
       <?php endif;?>
+      
       <?php if (!empty($เมนูแนะนำ)):?>
         <p class="text-gray-500 mb-2">เมนูแนะนำ</p>
-        <div class="flex">
-          <?php foreach ($เมนูแนะนำ as $เมนู) : 
-            $menuImage = $defaultImage;
-            if(!empty($เมนู['menuPic']) && file_exists($เมนู['menuPic'])){
-                $menuImage = $เมนู['menuPic'] ;
-            }
-            ?>
-            <a href="#">
-              <img src="<?= $menuImage?>" alt="" class="h-40 mr-2 rounded-lg">
-            </a>
-          <?php endforeach; ?>
+        <div class="swiper-container menuSlider">
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <?php foreach ($เมนูแนะนำ as $เมนู) : ?>
+              <div class="swiper-slide rounded-xl overflow-hidden banner-slide-menu">
+                <img class="object-cover w-full h-full" src="<?= $เมนู['menuPic'] ?>" alt="" onerror="this.src='<?= $defaultImage ?>';"/>
+              </div>
+            <?php endforeach ?>
+          </div>
         </div>
         <hr class="my-5" />
       <?php endif;?>
@@ -279,8 +287,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $(document).ready(function() {
+    var lastestCoursesSlider = new Swiper('.menuSlider', {
+      slidesPerView: 'auto',
+      spaceBetween: 15,
+    });
 
-    const swiper = new Swiper('.swiper-container', {
+    const swiper = new Swiper('.pictureSlider', {
       slidesPerView: 'auto',
       spaceBetween: 15,
       // loop: true,

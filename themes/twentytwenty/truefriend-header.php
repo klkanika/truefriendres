@@ -298,6 +298,7 @@
 			$("#magni").attr('type', 'submit')
 		}
 	});
+	
 </script>
 
 <div>

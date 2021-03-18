@@ -109,7 +109,9 @@
       <div class="swiper-wrapper lg:pl-48 pl-4">
         <!-- Slides -->
         <?php foreach ($รูปภาพ as $รูป) : ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $รูป['image'] ?>" alt="" /></div>
+          <div class="swiper-slide rounded-xl overflow-hidden banner-slide">
+            <img class="object-cover w-full h-full" src="<?= $รูป['image'] ?>" alt="" onerror="this.src='<?= $defaultImage ?>';"/>
+          </div>
         <?php endforeach ?>
 
       </div>
@@ -312,7 +314,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $(document).ready(function() {
-
+    
     $('.collapse').next().toggle(false)
     $('.collapse-icon').toggleClass('rotate-180', false)
 
@@ -334,6 +336,10 @@
       //   992: {
       //   },
       // }
+    });
+
+    $("img").on("error", function() {
+      $(this).attr('src', "<?= $defaultImage ?>");
     });
   });
 </script>

@@ -49,6 +49,12 @@ $franchises = $newFranchisesObject->posts;
       max-width: 1000px;
       margin: 0 auto;
     }
+
+    .noImg {
+      background-color: #D3D3D3 !important;
+      width: 150px !important;
+      height: 150px !important;
+    }
   </style>
   <!-- franchise hub title -->
   <section class="pt-32 w-full" style="color: #262145;">
@@ -211,7 +217,7 @@ $franchises = $newFranchisesObject->posts;
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
-
+    
     let fracnhiseType = '';
     var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
     let allPosts = <?= $franchisesObject->posts_count ? $franchisesObject->posts_count : 0 ?>;
@@ -357,16 +363,16 @@ $franchises = $newFranchisesObject->posts;
               ${index === 0 && '<?= !wp_is_mobile() ?>' == 1 && firstObjectMatters ? `
                 <div class="flex gap-x-3 h-80">
                   <div style="flex:4;">
-                    <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].image ? franchise.รูปภาพ[0].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="">
+                    <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].image ? franchise.รูปภาพ[0].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';">
                   </div>
                   <div class="flex flex-col flex-1 gap-y-2 h-full">
-                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].image ? franchise.รูปภาพ[1].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].image ? franchise.รูปภาพ[2].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].image ? franchise.รูปภาพ[3].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].image ? franchise.รูปภาพ[1].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].image ? franchise.รูปภาพ[2].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
+                    <div class="h-full overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].image ? franchise.รูปภาพ[3].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
                     <div class="h-full overflow-hidden relative">
                       <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
                       <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
-                      <img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].image ? franchise.รูปภาพ[4].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="">
+                      <img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].image ? franchise.รูปภาพ[4].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';">
                     </div>
                   </div>
                 </div>
@@ -379,16 +385,18 @@ $franchises = $newFranchisesObject->posts;
                 `<div class="flex flex-wrap ${firstObjectMatters ? '' : 'flex-wrap-reverse'}">
                   <div class="flex flex-wrap">
                     <div class="flex w-full h-60">
-                      <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].image ? franchise.รูปภาพ[0].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full pb-2" alt="">
+                      <img src="${franchise.รูปภาพ[0] && franchise.รูปภาพ[0].image ? franchise.รูปภาพ[0].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full pb-2" alt="" onerror="this.src='<?= $defaultImage ?>';">
                     </div>
                     <div class="flex h-20 gap-x-1">
-                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].image ? franchise.รูปภาพ[1].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].image ? franchise.รูปภาพ[2].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
-                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].image ? franchise.รูปภาพ[3].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[1] && franchise.รูปภาพ[1].image ? franchise.รูปภาพ[1].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
+                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[2] && franchise.รูปภาพ[2].image ? franchise.รูปภาพ[2].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
+                      <div class="h-full w-1/4 overflow-hidden"><img src="${franchise.รูปภาพ[3] && franchise.รูปภาพ[3].image ? franchise.รูปภาพ[3].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
                       <div class="h-full w-1/4 overflow-hidden relative">
                         <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
                         <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${franchise.รูปภาพ.length > 5 ? '' : 'hidden'}">${franchise.รูปภาพ.length - 5}+</div>
-                        <div class="h-full w-full overflow-hidden"><img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].image ? franchise.รูปภาพ[4].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+                        <div class="h-full w-full overflow-hidden">
+                          <img src="${franchise.รูปภาพ[4] && franchise.รูปภาพ[4].image ? franchise.รูปภาพ[4].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -571,18 +579,20 @@ $franchises = $newFranchisesObject->posts;
         ])
         row.child(`
         <a href="${d['link'] || d['guid']}" class="flex gap-x-2 pb-6 mb-4 pt-4 border-b" style="border-color:rgba(0,0,0,0.12)">
-          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][0]?d['รูปภาพ'][0].image :'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}"/></div>
-          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][1]?d['รูปภาพ'][1].image :'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}"/></div>
+          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl">
+            <img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][0]?d['รูปภาพ'][0].image :'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" onerror="this.src='<?= $defaultImage ?>';"/>
+          </div>
+          <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][1]?d['รูปภาพ'][1].image :'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" onerror="this.src='<?= $defaultImage ?>';"/></div>
           <div class="lg:w-1/5 w-1/4 lg:h-36 h-20 overflow-hidden rounded-xl relative">
             <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center lg:hidden ${d['รูปภาพ'].length > 3 ? '' : 'hidden'}">${d['รูปภาพ'].length - 3}+</div>
             <div class="w-full h-full absolute text-white text-xl flex items-center justify-center lg:hidden ${d['รูปภาพ'].length > 3 ? '' : 'hidden'}">${d['รูปภาพ'].length - 3}+</div>
-            <div class="h-full w-full overflow-hidden"><img src="${d['รูปภาพ'][2] && d['รูปภาพ'][2].image ? d['รูปภาพ'][2].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+            <div class="h-full w-full overflow-hidden"><img src="${d['รูปภาพ'][2] && d['รูปภาพ'][2].image ? d['รูปภาพ'][2].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
           </div>
-          <div class="lg:w-1/5 w-1/4 h-36 lg:block hidden overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][3]?d['รูปภาพ'][3].image :'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}"/></div>
+          <div class="lg:w-1/5 w-1/4 h-36 lg:block hidden overflow-hidden rounded-xl"><img class="object-cover w-full h-full" src="${d['รูปภาพ'] && d['รูปภาพ'][3]?d['รูปภาพ'][3].image :'<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" onerror="this.src='<?= $defaultImage ?>';"/></div>
           <div class="h-full lg:w-1/5 w-1/4 lg:h-36 rounded-xl overflow-hidden relative lg:block hidden">
             <div class="w-full h-full bg-black opacity-50 absolute text-white text-xl flex items-center justify-center ${d['รูปภาพ'].length > 5 ? '' : 'hidden'}">${d['รูปภาพ'].length - 5}+</div>
             <div class="w-full h-full absolute text-white text-xl flex items-center justify-center ${d['รูปภาพ'].length > 5 ? '' : 'hidden'}">${d['รูปภาพ'].length - 5}+</div>
-            <div class="h-full w-full overflow-hidden"><img src="${d['รูปภาพ'][4] && d['รูปภาพ'][4].image ? d['รูปภาพ'][4].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt=""></div>
+            <div class="h-full w-full overflow-hidden"><img src="${d['รูปภาพ'][4] && d['รูปภาพ'][4].image ? d['รูปภาพ'][4].image : '<?= get_theme_file_uri() ?>' + '/assets/images/gray.png'}" class="object-cover h-full w-full" alt="" onerror="this.src='<?= $defaultImage ?>';"></div>
           </div>
         </a>
         ${(i+1) % 5 === 0 ? ` <div class="pb-6 mb-4 border-b" style="border-color:rgba(0,0,0,0.12)"><?php include 'truefriend-advertisement-small.php'; ?></div>` : ''}
@@ -609,6 +619,10 @@ $franchises = $newFranchisesObject->posts;
 
     $("#type").val(<?= $_GET['type'] ?>);
     $("#type").trigger('change');
+
+    $("img").on("error", function() {
+      $(this).attr('src', "<?= $defaultImage ?>");
+    });
   });
 </script>
 

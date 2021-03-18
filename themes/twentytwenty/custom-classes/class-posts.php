@@ -267,7 +267,7 @@ class Post
             $tq = $query->found_posts;
             while ($query->have_posts()) {
                 $query->the_post();
-                $thePost = Post::getPost($postType, null);
+                $thePost = Post::getPost(null, null);
                 array_push($posts, $thePost);
             }
         }
