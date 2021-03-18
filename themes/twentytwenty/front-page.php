@@ -70,7 +70,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                 <?php
                 foreach ($stickyPosts as $thePost) {
                     $image = $defaultImage;
-                    if (exif_imagetype($thePost->featuredImage)) {
+                    if ($thePost->featuredImage) {
                         $image = $thePost->featuredImage;
                     }
                 ?>
@@ -119,7 +119,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                 <?php
                 foreach ($recentPosts->posts as $thePost) {
                     $image = $defaultImage;
-                    if (exif_imagetype($thePost->featuredImage)) {
+                    if ($thePost->featuredImage) {
                         $image = $thePost->featuredImage;
                     }
                 ?>
@@ -238,7 +238,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                         $thePost = $posts[$i];
                         if ($i === 0) {
                             $image = $defaultImage;
-                            if (exif_imagetype($thePost->featuredImage)) {
+                            if ($thePost->featuredImage) {
                                 $image = $thePost->featuredImage;
                             }
                 ?>
