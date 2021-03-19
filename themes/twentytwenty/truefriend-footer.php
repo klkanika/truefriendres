@@ -37,7 +37,7 @@
 	<div class="mt-10 lg:hidden text-center">
 		<div class="flex items-center justify-center mb-4">
 			<a href="<?= get_site_url() ?>/" class="w-full">
-				<img src="<?= $footerlogo ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer mr-2" />
+				<img src="<?= isset($footerlogo) ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer mr-2" />
 			</a>
 		</div>
 		<p class="lg:text-base text-xs"><a href="mailto:restaurantbuddysme@gmail.com">restaurantbuddysme@gmail.com</a></p>
