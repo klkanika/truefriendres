@@ -1,8 +1,8 @@
-<div class="flex flex-wrap justify-center text-white lg:pb-32 pb-16" style="color:<?= $footercolor ? $footercolor : 'white' ?>;background-color:<?= $footerbgcolor ? $footerbgcolor : '#262145' ?>;">
+<div class="flex flex-wrap justify-center text-white lg:pb-32 pb-16" style="color:<?= isset($footercolor) ? $footercolor : 'white' ?>;background-color:<?= isset($footerbgcolor) ? $footerbgcolor : '#262145' ?>;">
 	<div class="flex justify-between w-full">
 		<div class="ml-8 mt-10 mb-10 lg:block hidden">
 			<a href="<?= get_site_url() ?>/" class="flex items-center justify-start mb-6">
-				<img src="<?= $footerlogo ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer w-32" />
+				<img src="<?= isset($footerlogo) ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer w-32" />
 				<!-- <div class="text-sm leading-tight font-bold">
 					<p>เพื่อนแท้</p>
 					<p>ร้านอาหาร</p>
@@ -37,7 +37,7 @@
 	<div class="mt-10 lg:hidden text-center">
 		<div class="flex items-center justify-center mb-4">
 			<a href="<?= get_site_url() ?>/" class="w-full">
-				<img src="<?= $footerlogo ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer mr-2" />
+				<img src="<?= isset($footerlogo) ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer mr-2" />
 			</a>
 		</div>
 		<p class="lg:text-base text-xs"><a href="mailto:restaurantbuddysme@gmail.com">restaurantbuddysme@gmail.com</a></p>

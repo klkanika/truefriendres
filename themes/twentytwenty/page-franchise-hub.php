@@ -217,7 +217,7 @@ $franchises = $newFranchisesObject->posts;
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
-    
+
     let fracnhiseType = '';
     var ajaxurl = "<?= admin_url('admin-ajax.php'); ?>";
     let allPosts = <?= $franchisesObject->posts_count ? $franchisesObject->posts_count : 0 ?>;
@@ -413,11 +413,11 @@ $franchises = $newFranchisesObject->posts;
         `);
       });
       if (firstObjectMatters) {
-          new Swiper(slideName, {
-            slidesPerView: 'auto',
-            spaceBetween: 10,
-            freeMode: true,
-          });
+        new Swiper(slideName, {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          freeMode: true,
+        });
       } else {
         new Swiper(slideName, {
           spaceBetween: 0,
@@ -616,9 +616,14 @@ $franchises = $newFranchisesObject->posts;
       }
     });
 
-    $("#type").val("<?= $_GET['type'] ?>");
-    $("#type").trigger('change');
-
+    <?php
+    if (isset($_GET['type'])) {
+    ?>
+      $("#type").val("<?= $_GET['type'] ?>");
+      $("#type").trigger('change');
+    <?php
+    }
+    ?>
     $("img").on("error", function() {
       $(this).attr('src', "<?= $defaultImage ?>");
     });
