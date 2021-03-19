@@ -105,6 +105,7 @@
   .contact-topic ul li {
     display: block !important;
     width: 50% !important;
+    margin-right: 0 !important;
   }
 
   .contact-topic ul input[type="radio"] {
@@ -156,6 +157,13 @@
     color: #262145 !important;
     border-radius: 20px !important;
     font-weight: 600 !important;
+  }
+
+  div.wpforms-container-full .wpforms-form .wpforms-list-inline ul li {
+    margin-right: 0 !important;
+  }
+  div.wpforms-container-full .wpforms-form .wpforms-field{
+    padding: 0 !important;
   }
 
   @media (max-width: 1024px) {
