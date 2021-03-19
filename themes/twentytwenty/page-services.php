@@ -405,6 +405,9 @@ $traningClient = get_field('training', get_the_ID());
   input:focus {
     outline: none !important;
   }
+  .contact-us{
+    width: 100% !important;
+  }
 
   .contact-topic {
     margin-bottom: 10px !important;
