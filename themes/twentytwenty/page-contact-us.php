@@ -157,6 +157,7 @@
     color: #262145 !important;
     border-radius: 20px !important;
     font-weight: 600 !important;
+    border: 0 !important;
   }
 
   div.wpforms-container-full .wpforms-form .wpforms-list-inline ul li {
@@ -164,6 +165,9 @@
   }
   div.wpforms-container-full .wpforms-form .wpforms-field{
     padding: 0 !important;
+  }
+  .wpforms-field-limit-text{
+    display: none !important;
   }
 
   @media (max-width: 1024px) {
