@@ -28,7 +28,7 @@ $count_material = wp_count_posts($post_type)->publish;
         <div class="swiper-wrapper" id="thumbnail-wrapper">
             <?php foreach ($thumbnail_slider_material as $key => $material) : 
                     $image = $defaultImage;
-                    if(!empty(get_field('pictureUrl', $material)) && getimagesize(get_field('pictureUrl', $material))){
+                    if(!empty(get_field('pictureUrl', $material)) && @getimagesize(get_field('pictureUrl', $material))){
                         $image = get_field('pictureUrl', $material) ;
                     }
                 ?>

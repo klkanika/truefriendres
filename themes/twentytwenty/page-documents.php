@@ -76,7 +76,7 @@ $documents = $documentsObject->posts;
         }
       ?>
         <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md shadow bg-white">
-          <?= $thePost->pictureUrl && getimagesize($thePost->pictureUrl) ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' . $thePost->pictureUrl . '" />' : '' ?>
+          <?= $thePost->pictureUrl && @getimagesize($thePost->pictureUrl) ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' . $thePost->pictureUrl . '" />' : '' ?>
           <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
             <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2"><?= $thePost->ชื่อ ?></h1>
             <h2 class="text-xs lg:text-sm lg:text-center"><?= $thePost->รายละเอียด ?></h2>

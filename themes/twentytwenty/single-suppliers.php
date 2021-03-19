@@ -120,7 +120,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         if ($อาเรย์รูปภาพ) {
           foreach ($อาเรย์รูปภาพ as $รูปภาพ) : 
             $image = $defaultImage;
-            if(getimagesize($รูปภาพ['image'])){
+            if(@getimagesize($รูปภาพ['image'])){
                 $image = $รูปภาพ['image'] ;
             }
           ?>
@@ -141,7 +141,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
             <a class="text-xs rounded-full text-sm px-4 py-2 mb-2" style="background-color: #FEDA52;" href="<?= get_site_url() ?>/supplier-hub">Supplier hub</a>
             <?php foreach ($supplierTypes as $supplierType) : 
               $termImage = $defaultImage;
-              if(!empty(get_field('pictureUrl', $supplierType)) && getimagesize(get_field('pictureUrl', $supplierType))){
+              if(!empty(get_field('pictureUrl', $supplierType)) && @getimagesize(get_field('pictureUrl', $supplierType))){
                   $termImage = get_field('pictureUrl', $supplierType) ;
               }
               ?>

@@ -77,7 +77,7 @@ $traningClient = get_field('training', get_the_ID());
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
                   <?php if (!empty($thePost['icon_image'])) :
                     $icon = $defaultImage;
-                    if (getimagesize($thePost['icon_image'])) {
+                    if (@getimagesize($thePost['icon_image'])) {
                       $icon = $thePost['icon_image'];
                     }
                   ?>
@@ -89,7 +89,7 @@ $traningClient = get_field('training', get_the_ID());
                     <div class="flex items-center mb-4">
                       <?php if (!empty($thePost['customer_image'])) :
                         $customerImage = $defaultImage;
-                        if (getimagesize($thePost['customer_image'])) {
+                        if (@getimagesize($thePost['customer_image'])) {
                           $customerImage = $thePost['customer_image'];
                         }
                       ?>
@@ -169,7 +169,7 @@ $traningClient = get_field('training', get_the_ID());
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
                   <?php if (!empty($thePost['icon_image'])) :
                     $icon = $defaultImage;
-                    if (getimagesize($thePost['icon_image'])) {
+                    if (@getimagesize($thePost['icon_image'])) {
                       $icon = $thePost['icon_image'];
                     }
                   ?>
@@ -181,7 +181,7 @@ $traningClient = get_field('training', get_the_ID());
                     <div class="flex items-center mb-4">
                       <?php if (!empty($thePost['customer_image'])) :
                         $customerImage = $defaultImage;
-                        if (getimagesize($thePost['customer_image'])) {
+                        if (@getimagesize($thePost['customer_image'])) {
                           $customerImage = $thePost['customer_image'];
                         }
                       ?>
@@ -261,7 +261,7 @@ $traningClient = get_field('training', get_the_ID());
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
                   <?php if (!empty($thePost['icon_image'])) :
                     $icon = $defaultImage;
-                    if (getimagesize($thePost['icon_image'])) {
+                    if (@getimagesize($thePost['icon_image'])) {
                       $icon = $thePost['icon_image'];
                     }
                   ?>
@@ -273,7 +273,7 @@ $traningClient = get_field('training', get_the_ID());
                     <div class="flex items-center mb-4">
                       <?php if (!empty($thePost['customer_image'])) :
                         $customerImage = $defaultImage;
-                        if (getimagesize($thePost['customer_image'])) {
+                        if (@getimagesize($thePost['customer_image'])) {
                           $customerImage = $thePost['customer_image'];
                         }
                       ?>

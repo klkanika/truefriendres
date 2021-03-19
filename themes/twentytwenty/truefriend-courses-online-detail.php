@@ -187,7 +187,7 @@ if(!empty(get_field('เนื้อหาของคอร์สนี้'))){
         <!-- Slides -->
         <?php foreach (get_field('รูปภาพ') as $รูป) : 
           $image = $defaultImage;
-          if(getimagesize($รูป['รูป']['url'])){
+          if(@getimagesize($รูป['รูป']['url'])){
               $image = $รูป['รูป']['url'] ;
           }
           ?>

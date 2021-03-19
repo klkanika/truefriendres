@@ -57,7 +57,7 @@
     </div>
     <?php if (!empty(get_the_post_thumbnail_url())) : 
         $image = $defaultImage;
-        if(getimagesize(get_the_post_thumbnail_url())){
+        if(@getimagesize(get_the_post_thumbnail_url())){
             $image = get_the_post_thumbnail_url() ;
         } 
       ?>
@@ -104,7 +104,7 @@
       $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
       if ($related) foreach ($related->posts as $key => $category) : 
         $image = $defaultImage;
-        if(getimagesize($category->featuredImage)){
+        if(@getimagesize($category->featuredImage)){
             $image = $category->featuredImage ;
         }
       ?>
