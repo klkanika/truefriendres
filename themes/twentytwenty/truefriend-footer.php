@@ -1,4 +1,4 @@
-<div class="flex flex-wrap justify-center text-white lg:pb-32 pb-16" style="color:<?= $footercolor ? $footercolor : 'white' ?>;background-color:<?= $footerbgcolor ? $footerbgcolor : '#262145' ?>;">
+<div class="flex flex-wrap justify-center text-white lg:pb-32 pb-16" style="color:<?= isset($footercolor) ? $footercolor : 'white' ?>;background-color:<?= isset($footerbgcolor) ? $footerbgcolor : '#262145' ?>;">
 	<div class="flex justify-between w-full">
 		<div class="ml-8 mt-10 mb-10 lg:block hidden">
 			<a href="<?= get_site_url() ?>/" class="flex items-center justify-start mb-6">
