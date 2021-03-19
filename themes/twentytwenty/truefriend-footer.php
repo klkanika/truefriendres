@@ -2,7 +2,7 @@
 	<div class="flex justify-between w-full">
 		<div class="ml-8 mt-10 mb-10 lg:block hidden">
 			<a href="<?= get_site_url() ?>/" class="flex items-center justify-start mb-6">
-				<img src="<?= $footerlogo ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer w-32" />
+				<img src="<?= isset($footerlogo) ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer w-32" />
 				<!-- <div class="text-sm leading-tight font-bold">
 					<p>เพื่อนแท้</p>
 					<p>ร้านอาหาร</p>
