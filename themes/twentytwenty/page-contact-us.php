@@ -79,85 +79,88 @@
 
 <style>
   input:focus {
-    outline: none;
+    outline: none !important;
+  }
+  .contact-us{
+    width: 100% !important;
   }
 
   .contact-topic {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
   }
 
   .contact-topic label {
-    font-size: .875rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    display: block;
+    font-size: .875rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 5px !important;
+    display: block !important;
   }
 
   .contact-topic ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -5px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 0 -5px !important;
   }
 
   .contact-topic ul li {
-    display: block;
-    width: 50%;
+    display: block !important;
+    width: 50% !important;
   }
 
   .contact-topic ul input[type="radio"] {
-    display: none;
+    display: none !important;
   }
 
   .contact-topic ul label {
-    border: 1px solid #262145;
-    color: #262145;
-    flex-grow: 1;
-    font-weight: normal;
-    padding: .75rem 1rem;
-    text-align: center;
-    border-radius: .5rem;
-    display: block;
-    margin: 0 5px;
-    cursor: pointer;
+    border: 1px solid #262145 !important;
+    color: #262145 !important;
+    flex-grow: 1 !important;
+    font-weight: normal !important;
+    padding: .75rem 1rem !important;
+    text-align: center !important;
+    border-radius: .5rem !important;
+    display: block !important;
+    margin: 0 5px !important;
+    cursor: pointer !important;
   }
 
   .contact-topic ul input[type="radio"]:checked+label {
-    background: #262145;
-    color: white;
+    background: #262145 !important;
+    color: white !important;
   }
 
   .wpforms-label-hide {
-    display: none;
+    display: none !important;
   }
 
   input,
   textarea {
-    width: 100%;
-    border-radius: .5rem;
-    height: 3rem;
-    padding: 0 1rem;
-    border: 1px solid rgba(6, 34, 65, 0.2);
-    background-color: transparent;
-    margin-bottom: 10px;
+    width: 100% !important;
+    border-radius: .5rem !important;
+    height: 3rem !important;
+    padding: 0 1rem !important;
+    border: 1px solid rgba(6, 34, 65, 0.2) !important;
+    background-color: transparent !important;
+    margin-bottom: 10px !important;
   }
 
   textarea {
-    height: 6rem;
-    padding: 1rem;
+    height: 6rem !important;
+    padding: 1rem !important;
   }
 
   .wpforms-submit {
-    width: 100%;
-    height: 2.5rem;
-    background-color: #FFD950;
-    color: #262145;
-    border-radius: 20px;
-    font-weight: 600;
+    width: 100% !important;
+    height: 2.5rem !important;
+    background-color: #FFD950 !important;
+    color: #262145 !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
   }
 
   @media (max-width: 1024px) {
     .text-contact {
-      font-size: 12vw;
+      font-size: 12vw !important;
     }
   }
 </style>
