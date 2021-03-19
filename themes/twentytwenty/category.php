@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge</title>
+  <title>Category</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
@@ -30,7 +30,7 @@ $Posts = $PostsObject->posts;
 			<div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
 				<?php foreach ($Posts as $thePost) : 
 					$image = $defaultImage;
-					if(file_exists($thePost->featuredImage)){
+					if(getimagesize($thePost->featuredImage)){
 						$image = $thePost->featuredImage ;
 					}
 					?>

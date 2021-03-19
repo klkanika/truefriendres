@@ -108,7 +108,7 @@
         <!-- Slides -->
         <?php foreach (get_field('รูปภาพ') as $รูป) : 
           $image = $defaultImage;
-          if(file_exists($รูป['รูป']['url'])){
+          if(getimagesize($รูป['รูป']['url'])){
               $image = $รูป['รูป']['url'] ;
           }
           ?>

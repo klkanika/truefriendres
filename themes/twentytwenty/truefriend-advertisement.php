@@ -16,13 +16,13 @@ $randomAds = rand(0, ($adsPostCount-1));
 <section class="flex items-center justify-center font-bold text-2xl h-48 " id="banner-1" style="background-color:#F2F2F2;color:#062241;">
   <?php if($adsPosts && $adsPostCount > 0) {?>
       <a href="<?= $adsPosts[$randomAds]->adsLink ?>" target="_blank">
-        <?php if(file_exists($adsPosts[$randomAds]->adsImage)) {?>
+        <?php if(getimagesize($adsPosts[$randomAds]->adsImage)) {?>
           <img class="hidden md:flex w-full h-48 object-cover" src="<?=  $adsPosts[$randomAds]->adsImage ?>" alt="">
         <?php }
         else { ?>
           <p class="hidden md:flex w-full">Image Error</p>
         <?php } ?>
-        <?php if(file_exists($adsPosts[$randomAds]->adsMobileImage)) {?>
+        <?php if(getimagesize($adsPosts[$randomAds]->adsMobileImage)) {?>
           <img class="md:hidden w-full h-48 object-cover" src="<?=  $adsPosts[$randomAds]->adsMobileImage ?>" alt="">
         <?php }
         else { ?>

@@ -91,7 +91,7 @@ if ($query->have_posts()) {
       <?php
         $thumbnailId = get_post_thumbnail_id($thePost);
         $image = wp_get_attachment_url($thumbnailId, 'thumbnail');
-        if(!file_exists($image)){
+        if(!getimagesize($image)){
           $image = $defaultImage;
         }
         $link = get_permalink($thePost);

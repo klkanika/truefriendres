@@ -116,7 +116,7 @@
         if ($อาเรย์รูปภาพ):
           foreach ($อาเรย์รูปภาพ as $รูปภาพ) : 
             $image = $defaultImage;
-            if(file_exists($รูปภาพ['รูป'])){
+            if(getimagesize($รูปภาพ['รูป'])){
                 $image = $รูปภาพ['รูป'] ;
             }
           ?>
@@ -134,7 +134,7 @@
         <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Restautant hub</div>
         <?php foreach ($restaurant_type as $rstype) : 
           $termImage = $defaultImage;
-          if(!empty(get_field('pictureUrl', $rstype)) && file_exists(get_field('pictureUrl', $rstype))){
+          if(!empty(get_field('pictureUrl', $rstype)) && getimagesize(get_field('pictureUrl', $rstype))){
               $termImage = get_field('pictureUrl', $rstype) ;
           }
           ?>
