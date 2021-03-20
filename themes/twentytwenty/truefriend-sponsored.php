@@ -53,7 +53,7 @@ $month=date("m",$time);
 $year=date("Y",$time);
 $hour=date("H",$time);
 $minute=date("i",$time);
-$second=date("s",$time) + 1;
+$second=date("s",$time) > 58 ? 0 : date("s",$time) + 1;
 $args = array(
   'date_query' => array(
       array(
