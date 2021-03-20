@@ -16,17 +16,17 @@ $randomAds = rand(0, ($adsPostCount-1));
 <div class="w-full h-36 bg-gray-300 flex items-center justify-center rounded-lg	mt-6">
   <?php if($adsPosts && $adsPostCount > 0) {?>
     <a href="<?= $adsPosts[$randomAds]->adsLink ?>" target="_blank">
-      <?php if(@getimagesize($adsPosts[$randomAds]->adsImage)) {?>
-        <img class="hidden md:flex w-full h-36 object-cover rounded-lg" src="<?=  $adsPosts[$randomAds]->adsImage ?>" alt="">
+      <?php if(!empty($adsPosts[$randomAds]->adsImage)) {?>
+        <img class="hidden md:flex w-full h-36 object-cover rounded-lg" src="<?=  $adsPosts[$randomAds]->adsImage ?>"  onerror="this.src='<?= $defaultImage ?>'" alt="">
       <?php }
         else { ?>
-            <p class="hidden md:flex w-full ">Image Error</p>
+            <p class="hidden md:flex w-full ">No Ads</p>
       <?php } ?>
-        <?php if(@getimagesize($adsPosts[$randomAds]->adsMobileImage)) {?>
-          <img class="md:hidden w-full h-36 object-cover rounded-lg" src="<?=  $adsPosts[$randomAds]->adsMobileImage ?>" alt="">
+        <?php if(!empty($adsPosts[$randomAds]->adsMobileImage)) {?>
+          <img class="md:hidden w-full h-36 object-cover rounded-lg" src="<?=  $adsPosts[$randomAds]->adsMobileImage ?>"  onerror="this.src='<?= $defaultImage ?>'" alt="">
       <?php }
         else { ?>
-          <p class="md:hidden w-full h-36">Image Error</p>
+          <p class="md:hidden w-full h-36">No Ads</p>
       <?php } ?>
     </a>
   <?php }

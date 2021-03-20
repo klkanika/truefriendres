@@ -107,13 +107,9 @@
       <div class="swiper-wrapper md:pl-48 pl-4">
         <!-- Slides -->
         <?php foreach (get_field('รูปภาพ') as $รูป) : 
-          $image = $defaultImage;
-          if(@getimagesize($รูป['รูป']['url'])){
-              $image = $รูป['รูป']['url'] ;
-          }
           ?>
           <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
-            <img class="object-cover w-full h-full" src="<?= $image ?>" alt="" />
+            <img class="object-cover w-full h-full" src="<?= $image = $รูป['รูป']['url'] ?>" onerror="this.src='<?= $defaultImage ?>'" alt="" />
           </div>
         <?php endforeach; ?>
       </div>

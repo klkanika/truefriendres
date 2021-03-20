@@ -26,17 +26,12 @@ $count_material = wp_count_posts($post_type)->publish;
 
     <div class="swiper-container thumbnail-container">
         <div class="swiper-wrapper" id="thumbnail-wrapper">
-            <?php foreach ($thumbnail_slider_material as $key => $material) : 
-                    $image = $defaultImage;
-                    if(!empty(get_field('pictureUrl', $material)) && @getimagesize(get_field('pictureUrl', $material))){
-                        $image = get_field('pictureUrl', $material) ;
-                    }
-                ?>
+            <?php foreach ($thumbnail_slider_material as $key => $material) :?>
                 <?php if ($key % 20 === 0) { ?>
                     <div class="grid lg:grid-cols-5 grid-cols-1 gap-y-3 gap-x-4 py-8 swiper-slide <?= $key % 20 > 0 ? 'lg:flex hidden' : '' ?>">
                     <?php } ?>
-                    <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>?type=<?= $material->term_id ?>" class="border-b border-gray-300 py-2 flex items-center">
-                        <img src="<?= $image?>" class="w-12 h-12 rounded mr-2 object-cover" />
+                    <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>?type=<?= $material->term_id ?>" class="border-b border-gray-300 py-2 flex items-center" >
+                        <img src="<?= get_field('pictureUrl', $material)?>" class="w-12 h-12 rounded mr-2 object-cover" onerror="this.src='<?= $defaultImage ?>'"/>
                         <div>
                             <p class="font-semibold"><?= $material->name ?></p>
                             <p class="text-sm"><?= $material->count ?> เบอร์โทร</p>
@@ -88,6 +83,7 @@ $count_material = wp_count_posts($post_type)->publish;
                 async: false,
                 dataType: "json",
                 success: function(postsObject) {
+                    const defaultImage = "<?= $defaultImage ?>";
                     thumbnail_swiper.destroy();
                     $("#thumbnail-wrapper").html(``);
                     postsObject.map((material, i) => {
@@ -96,7 +92,7 @@ $count_material = wp_count_posts($post_type)->publish;
                         }
                         $(".swiper-slide").last().append(`
                             <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>?type=${material.cat_ID}" class="border-b border-gray-300 py-2 flex items-center">
-                                <img src="${material.pictureUrl}" class="w-12 h-12 rounded mr-2 object-cover" />
+                                <img src="${material.pictureUrl}" class="w-12 h-12 rounded mr-2 object-cover" onerror="this.src = '${defaultImage}'"/>
                                 <div>
                                     <p class="font-semibold">${material.cat_name}</p>
                                     <p class="text-sm">${material.category_count} เบอร์โทร</p>
