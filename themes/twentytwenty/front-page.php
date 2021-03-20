@@ -76,7 +76,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                 ?>
                     <div class="relative banner">
                         <a href="<?= $thePost->link ?>">
-                            <img class="object-cover w-full h-full" src="<?= $image ?>" />
+                            <img class="object-cover w-full h-full" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                             <div class="absolute left-0 bottom-0 banner__title">
                                 <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
                                     <div onclick="window.open('<?= get_site_url() ?>/<?= $thePost->categories[0]->slug ?>','_self')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
@@ -95,7 +95,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
         </section>
     <?php else : ?>
         <div class="relative banner">
-            <img class="object-cover w-full h-full" src="<?= $defaultImage ?>" />
+            <img class="object-cover w-full h-full" src="<?= $defaultImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
             <div class="absolute left-0 bottom-0 banner__title">
                 <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
                     <div class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;">ไม่พบข้อมูล</div>
@@ -126,7 +126,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                     <a href="<?= $thePost->link ?>">
                         <div class="relative">
                             <div style="height:30vh">
-                                <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" />
+                                <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                             </div>
                             <p class="mt-4"> <?= $thePost->title ?> </p>
                         </div>
@@ -175,7 +175,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                                 <a href="<?= $supplierType->link ?>" class="swiper-slide">
                                     <div class="relative" style="height:40vh;">
                                         <div style="height:40vh;">
-                                            <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" />
+                                            <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                         </div>
                                         <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
                                             <?php if ((int)$supplierType->supplierTypeCount < 99) {
@@ -205,7 +205,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                     <a href="<?= $supplierType->link ?>">
                         <div class="py-2 border-b flex items-center relative">
                             <div class="w-20 h-20 mr-4">
-                                <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" />
+                                <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
                             </div>
                             <div>
                                 <div class="text-lg font-bold"><?= $supplierType->name ?></div>
@@ -244,7 +244,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                 ?>
                             <div onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
                                 <div class="mb-4" style="height:30vh">
-                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" />
+                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                 </div>
                                 <p><?= $thePost->title ?></p>
                             </div>
@@ -276,7 +276,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                     foreach ($galleryPosts->posts as $key => $thePost) : ?>
                         <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
                             <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
-                                <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" />
+                                <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                 <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
                             </div>
                         </a>
@@ -409,7 +409,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                         <a href="${material.link}" class="swiper-slide">
                             <div class="relative" style="height:40vh;">
                                 <div style="height:40vh;">
-                                    <img class="object-cover w-full h-full rounded-xl" src="${material.pictureUrl}" />
+                                    <img class="object-cover w-full h-full rounded-xl" src="${material.pictureUrl}" onerror="this.src='<?= $defaultImage ?>'"  />
                                 </div>
                                 <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
                                     ${material.category_count < 100 ? material.category_count : '99+'}
@@ -471,7 +471,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                         $("#gallery-posts").append(`
                         <a href="${thePost.link}" class="${key % 4 === 1 || key % 4 === 2 ? 'w-3/5' : 'w-2/5'}  lg:mb-4 mb-2 relative">
                             <div class="gallery-thumbnail relative ${ key % 2 == 0 ? 'lg:mr-4 mr-2' : '' }">
-                                <img class="object-cover w-full h-full rounded-lg" src="${thePost.featuredImage}" />
+                                <img class="object-cover w-full h-full rounded-lg" src="${thePost.featuredImage}" onerror="this.src='<?= $defaultImage ?>'"  />
                                 <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">${thePost.title}</div>
                             </div>
                         </a>
