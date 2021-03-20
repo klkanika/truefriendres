@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
 <?php
-
 $catTitle = single_cat_title( '', false );
 require_once('custom-classes/class-posts.php');
-$catId = get_cat_ID($catTitle);
-$PostsObject = Post::getPostsByCategory('post', get_cat_ID($catTitle), 9, 0, null);
+$category = get_queried_object();
+$catId = $category->term_id;
+$PostsObject = Post::getPostsByCategory('post', $category->term_id, 9, 0, null);
 $Posts = $PostsObject->posts;
 ?>
 
