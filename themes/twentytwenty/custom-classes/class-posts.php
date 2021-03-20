@@ -194,7 +194,7 @@ class Post
         $thePost->title = get_the_title();
         $thePost->link = get_the_permalink();
         $thePost->categories = get_the_category();
-        $thePost->featuredImage = @getimagesize(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+        $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');
         $thePost->numberDate = get_the_date('d/m/Y');
         $thePost->restaurantCategory = get_field('restaurant_101_category');
@@ -202,7 +202,7 @@ class Post
         if ($postType === 'interviews') {
             $thePost->interviewee = get_field('interviewee');
             $thePost->intervieweeBusiness = get_field('intervieweeBusiness');
-            $thePost->intervieweeBusinessLogo = get_field('intervieweeBusinessLogo') && @getimagesize(get_field('intervieweeBusinessLogo')) ? get_field('intervieweeBusinessLogo') : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+            $thePost->intervieweeBusinessLogo = get_field('intervieweeBusinessLogo') ? get_field('intervieweeBusinessLogo') : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         }
 
         if ($postType === 'suppliers') {
