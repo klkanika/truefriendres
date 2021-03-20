@@ -56,8 +56,6 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     </div>
     <?php
 
-    var_dump(get_the_post_thumbnail_url());
-    var_dump(@getimagesize(get_the_post_thumbnail_url()));
     if (!empty(get_the_post_thumbnail_url())) :
       $image = $defaultImage;
       if (@getimagesize(get_the_post_thumbnail_url())) {
