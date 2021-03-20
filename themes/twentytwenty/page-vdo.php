@@ -24,6 +24,7 @@
     $videoPostsObject = Post::getPostsByCategory('post', get_category_by_slug('video')->cat_ID, 6, 0, null);
     $videoPosts = $videoPostsObject->posts;
   }
+  $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
   ?>
   <!-- Set up your HTML -->
   <section class="text-white w-full pb-12 overflow-hidden" style="background-color: #19181F;" id="banner">
@@ -114,7 +115,7 @@
           posts.map((thePost, i) => {
             $("#posts").append(`
             <a href="${thePost.link}" class="w-full lg:w-1/2 px-4">
-              <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('${thePost.featuredImage}">
+              <div class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('${thePost.featuredImage}')">
                 <img class="absolute right-0 bottom-0 mr-4 mb-4 w-10 h-10 lg:w-12 lg:h-12" src="<?= get_theme_file_uri() ?>/assets/images/play-btn.svg" />
               </div>
               <p class="mt-6 mb-8 text-base">${thePost.title}</p>

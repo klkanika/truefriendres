@@ -23,6 +23,7 @@ if (!get_term_by('id', $supplierTypeId, 'suppliertypes')) {
 }
 $suppliersObject = Post::getPostsByCategory('suppliers', $supplierTypeId, 10, 0, null);
 $suppliers = $suppliersObject->posts;
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 ?>
 
 <body class="w-full">

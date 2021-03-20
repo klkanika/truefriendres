@@ -28,7 +28,7 @@ class Restaurant
                     'terms' => $categoryNo
                 )
             );
-        }    
+        }
 
         if ($except != null) {
             $args['post__not_in'] = $except;
@@ -39,58 +39,58 @@ class Restaurant
             $name = null;
             $startNumFilter = null;
             $endNumFilter = null;
-            if($endNum == null && $startNum != null){
+            if ($endNum == null && $startNum != null) {
                 $startNumFilter = array(
-                    'key'		=> 'จำนวนสาขา',
-                    'value'		=> $startNum,
-                    'type'		=> 'NUMERIC',
-                    'compare'	=> '>'
+                    'key'        => 'จำนวนสาขา',
+                    'value'        => $startNum,
+                    'type'        => 'NUMERIC',
+                    'compare'    => '>'
                 );
-            }else if($startNum != null && $endNum != null){
+            } else if ($startNum != null && $endNum != null) {
                 $startNumFilter = array(
-                    'key'		=> 'จำนวนสาขา',
-                    'value'		=> $startNum,
-                    'type'		=> 'NUMERIC',
-                    'compare'	=> '>='
+                    'key'        => 'จำนวนสาขา',
+                    'value'        => $startNum,
+                    'type'        => 'NUMERIC',
+                    'compare'    => '>='
                 );
 
                 $endNumFilter = array(
-                    'key'		=> 'จำนวนสาขา',
-                    'value'		=> $endNum,
-                    'type'		=> 'NUMERIC',
-                    'compare'	=> '<='
+                    'key'        => 'จำนวนสาขา',
+                    'value'        => $endNum,
+                    'type'        => 'NUMERIC',
+                    'compare'    => '<='
                 );
             }
 
-            if($ชื่อร้าน != null){
+            if ($ชื่อร้าน != null) {
                 $name = array(
-                    'key'	 	=> 'ชื่อร้าน',
-                    'value'	  	=> $ชื่อร้าน,
-                    'compare' 	=> 'LIKE',
+                    'key'         => 'ชื่อร้าน',
+                    'value'          => $ชื่อร้าน,
+                    'compare'     => 'LIKE',
                 );
             }
 
-            if($startNumFilter == null && $name != null){
+            if ($startNumFilter == null && $name != null) {
                 $args['meta_query'] = array(
-                    'relation'		=> 'AND',
+                    'relation'        => 'AND',
                     $name,
                 );
-            }else if($name == null){
-                if($endNumFilter == null){
+            } else if ($name == null) {
+                if ($endNumFilter == null) {
                     $args['meta_query'] = array(
-                        'relation'		=> 'AND',
+                        'relation'        => 'AND',
                         $startNumFilter,
                     );
-                }else{
+                } else {
                     $args['meta_query'] = array(
-                        'relation'		=> 'AND',
+                        'relation'        => 'AND',
                         $startNumFilter,
                         $endNumFilter,
                     );
                 }
-            }else{
+            } else {
                 $args['meta_query'] = array(
-                    'relation'		=> 'AND',
+                    'relation'        => 'AND',
                     $name,
                     $startNumFilter,
                     $endNumFilter,
@@ -124,7 +124,7 @@ class Restaurant
         $thePost->title = get_the_title();
         $thePost->link = get_the_permalink();
         $thePost->categories = get_the_category();
-        $thePost->featuredImage = get_the_post_thumbnail_url() && @getimagesize(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+        $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');
         $thePost->numberDate = get_the_date('d/m/Y');
         $thePost->ชื่อร้าน = get_field('ชื่อร้าน');
