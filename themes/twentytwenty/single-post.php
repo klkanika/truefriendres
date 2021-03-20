@@ -1,6 +1,5 @@
-
-<?php 
-	$defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
+<?php
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +25,7 @@
     array_push($cat_ID, $category->cat_ID);
   endforeach;
   $thisLink = get_permalink();
-  
+
   ?>
   <style>
     #headder {
@@ -43,9 +42,9 @@
   <section class="relative w-full">
     <div class="lg:pl-12 pl-4 lg:pr-12 pr-4 lg:pb-10 pb-6 pt-28 text-center" style="background-color: #262145;">
       <div class="flex flex-wrap justify-center mb-6">
-        <?php 
+        <?php
         foreach (get_the_category() as $category) : ?>
-          <a href="<?= get_category_link( $category->cat_ID ) ?>" class="select-none rounded-full text-center lg:w-44 w-32 p-2 m-1 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $category->cat_name ?></a>
+          <a href="<?= get_category_link($category->cat_ID) ?>" class="select-none rounded-full text-center lg:w-44 w-32 p-2 m-1 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $category->cat_name ?></a>
         <?php endforeach; ?>
       </div>
       <div class="text-white lg:text-3xl text-xl mx-auto"><?= the_title() ?></div>
@@ -55,14 +54,18 @@
         <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
       </div>
     </div>
-    <?php if (!empty(get_the_post_thumbnail_url())) : 
-        $image = $defaultImage;
-        if(@getimagesize(get_the_post_thumbnail_url())){
-            $image = get_the_post_thumbnail_url() ;
-        } 
-      ?>
+    <?php
+
+    var_dump(get_the_post_thumbnail_url());
+    var_dump(@getimagesize(get_the_post_thumbnail_url()));
+    if (!empty(get_the_post_thumbnail_url())) :
+      $image = $defaultImage;
+      if (@getimagesize(get_the_post_thumbnail_url())) {
+        $image = get_the_post_thumbnail_url();
+      }
+    ?>
       <div class="relative">
-        <img class="object-cover w-full h-full" src="<?=$image?>" />
+        <img class="object-cover w-full h-full" src="<?= $image ?>" />
       </div>
     <?php endif ?>
   </section>
@@ -102,10 +105,10 @@
     <div id="relatedSlider" class="owl-carousel">
       <?php
       $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
-      if ($related) foreach ($related->posts as $key => $category) : 
+      if ($related) foreach ($related->posts as $key => $category) :
         $image = $defaultImage;
-        if(@getimagesize($category->featuredImage)){
-            $image = $category->featuredImage ;
+        if (@getimagesize($category->featuredImage)) {
+          $image = $category->featuredImage;
         }
       ?>
         <a href="<?= $category->link ?>" class="block">
@@ -139,7 +142,7 @@
       $("img").on("error", function() {
         $(this).addClass('noImg');
       });
-      
+
       $("#relatedSlider").owlCarousel({
         items: $(window).width() < 1024 ? 1.3 : 3,
         loop: true,
