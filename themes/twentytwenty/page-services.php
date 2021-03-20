@@ -15,6 +15,8 @@
 $marketingClient = get_field('pr_marketing_client', get_the_ID());
 $consultantClient = get_field('consultant', get_the_ID());
 $traningClient = get_field('training', get_the_ID());
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
+
 ?>
 
 <body class="w-full">
@@ -75,25 +77,23 @@ $traningClient = get_field('training', get_the_ID());
               <?php foreach ($marketingClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) :
-                    $icon = $defaultImage;
-                    if (@getimagesize($thePost['icon_image'])) {
-                      $icon = $thePost['icon_image'];
-                    }
+                  <?php
+                  $icon = $defaultImage;
+                  if (!empty($thePost['icon_image'])) :
+                    $icon = $thePost['icon_image'];
                   ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" onerror="this.src='<?= $defaultImage ?>'" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) :
-                        $customerImage = $defaultImage;
-                        if (@getimagesize($thePost['customer_image'])) {
-                          $customerImage = $thePost['customer_image'];
-                        }
+                      <?php
+                      $customerImage = $defaultImage;
+                      if (!empty($thePost['customer_image'])) :
+                        $customerImage = $thePost['customer_image'];
                       ?>
-                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;" onerror="this.src='<?= $defaultImage ?>'">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>
@@ -167,25 +167,23 @@ $traningClient = get_field('training', get_the_ID());
               <?php foreach ($consultantClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) :
-                    $icon = $defaultImage;
-                    if (@getimagesize($thePost['icon_image'])) {
-                      $icon = $thePost['icon_image'];
-                    }
+                  <?php
+                  $icon = $defaultImage;
+                  if (!empty($thePost['icon_image'])) :
+                    $icon = $thePost['icon_image'];
                   ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" onerror="this.src='<?= $defaultImage ?>'" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) :
-                        $customerImage = $defaultImage;
-                        if (@getimagesize($thePost['customer_image'])) {
-                          $customerImage = $thePost['customer_image'];
-                        }
+                      <?php
+                      $customerImage = $defaultImage;
+                      if (!empty($thePost['customer_image'])) :
+                        $customerImage = $thePost['customer_image'];
                       ?>
-                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;" onerror="this.src='<?= $defaultImage ?>'">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>
@@ -259,25 +257,23 @@ $traningClient = get_field('training', get_the_ID());
               <?php foreach ($traningClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) :
-                    $icon = $defaultImage;
-                    if (@getimagesize($thePost['icon_image'])) {
-                      $icon = $thePost['icon_image'];
-                    }
+                  <?php
+                  $icon = $defaultImage;
+                  if (!empty($thePost['icon_image'])) :
+                    $icon = $thePost['icon_image'];
                   ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" />
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $icon ?>" onerror="this.src='<?= $defaultImage ?>'" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) :
-                        $customerImage = $defaultImage;
-                        if (@getimagesize($thePost['customer_image'])) {
-                          $customerImage = $thePost['customer_image'];
-                        }
+                      <?php
+                      $customerImage = $defaultImage;
+                      if (!empty($thePost['customer_image'])) :
+                        $customerImage = $thePost['customer_image'];
                       ?>
-                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;" onerror="this.src='<?= $defaultImage ?>'">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>
@@ -405,7 +401,8 @@ $traningClient = get_field('training', get_the_ID());
   input:focus {
     outline: none !important;
   }
-  .contact-us{
+
+  .contact-us {
     width: 100% !important;
   }
 
@@ -487,10 +484,12 @@ $traningClient = get_field('training', get_the_ID());
   div.wpforms-container-full .wpforms-form .wpforms-list-inline ul li {
     margin-right: 0 !important;
   }
-  div.wpforms-container-full .wpforms-form .wpforms-field{
+
+  div.wpforms-container-full .wpforms-form .wpforms-field {
     padding: 0 !important;
   }
-  .wpforms-field-limit-text{
+
+  .wpforms-field-limit-text {
     display: none !important;
   }
 

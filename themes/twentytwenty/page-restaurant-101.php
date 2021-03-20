@@ -5,6 +5,7 @@
 require_once('custom-classes/class-posts.php');
 $restaurant101PostsObject = Post::getPostsByCategory('post', get_category_by_slug('restaurant101')->cat_ID, 8, 0, null);
 $restaurant101Posts = $restaurant101PostsObject->posts;
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 ?>
 
 <head>

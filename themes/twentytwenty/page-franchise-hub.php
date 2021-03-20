@@ -30,6 +30,7 @@ $newFranchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null)
 $newFranchises = $newFranchisesObject->posts;
 $franchisesObject = Post::getPostsByCategory('franchises', null, 10, 0, null);
 $franchises = $newFranchisesObject->posts;
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 ?>
 
 <body class="w-full">

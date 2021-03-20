@@ -16,6 +16,7 @@
 require_once('custom-classes/class-posts.php');
 $documentsObject = Post::getPostsByCategory('documents', null, 12, 0, null);
 $documents = $documentsObject->posts;
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 ?>
 
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
@@ -46,7 +47,6 @@ $documents = $documentsObject->posts;
         background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-b-mobile.svg');
       }
     }
-    
   </style>
 
   <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
@@ -63,8 +63,8 @@ $documents = $documentsObject->posts;
     <div class="flex justify-center flex-wrap w-full md:w-3/4 mt-16 mb-12 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-y-4 md:gap-x-8" id="posts">
       <?php foreach ($documents as $key => $thePost) :
         $path_info = pathinfo($thePost->file);
-        $extension='';
-        if(!empty($thePost->file)){
+        $extension = '';
+        if (!empty($thePost->file)) {
           $extension = $path_info['extension'];
           if ($extension === 'xls' || $extension === 'xlsx') {
             $extension = 'Excel';
@@ -76,17 +76,17 @@ $documents = $documentsObject->posts;
         }
       ?>
         <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md shadow bg-white">
-          <?= $thePost->pictureUrl && @getimagesize($thePost->pictureUrl) ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' . $thePost->pictureUrl . '" />' : '' ?>
+          <?= $thePost->pictureUrl ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' . $thePost->pictureUrl . '" onerror="this.src=' . $defaultImage . '" />' : '' ?>
           <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
             <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2"><?= $thePost->ชื่อ ?></h1>
             <h2 class="text-xs lg:text-sm lg:text-center"><?= $thePost->รายละเอียด ?></h2>
           </div>
           <div class="w-full text-sm absolute flex justify-between bottom-0 px-4 py-4 font-black">
-            <?php if(!empty($thePost->file)):?>
+            <?php if (!empty($thePost->file)) : ?>
               <a href="<?= $thePost->file ?>" download>Download <?= $extension ?></a>
-            <?php else:?>
+            <?php else : ?>
               <p>No File</p>
-            <?php endif;?>
+            <?php endif; ?>
             <div class="flex items-center">
               <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= $thePost->file ?>"><img class="mr-3 w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
               <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= $thePost->file ?>"><img class="mr-3 w-5 h-5 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
@@ -156,9 +156,9 @@ $documents = $documentsObject->posts;
           posts.map((thePost, i) => {
             var re = /(?:\.([^.]+))?$/;
             let extension = '';
-            if(thePost.file)
-              extension = re.exec(thePost.file)[1]; 
-            if(extension){
+            if (thePost.file)
+              extension = re.exec(thePost.file)[1];
+            if (extension) {
               if (extension === 'xls' || extension === 'xlsx') {
                 extension = 'Excel';
               } else if (extension === 'pdf') {
@@ -166,12 +166,12 @@ $documents = $documentsObject->posts;
               } else if (extension === '.doc' || extension === '.docx') {
                 extension = 'Word';
               }
-            }else{
+            } else {
               extension = '';
             }
             $("#posts").append(`
             <div class="w-full flex items-center lg:justify-center flex-col lg:h-72 h-40 relative md:mb-0 mb-4 rounded-md shadow bg-white">
-              ${thePost.pictureUrl ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' + thePost.pictureUrl + '" onerror="this.style.display=`none`" />' : '' }
+              ${thePost.pictureUrl ? '<img class="object-cover h-full w-full opacity-30 rounded-md" src="' + thePost.pictureUrl + '" onerror="this.style.display=`<?= $defaultImage ?>`" />' : '' }
               <div class="absolute text-center px-4 pt-6 lg:pt-4 lg:pb-10">
                 <h1 class="text-xl lg:text-3xl font-black tracking-tighter lg:mb-3 mb-2">${thePost.ชื่อ}</h1>
                 <h2 class="text-xs lg:text-sm lg:text-center">${thePost.รายละเอียด}</h2>

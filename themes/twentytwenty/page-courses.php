@@ -61,11 +61,11 @@ $coursesPosts = [
         <!-- Slides -->
         <?php foreach ($allPosts->posts as $i => $thePost) : ?>
           <a href="<?= $thePost->link ?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer" style="background-color:#262145;">
-            <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" />
+            <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
             <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs font-bold">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
-              <?php if(!empty($thePost->terms)) : ?>
+              <?php if (!empty($thePost->terms)) : ?>
                 <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
               <?php endif; ?>
               <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
@@ -119,25 +119,23 @@ $coursesPosts = [
               <?php foreach ($offlineClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) : 
-                    $iconImage = $defaultImage;
-                    if(@getimagesize($thePost['icon_image'])){
-                        $customerImage = $thePost['icon_image'] ;
-                    }
-                    ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $iconImage ?>" />
+                  <?php
+                  $iconImage = $defaultImage;
+                  if (!empty($thePost['icon_image'])) :
+                    $iconImage = $thePost['icon_image'];
+                  ?>
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $iconImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) : 
-                        $customerImage = $defaultImage;
-                        if(@getimagesize($thePost['customer_image'])){
-                            $customerImage = $thePost['customer_image'] ;
-                        }
-                        ?>
-                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php
+                      $customerImage = $defaultImage;
+                      if (!empty($thePost['customer_image'])) :
+                        $customerImage = $thePost['customer_image'];
+                      ?>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;" onerror="this.src='<?= $defaultImage ?>'">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>
@@ -164,11 +162,11 @@ $coursesPosts = [
         <!-- Slides -->
         <?php foreach ($offlinePosts->posts as $i => $thePost) : ?>
           <a href="<?= $thePost->link ?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-            <img class="object-cover w-full h-full rounded-xl opacity-30" src="<?= $thePost->featuredImage ?>" />
+            <img class="object-cover w-full h-full rounded-xl opacity-30" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
-              <?php if(!empty($thePost->terms)) : ?>
+              <?php if (!empty($thePost->terms)) : ?>
                 <p class="lg:text-xs text-xs mb-1"><?= ($thePost->terms)[0]->name ?></p>
               <?php endif; ?>
               <p class="lg:text-lg text-xs font-bold"><?= $thePost->ชื่อ ?></p>
@@ -213,25 +211,23 @@ $coursesPosts = [
               <?php foreach ($onlineClient as $key => $thePost) : ?>
                 <?php $margin = 0.5 * -1 * $key; ?>
                 <div class="tooltip" style="margin-left: <?= $margin . "rem;" ?>">
-                  <?php if (!empty($thePost['icon_image'])) : 
-                    $iconImage = $defaultImage;
-                    if(@getimagesize($thePost['icon_image'])){
-                        $customerImage = $thePost['icon_image'] ;
-                    }
-                    ?>
-                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $iconImage ?>" />
+                  <?php
+                  $iconImage = $defaultImage;
+                  if (!empty($thePost['icon_image'])) :
+                    $iconImage = $thePost['icon_image'];
+                  ?>
+                    <img class="w-12 h-12 object-cover rounded-full" src="<?= $iconImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
                   <?php else : ?>
                     <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                   <?php endif; ?>
                   <div class="tooltiptext">
                     <div class="flex items-center mb-4">
-                      <?php if (!empty($thePost['customer_image'])) : 
-                        $customerImage = $defaultImage;
-                        if(@getimagesize($thePost['customer_image'])){
-                            $customerImage = $thePost['customer_image'] ;
-                        }
-                        ?>
-                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;">
+                      <?php
+                      $customerImage = $defaultImage;
+                      if (!empty($thePost['customer_image'])) :
+                        $customerImage = $thePost['customer_image'];
+                      ?>
+                        <img src="<?= $customerImage ?>" alt="" class="object-cover w-full h-full rounded-full" style="width:45px;height:45px;" onerror="this.src='<?= $defaultImage ?>'">
                       <?php else : ?>
                         <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
                       <?php endif; ?>
@@ -258,7 +254,7 @@ $coursesPosts = [
         <!-- Slides -->
         <?php foreach ($onlinePosts->posts as $i => $thePost) : ?>
           <a href="<?= $thePost->link ?>" class="swiper-slide rounded-xl overflow-hidden banner-slide cursor-pointer bg-gray-300">
-            <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" />
+            <img class="object-cover w-full h-full rounded-xl opacity-50" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
             <div class="border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-xs font-bold" style="border-color:#262145;">รายละเอียดคอร์ส</div>
             <div class="absolute top-5 left-5" style="width: 40px;"></div>
             <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0">
@@ -328,10 +324,10 @@ $coursesPosts = [
 
 
   <?php
-    $footerbgcolor = '#262145';
-    $footercolor = 'white';
-    $footerheadercolor = 'rgba(255,255,255,0.5)';
-    $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
+  $footerbgcolor = '#262145';
+  $footercolor = 'white';
+  $footerheadercolor = 'rgba(255,255,255,0.5)';
+  $footerlogo = get_theme_file_uri() . '/assets/images/logo-white.svg';
   ?>
   <?php include 'truefriend-footer.php'; ?>
 

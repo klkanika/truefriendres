@@ -7,6 +7,7 @@ $interviewPosts = $interviewPostsObject->posts;
 $firstPost = $interviewPosts ? $interviewPosts[0] : null;
 array_shift($interviewPosts);
 $footerbgcolor = '#19181F';
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 //Shift out for the first post
 ?>
 
@@ -79,11 +80,11 @@ $footerbgcolor = '#19181F';
     ?>
       <div class="relative cursor-pointer" onclick="window.open('<?= $item->link ?>','_self')">
         <div class="interview-card">
-          <img class="object-cover w-full h-full rounded-xl" src="<?= $item->featuredImage ?>" />
+          <img class="object-cover w-full h-full rounded-xl" src="<?= $item->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
         </div>
         <div class="absolute top-3 left-3" style="width:45px;height:45px;">
           <?php if (!empty($item->intervieweeBusinessLogo)) : ?>
-            <img class="object-cover w-full h-full rounded-full" src="<?= $item->intervieweeBusinessLogo ?>" />
+            <img class="object-cover w-full h-full rounded-full" src="<?= $item->intervieweeBusinessLogo ?>" onerror="this.src='<?= $defaultImage ?>'" />
           <?php endif; ?>
         </div>
         <div class="absolute left-0 bottom-0" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">
@@ -158,11 +159,11 @@ $footerbgcolor = '#19181F';
               $("#interview-list").append(`
               <div class="relative cursor-pointer" onclick="window.open('${ interview.link }','_self')">
                 <div class="interview-card">
-                  <img class="object-cover w-full h-full rounded-xl" src="${ interview.featuredImage }" />
+                  <img class="object-cover w-full h-full rounded-xl" src="${ interview.featuredImage }" onerror="this.src='<?= $defaultImage ?>'" />
                 </div>
                 <div class="absolute top-3 left-3" style="width:45px;height:45px;">
                   ${(interview.intervieweeBusinessLogo) ? 
-                    '<img class="object-cover w-full h-full rounded-full" src="${ interview.intervieweeBusinessLogo }" />'
+                    `<img class="object-cover w-full h-full rounded-full" src="${ interview.intervieweeBusinessLogo }" onerror="this.src='<?= $defaultImage ?>'" />`
                   :''}
                 </div>
                 <div class="absolute left-0 bottom-0" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">
