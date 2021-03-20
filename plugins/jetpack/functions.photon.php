@@ -208,7 +208,6 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 		$photon_url = add_query_arg( array( 'ssl' => 1 ), $photon_url );
 	}
 
-	echo ('bigza'.$photon_url);
 	return jetpack_photon_url_scheme( $photon_url, $scheme );
 }
 
