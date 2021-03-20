@@ -115,12 +115,10 @@
         <?php
         if ($อาเรย์รูปภาพ):
           foreach ($อาเรย์รูปภาพ as $รูปภาพ) : 
-            $image = $defaultImage;
-            if(@getimagesize($รูปภาพ['รูป'])){
-                $image = $รูปภาพ['รูป'] ;
-            }
           ?>
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $image ?>" alt="" /></div>
+            <div class="swiper-slide rounded-xl overflow-hidden banner-slide">
+              <img class="object-cover w-full h-full" src="<?= $รูปภาพ['รูป'] ?>" alt="" onerror="this.src='<?= $defaultImage ?>'" />
+            </div>
         <?php endforeach;
         endif; ?>
 
@@ -133,13 +131,9 @@
       <div class="flex items-center justify-center">
         <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Restautant hub</div>
         <?php foreach ($restaurant_type as $rstype) : 
-          $termImage = $defaultImage;
-          if(!empty(get_field('pictureUrl', $rstype)) && @getimagesize(get_field('pictureUrl', $rstype))){
-              $termImage = get_field('pictureUrl', $rstype) ;
-          }
           ?>
           <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
-            <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= $termImage ?>" alt="">
+            <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $rstype) ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
             <span class="ml-6 text-xs"><?= $rstype->name ?></span>
           </div>
         <?php endforeach; ?>

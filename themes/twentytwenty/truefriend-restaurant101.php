@@ -27,15 +27,10 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
       </div>
       <div class="swiper-container res101-container pb-16 mb-6" style="border-color:#E9E9E9">
         <div class="swiper-wrapper" id="res101-wrapper">
-          <?php foreach ($Restaurant101Posts as $thePost) : 
-              $image = $defaultImage;
-              if($thePost->featuredImage){
-                  $image = $thePost->featuredImage ;
-              }
-            ?>
+          <?php foreach ($Restaurant101Posts as $thePost) : ?>
             <a href="<?= $thePost->link ?>" class="swiper-slide">
               <div class="relative fourthSliderClass">
-                <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" />
+                <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'"/>
                 <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
                 <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
                 <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
@@ -109,7 +104,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
               $("#res101-wrapper").append(`
                 <a href="${thePost.link}" class="swiper-slide">
                   <div class="relative fourthSliderClass">
-                    <img id="img-${thePost.id}" class="object-cover w-full h-full rounded-xl" src="${thePost.pictureUrl}" onerror="document.getElementById('img-'+${thePost.id}).src = '${defaultImage}'"/>
+                    <img class="object-cover w-full h-full rounded-xl" src="${thePost.pictureUrl}" onerror="this.src = '${defaultImage}'"/>
                     <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
                     <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
                     <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">

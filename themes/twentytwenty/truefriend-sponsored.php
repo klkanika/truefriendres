@@ -18,8 +18,8 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
   <div class="border-b pb-2 mb-4 font-semibold tracking-wide">Sponsored by</div>
   <?php if($adsPosts && $adsPostCount > 0) {?>
     <a href="<?= $adsPosts[$randomAds]->adsLink ?>" target="_blank">
-      <img class="hidden md:flex rounded w-full" src="<?=  $adsPosts[$randomAds]->adsImage ?>" alt="">
-      <img class="md:hidden rounded w-full" src="<?=  $adsPosts[$randomAds]->adsMobileImage ?>" alt="">
+      <img class="hidden md:flex rounded w-full" src="<?=  $adsPosts[$randomAds]->adsImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
+      <img class="md:hidden rounded w-full" src="<?=  $adsPosts[$randomAds]->adsMobileImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
     </a>
   <?php } ?>
 </div>
@@ -91,14 +91,11 @@ if ($query->have_posts()) {
       <?php
         $thumbnailId = get_post_thumbnail_id($thePost);
         $image = wp_get_attachment_url($thumbnailId, 'thumbnail');
-        if(!@getimagesize($image)){
-          $image = $defaultImage;
-        }
         $link = get_permalink($thePost);
         $postDate = date_format(date_create($thePost->post_date),"d/m/Y");
       ?>
       <a href="<?=$link?>" class="border-b py-4 <?= $key > 2 ? 'flex gap-5 items-center' : '' ?>">
-        <img class="object-cover rounded <?= $key > 2 ? 'w-20 h-20' : 'w-full h-40' ?>" src="<?= $image ?>" alt="">
+        <img class="object-cover rounded <?= $key > 2 ? 'w-20 h-20' : 'w-full h-40' ?>" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
         <div>
           <div class="mt-2 mb-1"><?= $thePost->post_title ?></div>
           <div class="text-gray-500 text-xs" style="color: rgba(6, 34, 65, 0.5);"><?= $postDate ?></div>

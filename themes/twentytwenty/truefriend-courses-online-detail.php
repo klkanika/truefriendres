@@ -185,14 +185,9 @@ if(!empty(get_field('เนื้อหาของคอร์สนี้'))){
     <div class="swiper-container w-full">
       <div class="swiper-wrapper pl-4 md:pl-48">
         <!-- Slides -->
-        <?php foreach (get_field('รูปภาพ') as $รูป) : 
-          $image = $defaultImage;
-          if(@getimagesize($รูป['รูป']['url'])){
-              $image = $รูป['รูป']['url'] ;
-          }
-          ?>
+        <?php foreach (get_field('รูปภาพ') as $รูป) : ?>
           <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
-            <img class="object-cover w-full h-full" src="<?= $image ?>" alt="" />
+            <img class="object-cover w-full h-full" src="<?= $รูป['รูป']['url'] ?>" onerror="this.src='<?= $defaultImage ?>'" alt="" />
           </div>
         <?php endforeach; ?>
       </div>

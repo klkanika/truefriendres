@@ -28,15 +28,10 @@ $Posts = $PostsObject->posts;
     <div class="bg-white">
         <?php if(!empty($catId)) :?>
 			<div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
-				<?php foreach ($Posts as $thePost) : 
-					$image = $defaultImage;
-					if(@getimagesize($thePost->featuredImage)){
-						$image = $thePost->featuredImage ;
-					}
-					?>
+				<?php foreach ($Posts as $thePost) : ?>
 					<a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
 					<div class="lg:h-72 h-56">
-						<img class="rounded-lg object-cover w-full h-full" src="<?= $image ?>" alt="">
+						<img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
 					</div>
 					<div class="font-semibold text-lg"><?= $thePost->title ?></div>
 					<div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
@@ -106,7 +101,7 @@ $Posts = $PostsObject->posts;
             $("#posts").append(`
             <a href="${thePost.link}" class="flex flex-col gap-4">
               <div class="lg:h-72 h-56">
-			      	  <img id="img-${thePost.id}" class="rounded-lg object-cover w-full h-full" src="${thePost.featuredImage}" alt="" onerror="document.getElementById('img-'+${thePost.id}).src = '${defaultImage}'">
+			      	  <img class="rounded-lg object-cover w-full h-full" src="${thePost.featuredImage}" alt="" onerror="this.src = '${defaultImage}'">
               </div>
               <div class="font-semibold text-lg">${thePost.title}</div>
               <div class="" style="color: rgba(6, 34, 65, 0.4)">${thePost.date}</div>

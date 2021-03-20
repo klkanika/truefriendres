@@ -45,9 +45,9 @@ $thisLink = get_permalink();
           <div class="flex items-center lg:pt-0 pt-6">
             <?php
             $logo = get_field('intervieweeBusinessLogo');
-            if (!empty($logo) && @getimagesize($logo)) :
+            if (!empty($logo)) :
             ?>
-              <img src="<?= $logo ?>" alt="" class="w-12 h-12 rounded-full object-cover">
+              <img src="<?= $logo ?>" alt="" class="w-12 h-12 rounded-full object-cover" onerror="this.src='<?= get_theme_file_uri() ?>/assets/images/favicon.png'">
             <?php else : ?>
               <img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png" alt="" class="w-12 h-12 rounded-full object-cover bg-white p-2">
             <?php endif; ?>
