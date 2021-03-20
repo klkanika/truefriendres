@@ -1,9 +1,11 @@
-<?php $interviewPosts = Post::getPostsByCategory('interviews', null, 8, 0, [get_the_ID()]); ?>
+<?php $interviewPosts = Post::getPostsByCategory('interviews', null, 8, 0, [get_the_ID()]);
+$defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
+?>
 
 <section id="section-3rdSlider" class="pt-14 pb-10 lg:px-8 lg:px-4 text-white" style="background-color:#19181F;">
     <div class="mb-6 flex justify-between lg:px-0 px-4">
         <p class="font-bold text-2xl lg:mb-0 mb-2">Interview</p>
-        <?php if(!empty($interviewPosts->posts_count)) :?>
+        <?php if (!empty($interviewPosts->posts_count)) : ?>
             <div class="flex items-center">
                 <a href="interviews" class="lg:mr-6 lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $interviewPosts->posts_count ?>)</a>
                 <!-- 3rd navigator -->
@@ -14,18 +16,18 @@
             </div>
         <?php endif; ?>
     </div>
-    <?php if(!empty($interviewPosts->posts_count)) :?>
+    <?php if (!empty($interviewPosts->posts_count)) : ?>
         <div id="3rdSlider" class="owl-carousel lg:pl-0 pl-4 w-full">
             <?php
             foreach ($interviewPosts->posts as $thePost) {
             ?>
                 <div class="relative cursor-pointer" onclick="window.open('<?= $thePost->link ?>','_self')">
                     <div style="height:60vh">
-                        <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" />
+                        <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
                     </div>
                     <?php if ($thePost->intervieweeBusinessLogo) : ?>
                         <div class="absolute top-3 left-3" style="width:45px;height:45px;">
-                            <img class="object-cover w-full h-full rounded-full" src="<?= $thePost->intervieweeBusinessLogo ?>" />
+                            <img class="object-cover w-full h-full rounded-full" src="<?= $thePost->intervieweeBusinessLogo ?>" onerror="this.src='<?= $defaultImage ?>'" />
                         </div>
                     <?php endif; ?>
                     <div class="absolute left-0 bottom-0 w-full rounded-b-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));">
@@ -39,9 +41,7 @@
             }
             ?>
         </div>
-    <?php else: ?>
+    <?php else : ?>
         <p>ไม่พบข้อมูล</p>
     <?php endif; ?>
 </section>
-
-

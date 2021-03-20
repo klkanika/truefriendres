@@ -118,12 +118,10 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
         <!-- Slides -->
         <?php
         if ($อาเรย์รูปภาพ) {
-          foreach ($อาเรย์รูปภาพ as $รูปภาพ) : 
-            $image = $defaultImage;
-            if(@getimagesize($รูปภาพ['image'])){
-                $image = $รูปภาพ['image'] ;
-            }
-          ?>
+          $image = $defaultImage;
+          foreach ($อาเรย์รูปภาพ as $รูปภาพ) :
+            $image = $รูปภาพ['image'];
+        ?>
             <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $image ?>" alt="" /></div>
         <?php
           endforeach;
@@ -140,7 +138,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
           <div class="flex items-center justify-start flex-wrap">
             <a class="text-xs rounded-full text-sm px-4 py-2 mb-2" style="background-color: #FEDA52;" href="<?= get_site_url() ?>/supplier-hub">Supplier hub</a>
             <?php foreach ($supplierTypes as $supplierType) : ?>
-              <a href="<?= get_site_url() ?>/supplier-hub?type=<?= $supplierType->term_id?>" class="relative rounded-full text-sm px-4 py-2 ml-2 mb-2 text-white flex items-center cursor-pointer select-none" style="background-color: #062241;">
+              <a href="<?= get_site_url() ?>/supplier-hub?type=<?= $supplierType->term_id ?>" class="relative rounded-full text-sm px-4 py-2 ml-2 mb-2 text-white flex items-center cursor-pointer select-none" style="background-color: #062241;">
                 <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $supplierType) ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
                 <span class="ml-6 text-xs"><?= $supplierType->name ?></span>
               </a>
