@@ -55,15 +55,12 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
       </div>
     </div>
     <?php
-
+    $image = $defaultImage;
     if (!empty(get_the_post_thumbnail_url())) :
-      $image = $defaultImage;
-      if (@getimagesize(get_the_post_thumbnail_url())) {
-        $image = get_the_post_thumbnail_url();
-      }
+      $image = get_the_post_thumbnail_url();
     ?>
       <div class="relative">
-        <img class="object-cover w-full h-full" src="<?= $image ?>" />
+        <img class="object-cover w-full h-full" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
       </div>
     <?php endif ?>
   </section>
