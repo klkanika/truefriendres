@@ -122,7 +122,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
             <div class="bro-max-width light_theme carousel-overflow">
                 <section id="section-2ndSlider" class="pt-10 pb-20 " style="color:#062241">
                     <div class="mb-5 mt-10 flex justify-between">
-                        <p style="letter-spacing:-0.05rem;" class="font-semibold text-4xl text-en">Latest update</p>
+                        <p style="letter-spacing:-0.1rem;" class="font-semibold text-4xl text-en">Latest update</p>
                         <!-- 2nd navigator -->
                         <div class="items-center justify-between  hidden lg:flex">
                             <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="2ndSlider" class="cursor-pointer button_ghost toTheLeft" />
@@ -139,10 +139,10 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                         ?>
                             <a  href="<?= $thePost->link ?>">
                                 <div class="relative button_ghost" style="padding:0!important;">
-                                    <div style="height:13rem">
+                                    <div style="height:20rem">
                                         <img class="object-cover w-full h-full rounded-lg" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                     </div>
-                                    <div class="px-6 py-4 pb-6">
+                                    <div class="p-4 pb-6">
                                         <p class="text-sans-serift text-xl 	 leading-relaxed"> <?= $thePost->title ?> </p>
                                         <p style="height:4.5rem;" class="mt-4 opacity-75 font-light overflow-hidden text-sans-serift 	 leading-relaxed"> <?= $thePost->excerpt ?> </p>
                                     </div>
