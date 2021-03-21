@@ -5,6 +5,7 @@ class Post
     var $title;
     var $link;
     var $categories;
+    var $except;
     var $featuredImage;
 
     // interviews
@@ -193,6 +194,7 @@ class Post
         $thePost->id =  (get_the_ID());
         $thePost->title = get_the_title();
         $thePost->link = get_the_permalink();
+        $thePost->excerpt = get_the_excerpt();
         $thePost->categories = get_the_category();
         $thePost->featuredImage = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
         $thePost->date = get_the_date('d M Y');

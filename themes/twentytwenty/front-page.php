@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เพื่อนแท้ร้านอาหาร</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
@@ -49,7 +50,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     <!-- Set up your HTML -->
     <style>
         .banner {
-            height: 70vh;
+            height: 50rem;
         }
 
         .banner__title {
@@ -78,9 +79,11 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                         <a href="<?= $thePost->link ?>">
                             <img class="object-cover w-full h-full" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                             <div class="absolute left-0 bottom-0 banner__title">
-                                <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
-                                    <div onclick="window.open('<?= get_site_url() ?>/<?= $thePost->categories[0]->slug ?>','_self')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
-                                    <p class="text-white lg:text-2xl text-xl"><?= $thePost->title ?></p>
+                                <div class="bro-max-width">
+                                    <div class="mb-10">
+                                        <div onclick="window.open('<?= get_site_url() ?>/<?= $thePost->categories[0]->slug ?>','_self')" class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm text-en" style="color:#262145;background-color:#FEDA52;"><?= $thePost->categories[0]->name ?></div>
+                                        <p class="text-white lg:text-4xl text-2xl"><?= $thePost->title ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -88,17 +91,26 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                 <?php } ?>
             </div>
             <!-- 1st navigator -->
-            <div class="absolute flex items-center justify-between w-16 right-0 bottom-0 lg:mr-8 mr-5 lg:mb-10 mb-6 z-20">
-                <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left.svg" referTo="1stSlider" class="cursor-pointer toTheLeft" />
-                <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" referTo="1stSlider" class="cursor-pointer toTheRight" />
+            
+            <div class="absolute  w-full bottom-0 mb-10 z-20">
+                <div class="bro-max-width w-full mx-auto relative">
+                    <div class="relative">
+                        <div class="flex items-center justify-between absolute right-0 bottom-0">
+                            <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left.svg" referTo="1stSlider" class="cursor-pointer toTheLeft button_ghost" />
+                            <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" referTo="1stSlider" class="cursor-pointer toTheRight button_ghost hilight ml-2" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     <?php else : ?>
         <div class="relative banner">
             <img class="object-cover w-full h-full" src="<?= $defaultImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
             <div class="absolute left-0 bottom-0 banner__title">
-                <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
-                    <div class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;">ไม่พบข้อมูล</div>
+                <div class="bro-max-width">
+                    <div class="lg:ml-12 ml-5 lg:mr-12 mr-32 lg:mb-10 mb-6">
+                        <div class="select-none rounded-full text-center lg:w-44 w-32 p-2 mb-5 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;">ไม่พบข้อมูล</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,36 +118,43 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 
     <!--Last update Post Slide -->
     <?php if (!empty($recentPosts->posts_count)) : ?>
-        <section id="section-2ndSlider" class="pt-8 pb-10 lg:pl-8 lg:pr-8 pl-4" style="color:#062241">
-            <div class="mb-4 flex justify-between">
-                <p class="font-bold text-2xl">Last update</p>
-                <!-- 2nd navigator -->
-                <div class="items-center justify-between w-16 hidden lg:flex">
-                    <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="2ndSlider" class="cursor-pointer toTheLeft" />
-                    <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" referTo="2ndSlider" class="cursor-pointer toTheRight" />
-                </div>
-            </div>
-            <div id="2ndSlider" class="owl-carousel">
-                <?php
-                foreach ($recentPosts->posts as $thePost) {
-                    $image = $defaultImage;
-                    if ($thePost->featuredImage) {
-                        $image = $thePost->featuredImage;
-                    }
-                ?>
-                    <a href="<?= $thePost->link ?>">
-                        <div class="relative">
-                            <div style="height:30vh">
-                                <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
-                            </div>
-                            <p class="mt-4"> <?= $thePost->title ?> </p>
+        <div class="overflow-hidden">
+            <div class="bro-max-width light_theme carousel-overflow">
+                <section id="section-2ndSlider" class="pt-10 pb-20 " style="color:#062241">
+                    <div class="mb-5 mt-10 flex justify-between">
+                        <p style="letter-spacing:-0.05rem;" class="font-semibold text-4xl text-en">Latest update</p>
+                        <!-- 2nd navigator -->
+                        <div class="items-center justify-between  hidden lg:flex">
+                            <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="2ndSlider" class="cursor-pointer button_ghost toTheLeft" />
+                            <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" referTo="2ndSlider" class="cursor-pointer button_ghost hilight toTheRight ml-2" />
                         </div>
-                    </a>
-                <?php
-                }
-                ?>
+                    </div>
+                    <div id="2ndSlider" class="owl-carousel">
+                        <?php
+                        foreach ($recentPosts->posts as $thePost) {
+                            $image = $defaultImage;
+                            if ($thePost->featuredImage) {
+                                $image = $thePost->featuredImage;
+                            }
+                        ?>
+                            <a  href="<?= $thePost->link ?>">
+                                <div class="relative button_ghost" style="padding:0!important;">
+                                    <div style="height:13rem">
+                                        <img class="object-cover w-full h-full rounded-lg" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                    </div>
+                                    <div class="px-6 py-4 pb-6">
+                                        <p class="text-sans-serift text-xl 	 leading-relaxed"> <?= $thePost->title ?> </p>
+                                        <p style="height:4.5rem;" class="mt-4 opacity-75 font-light overflow-hidden text-sans-serift 	 leading-relaxed"> <?= $thePost->excerpt ?> </p>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </section>
             </div>
-        </section>
+        </div>
     <?php endif; ?>
 
     <?php include 'truefriend-advertisement.php'; ?>

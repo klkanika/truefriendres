@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<!-- drawer.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+<!-- jquery & iScroll -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+<!-- drawer.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
 <style>
 	*:focus {
 		outline: unset !important;
@@ -218,17 +224,18 @@
 		$('#burger-menu').toggle();
 	}
 </script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <?php $menus = [
-					['link'=> '', 'label'=>'home'],
-					['link'=> 'services', 'label'=>'service'],
-					['link'=> 'knowledge', 'label'=>'knowledge'],
+					['link'=> '', 'label'=>'Home'],
+					['link'=> 'services', 'label'=>'Service'],
+					['link'=> 'knowledge', 'label'=>'Knowledge'],
 					['link'=> 'restaurant-101', 'label'=>'Restaurant 101'],
-					['link'=> 'interviews', 'label'=>'interview'],
+					['link'=> 'interviews', 'label'=>'Interview'],
 					['link'=> 'vdo', 'label'=>'Video'],
-					['link'=> 'infohub', 'label'=>'info hub'],
-					['link'=> 'courses', 'label'=>'courses'],
-					['link'=> 'documents', 'label'=>'documents'],
-					['link'=> 'contact-us', 'label'=>'contact us'],
+					['link'=> 'infohub', 'label'=>'Info hub'],
+					['link'=> 'courses', 'label'=>'Courses'],
+					['link'=> 'documents', 'label'=>'Documents'],
+					['link'=> 'contact-us', 'label'=>'Contact us'],
 	];
 	$menus_desktop = [
 					['link'=> 'knowledge', 'label'=>'Knowledge'],
@@ -241,21 +248,13 @@
 	?>
 <div id="headder" class="fixed  dark-theme left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-4'?> lg:pb-4 p-4 z-40">
 	<div class="flex items-center justify-between bro-max-width">
-		<div class="flex items-center">
-			<div id="burger-menu" class="w-full md:w-96 ">
-				<div class="flex justify-end px-8 mb-4">
-					<svg x="0px" y="0px" viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
-						<circle style="fill:#FFD950" cx="20" cy="20" r="20" />
-						<polygon style="fill:#272245" points="30.7,11.2 29.5,10 20.6,18.9 12.2,10.6 11,11.8 19.3,20.2 11,28.5 12.2,29.7 20.6,21.4 29.5,30.3 
-						30.7,29.1 21.8,20.2 " />
-					</svg>
-				</div>				
-				<?php foreach($menus as $menu):?>
-					<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
-				<?php endforeach;?>
-			</div>
-			<div class="button_ghost b-nav_item flex items-center justify-center">
-				<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar " onclick="burger()">
+		<div class="flex items-center">			
+			<div
+				x-data="{}"
+				@click="$dispatch('open-menu', { open: true })"
+				class="button_ghost b-nav_item flex items-center justify-center"
+			>
+				<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar " >
 					<path class="st0" d="M18.2,12.4c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H0.6c-0.2,0-0.3-0.1-0.4-0.2
 					C0.1,13.2,0,13,0,12.8s0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2h17.1C17.9,12.2,18,12.3,18.2,12.4z M17.7,6.1H0.6
 					c-0.2,0-0.3,0.1-0.4,0.2C0.1,6.4,0,6.6,0,6.7C0,6.9,0.1,7,0.2,7.2c0.1,0.1,0.3,0.2,0.4,0.2h17.1c0.2,0,0.3-0.1,0.4-0.2
@@ -265,13 +264,13 @@
 				</svg>
 			</div>
 			<div class="logo   flex items-center mr-4">
-				<div class="b-nav_item" style="height:4rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div>
+				<div class="b-nav_item" style="height:5rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div>
 				<a href="<?= get_site_url() ?>/">
-					<div style="letter-spacing:0rem;font-size:1.6rem;line-height:1.75rem;" class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
+					<div style="letter-spacing:0rem;font-size:1.5rem;line-height:1.5rem;" class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
 				</a>
 			</div>
 			<?php foreach($menus_desktop as $menu):?>
-					<a class="button_ghost b-nav_item flex items-center text-en mr-2" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
+					<a class="button_ghost b-nav_item flex items-center text-en mr-2 text-sm" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
 			<?php endforeach;?>
 		</div>
 		<div class="flex items-center">
@@ -280,7 +279,7 @@
 			<div class="flex items-center">
 				<div class="flex button_ghost b-nav_item items-center mr-2">
 					<a class="mr-3" href="https://www.facebook.com/RestaurantBuddy/" target="_blank">
-						<svg style="height:1.25rem;" x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class=" cursor-pointer balloon-chat">
+						<svg style="height:1.25rem;width:2rem;" x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class=" cursor-pointer balloon-chat">
 							<path class="st0" d="M0,2.6c0-0.7,0.3-1.4,0.8-1.8C1.3,0.3,1.9,0,2.6,0h15.7c0.7,0,1.4,0.3,1.8,0.8c0.5,0.5,0.8,1.2,0.8,1.8v10.5
 							c0,0.7-0.3,1.4-0.8,1.8c-0.5,0.5-1.2,0.8-1.8,0.8H5.8c-0.3,0-0.7,0.1-0.9,0.4l-3.7,3.7C1,19.9,0.9,20,0.8,20c-0.1,0-0.3,0-0.4,0
 							s-0.2-0.1-0.3-0.2C0,19.6,0,19.5,0,19.3V2.6z M4.6,3.9C4.4,3.9,4.2,4,4.1,4.1C4,4.2,3.9,4.4,3.9,4.6C3.9,4.8,4,4.9,4.1,5
@@ -291,17 +290,20 @@
 							c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z" />
 						</svg>
 					</a>
-					<div class="text-en ">
+					<div class="text-en  text-sm">
 						Contact
 					</div>
 				</div>
-				<div class="flex button_ghost b-nav_item hilight items-center">
+				<div
+					x-data="{}"
+					@click="$dispatch('open-search', { open: true })"
+				class="flex button_ghost b-nav_item hilight items-center">
 					<div id="searchbox" class="rounded-full flex items-center top-4 right-4">
 						<button type="button" class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
 							<img style="height:1.25rem;" src="<?= get_theme_file_uri() ?>/assets/images/magnifier_light.svg" />
 						</button>
 					</div>
-					<div class="text-en mr-2">
+					<div class="text-en mr-4 text-sm">
 						Search
 					</div>
 				</div>
@@ -310,6 +312,83 @@
 		</div>
 	</div>
 </div>
+<section
+	x-data="slideout()"
+	x-cloak
+	@open-search.window="open = $event.detail.open"	
+	@keydown.escape="open = false"
+	x-init="init()">
+	<div
+		x-show.transition.opacity.duration.500="open"
+		@click="open = false"
+		style="z-index:999;"
+		class="fixed  inset-0 bg-black bg-opacity-25"></div>
+	<div
+		style="z-index:999;"
+		class="light_theme fixed transition duration-300 left-0 top-0 transform w-full  overflow-hidden pt-10"
+		:class="{'-translate-y-full': !open}">
+			<form class="w-full max-w-4xl mx-auto " method="get" action="<?= get_site_url() ?>">
+				<div id="searchbox" class="rounded-xl flex items-center p-4" style="background-color:white;">
+					<div type="button" class="lg:w-10 lg:h-10 w-10 h-10 mr-2 flex justify-center items-center cursor-pointer opacity-50" >
+						<img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+					</div>
+					<input x-ref="focus" class="m-0 border-0 h-12 font-light flex-1 text-3xl" type="text" style="background-color:white;color:#262145;" placeholder="ค้นหา..." id="searchInput" name="s" />
+					<div
+						@click="open = false"
+						x-ref="closeButton"			
+						class="button_ghost ">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x w-8 h-8"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+					</div>		
+				</div>
+			</form>		
+	</div>
+</section>
+<section
+	x-data="slideout()"
+	x-cloak
+	@open-menu.window="open = $event.detail.open"	
+	@keydown.escape="open = false"
+	x-init="init()">
+	<div
+		x-show.transition.opacity.duration.500="open"
+		@click="open = false"
+		style="z-index:999;"
+		class="fixed  inset-0 bg-black bg-opacity-25"></div>
+	<div
+		style="z-index:999;"
+		class="light_theme fixed transition duration-300 left-0 top-0 transform w-full max-w-xs h-screen bg-gray-100 overflow-hidden"
+		:class="{'-translate-x-full': !open}">
+		<button
+			@click="open = false"
+			x-ref="closeButton"			
+			class="fixed top-0 right-0 mr-4 mt-2 z-50 button_ghost">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+		</button>
+		<div class="py-16  px-4 absolute w-full top-0 h-full overflow-y-scroll">		
+			<?php foreach($menus as $menu):?>
+				<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class=" button_ghost mb-2 block w-full text-left text-en p-4  leading-loose" style="color: #062241;"><?= $menu['label']?></a>
+			<?php endforeach;?>
+		</div>
+	</div>
+</section>
+<script>
+	function slideout() {
+		return {
+			open: false,			
+			init() {
+				this.$watch('open', value => {
+					value && this.$refs.closeButton.focus()
+					value && this.$refs.focus && this.$refs.focus.focus()
+					this.toggleOverlay()
+				})
+				this.toggleOverlay()
+			},
+			toggleOverlay() {
+				document.body.classList[this.open ? 'add' : 'remove']('h-screen', 'overflow-hidden')
+			}
+		}
+	}
+</script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
 	var ismobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));

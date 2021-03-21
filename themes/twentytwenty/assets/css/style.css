@@ -70,11 +70,12 @@
   font-display: swap;
 }
 html {
-  font-size: 14px;
+  font-size: 15px;
   --primary: #062241;
 }
 
 body {
+  letter-spacing: 0.015em;
   font-family: "NotoSansThai", sans-serif;
 }
 
@@ -175,8 +176,13 @@ button:focus {
 }
 
 .bro-max-width {
+  padding-left: 2rem;
+  padding-right: 2rem;
   max-width: 1600px;
   margin: auto;
+}
+.text-sans-serift {
+  font-family: sans-serif;
 }
 .text-en {
   font-family: "Poppins", "NotoSansThai", sans-serif;
@@ -184,24 +190,58 @@ button:focus {
 }
 .button_ghost {
   padding: 0.5rem 0.75rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   transition: all 0.25s;
   cursor: pointer;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
-.dark-theme .button_ghost {
-  background: rgba(255, 255, 255, 0);
+.button_ghost {
+  background: rgba(230, 234, 255, 0);
 }
-.dark-theme .button_ghost.hilight {
-  background: rgba(255, 255, 255, 0.1);
+.button_ghost.hilight {
+  background: rgba(230, 234, 255, 0.1);
 }
-.dark-theme .button_ghost:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
+.button_ghost:hover {
+  background: rgba(230, 234, 255, 0.25) !important;
 }
-.dark-theme .button_ghost:active {
-  background: rgba(255, 255, 255, 0.15) !important;
+.button_ghost:active {
+  background: rgba(230, 234, 255, 0.15) !important;
 }
+
+.light_theme .button_ghost {
+  background: rgba(159, 155, 201, 0);
+}
+.light_theme .button_ghost.hilight {
+  background: rgba(159, 155, 201, 0.1);
+}
+.light_theme .button_ghost:hover {
+  background: rgba(159, 155, 201, 0.2) !important;
+}
+.light_theme .button_ghost:active {
+  background: rgba(159, 155, 201, 0.5) !important;
+}
+
 .b-nav_item {
-  height: 2rem;
-  min-width: 2rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+}
+.carousel-overflow .owl-stage-outer {
+  overflow: visible;
+}
+[x-cloak] {
+  display: none;
+}
+.logo .b-nav_item,
+.logo .font-bold {
+  transition: all 0.5s;
+}
+#headder {
+  transition: all 0.25s;
+}
+html:not([data-scroll="0"]) .b-nav_item {
+  height: 2.5rem !important;
+  width: auto !important;
+}
+html:not([data-scroll="0"]) .logo .font-bold {
+  display: none;
 }
