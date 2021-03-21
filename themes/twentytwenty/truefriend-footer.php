@@ -28,7 +28,7 @@
 					</a>
 					<div>
 						<p class="text-en mt-10 "><a href="mailto:restaurantbuddysme@gmail.com">restaurantbuddysme@gmail.com</a></p>
-						<p class="text-en  text-xl mt-2"><a href="tel:0917804724">091 780 4724</a></p>
+						<p class="text-en  text-2xl mt-2"><a href="tel:0917804724">091 780 4724</a></p>
 					</div>					
 				</div>
 			</div>			
