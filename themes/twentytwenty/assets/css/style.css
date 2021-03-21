@@ -239,7 +239,7 @@ button:focus {
   transition: all 0.25s;
 }
 html:not([data-scroll="0"]) .b-nav_item {
-  height: 2.5rem !important;
+  height: 3.5rem !important;
   width: auto !important;
 }
 html:not([data-scroll="0"]) .logo .font-bold {

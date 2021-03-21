@@ -264,7 +264,7 @@
 				</svg>
 			</div>
 			<div class="logo   flex items-center mr-4">
-				<div class="b-nav_item" style="height:5rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div>
+				<a href="<?= get_site_url() ?>/"><div class="b-nav_item" style="height:5rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div></a>
 				<a href="<?= get_site_url() ?>/">
 					<div style="letter-spacing:0rem;font-size:1.5rem;line-height:1.5rem;" class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
 				</a>
