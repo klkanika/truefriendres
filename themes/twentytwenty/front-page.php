@@ -140,7 +140,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                             <a  href="<?= $thePost->link ?>">
                                 <div class="relative button_ghost" style="padding:0!important;">
                                     <div style="height:20rem">
-                                        <img class="object-cover w-full h-full rounded-lg" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                        <img class="object-cover w-full h-full rounded" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                     </div>
                                     <div class="p-4 pb-6">
                                         <p class="text-sans-serift text-xl 	 leading-relaxed"> <?= $thePost->title ?> </p>
