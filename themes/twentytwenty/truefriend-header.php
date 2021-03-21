@@ -5,6 +5,7 @@
 ?>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 	*:focus {
 		outline: unset !important;
@@ -217,69 +218,96 @@
 		$('#burger-menu').toggle();
 	}
 </script>
-<div id="headder" class="fixed flex items-center justify-between left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-4'?> lg:pb-4 p-4 z-40">
-	<div id="burger-menu" class="w-full md:w-96">
-		<div class="flex justify-end px-8 mb-4">
-			<svg x="0px" y="0px" viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
-				<circle style="fill:#FFD950" cx="20" cy="20" r="20" />
-				<polygon style="fill:#272245" points="30.7,11.2 29.5,10 20.6,18.9 12.2,10.6 11,11.8 19.3,20.2 11,28.5 12.2,29.7 20.6,21.4 29.5,30.3 
-				30.7,29.1 21.8,20.2 " />
-			</svg>
-		</div>
-		<?php $menus = [
-			['link'=> '', 'label'=>'home'],
-			['link'=> 'services', 'label'=>'service'],
-			['link'=> 'knowledge', 'label'=>'knowledge'],
-			['link'=> 'restaurant-101', 'label'=>'Restaurant 101'],
-			['link'=> 'interviews', 'label'=>'interview'],
-			['link'=> 'vdo', 'label'=>'Video'],
-			['link'=> 'infohub', 'label'=>'info hub'],
-			['link'=> 'courses', 'label'=>'courses'],
-			['link'=> 'documents', 'label'=>'documents'],
-			['link'=> 'contact-us', 'label'=>'contact us'],
-		];
-		?>
-		<?php foreach($menus as $menu):?>
-			<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
-		<?php endforeach;?>
-	</div>
-	<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar" onclick="burger()">
-		<path class="st0" d="M18.2,12.4c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H0.6c-0.2,0-0.3-0.1-0.4-0.2
-		C0.1,13.2,0,13,0,12.8s0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2h17.1C17.9,12.2,18,12.3,18.2,12.4z M17.7,6.1H0.6
-		c-0.2,0-0.3,0.1-0.4,0.2C0.1,6.4,0,6.6,0,6.7C0,6.9,0.1,7,0.2,7.2c0.1,0.1,0.3,0.2,0.4,0.2h17.1c0.2,0,0.3-0.1,0.4-0.2
-		c0.1-0.1,0.2-0.3,0.2-0.4c0-0.2-0.1-0.3-0.2-0.4C18,6.2,17.9,6.1,17.7,6.1z M0.6,1.2h17.1c0.2,0,0.3-0.1,0.4-0.2
-		c0.1-0.1,0.2-0.3,0.2-0.4c0-0.2-0.1-0.3-0.2-0.4C18,0.1,17.9,0,17.7,0H0.6C0.4,0,0.3,0.1,0.2,0.2C0.1,0.3,0,0.4,0,0.6
-		C0,0.8,0.1,0.9,0.2,1C0.3,1.2,0.4,1.2,0.6,1.2z" />
-	</svg>
-	<div class="logo flex items-center lg:ml-8">
-		<div style="width: 35px;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div>
-		<a href="<?= get_site_url() ?>/">
-			<div class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
-		</a>
-	</div>
-	<!-- <div class="" style="width: 120px;margin-left: 60px;"></div> -->
-	<div class="flex items-center">
-		<a href="https://www.facebook.com/RestaurantBuddy/" target="_blank">
-			<svg x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class="lg:mr-6 mr-4 cursor-pointer balloon-chat">
-				<path class="st0" d="M0,2.6c0-0.7,0.3-1.4,0.8-1.8C1.3,0.3,1.9,0,2.6,0h15.7c0.7,0,1.4,0.3,1.8,0.8c0.5,0.5,0.8,1.2,0.8,1.8v10.5
-				c0,0.7-0.3,1.4-0.8,1.8c-0.5,0.5-1.2,0.8-1.8,0.8H5.8c-0.3,0-0.7,0.1-0.9,0.4l-3.7,3.7C1,19.9,0.9,20,0.8,20c-0.1,0-0.3,0-0.4,0
-				s-0.2-0.1-0.3-0.2C0,19.6,0,19.5,0,19.3V2.6z M4.6,3.9C4.4,3.9,4.2,4,4.1,4.1C4,4.2,3.9,4.4,3.9,4.6C3.9,4.8,4,4.9,4.1,5
-				c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2C16.9,4.9,17,4.8,17,4.6c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z
-				M4.6,7.2c-0.2,0-0.3,0.1-0.5,0.2C4,7.5,3.9,7.7,3.9,7.8C3.9,8,4,8.2,4.1,8.3c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2
-				C16.9,8.2,17,8,17,7.8c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z M4.6,10.5c-0.2,0-0.3,0.1-0.5,0.2
-				c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.3,0.2,0.5c0.1,0.1,0.3,0.2,0.5,0.2h6.5c0.2,0,0.3-0.1,0.5-0.2c0.1-0.1,0.2-0.3,0.2-0.5
-				c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z" />
-			</svg>
-		</a>
-
-		<form method="get" action="<?= get_site_url() ?>">
-			<div id="searchbox" class="rounded-full flex items-center top-4 right-4" style="background-color:#FFD950;">
-				<input class="rounded-full pl-6 hidden m-0 border-0 h-12" type="text" style="background-color:#FFD950;color:#262145;" placeholder="search..." id="searchInput" name="s" />
-				<button type="button" class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
-					<img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
-				</button>
+<?php $menus = [
+					['link'=> '', 'label'=>'home'],
+					['link'=> 'services', 'label'=>'service'],
+					['link'=> 'knowledge', 'label'=>'knowledge'],
+					['link'=> 'restaurant-101', 'label'=>'Restaurant 101'],
+					['link'=> 'interviews', 'label'=>'interview'],
+					['link'=> 'vdo', 'label'=>'Video'],
+					['link'=> 'infohub', 'label'=>'info hub'],
+					['link'=> 'courses', 'label'=>'courses'],
+					['link'=> 'documents', 'label'=>'documents'],
+					['link'=> 'contact-us', 'label'=>'contact us'],
+	];
+	$menus_desktop = [
+					['link'=> 'knowledge', 'label'=>'Knowledge'],
+					['link'=> 'restaurant-101', 'label'=>'Restaurant 101'],
+					['link'=> 'interviews', 'label'=>'Interview'],
+					['link'=> 'vdo', 'label'=>'Video'],
+					['link'=> 'infohub', 'label'=>'Info hub'],
+					['link'=> 'courses', 'label'=>'Courses'],					
+	];
+	?>
+<div id="headder" class="fixed  dark-theme left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-4'?> lg:pb-4 p-4 z-40">
+	<div class="flex items-center justify-between bro-max-width">
+		<div class="flex items-center">
+			<div id="burger-menu" class="w-full md:w-96 ">
+				<div class="flex justify-end px-8 mb-4">
+					<svg x="0px" y="0px" viewBox="0 0 40 40" class="w-8 h-8 cursor-pointer	" onclick="burger()">
+						<circle style="fill:#FFD950" cx="20" cy="20" r="20" />
+						<polygon style="fill:#272245" points="30.7,11.2 29.5,10 20.6,18.9 12.2,10.6 11,11.8 19.3,20.2 11,28.5 12.2,29.7 20.6,21.4 29.5,30.3 
+						30.7,29.1 21.8,20.2 " />
+					</svg>
+				</div>				
+				<?php foreach($menus as $menu):?>
+					<a href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" class="block w-full text-center p-4 uppercase text-xl" style="color: #062241;"><?= $menu['label']?></a>
+				<?php endforeach;?>
 			</div>
-		</form>
+			<div class="button_ghost b-nav_item flex items-center justify-center">
+				<svg x="0px" y="0px" width="18.3px" height="13.4px" viewBox="0 0 18.3 13.4" class="cursor-pointer burger-bar " onclick="burger()">
+					<path class="st0" d="M18.2,12.4c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H0.6c-0.2,0-0.3-0.1-0.4-0.2
+					C0.1,13.2,0,13,0,12.8s0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2h17.1C17.9,12.2,18,12.3,18.2,12.4z M17.7,6.1H0.6
+					c-0.2,0-0.3,0.1-0.4,0.2C0.1,6.4,0,6.6,0,6.7C0,6.9,0.1,7,0.2,7.2c0.1,0.1,0.3,0.2,0.4,0.2h17.1c0.2,0,0.3-0.1,0.4-0.2
+					c0.1-0.1,0.2-0.3,0.2-0.4c0-0.2-0.1-0.3-0.2-0.4C18,6.2,17.9,6.1,17.7,6.1z M0.6,1.2h17.1c0.2,0,0.3-0.1,0.4-0.2
+					c0.1-0.1,0.2-0.3,0.2-0.4c0-0.2-0.1-0.3-0.2-0.4C18,0.1,17.9,0,17.7,0H0.6C0.4,0,0.3,0.1,0.2,0.2C0.1,0.3,0,0.4,0,0.6
+					C0,0.8,0.1,0.9,0.2,1C0.3,1.2,0.4,1.2,0.6,1.2z" />
+				</svg>
+			</div>
+			<div class="logo   flex items-center mr-4">
+				<div class="b-nav_item" style="height:4rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div>
+				<a href="<?= get_site_url() ?>/">
+					<div style="letter-spacing:0rem;font-size:1.6rem;line-height:1.75rem;" class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
+				</a>
+			</div>
+			<?php foreach($menus_desktop as $menu):?>
+					<a class="button_ghost b-nav_item flex items-center text-en mr-2" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
+			<?php endforeach;?>
+		</div>
+		<div class="flex items-center">
+			
+			<!-- <div class="" style="width: 120px;margin-left: 60px;"></div> -->
+			<div class="flex items-center">
+				<div class="flex button_ghost b-nav_item items-center mr-2">
+					<a class="mr-3" href="https://www.facebook.com/RestaurantBuddy/" target="_blank">
+						<svg style="height:1.25rem;" x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class=" cursor-pointer balloon-chat">
+							<path class="st0" d="M0,2.6c0-0.7,0.3-1.4,0.8-1.8C1.3,0.3,1.9,0,2.6,0h15.7c0.7,0,1.4,0.3,1.8,0.8c0.5,0.5,0.8,1.2,0.8,1.8v10.5
+							c0,0.7-0.3,1.4-0.8,1.8c-0.5,0.5-1.2,0.8-1.8,0.8H5.8c-0.3,0-0.7,0.1-0.9,0.4l-3.7,3.7C1,19.9,0.9,20,0.8,20c-0.1,0-0.3,0-0.4,0
+							s-0.2-0.1-0.3-0.2C0,19.6,0,19.5,0,19.3V2.6z M4.6,3.9C4.4,3.9,4.2,4,4.1,4.1C4,4.2,3.9,4.4,3.9,4.6C3.9,4.8,4,4.9,4.1,5
+							c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2C16.9,4.9,17,4.8,17,4.6c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z
+							M4.6,7.2c-0.2,0-0.3,0.1-0.5,0.2C4,7.5,3.9,7.7,3.9,7.8C3.9,8,4,8.2,4.1,8.3c0.1,0.1,0.3,0.2,0.5,0.2h11.8c0.2,0,0.3-0.1,0.5-0.2
+							C16.9,8.2,17,8,17,7.8c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z M4.6,10.5c-0.2,0-0.3,0.1-0.5,0.2
+							c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.3,0.2,0.5c0.1,0.1,0.3,0.2,0.5,0.2h6.5c0.2,0,0.3-0.1,0.5-0.2c0.1-0.1,0.2-0.3,0.2-0.5
+							c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z" />
+						</svg>
+					</a>
+					<div class="text-en ">
+						Contact
+					</div>
+				</div>
+				<div class="flex button_ghost b-nav_item hilight items-center">
+					<div id="searchbox" class="rounded-full flex items-center top-4 right-4">
+						<button type="button" class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
+							<img style="height:1.25rem;" src="<?= get_theme_file_uri() ?>/assets/images/magnifier_light.svg" />
+						</button>
+					</div>
+					<div class="text-en mr-2">
+						Search
+					</div>
+				</div>
+				
+			</div>
+		</div>
 	</div>
 </div>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
