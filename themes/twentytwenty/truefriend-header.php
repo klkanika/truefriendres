@@ -246,7 +246,7 @@
 					['link'=> 'courses', 'label'=>'Courses'],					
 	];
 	?>
-<div id="headder" class="fixed  dark-theme left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-4'?> lg:pb-4 p-4 z-40">
+<div id="headder" class="fixed  dark-theme left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-2'?> lg:pb-2 p-4 z-40">
 	<div class="flex items-center justify-between bro-max-width">
 		<div class="flex items-center">			
 			<div
