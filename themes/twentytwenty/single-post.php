@@ -35,8 +35,8 @@
 
     .noImg {
       background-color: #D3D3D3 !important;
-      width: 150px !important;
-      height: 150px !important;
+      width: 250px !important;
+      height: 250px !important;
     }
   </style>
   <!-- Set up your HTML -->
