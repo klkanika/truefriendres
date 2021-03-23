@@ -143,7 +143,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                                         <img class="object-cover w-full h-full rounded" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                     </div>
                                     <div class="p-4 pb-6">
-                                        <p class="text-sans-serift text-xl 	 leading-relaxed"> <?= $thePost->title ?> </p>
+                                        <p class="text-sans-serift text-lg 	 leading-relaxed"> <?= $thePost->title ?> </p>
                                         <p style="height:4.5rem;" class="mt-4 opacity-75 font-light overflow-hidden text-sans-serift 	 leading-relaxed"> <?= $thePost->excerpt ?> </p>
                                     </div>
                                 </div>
@@ -162,150 +162,173 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     <?php include 'truefriend-restaurant101.php'; ?>
 
     <!--Supplier Hub-->
-    <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" style="background-color:#262145;">
-        <div class="lg:mb-12 mb-8">
-            <div class="mb-1 flex justify-between lg:pr-8">
-                <p class="font-bold text-2xl">Supplier Hub</p>
-                <div class="flex items-center">
-                    <form id="supplier-type-search">
-                        <div style="border:1px solid #062241;background-color:#f2f2f2;color:#262145;" class="rounded-full flex justify-center mr-6 hidden" id="supplier-type-search-field">
-                            <input type="text" class="rounded-full h-12 px-4" placeholder="search..." style="background-color:inherit" id="supplier-type-input" />
-                            <button type="submit" class="cursor-pointer pr-2">
-                                <img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
-                            </button>
+    <div style="background-color:#262145;"> 
+        <div class="bro-max-width  carousel-overflow">
+            <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" >
+                <div class="lg:mb-12 mb-8">
+                    <div class="mb-1 flex items-center justify-between lg:pr-8">
+                        <div>
+                            <p class="font-semibold text-4xl text-en mb-2">Supplier Hub</p>
+                            <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
                         </div>
-                    </form>
-                    <?php if (!empty($supplierPosts->posts_count)) : ?>
-                        <p class="font-bold mr-8 hidden lg:block cursor-pointer" id="supplier-type-search-btn"> ค้นหา</p>
-                        <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold">ดูทั้งหมด (<?= $supplierPosts->posts_count < 1000 ? $supplierPosts->posts_count : '999+' ?>)</a>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
-        </div>
-        <div class="lg:block hidden">
-            <div class="swiper-container supplier-container" style="border-color:#E9E9E9">
-                <div class="swiper-wrapper supplier-wrapper" id="supplier-wrapper">
-                    <?php
-                    if (!empty($supplierTypes->posts_count) && !empty($supplierPosts->posts_count)) :
-                        foreach ($supplierTypes->supplierTypes as $supplierType) :
-                            if ((int)$supplierType->supplierTypeCount > 0) :
-                    ?>
-                                <a href="<?= $supplierType->link ?>" class="swiper-slide">
-                                    <div class="relative" style="height:40vh;">
-                                        <div style="height:40vh;">
-                                            <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
-                                        </div>
-                                        <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
-                                            <?php if ((int)$supplierType->supplierTypeCount < 99) {
-                                                echo $supplierType->supplierTypeCount;
-                                            } else {
-                                                echo '99+';
-                                            } ?>
-                                        </div>
-                                        <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
-                                            <p><?= $supplierType->name ?></p>
-                                        </div>
+                        <div class="flex items-center">
+                            <form id="supplier-type-search items-center">
+                                <div  id="supplier-type-search-field" class="hidden">
+                                    <div style="border:1px solid #062241;background-color:#f2f2f2;color:#262145;" class="rounded-full flex justify-center mr-6  items-center">
+                                        <input type="text" class="rounded-full h-12 px-4" placeholder="search..." style="background-color:inherit" id="supplier-type-input" />
+                                        <button type="submit" class="cursor-pointer pr-2 flex items-center">
+                                            <img src="<?= get_theme_file_uri() ?>/assets/images/magnifier.svg" />
+                                        </button>
                                     </div>
-                                </a>
-                        <?php endif;
-                        endforeach; ?>
-                    <?php else : ?>
-                        <p class="text-center w-full">ไม่พบข้อมูล</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-        <div class="lg:hidden">
-            <?php
-            foreach ($supplierTypes->supplierTypes as $supplierType) :
-                if ((int)$supplierType->supplierTypeCount > 0) :
-            ?>
-                    <a href="<?= $supplierType->link ?>">
-                        <div class="py-2 border-b flex items-center relative">
-                            <div class="w-20 h-20 mr-4">
-                                <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
-                            </div>
-                            <div>
-                                <div class="text-lg font-bold"><?= $supplierType->name ?></div>
-                                <div class="text-sm"><?= (int)$supplierType->supplierTypeCount ?> เบอร์โทร</div>
-                            </div>
-                            <img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" />
+                                </div>
+                            </form>
+                            <?php if (!empty($supplierPosts->posts_count)) : ?>
+                                <p class="font-bold mr-8 hidden lg:block cursor-pointer button_ghost h-full" id="supplier-type-search-btn"> ค้นหา</p>
+                                <a href="<?= get_site_url() ?>/supplier-hub" class="lg:text-base text-xs font-bold button_ghost h-full">ดูทั้งหมด (<?= $supplierPosts->posts_count < 1000 ? $supplierPosts->posts_count : '999+' ?>)</a>
+                            <?php endif; ?>
                         </div>
-                    </a>
-            <?php endif;
-            endforeach; ?>
+                    </div>
+                    
+                </div>
+                <div class="lg:block hidden">
+                    <div class="swiper-container supplier-container" style="border-color:#E9E9E9">
+                        <div class="swiper-wrapper supplier-wrapper" id="supplier-wrapper">
+                            <?php
+                            if (!empty($supplierTypes->posts_count) && !empty($supplierPosts->posts_count)) :
+                                foreach ($supplierTypes->supplierTypes as $supplierType) :
+                                    if ((int)$supplierType->supplierTypeCount > 0) :
+                            ?>
+                                        <a href="<?= $supplierType->link ?>" class="swiper-slide">
+                                            <div class="relative" style="height:40vh;">
+                                                <div style="height:40vh;">
+                                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $supplierType->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                                </div>
+                                                <div class="absolute flex justify-center items-center text-white top-0 right-0 mb-2 py-1 px-2 rounded-xl m-2 text-sm" style="color:#262145;background-color:#FFDA4F;">
+                                                    <?php if ((int)$supplierType->supplierTypeCount < 99) {
+                                                        echo $supplierType->supplierTypeCount;
+                                                    } else {
+                                                        echo '99+';
+                                                    } ?>
+                                                </div>
+                                                <div class="absolute flex justify-center text-white text-xl font-bold bottom-0 left-0 w-full flex items-end pb-2 h-2/4 rounded-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));">
+                                                    <p><?= $supplierType->name ?></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                <?php endif;
+                                endforeach; ?>
+                            <?php else : ?>
+                                <p class="text-center w-full">ไม่พบข้อมูล</p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:hidden">
+                    <?php
+                    foreach ($supplierTypes->supplierTypes as $supplierType) :
+                        if ((int)$supplierType->supplierTypeCount > 0) :
+                    ?>
+                            <a href="<?= $supplierType->link ?>">
+                                <div class="py-2 border-b flex items-center relative">
+                                    <div class="w-20 h-20 mr-4">
+                                        <img class="object-cover w-full h-full rounded-lg" src="<?= $supplierType->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                    </div>
+                                    <div>
+                                        <div class="text-lg font-bold"><?= $supplierType->name ?></div>
+                                        <div class="text-sm"><?= (int)$supplierType->supplierTypeCount ?> เบอร์โทร</div>
+                                    </div>
+                                    <img class="absolute right-0" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right.svg" />
+                                </div>
+                            </a>
+                    <?php endif;
+                    endforeach; ?>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
     <?php include 'truefriend-advertisement.php'; ?>
 
     <!--News & Marketing & Knowledge Post-->
-    <section id="section-blogs" class="pt-12 lg:ml-8 lg:mr-2 ml-4 mr-4 lg:pb-16 pb-12 flex flex-wrap" style="color:#062241">
-        <?php
-        foreach ($postObjects as $postObject) {
-            $catObject = $postObject->catObject;
-            $posts = $postObject->posts->posts;
-        ?>
-            <div class="lg:w-1/3 w-full lg:pr-6 lg:text-sm text-xs mb-12 lg:mb-0">
-                <div onclick="window.open('<?= get_site_url() ?>/<?= $catObject->slug ?>/','_self')" class="flex items-center lg:text-2xl text-base font-bold cursor-pointer select-none w-max lg:mb-6 mb-4">
-                    <p><?= $catObject->name ?></p>
-                    <img class="lg:ml-2" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" />
-                </div>
-                <?php
-                if (count($posts) > 0) {
-                    for ($i = 0; $i < count($posts); $i++) {
-                        $thePost = $posts[$i];
-                        if ($i === 0) {
-                            $image = $defaultImage;
-                            if ($thePost->featuredImage) {
-                                $image = $thePost->featuredImage;
-                            }
-                ?>
-                            <div onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
-                                <div class="mb-4" style="height:30vh">
-                                    <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
+    <div class="bro-max-width  light_theme">
+        <section id="section-blogs" class="pt-12 lg:ml-8 lg:mr-2 ml-4 mr-4 lg:pb-16 pb-12 flex flex-wrap" style="color:#062241">
+            <?php
+            foreach ($postObjects as $postObject) {
+                $catObject = $postObject->catObject;
+                $posts = $postObject->posts->posts;
+            ?>
+                <div class="lg:w-1/3 w-full lg:pr-6 lg:text-sm text-xs mb-12 lg:mb-0">
+                    <div class="button_ghost mb-2" style="padding:0;">
+                        <div class="p-4">
+                            <div onclick="window.open('<?= get_site_url() ?>/<?= $catObject->slug ?>/','_self')" class="flex items-center lg:text-2xl text-base font-bold cursor-pointer select-none w-max ">
+                                <p class="font-en"><?= $catObject->name ?></p>
+                                <img class="lg:ml-2" src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" />
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    if (count($posts) > 0) {
+                        for ($i = 0; $i < count($posts); $i++) {
+                            $thePost = $posts[$i];
+                            if ($i === 0) {
+                                $image = $defaultImage;
+                                if ($thePost->featuredImage) {
+                                    $image = $thePost->featuredImage;
+                                }
+                    ?>
+                                <div class="button_ghost mb-4" style="padding:0;" onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
+                                    <div  style="height:30vh">
+                                        <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                    </div>
+                                    <div class="p-4">
+                                        <p class="text-sans-serift text-lg"><?= $thePost->title ?></p>
+                                    </div>
                                 </div>
-                                <p><?= $thePost->title ?></p>
-                            </div>
-                        <?php
-                        } else {
-                        ?>
-                            <div class="mt-6 pb-4 cursor-pointer border-grey-800 border-b <?= $i === 3 ? 'lg:border-none' : '' ?>" onclick="window.open('<?= $thePost->link ?>','_self')">
-                                <p class="font-bold lg:text-base text-sm">HOT UPDATE</p>
-                                <p><?= $thePost->title ?></p>
-                            </div>
-                <?php
+                            <?php
+                            } else {
+                            ?>
+                                <div style="border-radius:0; padding:0;" class="button_ghost  cursor-pointer border-grey-800 border-b <?= $i === 3 ? 'lg:border-none' : '' ?>" onclick="window.open('<?= $thePost->link ?>','_self')">
+                                    <div class="p-4">
+                                        <p class="font-semibold leading-loose text-xs opacity-50 text-en">HOT UPDATE</p>
+                                        <p class="text-sans-serift text-lg"><?= $thePost->title ?></p>
+                                    </div>
+                                </div>
+                    <?php
+                            }
                         }
                     }
-                }
-                ?>
-            </div>
-        <?php
-        }
-        ?>
-    </section>
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
+        </section>
+    </div>
 
     <!-- Gallery -->
     <section class="text-white" style="background-color:#19181F;">
         <div class="pt-16 lg:ml-8 lg:mr-8 ml-4 mr-4 lg:pb-16 pb-10 lg:text-base text-xs">
-            <p class="text-2xl mb-16 text-center">G A L L E R Y</p>
-            <div class="flex flex-wrap justify-between" id="gallery-posts">
-                <?php
-                if (!empty($galleryCatId)) :
-                    foreach ($galleryPosts->posts as $key => $thePost) : ?>
-                        <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
-                            <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
-                                <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
-                                <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
-                            </div>
-                        </a>
-                    <?php endforeach;
-                else : ?>
-                    <p class="text-center w-full">ไม่พบข้อมูล</p>
-                <?php endif; ?>
-            </div>
-            <div class="flex justify-center">
-                <p class="mt-4 select-none cursor-pointer hidden" id="loadmore">Load More</p>
+            <p class="text-2xl mb-16 text-center text-en">G A L L E R Y</p>
+            <div class="bro-max-width">
+                <div class="flex flex-wrap justify-between" id="gallery-posts">
+                    <?php
+                    if (!empty($galleryCatId)) :
+                        foreach ($galleryPosts->posts as $key => $thePost) : ?>
+                            <a href="<?= $thePost->link; ?>" class="<?= $key % 3 == 0 ? 'w-3/5' : 'w-2/5'; ?>  lg:mb-4 mb-2 relative">
+                                <div class="gallery-thumbnail relative <?= $key % 2 == 0 ? 'lg:mr-4 mr-2' : ''; ?>">
+                                    <img class="object-cover w-full h-full rounded-lg" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                    <div class="absolute w-full left-0 bottom-0 lg:p-6 p-3 rounded-lg" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"><?= $thePost->title ?></div>
+                                </div>
+                            </a>
+                        <?php endforeach;
+                    else : ?>
+                        <p class="text-center w-full">ไม่พบข้อมูล</p>
+                    <?php endif; ?>
+                </div>
+                <div class="flex justify-center button_ghost mt-4">
+                    <div class="p-4">
+                        <p class="select-none cursor-pointer hidden text-en" id="loadmore">Load More</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

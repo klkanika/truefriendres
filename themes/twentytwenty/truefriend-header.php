@@ -21,21 +21,27 @@
 		height: 30vh;
 	}
 
+	.tab-button {
+		font-family: sans-serif;
+		min-height: 2rem;		
+		padding: 0.75rem 2rem;
+		width:auto;
+		transition:all 0.25s;
+		border: 1px solid #bbbbbb;
+		
+	}
+
 	.tab-button-active {
-		background-color: #062241;
-		color: white;
+		background-color: rgba(159, 155, 201, 0.2);
+		color: #062241;
+		border: 1px solid #062241;
 	}
 
 	.tab-button:hover {
-		background-color: #062241;
-		color: white;
+		border-color:#062241;
 	}
 
-	.tab-button {
-		min-height: 2rem;
-		min-width: 5rem;
-		padding: 0 1rem;
-	}
+	
 
 	.gallery-thumbnail {
 		height: 30vh
@@ -52,7 +58,7 @@
 
 		.tab-button {
 			min-height: 2.5rem;
-			min-width: 7rem;
+			
 		}
 
 		.gallery-thumbnail {

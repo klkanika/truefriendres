@@ -70,7 +70,7 @@
   font-display: swap;
 }
 html {
-  font-size: 15px;
+  font-size: 16px;
   --primary: #062241;
 }
 
@@ -225,7 +225,9 @@ button:focus {
   height: 2.5rem;
   min-width: 2.5rem;
 }
-.carousel-overflow .owl-stage-outer {
+.carousel-overflow .owl-stage-outer,
+.carousel-overflow .swiper-wrapper,
+.carousel-overflow .swiper-container {
   overflow: visible;
 }
 [x-cloak] {
