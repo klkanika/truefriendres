@@ -106,7 +106,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
                     <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />
                     <div class="rounded-xl lg:ml-5 lg:mr-5 ml-4 mr-4 mb-5 absolute bottom-0 left-0 text-white">
                       <p class="mb-1">${value ? value : thePost.restaurantCategory}</p>
-                      <p class="text-white text-sans-serift text-lg font-light 	 leading-relaxed mt-2">${thePost.title}</p>
+                      <p class="text-white text-sans-serift text-lg font-light leading-relaxed mt-2">${thePost.title}</p>
                     </div>
                   </div>
                 </a>

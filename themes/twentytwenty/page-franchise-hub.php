@@ -37,14 +37,6 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <style>
-    #headder {
-      background: transparent;
-      color: var(--primary);
-    }
-
-    #headder svg {
-      fill: var(--primary);
-    }
 
     #content {
       max-width: 1000px;
@@ -74,7 +66,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     <div class="swiper-wrapper">
       <?php foreach ($stickyPosts as $franchise) : ?>
         <a href="<?= $franchise->link ?>" class="swiper-slide banner">
-          <img class="object-cover w-full h-full" src="<?= $franchise->featuredImage ?>" />
+          <img class="object-cover w-full h-full" src="<?= $franchise->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>';"/>
         </a>
       <?php endforeach; ?>
     </div>

@@ -43,9 +43,9 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
   </style>
 </head>
 
-<body style="background-color: #19181F;" class="text-white w-full">
+<body style="background-color: #19181F;" class="text-white w-full text-en">
   <?php include 'truefriend-header.php'; ?>
-  <!-- Set up your HTML -->
+  
   <?php if ($firstPost) { ?>
     <section class="w-full pt-16 ">
       <div class="relative interview-cover cursor-pointer" onclick="window.open('<?= $firstPost->link ?>','_self')">
@@ -74,30 +74,32 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
       </div>
     </section>
   <?php } ?>
-  <section id="interview-list" class="grid lg:grid-cols-4 grid-cols-1 lg:px-5 px-4 gap-5 pb-12 pt-16">
-    <?php
-    foreach ($interviewPosts as $item) {
-    ?>
-      <div class="relative cursor-pointer" onclick="window.open('<?= $item->link ?>','_self')">
-        <div class="interview-card">
-          <img class="object-cover w-full h-full rounded-xl" src="<?= $item->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
-        </div>
-        <div class="absolute top-3 left-3" style="width:45px;height:45px;">
-          <?php if (!empty($item->intervieweeBusinessLogo)) : ?>
-            <img class="object-cover w-full h-full rounded-full" src="<?= $item->intervieweeBusinessLogo ?>" onerror="this.src='<?= $defaultImage ?>'" />
-          <?php endif; ?>
-        </div>
-        <div class="absolute left-0 bottom-0" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">
-          <div class="ml-6 mb-6 mr-6">
-            <p class="font-bold text-white text-base mb-2"><?= $item->intervieweeBusiness ? $item->intervieweeBusiness : $item->interviewee ?></p>
-            <p class="text-white text-base"><?= $item->title ?></p>
+  <div class="bro-max-width">
+    <section id="interview-list" class="grid lg:grid-cols-4 grid-cols-1 lg:px-5 px-4 gap-5 pb-12 pt-16">
+      <?php
+      foreach ($interviewPosts as $item) {
+      ?>
+        <div class="relative cursor-pointer" onclick="window.open('<?= $item->link ?>','_self')">
+          <div style="height:60vh">
+            <img class="object-cover w-full h-full rounded-xl" src="<?= $item->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
+          </div>
+          <div class="absolute top-3 left-3" style="width:45px;height:45px;">
+            <?php if (!empty($item->intervieweeBusinessLogo)) : ?>
+              <img class="object-cover w-full h-full rounded-full" src="<?= $item->intervieweeBusinessLogo ?>" onerror="this.src='<?= $defaultImage ?>'" />
+            <?php endif; ?>
+          </div>
+          <div class="absolute left-0 bottom-0 w-full rounded-b-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));">
+            <div class="ml-6 mb-6 mr-6">
+              <p class="font-bold text-white text-base mb-2"><?= $item->intervieweeBusiness ? $item->intervieweeBusiness : $item->interviewee ?></p>
+              <p class="text-white text-sans-serift text-lg font-light leading-relaxed mt-4"><?= $item->title ?></p>
+            </div>
           </div>
         </div>
-      </div>
-    <?php } ?>
-  </section>
-  <div class="flex items-center justify-center py-8">
-    <button id="loadmore" class="rounded-full py-3 px-24 text-xs" style="background-color: #262145; color: white;">LOAD MORE</button>
+      <?php } ?>
+    </section>
+    <div class="flex items-center justify-center py-8">
+      <button id="loadmore" class="rounded-full text-xs button_ghost hover:text-black" style="background-color: #262145; color: white;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;">LOAD MORE</button>
+    </div>
   </div>
   <?php
   $footerbgcolor = '#191920';
@@ -166,10 +168,10 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                     `<img class="object-cover w-full h-full rounded-full" src="${ interview.intervieweeBusinessLogo }" onerror="this.src='<?= $defaultImage ?>'" />`
                   :''}
                 </div>
-                <div class="absolute left-0 bottom-0" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));">
+                <div class="absolute left-0 bottom-0 w-full rounded-b-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));">
                   <div class="ml-6 mb-6 mr-6">
                     <p class="font-bold text-white text-base mb-2">${ interview.intervieweeBusiness ? interview.intervieweeBusiness : interview.interviewee }</p>
-                    <p class="text-white text-base">${ interview.title }</p>
+                    <p class="text-white text-sans-serift text-lg font-light leading-relaxed mt-4">${ interview.title }</p>
                   </div>
                 </div>
               </div>

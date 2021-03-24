@@ -215,8 +215,8 @@ class Post
         if ($postType === 'restaurants') {
             $thePost->ชื่อร้าน = get_field('ชื่อร้าน');
             $restaurantTypes = wp_get_post_terms(get_the_ID(), 'restaurant_type');
-            $thePost->typeId = $restaurantTypes[0]->term_id;
-            $thePost->ประเภทธุรกิจ = $restaurantTypes[0]->name;
+            $thePost->typeId = $restaurantTypes && count($restaurantTypes) > 0 ? $restaurantTypes[0]->term_id : '';
+            $thePost->ประเภทธุรกิจ = $restaurantTypes && count($restaurantTypes) > 0 ? $restaurantTypes[0]->name : '';
             $thePost->จำนวนสาขา = get_field('จำนวนสาขา');
             $thePost->จังหวัด = get_field('province');
             $thePost->เบอร์โทรศัพท์ = get_field('telInfo')['telNo'];

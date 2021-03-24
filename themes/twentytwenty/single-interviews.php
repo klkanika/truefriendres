@@ -38,7 +38,6 @@ $thisLink = get_permalink();
   <section class="w-full">
     <div class="relative interview-cover">
       <div class="absolute w-full h-full" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"></div>
-
       <div class="absolute bottom-0 w-full block lg:flex justify-center lg:px-0 px-6 py-6">
         <div class="flex lg:flex-row flex-col lg:items-center lg:justify-between lg:border-t border-white py-4 lg:w-1/2">
           <span class="text-2xl font-medium">Interview</span>
@@ -100,18 +99,8 @@ $thisLink = get_permalink();
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   $(document).ready(function() {
+    $("#3rdSlider").trigger('destroy.owl.carousel');
     $("#3rdSlider").owlCarousel({
-      items: $(window).width() < 1024 ? 1.3 : 4,
-      loop: true,
-      // autoplay: true,
-      autoplayHoverPause: true,
-      slideBy: 2,
-      margin: 20,
-      dots: false,
-    });
-    $(window).resize(function() {
-      $("#3rdSlider").trigger('destroy.owl.carousel');
-      $("#3rdSlider").owlCarousel({
         items: $(window).width() < 1024 ? 1.3 : 4,
         loop: true,
         // autoplay: true,
@@ -119,8 +108,17 @@ $thisLink = get_permalink();
         slideBy: 2,
         margin: 20,
         dots: false,
-      });
     });
+  });
+
+  $(".toTheLeft").click(function() {
+      let carousel = $(this).attr('referTo')
+      $(`#${carousel}`).trigger('prev.owl.carousel');
+  });
+
+  $(".toTheRight").click(function() {
+      let carousel = $(this).attr('referTo')
+      $(`#${carousel}`).trigger('next.owl.carousel');
   });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>

@@ -9,7 +9,7 @@
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
-
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
 </head>
 
 <?php
@@ -22,19 +22,6 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 <body style="font-family: 'Noto Sans Thai', sans-serif;" class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <style>
-    #headder {
-      background: transparent;
-    }
-
-    .burger-bar,
-    .balloon-chat {
-      fill: #262145;
-    }
-
-    .logo {
-      color: #262145;
-    }
-
     #documents {
       background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-b.svg');
       background-repeat: no-repeat;
@@ -49,7 +36,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     }
   </style>
 
-  <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
+  <section id="documents" class="text-white pt-32 w-full flex items-center flex-col text-en" style="background-color: #F2F2F2; color:#262145;">
     <div class="flex text-base md:text-2xl pb-2">
       <div class="text-base md:text-xl font-light pr-2">คลังแสงของคนอยากเปิดร้านอาหาร</div>
     </div>

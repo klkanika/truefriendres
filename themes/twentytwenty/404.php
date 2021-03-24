@@ -15,20 +15,17 @@ $searchQuery = get_search_query();
 <body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
-  <section class="text-white pt-32 w-full" style="background-color: #262145;">
+  <section class="text-white pt-32 w-full text-center text-en" style="background-color: #262145;">
 	<?php if(!empty($searchQuery)) :?>
-		<div class="flex flex-col my-8 lg:px-40 px-8">
+		<div class="flex flex-col lg:p-40 p-8">
 			<span class="text-xl mb-2 font-thin">Search</span>
 			<span class="text-5xl font-extrabold"><?=$searchQuery ?></span>
 		</div>
 	<?php else :?>
-		<div class="flex flex-col my-8 lg:px-40 px-8">
+		<div class="flex flex-col lg:p-40 p-8">
 			<span class="text-5xl font-extrabold">Page Not Found</span>
 		</div>
 	<?php endif; ?>
-    <div class="bg-white text-black mx-auto">
-		<p class="text-center w-full py-24">ไม่พบข้อมูล</p>
-    </div>
   </section>
   <?php
   $footerbgcolor = '#262145';

@@ -291,22 +291,15 @@ $form = [
     <?php include 'truefriend-header.php'; ?>
     <!-- Set up your HTML -->
     <style>
-			#headder{
-				background: transparent;
-				color: var(--primary);
-			}
-			#headder svg{
-				fill: var(--primary);
-			}
-			.collapse .collapse-content{
-				display: none;
-			}
-			.collapse.open .collapse-icon{
-				transform: rotate(180deg);
-			}
-			.collapse.open .collapse-content{
-				display: block;
-			}
+		.collapse .collapse-content{
+			display: none;
+		}
+		.collapse.open .collapse-icon{
+			transform: rotate(180deg);
+		}
+		.collapse.open .collapse-content{
+			display: block;
+		}
     </style>
     <section class="text-white pt-32 pb-4 lg:pb-20 lg:px-48 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
 		<section class="w-full flex flex-col px-6 lg:px-0">

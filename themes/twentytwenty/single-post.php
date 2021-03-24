@@ -38,21 +38,28 @@
       width: 250px !important;
       height: 250px !important;
     }
+    
+    .content_font {
+      font-family:sans-serif;
+      line-height:2.5rem;
+      font-weight:100;
+      letter-spacing:0.01em;
+    }
   </style>
   <!-- Set up your HTML -->
-  <section class="relative w-full">
+  <section class="relative w-full text-en">
     <div class="lg:pl-12 pl-4 lg:pr-12 pr-4 lg:pb-10 pb-6 pt-28 text-center" style="background-color: #262145;">
-      <div class="flex flex-wrap justify-center mb-6">
-        <?php 
-        foreach (get_the_category() as $category) : ?>
-          <a href="<?= get_category_link( $category->cat_ID ) ?>" class="select-none rounded-full text-center lg:w-44 w-32 p-2 m-1 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $category->cat_name ?></a>
-        <?php endforeach; ?>
-      </div>
       <div class="text-white lg:text-3xl text-xl mx-auto"><?= the_title() ?></div>
       <div class="flex justify-center mt-2">
         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
         <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>" class="mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
         <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard mx-2"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
+      </div>
+      <div class="flex flex-wrap justify-center pt-6">
+        <?php 
+        foreach (get_the_category() as $category) : ?>
+          <a href="<?= get_category_link( $category->cat_ID ) ?>" class="select-none rounded-full text-center w-auto py-2 px-8 m-1 lg:text-base text-sm" style="color:#262145;background-color:#FEDA52;"><?= $category->cat_name ?></a>
+        <?php endforeach; ?>
       </div>
     </div>
     <?php if (!empty(get_the_post_thumbnail_url())) : ?>
@@ -62,52 +69,74 @@
     <?php endif ?>
   </section>
   <!-- overflow-hidden max-h-screen -->
-  <section class="w-full lg:p-20 px-4 py-8 relative max-h-screen overflow-hidden" style="color: #062241;" id="content-section">
+  <section class="w-full lg:p-20 px-4 py-8 relative max-h-screen overflow-hidden content_font" style="color: #062241;max-width:1366px;" id="content-section">
     <div class="flex lg:flex-row flex-col lg:gap-10">
-      <div class="lg:w-3/4 flex-1 text-base flex flex-col gap-4"><?= the_content() ?></div>
+      <div class="lg:w-3/4 flex-1 text-base flex flex-col gap-4 content_font">
+        <?= the_content() ?>
+      </div>
       <div class="lg:w-1/4 flex flex-col gap-8 lg:mt-0 mt-16 lg:block hidden">
         <?php include 'truefriend-sponsored.php'; ?>
       </div>
     </div>
-    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full" id="pop-section" style="transform:translate(-50%,0%);background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 40%);">
-      <button class="rounded-full text-white py-3 lg:px-28 px-14" style="background-color: #262145;" id="readnext">READ NEXT</button>
+    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full light_theme" id="pop-section" style="transform:translate(-50%,0%);background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 40%);">
+      <button class="rounded-full text-white py-3 lg:px-28 px-14 text-en button_ghost hover:text-black" style="background-color: #262145;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;" id="readnext">READ NEXT</button>
     </div>
   </section>
 
-  <div class="w-full flex lg:flex-row flex-col lg:px-20 px-8 py-10 justify-between items-center" style="background-color: #F2F2F2; color: #062241;">
-    <span class="text-xl">Share this article</span>
-    <div class="flex items-center justify-center flex-wrap gap-4 lg:pr-20 lg:mt-0 mt-8">
-      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
-      <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
-      <div class="relative bg-white rounded-full w-80 pl-4 pr-12 py-3 shadow-lg overflow-hidden">
-        <img copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard w-6 h-6 absolute right-0 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" onclick="copyToClipboard('<?= the_permalink(); ?>')">
-        <div class="truncate"><?= $thisLink ?></div>
+  <!--Share-->
+  <div class="w-full lg:px-20 px-8 py-10 text-en" style="background-color: #F2F2F2; color: #062241;">
+    <div class="bro-max-width justify-between items-center flex lg:flex-row flex-col">
+      <span class="text-xl">Share this article</span>
+      <div class="flex items-center justify-center flex-wrap gap-4 lg:mt-0 mt-8">
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-black-icon.png" alt=""></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-black-icon.png" alt=""></a>
+        <div class="relative bg-white rounded-full w-80 pl-4 pr-12 py-3 shadow-lg overflow-hidden">
+          <img copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard w-6 h-6 absolute right-0 mr-4" src="<?= get_theme_file_uri() ?>/assets/images/link-black-icon.png" alt="" onclick="copyToClipboard('<?= the_permalink(); ?>')">
+          <div class="truncate"><?= $thisLink ?></div>
+        </div>
       </div>
     </div>
   </div>
-  <section class="bg-white lg:pt-20 lg:pb-8 lg:px-0 lg:mx-8 border-b pl-4 py-16 pr-0">
-    <div class="flex items-center justify-between mb-4">
-      <span class="text-2xl font-semibold">Related Content</span>
-      <div class="gap-10 lg:flex hidden">
-        <img class="w-2 h-4 cursor-pointer toTheLeft" src="<?= get_theme_file_uri() ?>/assets/images/left.png" referTo="relatedSlider" />
-        <img class="w-2 h-4 cursor-pointer toTheRight" src="<?= get_theme_file_uri() ?>/assets/images/right.png" referTo="relatedSlider" />
-      </div>
-    </div>
-    <!-- grid grid-cols-3 gap-4  -->
-    <div id="relatedSlider" class="owl-carousel">
-      <?php
-      $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
-      if ($related) foreach ($related->posts as $key => $category) : ?>
-        <a href="<?= $category->link ?>" class="block">
-          <div style="height:250px;" class="mb-2">
-            <img class="object-cover w-full h-full rounded" src="<?= $category->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
+  
+  <!--Related-->
+  <?php
+  $related = Post::getPostsByCategory('post', $categories[0]->cat_ID, null, 0, [$currentPostId]);
+  ?>
+  <?php if (!empty($related->posts_count)) : ?>
+      <section class="overflow-hidden bg-white border-b">
+          <div class="bro-max-width light_theme carousel-overflow">
+              <section id="section-2ndSlider" class="pt-10 pb-20 " style="color:#062241">
+                  <div class="mb-5 mt-10 flex justify-between">
+                      <p style="letter-spacing:-0.1rem;" class="font-semibold text-4xl text-en">Related Content</p>
+                      <!-- 2nd navigator -->
+                      <div class="items-center justify-between  hidden lg:flex">
+                          <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="relatedSlider" class="cursor-pointer button_ghost toTheLeft" />
+                          <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-right-blue.svg" referTo="relatedSlider" class="cursor-pointer button_ghost hilight toTheRight ml-2" />
+                      </div>
+                  </div>
+                  <div id="relatedSlider" class="owl-carousel">
+                      <?php
+                      foreach ($related->posts as $thePost) {
+                      ?>
+                          <a  href="<?= $thePost->link ?>">
+                              <div class="relative button_ghost" style="padding:0!important;">
+                                  <div style="height:20rem">
+                                      <img class="object-cover w-full h-full rounded" src="<?=  $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" />
+                                  </div>
+                                  <div class="p-4 pb-6">
+                                      <p class="text-sans-serift text-lg leading-relaxed"> <?= $thePost->title ?> </p>
+                                      <p style="height:4.5rem;" class="mt-4 opacity-75 font-light overflow-hidden text-sans-serift leading-relaxed"> <?= $thePost->excerpt ?> </p>
+                                  </div>
+                              </div>
+                          </a>
+                      <?php
+                      }
+                      ?>
+                  </div>
+              </section>
           </div>
-          <span class="text-sm"><?= $category->title ?></span>
-        </a>
-      <?php endforeach;
-      wp_reset_postdata(); ?>
-    </div>
-  </section>
+      </section>
+  <?php endif; ?>
   <?php include 'truefriend-restaurant101.php'; ?>
   <div class="lg:hidden py-8 px-4">
     <?php include 'truefriend-sponsored.php'; ?>

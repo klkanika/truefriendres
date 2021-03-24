@@ -19,13 +19,6 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <style>
-    #headder{
-      background: transparent;
-      color: var(--primary);
-    }
-    #headder svg{
-      fill: var(--primary);
-    }
     #infohub{
       background-color:#f2f2f2;
       color:#262145;
@@ -53,7 +46,7 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
       }
     }
   </style>
-  <section id="infohub" class="text-white pt-40 w-full flex items-center flex-col">
+  <section id="infohub" class="text-white pt-40 w-full flex items-center flex-col text-en">
     <h2 class="xs:text-lg md:text-xl mb-4 font-light">คลังแสงของคนอยากเปิดร้านอาหาร</h2>
     <h1 class="text-6xl font-black tracking-tighter mb-6">Infohub</h1>
     <h3 class="xs:text-sm md:text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</h3>

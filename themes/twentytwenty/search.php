@@ -17,30 +17,34 @@ $Posts = $PostsObject->posts;
 <body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
-  <section class="text-white pt-32 w-full" style="background-color: #262145;">
+  <section class="text-white pt-32 w-full text-en" style="background-color: #262145;">
     <div class="flex flex-col my-8 lg:px-40 px-8">
       <span class="text-xl mb-2 font-thin">Search</span>
       <span class="text-5xl font-extrabold"><?=get_search_query()?></span>
     </div>
-    <div class="bg-white">
-      <?php if(!empty(get_search_query()) && !empty($PostsObject->posts_count)) :?>
-        <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
-          <?php foreach ($Posts as $thePost) : ?>
-            <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
-            <div class="lg:h-72 h-56">
-              <img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
-            </div>
-            <div class="font-semibold text-lg"><?= $thePost->title ?></div>
-            <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
-            </a>
-          <?php endforeach; ?>
-        </div>
-        <div class="bg-white text-center text-xs py-12">
-          <button class="rounded-full text-white px-8 py-3 px-28 hidden" style="background-color: #262145;" id="loadmore">LOAD MORE</button>
-        </div>
-     	 <?php else: ?>
-        	<p class="text-center w-full text-black py-24">ไม่พบข้อมูล</p>
-      	<?php endif; ?>
+    <div class="bg-white justify-items-center">
+      <div class="bro-max-width light_theme">
+        <?php if(!empty(get_search_query()) && !empty($PostsObject->posts_count)) :?>
+          <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
+            <?php foreach ($Posts as $thePost) : ?>
+              <a href="<?= $thePost->link ?>" class="flex flex-col gap-4 button_ghost" style="padding: 0!important;">
+                <div class="lg:h-72 h-56">
+                  <img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
+                </div>
+                <div class="px-4 pb-4">
+                  <div class="text-sans-serift text-lg leading-relaxed"><?= $thePost->title ?></div>
+                  <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
+                </div>
+              </a>
+            <?php endforeach; ?>
+          </div>
+          <div class="bg-white text-center text-xs py-12">
+            <button class="rounded-full text-white hidden button_ghost hover:text-black" style="background-color: #262145;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;" id="loadmore">LOAD MORE</button>
+          </div>
+        <?php else: ?>
+            <p class="text-center w-full text-black py-24">ไม่พบข้อมูล</p>
+        <?php endif; ?>
+      </div>
     </div>
   </section>
   <?php include 'truefriend-footer.php'; ?>
@@ -89,12 +93,14 @@ $Posts = $PostsObject->posts;
 		  const defaultImage = "<?= $defaultImage ?>";
           posts.map((thePost, i) => {
             $("#posts").append(`
-            <a href="${thePost.link}" class="flex flex-col gap-4">
+            <a href="${thePost.link}" class="flex flex-col gap-4 button_ghost" style="padding: 0!important;">
               <div class="lg:h-72 h-56">
 			  	      <img class="rounded-lg object-cover w-full h-full" src="${thePost.featuredImage}" alt="" onerror="this.src = '${defaultImage}'">
               </div>
-              <div class="font-semibold text-lg">${thePost.title}</div>
-              <div class="" style="color: rgba(6, 34, 65, 0.4)">${thePost.date}</div>
+              <div class="px-4 pb-4">
+                <div class="font-semibold text-lg">${thePost.title}</div>
+                <div class="" style="color: rgba(6, 34, 65, 0.4)">${thePost.date}</div>
+              </div>
             </a>
             `);
           })

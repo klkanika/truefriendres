@@ -56,14 +56,6 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <style>
-    #headder {
-      background: transparent;
-      color: var(--primary);
-    }
-
-    #headder svg {
-      fill: var(--primary);
-    }
 
     #suppliers-content .swiper-button-next,
     #suppliers-content .swiper-button-prev {
@@ -122,7 +114,9 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
           foreach ($อาเรย์รูปภาพ as $รูปภาพ) :
             $image = $รูปภาพ['image'];
         ?>
-            <div class="swiper-slide rounded-xl overflow-hidden banner-slide"><img class="object-cover w-full h-full" src="<?= $image ?>" alt="" /></div>
+            <div class="swiper-slide rounded-xl overflow-hidden banner-slide">
+              <img class="object-cover w-full h-full" src="<?= $image ?>" alt="" onerror="this.src='<?= $defaultImage ?>'"/>
+            </div>
         <?php
           endforeach;
         } ?>

@@ -14,7 +14,7 @@ $knowledgePostsObject = Post::getPostsByCategory('post', get_category_by_slug('k
 $knowledgePosts = $knowledgePostsObject->posts;
 ?>
 
-<body class="w-full">
+<body class="w-full text-en">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
   <section class="text-white pt-32 w-full" style="background-color: #262145;">
@@ -27,25 +27,29 @@ $knowledgePosts = $knowledgePostsObject->posts;
       <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('knowledge'))) ?>"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>
       <div copytoclipboard="<?= get_permalink(get_page_by_path('knowledge')) ?>" class="btn-copytoclipboard"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/link-icon.png" alt=""></div>
     </div>
-    <div class="bg-white">
-      <?php if (!empty(get_category_by_slug('knowledge')->cat_ID)) : ?>
-        <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
-          <?php foreach ($knowledgePosts as $thePost) :?>
-            <a href="<?= $thePost->link ?>" class="flex flex-col gap-4">
-              <div class="lg:h-72 h-56">
-                <img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
-              </div>
-              <div class="font-semibold text-lg"><?= $thePost->title ?></div>
-              <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
-            </a>
-          <?php endforeach; ?>
-        </div>
-        <div class="bg-white text-center text-xs py-12">
-          <button class="rounded-full text-white px-8 py-3 px-28 hidden" style="background-color: #262145;" id="loadmore">LOAD MORE</button>
-        </div>
-      <?php else : ?>
-        <p class="text-center w-full">ไม่พบข้อมูล</p>
-      <?php endif; ?>
+    <div class="bg-white light_theme">
+      <div class="bro-max-width">
+        <?php if (!empty(get_category_by_slug('knowledge')->cat_ID)) : ?>
+          <div class="lg:px-8 px-4 grid lg:grid-cols-3 gap-x-4 gap-y-10 py-10" style="color: #062241;" id="posts">
+            <?php foreach ($knowledgePosts as $thePost) :?>
+              <a href="<?= $thePost->link ?>" class="flex flex-col gap-4 button_ghost" style="padding: 0!important;">
+                <div class="lg:h-72 h-56">
+                  <img class="rounded-lg object-cover w-full h-full" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
+                </div>
+                <div class="px-4 pb-4">
+                  <div class="text-sans-serift text-lg leading-relaxed"><?= $thePost->title ?></div>
+                  <div class="" style="color: rgba(6, 34, 65, 0.4)"><?= $thePost->date ?></div>
+                </div>
+              </a>
+            <?php endforeach; ?>
+          </div>
+          <div class="bg-white text-center text-xs py-12">
+            <button class="rounded-full text-white hidden button_ghost hover:text-black" style="background-color: #262145;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;" id="loadmore">LOAD MORE</button>
+          </div>
+        <?php else : ?>
+          <p class="text-center w-full">ไม่พบข้อมูล</p>
+        <?php endif; ?>
+      </div>
     </div>
   </section>
   <?php
@@ -101,12 +105,14 @@ $knowledgePosts = $knowledgePostsObject->posts;
           const posts = postsObject.posts;
           posts.map((thePost, i) => {
             $("#posts").append(`
-            <a href="${thePost.link}" class="flex flex-col gap-4">
+            <a href="${thePost.link}" class="flex flex-col gap-4 button_ghost" style="padding: 0!important;">
               <div class="lg:h-72 h-56">
                 <img class="rounded-lg object-cover w-full h-full" src="${thePost.featuredImage}" onerror="this.src='<?= $defaultImage ?>'" alt="">
               </div>
-              <div class="font-semibold text-lg">${thePost.title}</div>
-              <div class="" style="color: rgba(6, 34, 65, 0.4)">${thePost.date}</div>
+              <div class="px-4 pb-4">
+                <div class="font-semibold text-lg">${thePost.title}</div>
+                <div class="" style="color: rgba(6, 34, 65, 0.4)">${thePost.date}</div>
+              </div>
             </a>
             `);
           })

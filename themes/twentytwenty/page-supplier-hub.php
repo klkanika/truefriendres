@@ -30,14 +30,6 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     <?php include 'truefriend-header.php'; ?>
     <!-- Set up your HTML -->
     <style>
-        #headder {
-            background: transparent;
-            color: var(--primary);
-        }
-
-        #headder svg {
-            fill: var(--primary);
-        }
 
         #content {
             max-width: 1000px;

@@ -35,7 +35,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 <body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <!-- Set up your HTML -->
-  <section class="text-white w-full pb-12" style="background-color: #262145;" id="banner">
+  <section class="text-white w-full pb-12 text-en" style="background-color: #262145;" id="banner">
     <section class="w-full relative overflow-hidden" id="banner">
       <!-- bg of banner -->
       <div class="w-full h-full flex flex-row absolute flex-wrap">
@@ -79,30 +79,32 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
         </div>
       </section>
     </section>
-    <?php if (!empty(get_category_by_slug('restaurant101')->cat_ID)) : ?>
-      <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
-        <?php foreach ($restaurant101Posts as $thePost) : ?>
-          <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
-            <div class="p-6 w-full">
-              <div class="w-full relative flex items-center h-48 lg:h-64">
-                <!-- <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('<?= $thePost->featuredImage ?>')"></div> -->
-                <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
-                <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
-                <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
-                  <p class="text-xs"><?= $thePost->restaurantCategory ? $thePost->restaurantCategory[0] : '' ?></p>
-                  <p class="lg:text-base text-sm mt-2"><?= $thePost->title; ?></p>
+    <div class="bro-max-width">
+      <?php if (!empty(get_category_by_slug('restaurant101')->cat_ID)) : ?>
+        <section class="w-full lg:px-8 px-4 grid lg:grid-cols-2 gap-5 mt-16" id="card-list">
+          <?php foreach ($restaurant101Posts as $thePost) : ?>
+            <a href="<?= $thePost->link ?>" class="w-full lg:h-80 h-56 bg-cover bg-center rounded-xl relative" style="background-image:url('<?= $thePost->featuredImage ?>');border:1px solid rgba(255,255,255,0.2);">
+              <div class="p-6 w-full">
+                <div class="w-full relative flex items-center h-48 lg:h-64">
+                  <!-- <div class="bg-center bg-contain bg-no-repeat h-36 lg:h-48 w-full" style="background-image:url('<?= $thePost->featuredImage ?>')"></div> -->
+                  <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
+                  <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
+                  <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
+                    <p class="mb-1"><?= $thePost->restaurantCategory ? $thePost->restaurantCategory[0] : '' ?></p>
+                    <p class="text-white text-sans-serift text-lg font-light leading-relaxed mt-2"><?= $thePost->title; ?></p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-        <?php endforeach ?>
-      </section>
-      <div class="flex w-full justify-center mt-8">
-        <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
-      </div>
-    <?php else : ?>
-      <p class="text-center w-full">ไม่พบข้อมูล</p>
-    <?php endif; ?>
+            </a>
+          <?php endforeach ?>
+        </section>
+        <div class="flex w-full justify-center mt-8">
+          <div class="lg:text-base text-xs rounded-3xl border-white border text-center py-2 w-1/2 lg:w-1/5 select-none cursor-pointer loadmore hidden" id="loadmore">LOAD MORE</div>
+        </div>
+      <?php else : ?>
+        <p class="text-center w-full">ไม่พบข้อมูล</p>
+      <?php endif; ?>
+    </div>
   </section>
   <?php
   $footerbgcolor = '#262145';
@@ -164,8 +166,8 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                   <img class="absolute left-0 top-0" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" />
                   <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
                   <div class="absolute left-0 bottom-0 lg:mb-0 mb-2">
-                    <p class="text-xs">${thePost.restaurantCategory?thePost.restaurantCategory[0]:''}</p>
-                    <p class="lg:text-base text-sm mt-2">${thePost.title}</p>
+                    <p class="mb-1 text-sans-serift">${thePost.restaurantCategory?thePost.restaurantCategory[0]:''}</p>
+                    <p class="text-white text-sans-serift text-lg font-light leading-relaxed mt-2">${thePost.title}</p>
                   </div>
                 </div>
               </div>

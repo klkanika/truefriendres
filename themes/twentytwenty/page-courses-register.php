@@ -177,19 +177,6 @@ $form = [
 <body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <style>
-    #headder {
-      background: transparent;
-    }
-
-    .burger-bar,
-    .balloon-chat {
-      fill: #262145;
-    }
-
-    .logo {
-      color: #262145;
-    }
-
     .collapse .collapse-content {
       display: none;
     }

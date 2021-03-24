@@ -228,14 +228,6 @@ $form = [
 	<?php include 'truefriend-header.php'; ?>
 	<!-- Set up your HTML -->
 	<style>
-		#headder {
-			background: transparent;
-			color: var(--primary);
-		}
-
-		#headder svg {
-			fill: var(--primary);
-		}
 
 		.collapse .collapse-content {
 			display: none;

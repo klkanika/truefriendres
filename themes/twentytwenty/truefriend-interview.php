@@ -35,7 +35,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                             <div class="absolute left-0 bottom-0 w-full rounded-b-xl" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));">
                                 <div class="ml-6 mb-6 mr-6">
                                     <p class="font-bold text-white text-base mb-2"><?= $thePost->intervieweeBusiness ? $thePost->intervieweeBusiness : $thePost->interviewee ?></p>
-                                    <p class="text-white text-sans-serift text-lg font-light 	 leading-relaxed mt-4"><?= $thePost->title ?></p>
+                                    <p class="text-white text-sans-serift text-lg font-light leading-relaxed mt-4"><?= $thePost->title ?></p>
                                 </div>
                             </div>
                         </div>

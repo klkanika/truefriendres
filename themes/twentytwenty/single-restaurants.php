@@ -7,6 +7,7 @@
   <title>Restaurant Detail</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   <script>
       // Initialize and add the map
       let map;
@@ -30,7 +31,7 @@
   </script>
 </head>
 
-<body style="font-family: 'Noto Sans Thai', sans-serif; background-color: #F2F2F2;" class="w-full">
+<body class="w-full text-en">
   <?php
   include 'truefriend-header.php';
   $อาเรย์รูปภาพ = get_field('รูปภาพ');
@@ -42,14 +43,6 @@
   $restaurant_facility = wp_get_post_terms(get_the_ID(), 'restaurant_facility');
   ?>
   <style>
-    #headder {
-      background: transparent;
-      color: var(--primary);
-    }
-
-    #headder svg {
-      fill: var(--primary);
-    }
 
     #suppliers-content .swiper-button-next,
     #suppliers-content .swiper-button-prev {

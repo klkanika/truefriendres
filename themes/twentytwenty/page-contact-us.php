@@ -12,19 +12,6 @@
 <body class="w-full">
   <?php include 'truefriend-header.php'; ?>
   <style>
-    #headder {
-      background: transparent;
-    }
-
-    .burger-bar,
-    .balloon-chat {
-      fill: #262145;
-    }
-
-    .logo {
-      color: #262145;
-    }
-
     #contact-us {
       background-image: url('<?= get_theme_file_uri() ?>/assets/images/bg-b.svg');
       background-repeat: no-repeat;
@@ -39,7 +26,7 @@
     }
   </style>
   <!-- Set up your HTML -->
-  <section id="contact-us" class="lg:h-screen px-12 lg:px-48 lg:pt-18 pt-32 flex items-center" style="background-color: #F2F2F2;">
+  <section id="contact-us" class="lg:h-screen px-12 lg:px-48 lg:pt-18 pt-32 flex items-center text-en" style="background-color: #F2F2F2;">
     <div class="lg:flex w-full lg:justify-between flex-col lg:flex-row">
       <div class="flex flex-col gap-8 flex-1" style="color: #262145;">
         <div class="flex flex-col gap-1">

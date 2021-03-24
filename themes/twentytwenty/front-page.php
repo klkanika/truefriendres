@@ -143,8 +143,8 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                                         <img class="object-cover w-full h-full rounded" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                     </div>
                                     <div class="p-4 pb-6">
-                                        <p class="text-sans-serift text-lg 	 leading-relaxed"> <?= $thePost->title ?> </p>
-                                        <p style="height:4.5rem;" class="mt-4 opacity-75 font-light overflow-hidden text-sans-serift 	 leading-relaxed"> <?= $thePost->excerpt ?> </p>
+                                        <p class="text-sans-serift text-lg leading-relaxed"> <?= $thePost->title ?> </p>
+                                        <p style="height:4.5rem;" class="mt-4 opacity-75 font-light overflow-hidden text-sans-serift leading-relaxed"> <?= $thePost->excerpt ?> </p>
                                     </div>
                                 </div>
                             </a>
@@ -286,7 +286,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                             <?php
                             } else {
                             ?>
-                                <div style="border-radius:0; padding:0;" class="button_ghost  cursor-pointer border-grey-800 border-b <?= $i === 3 ? 'lg:border-none' : '' ?>" onclick="window.open('<?= $thePost->link ?>','_self')">
+                                <div style="border-radius:0; padding:0;" class="button_ghost cursor-pointer border-grey-800 border-b <?= $i === 3 ? 'lg:border-none' : '' ?>" onclick="window.open('<?= $thePost->link ?>','_self')">
                                     <div class="p-4">
                                         <p class="font-semibold leading-loose text-xs opacity-50 text-en">HOT UPDATE</p>
                                         <p class="text-sans-serift text-lg"><?= $thePost->title ?></p>

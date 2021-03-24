@@ -8,6 +8,7 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.lazywasabi.net/fonts/NotoSansThai/NotoSansThai.css" rel="stylesheet">
   <!-- <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="<?= get_theme_file_uri() ?>/assets/css/style.css">
   <style>
     .restaurant-table th {
       font-weight: 400;
@@ -62,19 +63,6 @@
   ];
   ?>
   <style>
-    #headder {
-      background: transparent;
-      color: var(--primary);
-    }
-
-    #headder svg {
-      fill: var(--primary);
-    }
-
-    #content {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
     #resTable th svg{
       fill: #bababa;
     }
