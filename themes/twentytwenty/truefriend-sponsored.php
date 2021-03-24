@@ -25,7 +25,7 @@ $defaultImage = get_theme_file_uri()."/assets/images/img-default.jpg";
 </div>
 <div class="mb-8">
   <div class="border-b pb-2 mb-4 font-semibold tracking-wide text-en">Related Category</div>
-  <div class="flex flex-col gap-4 light_theme">
+  <div class="flex flex-col gap-2 light_theme">
     <?php foreach (get_categories() as $key => $category) :
       if ($category->count > 0 && $key < 5) : ?>
         <a href="<?= get_category_link( $category->cat_ID ) ?>" class="flex justify-between items-center font-thin button_ghost">
@@ -94,10 +94,10 @@ if ($query->have_posts()) {
         $link = get_permalink($thePost);
         $postDate = date_format(date_create($thePost->post_date),"d/m/Y");
       ?>
-      <a href="<?=$link?>" class="border-b my-4 button_ghost <?= $key > 2 ? 'flex gap-5 items-center' : '' ?>" style="padding: 0!important;">
+      <a href="<?=$link?>" class="border-b my-2 button_ghost <?= $key > 2 ? 'flex gap-5 items-center' : '' ?>" style="padding: 0!important;border-radius: 0!important;">
         <img class="mobject-cover rounded <?= $key > 2 ? 'w-20 h-20' : 'w-full h-40' ?>" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
-        <div class="mx-4 mb-4">
-          <div class="mt-2 mb-1 text-sans-serift text-lg leading-relaxed"><?= $thePost->post_title ?></div>
+        <div class="mx-4 mb-2">
+          <div class="text-sans-serift leading-relaxed <?= $key > 2 ? '' : 'mt-2' ?>"><?= $thePost->post_title ?></div>
           <div class="text-gray-500 text-xs" style="color: rgba(6, 34, 65, 0.5);"><?= $postDate ?></div>
         </div>
       </a>
