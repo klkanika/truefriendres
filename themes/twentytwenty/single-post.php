@@ -69,17 +69,21 @@
     <?php endif ?>
   </section>
   <!-- overflow-hidden max-h-screen -->
-  <section class="w-full lg:p-20 px-4 py-8 relative max-h-screen overflow-hidden content_font" style="color: #062241;max-width:1366px;" id="content-section">
-    <div class="flex lg:flex-row flex-col lg:gap-10">
-      <div class="lg:w-3/4 flex-1 text-base flex flex-col gap-4 content_font">
-        <?= the_content() ?>
+  <section class="lg:flex w-full lg:p-20 px-4 py-8 relative content_font" style="color: #062241;max-width:1366px;" >
+    <div class="flex w-full" id="content-main">
+      <div class="w-full lg:w-3/4 lg:mr-4 relative overflow-hidden" id="content-section">
+        <div>
+          <?= the_content() ?>
+        </div>
+        <div class="bg-white text-center text-xs lg:p-24 absolute bottom-0 left-1/2 w-full light_theme" id="pop-section" style="transform:translate(-50%,0%);background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 40%);">
+          <button class="rounded-full text-white py-3 lg:px-28 px-14 text-en button_ghost hover:text-black" style="background-color: #262145;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;" id="readnext">READ NEXT</button>
+        </div>
       </div>
-      <div class="lg:w-1/4 flex flex-col gap-8 lg:mt-0 mt-16 lg:block hidden">
-        <?php include 'truefriend-sponsored.php'; ?>
+      <div class="lg:w-1/4 flex lg:mt-0 mt-16 lg:block hidden">
+        <div id="sponsored-section">
+          <?php include 'truefriend-sponsored.php'; ?>
+        </div>
       </div>
-    </div>
-    <div class="bg-white text-center text-xs p-24 absolute bottom-0 left-1/2 w-full light_theme" id="pop-section" style="transform:translate(-50%,0%);background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 40%);">
-      <button class="rounded-full text-white py-3 lg:px-28 px-14 text-en button_ghost hover:text-black" style="background-color: #262145;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;" id="readnext">READ NEXT</button>
     </div>
   </section>
 
@@ -183,9 +187,21 @@
         $(this).addClass('tab-button-active')
       })
 
+      var divHeight = $('#sponsored-section').height();
+      if(divHeight > 0){
+        $('#content-section').css('max-height', divHeight+'px');
+      }else{
+        $('#content-section').css('max-height', '100vh');
+      }
+      
+      var parent = $('#content-main'),
+      child = parent.children('#content-section');
+      if (child.height() > parent.height()) {
+          parent.height(child.height());
+      }
       $("#readnext").click(() => {
         $("#content-section").removeClass("overflow-hidden")
-        $("#content-section").removeClass("max-h-screen")
+        $('#content-section').css('max-height', 'none');
         $("#pop-section").remove()
       })
     })
