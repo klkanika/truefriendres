@@ -91,21 +91,23 @@
 
   <section id="documents" class="text-white pt-32 bro-max-width flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <!-- Slider main container -->
-    <div class="swiper-container w-full">
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        <?php foreach (get_field('รูปภาพ') as $รูป) : 
-          ?>
-          <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
-            <img class="object-cover w-full h-full" src="<?= $image = $รูป['รูป']['url'] ?>" onerror="this.src='<?= $defaultImage ?>'" alt="" />
-          </div>
-        <?php endforeach; ?>
+    <div class="bro-max-width">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <?php foreach (get_field('รูปภาพ') as $รูป) : 
+            ?>
+            <div class="swiper-slide rounded-xl overflow-hidden banner-slide bg-gray-300 object-cover bg-no-repeat">
+              <img class="object-cover w-full h-full" src="<?= $image = $รูป['รูป']['url'] ?>" onerror="this.src='<?= $defaultImage ?>'" alt="" />
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
-      <!-- Add Arrows -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
     </div>
-    <div class="w-full mt-16 mb-12 px-4">
+    <div class="px-4 md:bro-max-width" style="margin-top: 4rem!important;margin-bottom: 3rem!important;">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <div class="flex items-center justify-center">
