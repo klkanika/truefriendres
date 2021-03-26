@@ -41,8 +41,6 @@
 		border-color:#062241;
 	}
 
-	
-
 	.gallery-thumbnail {
 		height: 30vh
 	}
@@ -253,7 +251,7 @@
 	];
 	?>
 <div id="headder" class="fixed  dark-theme left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-2'?> lg:pb-2 p-4 z-40">
-	<div class="flex items-center justify-between bro-max-width">
+	<div class="flex items-center justify-between lg:bro-max-width">
 		<div class="flex items-center">			
 			<div
 				x-data="{}"
@@ -269,21 +267,22 @@
 					C0,0.8,0.1,0.9,0.2,1C0.3,1.2,0.4,1.2,0.6,1.2z" />
 				</svg>
 			</div>
-			<div class="logo   flex items-center mr-4">
-				<a href="<?= get_site_url() ?>/"><div class="b-nav_item" style="height:5rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div></a>
+			<div class="logo flex items-center mr-4">
+				<a href="<?= get_site_url() ?>/"><div class="b-nav_item hidden lg:flex" style="height:5rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div></a>
+				<a href="<?= get_site_url() ?>/"><div class="b-nav_item lg:hidden"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div></a>
 				<a href="<?= get_site_url() ?>/">
-					<div style="letter-spacing:0rem;font-size:1.5rem;line-height:1.5rem;" class="ml-2 font-bold">เพื่อนแท้<br />ร้านอาหาร</div>
+					<div style="letter-spacing:0rem;" class="ml-2 font-bold text-sm lg:text-xl">เพื่อนแท้<br />ร้านอาหาร</div>
 				</a>
 			</div>
 			<?php foreach($menus_desktop as $menu):?>
-					<a class="button_ghost b-nav_item flex items-center text-en mr-2 text-sm" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
+					<a class="button_ghost b-nav_item hidden xl:flex items-center text-en mr-2 text-sm" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
 			<?php endforeach;?>
 		</div>
 		<div class="flex items-center">
 			
 			<!-- <div class="" style="width: 120px;margin-left: 60px;"></div> -->
 			<div class="flex items-center">
-				<div class="flex button_ghost b-nav_item items-center mr-2">
+				<div class="flex button_ghost b-nav_item items-center lg:mr-2">
 					<a class="mr-3" href="https://www.facebook.com/RestaurantBuddy/" target="_blank">
 						<svg style="height:1.25rem;width:2rem;" x="0px" y="0px" width="20.9px" height="20px" viewBox="0 0 20.9 20" class=" cursor-pointer balloon-chat">
 							<path class="st0" d="M0,2.6c0-0.7,0.3-1.4,0.8-1.8C1.3,0.3,1.9,0,2.6,0h15.7c0.7,0,1.4,0.3,1.8,0.8c0.5,0.5,0.8,1.2,0.8,1.8v10.5
@@ -296,20 +295,21 @@
 							c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.3-0.2-0.5-0.2H4.6z" />
 						</svg>
 					</a>
-					<div class="text-en  text-sm">
+					<div class="text-en text-sm hidden lg:flex">
 						Contact
 					</div>
 				</div>
 				<div
 					x-data="{}"
 					@click="$dispatch('open-search', { open: true })"
-				class="flex button_ghost b-nav_item hilight items-center">
-					<div id="searchbox" class="rounded-full flex items-center top-4 right-4">
+					class="flex button_ghost b-nav_item hilight items-center"
+				>
+					<div id="searchbox" class="rounded-full flex items-center top-4 lg:right-4">
 						<button type="button" class="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center cursor-pointer" id="magni">
 							<img style="height:1.25rem;" src="<?= get_theme_file_uri() ?>/assets/images/magnifier_light.svg" />
 						</button>
 					</div>
-					<div class="text-en mr-4 text-sm">
+					<div class="text-en mr-4 text-sm hidden lg:flex">
 						Search
 					</div>
 				</div>
@@ -401,11 +401,11 @@
 	$("#magni").click(() => {
 		let searchInput = $("#searchInput");
 		searchInput.show();
-		if (ismobile) {
-			$('#searchbox').css({
-				position: 'absolute'
-			});
-		}
+		// if (ismobile) {
+		// 	$('#searchbox').css({
+		// 		position: 'absolute'
+		// 	});
+		// }
 		searchInput.focus();
 		if (searchInput.val()) {
 			$("#magni").attr('type', 'submit')

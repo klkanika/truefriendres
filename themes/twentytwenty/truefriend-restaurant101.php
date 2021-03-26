@@ -8,7 +8,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
   <div class="bro-max-width light_theme carousel-overflow">
       <section id="restaurant101" class="pt-10 pb-10 lg:pl-8 pl-4 test" style="color:#062241;">
         <div class="mb-10  flex justify-between items-center">
-          <p style="letter-spacing:-0.1rem;" class="font-semibold text-4xl text-en">Restaurant 101</p>
+          <p style="letter-spacing:-0.1rem;" class="font-semibold text-3xl md:text-4xl text-en">Restaurant 101</p>
           <?php if(!empty($catId)) :?>
             <a href="restaurant-101" class="lg:text-base text-xs font-bold  button_ghost h-full">ดูทั้งหมด (<?= count($Restaurant101Posts); ?>)</a>
           <?php endif; ?>
@@ -30,7 +30,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
             <div class="swiper-wrapper" id="res101-wrapper">
               <?php foreach ($Restaurant101Posts as $thePost) : ?>
                 <a href="<?= $thePost->link ?>" class="swiper-slide">
-                  <div class="relative fourthSliderClass">
+                  <div class="relative h-60 md:h-64">
                     <img class="object-cover w-full h-full rounded-xl" src="<?= $thePost->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>'"/>
                     <div class="border-white border rounded-xl lg:pl-5 lg:pr-5 lg:pt-3 lg:pb-3 pl-4 pr-4 pt-2 pb-2 ml-5 mr-5 mt-3 mb-3 absolute top-0 right-0 text-white text-xs">อ่านต่อ</div>
                     <img class="absolute top-5 left-5" src="<?= get_theme_file_uri() ?>/assets/images/101.svg" style="width: 40px;" />

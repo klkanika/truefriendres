@@ -163,13 +163,14 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 
     <!--Supplier Hub-->
     <div style="background-color:#262145;"> 
-        <div class="bro-max-width  carousel-overflow">
-            <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-4 text-white" >
+        <div class="bro-max-width carousel-overflow">
+            <section id="section-5thSlider" class="pt-12 lg:pl-8 lg:pr-0 pb-16 px-2 text-white" >
                 <div class="lg:mb-12 mb-8">
                     <div class="mb-1 flex items-center justify-between lg:pr-8">
                         <div>
-                            <p class="font-semibold text-4xl text-en mb-2">Supplier Hub</p>
-                            <p class="lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
+                            <p class="font-semibold text-3xl md:text-4xl text-en mb-2">Supplier Hub</p>
+                            <p class="hidden md:block lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
+                            <p class="md:hidden text-xs">แหล่งรวมเบอร์ติดต่อ<br/> Supplier ประเภทต่างๆ</p>
                         </div>
                         <div class="flex items-center">
                             <form id="supplier-type-search items-center">
@@ -276,7 +277,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                                 }
                     ?>
                                 <div class="button_ghost mb-4" style="padding:0;" onclick="window.open('<?= $thePost->link ?>','_self')" class="cursor-pointer mb-8">
-                                    <div  style="height:30vh">
+                                    <div class="h-60 md:h-64">
                                         <img class="object-cover w-full h-full rounded-xl" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" />
                                     </div>
                                     <div class="p-4">

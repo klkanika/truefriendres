@@ -89,10 +89,10 @@
     }
   </style>
 
-  <section id="documents" class="text-white pt-32 w-full flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
+  <section id="documents" class="text-white pt-32 bro-max-width flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <!-- Slider main container -->
     <div class="swiper-container w-full">
-      <div class="swiper-wrapper md:pl-48 pl-4">
+      <div class="swiper-wrapper">
         <!-- Slides -->
         <?php foreach (get_field('รูปภาพ') as $รูป) : 
           ?>
@@ -105,14 +105,14 @@
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
-    <div class="w-full md:pl-48 md:pr-48 mt-16 mb-12 px-4">
+    <div class="w-full mt-16 mb-12 px-4">
       <div class="flex items-center justify-between">
-        <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
+        <div class="flex items-center">
           <div class="flex items-center justify-center">
             <div class="text-xs rounded-full text-sm px-4 py-2 text-white" style="background-color: #062241;">offline</div>
           </div>
         </div>
-        <div class="items-center justify-center flex-wrap gap-4 w-1/5 hidden lg:flex">
+        <div class="flex items-center flex-wrap gap-4">
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
           <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($thisLink) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
           <div copytoclipboard="<?= $thisLink ?>" class="btn-copytoclipboard"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt="" /></div>

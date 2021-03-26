@@ -241,7 +241,7 @@ $form = [
 			display: block;
 		}
 	</style>
-	<section class="text-white pt-32 lg:pb-20 lg:px-48 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
+	<section class="text-white pt-32 lg:pb-20 lg:px-24 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
 		<section class="w-full flex flex-col px-6 lg:px-0">
 			<h2 class="lg:text-2xl text-sm mb-2">ลงทะเบียน Supplier</h2>
 			<h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mb-4">Register Supplier</h1>
@@ -317,7 +317,7 @@ $form = [
 																</div>
 																<div class="flex flex-wrap w-full px-8 sector-collapse hidden">
 																	<?php foreach ($sector as $province) { ?>
-																		<div class="flex items-center w-1/3 mb-4" style="border-color:rgba(0, 0, 0, 0.08);">
+																		<div class="flex items-center w-full md:w-1/3 mb-4" style="border-color:rgba(0, 0, 0, 0.08);">
 																			<input type="checkbox" name="สถานที่จัดส่ง[]" id="<?= $province ?>" sector="<?= $key ?>" value="<?= $province ?>" class="mr-3 <?= $key ?> delivery-place province"> <label for="<?= $province ?>"> <?= $province ?> </label>
 																		</div>
 																	<?php } ?>

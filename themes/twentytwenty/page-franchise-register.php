@@ -488,7 +488,7 @@ $form = [
 			display: block;
 		}
 	</style>
-	<section class="text-white pt-32 lg:pb-20 lg:px-48 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
+	<section class="text-white pt-32 lg:pb-20 lg:px-24 px-4 w-full" style="background: #F2F2F2;color:var(--primary);">
 		<section class="w-full flex flex-col px-6 lg:px-0">
 			<h2 class="lg:text-2xl text-sm mb-2">ลงทะเบียน Franchise</h2>
 			<h1 class="lg:text-6xl text-5xl font-bold tracking-tighter mb-4">Register Franchise</h1>
@@ -573,8 +573,8 @@ $form = [
 													<input type="number" value="" name="อัตราการขยายสาขา_5_ปีย้อนหลัง-จำนวนสาขา" placeholder="จำนวนสาขา" class="py-2 px-4 border rounded-lg w-2-5" <?= $input['required'] ? "required" : "" ?> />
 												<?php break;
 												case "fee": ?>
-													<input type="number" value="" name="<?= $input['name'] ?>-value" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-3/5" <?= $input['required'] ? "required" : "" ?> />
-													<select name="<?= $input['name'] ?>-unit" class="py-2 px-4 border rounded-lg w-1/5">
+													<input type="number" value="" name="<?= $input['name'] ?>-value" placeholder="<?= $input['placeholder'] ?>" class="py-2 px-4 border rounded-lg w-2/5" <?= $input['required'] ? "required" : "" ?> />
+													<select name="<?= $input['name'] ?>-unit" class="py-2 px-4 border rounded-lg w-2/5">
 														<option selected value="% ต่อปี">% ต่อปี</option>
 														<option value="บาทต่อปี">บาทต่อปี</option>
 													</select>

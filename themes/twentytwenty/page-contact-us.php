@@ -26,12 +26,12 @@
     }
   </style>
   <!-- Set up your HTML -->
-  <section id="contact-us" class="lg:h-screen px-12 lg:px-48 lg:pt-18 pt-32 flex items-center text-en" style="background-color: #F2F2F2;">
+  <section id="contact-us" class="lg:h-screen bro-max-width lg:pt-18 pt-32 flex items-center text-en" style="background-color: #F2F2F2;">
     <div class="lg:flex w-full lg:justify-between flex-col lg:flex-row">
       <div class="flex flex-col gap-8 flex-1" style="color: #262145;">
         <div class="flex flex-col gap-1">
           <span class="text-xl" style="color: #262145;">ติดต่อเรา</span>
-          <span class="lg:text-5xl text-contact font-extrabold" style="line-height: 1em;margin-top: 0.2em;">Contact Us</span>
+          <span class="md:text-7xl text-5xl font-extrabold" style="line-height: 1em;margin-top: 0.2em;">Contact Us</span>
           <span class="text-base">ติดต่อลงโฆษณา / ทำ Content หรืออื่นๆ</span>
         </div>
         <div class="flex flex-col gap-1 text-base">
