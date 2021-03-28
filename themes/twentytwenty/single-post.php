@@ -32,12 +32,6 @@
     #headder {
       background: #262145;
     }
-
-    .noImg {
-      background-color: #D3D3D3 !important;
-      width: 250px !important;
-      height: 250px !important;
-    }
     
     .content_font {
       font-family:sans-serif;
@@ -72,9 +66,7 @@
   <section class="lg:flex w-full lg:p-20 px-4 py-8 relative content_font" style="color: #062241;max-width:1366px;" >
     <div class="flex w-full" id="content-main">
       <div class="w-full lg:w-3/4 lg:mr-4 relative overflow-hidden" id="content-section">
-        <div>
-          <?= the_content() ?>
-        </div>
+        <?php include 'truefriend-content.php'; ?>
         <div class="bg-white text-center text-xs lg:p-24 absolute bottom-0 left-1/2 w-full light_theme" id="pop-section" style="transform:translate(-50%,0%);background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 40%);">
           <button class="rounded-full text-white py-3 lg:px-28 px-14 text-en button_ghost hover:text-black" style="background-color: #262145;padding-left: 7rem!important;padding-right: 7rem!important;border-radius: 9999px!important;padding-top: .75rem!important;padding-bottom: .75rem!important;" id="readnext">READ NEXT</button>
         </div>
@@ -159,9 +151,6 @@
     };
 
     $(document).ready(function() {
-      $("img").on("error", function() {
-        $(this).addClass('noImg');
-      });
       
       $("#relatedSlider").owlCarousel({
         items: $(window).width() < 1024 ? 1.3 : 3,

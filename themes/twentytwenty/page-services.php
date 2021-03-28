@@ -117,7 +117,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
         <img src="<?= get_theme_file_uri() ?>/assets/images/PR&Marketing.png" />
       </div>
     </div>
-    <div class="text-center mb-2 font-bold">สอบถามรายละเอียด PR & MARKETING</div>
+    <div class="text-center mb-2 font-bold md:pr-20">สอบถามรายละเอียด PR & MARKETING</div>
     <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-300 md:flex md:justify-center md:mr-20">
       <div class="mx-3 flex items-center mb-2 md:mb-0">
         <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call.svg" />
@@ -207,7 +207,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
         <img src="<?= get_theme_file_uri() ?>/assets/images/servive-consultant.png" />
       </div>
     </div>
-    <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Consultant</div>
+    <div class="text-center mb-2 font-bold md:pr-20">สอบถามรายละเอียด Consultant</div>
     <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-100 md:flex md:justify-center md:mr-20">
       <div class="mx-3 flex items-center mb-2 md:mb-0">
         <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call-white.svg" />
@@ -297,7 +297,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
         <img src="<?= get_theme_file_uri() ?>/assets/images/service-training.png" />
       </div>
     </div>
-    <div class="text-center mb-2 font-bold">สอบถามรายละเอียด Training</div>
+    <div class="text-center mb-2 font-bold md:pr-20">สอบถามรายละเอียด Training</div>
     <div class="py-8 px-8 md:px-0 md:border-t md:border-gray-900 md:flex md:justify-center md:mr-20">
       <div class="mx-3 flex items-center mb-2 md:mb-0">
         <img class="w-6 h-6" src="<?= get_theme_file_uri() ?>/assets/images/icon-call.svg" />
@@ -314,13 +314,11 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     </div>
   </section>
 
-
-  <section id="contact-us" class="py-16 px-8 lg:px-48 lg:pt-18" style="background-color: #F2F2F2;">
-    <div class="lg:flex w-full lg:justify-between flex-col lg:flex-row">
+  <section id="contact-us" class="w-full lg:pt-18 pt-32 flex items-center text-en" style="background-color: #F2F2F2;">
+    <div class="xl:mx-36 md:mx-12 mx-4 lg:mb-4 lg:flex w-full flex-col lg:flex-row">
       <div class="flex flex-col gap-8 flex-1" style="color: #262145;">
         <div class="flex flex-col gap-1">
           <span class="text-xl font-bold " style="color: #262145;">เกี่ยวกับเรา</span>
-
           <span class="text-base ">เราพร้อมเป็นส่วนร่วมเล็กๆ สนับสนุนให้คนทำร้านอาหารสำเร็จ </span>
           <span class="text-base ">เราพร้อมเป็นเพือนร่วมคิด ร่วมแก้ปัญหา เป็นที่ปรึกษา</span>
           <span class="text-base ">เป็นแหล่งวัตถุดิบความรู้ ในการบริการจัดการร้านให้สำเร็จ</span>

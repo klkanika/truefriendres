@@ -69,9 +69,9 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
       </div>
       <section class="flex items-center justify-center flex-col w-full pt-32 pb-3" id="banner-wording">
         <h1 class="text-xl z-20">บทความที่ทุกร้านอาหารต้องอ่าน</h1>
-        <h1 class="text-5xl font-black mt-3 z-20">Restaurant 101</h1>
+        <h1 class="text-3xl md:text-5xl font-black mt-3 z-20">Restaurant 101</h1>
         <img class="z-20" src="<?= get_theme_file_uri() ?>/assets/images/restaurant-101.svg" />
-        <h2 class="z-20 text-base">นอกจากการเป็นคลังความรู้สำหรับธุรกิจร้านอาหารแล้ว <br /> เรายังมีบริการอื่นๆเพื่อช่วยผู้ประกอบการไปถึงฝั่งฝัน</h2>
+        <h2 class="z-20 text-xs md:text-base">นอกจากการเป็นคลังความรู้สำหรับธุรกิจร้านอาหารแล้ว <br /> เรายังมีบริการอื่นๆเพื่อช่วยผู้ประกอบการไปถึงฝั่งฝัน</h2>
         <div class="flex mt-10 z-20">
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('restaurant-101'))) ?>" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-icon.png" alt=""></a>
           <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('restaurant-101'))) ?>" class="mr-4"><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/twitter-icon.png" alt=""></a>

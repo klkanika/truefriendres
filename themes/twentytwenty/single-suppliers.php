@@ -106,7 +106,7 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
   <section id="suppliers-content" class="text-white pt-32 w-full" style="background-color:#f2f2f2;color:#262145;">
     <!-- Slider main container -->
     <div class="swiper-container supplier-swiper">
-      <div class="swiper-wrapper lg:pl-48 pl-4">
+      <div class="swiper-wrapper md:mx-12 mx-4">
         <!-- Slides -->
         <?php
         if ($อาเรย์รูปภาพ) {
@@ -126,15 +126,15 @@ foreach ($อาเรย์สถานที่จัดส่ง as $จั�
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
-    <section class="lg:mx-48 lg:mx-4 mt-16" id="content" style="color:#062241">
+    <section class="md:mx-12 mx-4 mt-16" id="content" style="color:#062241">
       <div class="w-full flex lg:mx-0">
         <div class="flex flex-wrap gap-x-3 lg:w-4/5 w-full pl-4 lg:pl-0">
-          <div class="flex items-center justify-start flex-wrap">
+          <div class="flex flex-wrap gap-2">
             <a class="text-xs rounded-full text-sm px-4 py-2 mb-2" style="background-color: #FEDA52;" href="<?= get_site_url() ?>/supplier-hub">Supplier hub</a>
             <?php foreach ($supplierTypes as $supplierType) : ?>
-              <a href="<?= get_site_url() ?>/supplier-hub?type=<?= $supplierType->term_id ?>" class="relative rounded-full text-sm px-4 py-2 ml-2 mb-2 text-white flex items-center cursor-pointer select-none" style="background-color: #062241;">
+              <a href="<?= get_site_url() ?>/supplier-hub?type=<?= $supplierType->term_id ?>" class="relative rounded-full text-sm px-4 py-2 mb-2 text-white flex items-center cursor-pointer select-none" style="background-color: #062241;">
                 <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $supplierType) ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
-                <span class="ml-6 text-xs"><?= $supplierType->name ?></span>
+                <span class="ml-6 text-xs text-en"><?= $supplierType->name ?></span>
               </a>
             <?php endforeach ?>
           </div>

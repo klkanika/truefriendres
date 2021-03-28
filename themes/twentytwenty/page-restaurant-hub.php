@@ -79,8 +79,8 @@
   <!-- Set up your HTML -->
   <section class="pt-32 w-full" style="color: #262145;">
     <div class="flex flex-col items-center justify-center border-b border-gray-300 pb-12">
-      <div class="lg:text-2xl text-sm mb-2 font-light">รวมเบอร์ติดต่อ Restaurant สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</div>
-      <div class="lg:text-6xl text-5xl font-bold tracking-tighter mt-2">Restaurant hub</div>
+      <div class="lg:text-2xl md:text-sm text-xs mb-2 font-light">รวมเบอร์ติดต่อ Restaurant สำหรับทำธุรกิจไว้ที่นี่ที่เดียว</div>
+      <div class="lg:text-6xl md:text-5xl text-4xl font-bold tracking-tighter mt-2">Restaurant hub</div>
       <div class="flex items-center justify-center flex-wrap mt-4">
         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('restaurant-hub'))) ?>"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
         <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('restaurant-hub'))) ?>"><img class="w-6 h-6 mx-2 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>
@@ -90,7 +90,7 @@
   </section>
 
   <section class="w-full py-8" style="color: #262145;">
-    <div class="max-w-screen-lg	md:mx-auto">
+    <div class="max-w-screen-lg	md:mx-12">
       <div class="flex lg:flex-row flex-col-reverse mx-4 md:mx-0">
         <div class="flex items-center">
           <div class="border border-gray-300 rounded-full px-2 py-1 w-32">

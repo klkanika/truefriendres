@@ -122,7 +122,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
             <div class="bro-max-width light_theme carousel-overflow">
                 <section id="section-2ndSlider" class="pt-10 pb-20 " style="color:#062241">
                     <div class="mb-5 mt-10 flex justify-between">
-                        <p style="letter-spacing:-0.1rem;" class="font-semibold text-4xl text-en">Latest update</p>
+                        <p style="letter-spacing:-0.1rem;" class="font-semibold text-xl md:text-4xl text-en">Latest update</p>
                         <!-- 2nd navigator -->
                         <div class="items-center justify-between  hidden lg:flex">
                             <img src="<?= get_theme_file_uri() ?>/assets/images/carbon-chevron-left-blue.svg" referTo="2ndSlider" class="cursor-pointer button_ghost toTheLeft" />
@@ -168,7 +168,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                 <div class="lg:mb-12 mb-8">
                     <div class="mb-1 flex items-center justify-between lg:pr-8">
                         <div>
-                            <p class="font-semibold text-3xl md:text-4xl text-en mb-2">Supplier Hub</p>
+                            <p class="font-semibold text-xl md:text-4xl text-en mb-2">Supplier Hub</p>
                             <p class="hidden md:block lg:text-base text-xs">แหล่งรวมเบอร์ติดต่อ Supplier ประเภทต่างๆ</p>
                             <p class="md:hidden text-xs">แหล่งรวมเบอร์ติดต่อ<br/> Supplier ประเภทต่างๆ</p>
                         </div>

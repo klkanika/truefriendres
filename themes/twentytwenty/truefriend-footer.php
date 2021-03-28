@@ -7,7 +7,7 @@
 				<li class="text-en leading-loose mb-1"><a href="<?= get_permalink(get_page_by_path('knowledge')) ?>">Knowledge</a></li>
 				<li class="text-en leading-loose mb-1"><a href="#">News</a></li>
 				<li class="text-en leading-loose mb-1"><a href="<?= get_permalink(get_page_by_path('vdo')) ?>">Video</a></li>
-				<li class="text-en leading-loose mb-1"><a href="<?= get_permalink(get_page_by_path('restaurant-101')) ?>">File</a></li>
+				<li class="text-en leading-loose mb-1"><a href="<?= get_permalink(get_page_by_path('documents')) ?>">File</a></li>
 			</ul>
 			<ul class="lg:ml-6 lg:mr-6">
 				<li class="text-en leading-loose mb-4 "><span style="color:<?= $footerheadercolor ? $footerheadercolor : 'rgba(255,255,255,1)' ?>" class="text-en mb-4">Interview & Review</span></li>

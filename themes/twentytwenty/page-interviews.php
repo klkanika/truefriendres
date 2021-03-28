@@ -47,7 +47,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
   <?php include 'truefriend-header.php'; ?>
   
   <?php if ($firstPost) { ?>
-    <section class="w-full pt-16 ">
+    <section class="w-full pt-24">
       <div class="relative interview-cover cursor-pointer" onclick="window.open('<?= $firstPost->link ?>','_self')">
         <div class="absolute w-full h-full" style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));"></div>
         <div class="absolute bottom-0 w-full lg:px-40 px-8 lg:w-1/2 lg:pb-16">

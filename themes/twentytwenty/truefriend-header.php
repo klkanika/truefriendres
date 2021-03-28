@@ -242,12 +242,15 @@
 					['link'=> 'contact-us', 'label'=>'Contact us'],
 	];
 	$menus_desktop = [
+					['link'=> 'services', 'label'=>'Service'],
 					['link'=> 'knowledge', 'label'=>'Knowledge'],
 					['link'=> 'restaurant-101', 'label'=>'Restaurant 101'],
 					['link'=> 'interviews', 'label'=>'Interview'],
 					['link'=> 'vdo', 'label'=>'Video'],
 					['link'=> 'infohub', 'label'=>'Info hub'],
-					['link'=> 'courses', 'label'=>'Courses'],					
+					['link'=> 'courses', 'label'=>'Courses'],	
+					['link'=> 'documents', 'label'=>'Documents'],
+					['link'=> 'contact-us', 'label'=>'Contact us'],				
 	];
 	?>
 <div id="headder" class="fixed  dark-theme left-0 top-0 w-full lg:pr-8 lg:pl-8 <?=$is_admin ? 'pt-12' : 'lg:pt-2'?> lg:pb-2 p-4 z-40">
@@ -271,11 +274,11 @@
 				<a href="<?= get_site_url() ?>/"><div class="b-nav_item hidden lg:flex" style="height:5rem;width: auto;"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div></a>
 				<a href="<?= get_site_url() ?>/"><div class="b-nav_item lg:hidden"><img src="<?= get_theme_file_uri() ?>/assets/images/favicon.png"/></div></a>
 				<a href="<?= get_site_url() ?>/">
-					<div style="letter-spacing:0rem;" class="ml-2 font-bold text-sm lg:text-xl">เพื่อนแท้<br />ร้านอาหาร</div>
+					<div style="letter-spacing:0rem;" class="ml-2 font-bold text-sm hidden md:flex lg:text-xl">เพื่อนแท้<br />ร้านอาหาร</div>
 				</a>
 			</div>
 			<?php foreach($menus_desktop as $menu):?>
-					<a class="button_ghost b-nav_item hidden xl:flex items-center text-en mr-2 text-sm" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
+				<a class="button_ghost b-nav_item hidden xl:flex items-center text-en mr-2 text-xs" href="<?= $menu['link'] === '' ? get_site_url() : get_permalink(get_page_by_path($menu['link']))?>" ><?= $menu['label']?></a>
 			<?php endforeach;?>
 		</div>
 		<div class="flex items-center">

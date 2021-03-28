@@ -8,7 +8,7 @@ $Restaurant101Posts = $Restaurant101PostsObject->posts;
   <div class="bro-max-width light_theme carousel-overflow">
       <section id="restaurant101" class="pt-10 pb-10 lg:pl-8 pl-4 test" style="color:#062241;">
         <div class="mb-10  flex justify-between items-center">
-          <p style="letter-spacing:-0.1rem;" class="font-semibold text-3xl md:text-4xl text-en">Restaurant 101</p>
+          <p style="letter-spacing:-0.1rem;" class="font-semibold text-xl md:text-4xl text-en">Restaurant 101</p>
           <?php if(!empty($catId)) :?>
             <a href="restaurant-101" class="lg:text-base text-xs font-bold  button_ghost h-full">ดูทั้งหมด (<?= count($Restaurant101Posts); ?>)</a>
           <?php endif; ?>

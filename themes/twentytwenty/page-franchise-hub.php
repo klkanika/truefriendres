@@ -63,7 +63,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
   </section>
   <!-- banner -->
   <section id="banner" class="swiper-container relative">
-    <div class="swiper-wrapper">
+    <div class="swiper-wrapper pl-4 md:pl-0">
       <?php foreach ($stickyPosts as $franchise) : ?>
         <a href="<?= $franchise->link ?>" class="swiper-slide banner">
           <img class="object-cover w-full h-full" src="<?= $franchise->featuredImage ?>" onerror="this.src='<?= $defaultImage ?>';"/>
@@ -149,8 +149,8 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
 
   <!-- lists -->
   <section id="lists" class="py-8 md:py-16" style="color: #262145;">
-    <div class="max-w-screen-md	md:mx-auto">
-      <div class="flex lg:flex-row flex-col-reverse mx-4 md:mx-0">
+    <div class="w-full px-4 md:px-20">
+      <div class="flex lg:flex-row flex-col-reverse">
         <div class="flex items-center">
           <div class="border border-gray-300 rounded-full px-2 py-1 w-32">
             <select class="bg-transparent w-full filterable" id="type">
@@ -175,7 +175,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
           <input type="text" class="bg-transparent focus:outline-none filterable" placeholder="ค้นหาชื่อ Franchise" id="keyword">
         </div>
       </div>
-      <div class="py-8 lg:px-0 px-4">
+      <div class="py-8 px-4">
         <table id="resTable" class="w-full restaurant-table">
           <tbody class="cursor-pointer">
           </tbody>
@@ -188,8 +188,8 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
   </section>
 
   <!-- register -->
-  <section class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
-    <span class="text-3xl font-bold">
+  <section class="text-en w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
+    <span class="md:text-3xl text-2xl font-bold">
       ลงทะเบียน Franchise ฟรี
     </span>
     <a href="<?= get_site_url() ?>/franchise-register" class="rounded-full py-3 px-24 bg-white my-6">

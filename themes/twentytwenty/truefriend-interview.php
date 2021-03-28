@@ -6,7 +6,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     <div class="bro-max-width  carousel-overflow">
         <section id="section-3rdSlider" class="pt-14 pb-10 lg:px-8 lg:px-4 text-white" >
             <div class="mb-6 flex justify-between lg:px-0 px-4">
-                <p style="letter-spacing:-0.1rem;" class="font-semibold text-4xl text-en">Interview</p>
+                <p style="letter-spacing:-0.1rem;" class="font-semibold text-xl md:text-4xl text-en">Interview</p>
                 <?php if (!empty($interviewPosts->posts_count)) : ?>
                     <div class="flex items-center">
                         <a href="interviews" class="lg:mr-6 lg:text-base text-xs font-bold button_ghost h-full">ดูทั้งหมด (<?= $interviewPosts->posts_count ?>)</a>

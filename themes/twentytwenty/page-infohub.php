@@ -49,7 +49,7 @@ $franchise = Post::getPostsByCategory('franchises', null, 1, 0, null);
   <section id="infohub" class="text-white pt-40 w-full flex items-center flex-col text-en">
     <h2 class="xs:text-lg md:text-xl mb-4 font-light">คลังแสงของคนอยากเปิดร้านอาหาร</h2>
     <h1 class="text-6xl font-black tracking-tighter mb-6">Infohub</h1>
-    <h3 class="xs:text-sm md:text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</h3>
+    <h3 class="text-xs md:text-base">รวมข้อมูลต่างๆที่เป็นประโยชน์ในการทำธุรกิจร้านอาหาร</h3>
     <div class="flex items-center justify-center flex-wrap gap-4 mt-12 lg:hidden">
       <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(get_permalink(get_page_by_path('infohub'))) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt="" /></a>
       <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode(get_permalink(get_page_by_path('infohub'))) ?>"><img class="w-6 h-6 cursor-pointer" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt="" /></a>

@@ -97,9 +97,9 @@
     }
   </style>
   <!-- Set up your HTML -->
-  <section id="franchise-content" class="text-white pt-32 w-full lg:px-52 px-4" style="color: #262145;">
+  <section id="franchise-content" class="text-white pt-32 w-full md:px-12 px-4" style="color: #262145;">
     <div class="swiper-container">
-      <div class="swiper-wrapper lg:pl-48 pl-4">
+      <div class="swiper-wrapper md:px-12 px-4">
         <!-- Slides -->
         <?php foreach ($รูปภาพ as $รูป) : ?>
           <div class="swiper-slide rounded-xl overflow-hidden banner-slide">
@@ -113,16 +113,16 @@
       <div class="swiper-button-prev"></div>
     </div>
     <div class="flex items-center justify-between mt-12">
-      <div class="flex items-center justify-center">
+      <div class="flex flex-wrap gap-2">
         <div class="text-xs rounded-full text-sm px-4 py-2" style="background-color: #FEDA52;">Franchise hub</div>
         <?php foreach ($franchiseTypes as $franchiseType) : ?>
-          <div class="relative rounded-full text-sm px-4 py-2 ml-2 text-white flex items-center" style="background-color: #062241;">
+          <div class="relative rounded-full text-sm px-4 py-2 text-white flex items-center" style="background-color: #062241;">
             <img class="w-7 h-7 absolute left-0 ml-1 rounded-full object-cover" src="<?= get_field('pictureUrl', $franchiseType) ? get_field('pictureUrl', $franchiseType) :  get_theme_file_uri() . '/assets/images/img-default.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'; ?>" alt="">
-            <span class="ml-6 text-xs"><?= $franchiseType->name ?></span>
+            <span class="ml-6 text-xs text-en"><?= $franchiseType->name ?></span>
           </div>
         <?php endforeach ?>
       </div>
-      <div class="lg:flex hidden lg:px-32 lg:mx-8 px-8 py-5 lg:justify-start justify-center ">
+      <div class="lg:flex hidden py-5 md:justify-end justify-center ">
         <a href=""><img class="w-5 h-5" src="<?= get_theme_file_uri() ?>/assets/images/facebook-blue.svg" alt=""></a>
         <a href=""><img class="w-5 h-5 ml-4" src="<?= get_theme_file_uri() ?>/assets/images/twitter-blue.svg" alt=""></a>
         <a href=""><img class="w-5 h-5 ml-4" src="<?= get_theme_file_uri() ?>/assets/images/link-blue.svg" alt=""></a>
@@ -285,8 +285,8 @@
   include 'truefriend-thumbnail-slider.php';
   ?>
 
-  <div class="w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
-    <span class="text-3xl font-bold">
+  <div class="text-en w-full h-72 flex flex-col items-center justify-center" style="background-color: #FEDA52;">
+    <span class="md:text-3xl text-2xl font-bold">
       ลงทะเบียน Franchise ฟรี
     </span>
     <a href="<?= get_site_url() ?>/franchise-register" class="rounded-full py-3 px-24 bg-white my-6">

@@ -48,11 +48,11 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
             </div>
         </section>
         <hr class="mt-8 mb-8 lg:mt-12 lg:mt-8" style="border-top:1px solid rgba(0,0,0,0.12)" />
-        <section class="mx:6 lg:py-8 pb-4" id="content">
+        <section class="lg:py-8 pb-4" id="content">
             <!-- Slider main container -->
             <div class="swiper-container">
                 <!-- Additional required wrapper -->
-                <div class="swiper-wrapper pl-4 lg:pl-0">
+                <div class="swiper-wrapper md:px-12 px-6">
                     <!-- Slides -->
                     <div class="supplier-type tab-button select-none cursor-pointer border-black-400 border flex items-center justify-center rounded-full lg:text-base text-xs swiper-slide <?= !$supplierTypeId ? 'tab-button-active' : '' ?>" style="width:auto" value=''>ทั้งหมด</div>
                     <?php foreach ($suppliertypes as $suppliertype) : ?>
@@ -60,7 +60,7 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
                     <?php endforeach; ?>
                 </div>
             </div>
-            <section class="px-4 lg:px-20 lg:mt-12" id="content-card">
+            <section class="md:px-12 px-6 lg:mt-12" id="content-card">
                 <?php foreach ($suppliers as $supplier) : ?>
                     <a href="<?= $supplier->link ?>" class="py-8 flex items-center justify-between w-full cursor-pointer" style="border-bottom:1px solid rgba(0,0,0,0.12)">
                         <div class="flex justify-between items-center w-4/5 lg:flex-nowrap flex-wrap">

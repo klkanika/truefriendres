@@ -2,8 +2,8 @@
 $count_material = 0;
 $count_material = wp_count_posts($post_type)->publish;
 ?>
-<section class="text-white pt-8 w-full lg:px-52 px-4" style="color: #262145;">
-    <div class="flex items-center justify-between">
+<section class="text-white pt-8 w-full md:px-12 px-4" style="color: #262145;">
+    <div class="w-full flex items-center justify-between">
         <p class="text-2xl font-bold"><?= $thumbnail_slider_title ?></p>
         <div class="flex lg:items-center font-semibold">
             <form id="thumbnail-search">
@@ -16,7 +16,7 @@ $count_material = wp_count_posts($post_type)->publish;
             </form>
             <span class="mr-8 lg:block hidden cursor-pointer" id="thumbnail-search-btn">ค้นหา</span>
             <a href="<?= get_site_url() ?>/<?= $thumbnail_slider_type ?>" class="lg:mr-8 lg:text-base text-xs">ดูทั้งหมด (<?= $count_material < 1000 ? $count_material : '999+' ?>)</a>
-            <div class=" lg:flex hidden items-center justify-between w-12 ">
+            <div class=" lg:flex hidden items-center justify-between w-12">
                 <img src="<?= get_theme_file_uri() ?>/assets/images/left.svg" class="cursor-pointer swiper-thumbnail-button-prev" />
                 <img src="<?= get_theme_file_uri() ?>/assets/images/chev-right.svg" class="cursor-pointer swiper-thumbnail-button-next" />
             </div>
