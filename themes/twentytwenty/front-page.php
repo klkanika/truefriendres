@@ -250,8 +250,8 @@ $defaultImage = get_theme_file_uri() . "/assets/images/img-default.jpg";
     <?php include 'truefriend-advertisement.php'; ?>
 
     <!--News & Marketing & Knowledge Post-->
-    <div class="bro-max-width  light_theme">
-        <section id="section-blogs" class="pt-12 lg:ml-8 lg:mr-2 ml-4 mr-4 lg:pb-16 pb-12 flex flex-wrap" style="color:#062241">
+    <div class="bro-max-width light_theme">
+        <section id="section-blogs" class="pt-12 lg:mx-8 lg:pb-16 pb-12 flex flex-wrap" style="color:#062241">
             <?php
             foreach ($postObjects as $postObject) {
                 $catObject = $postObject->catObject;

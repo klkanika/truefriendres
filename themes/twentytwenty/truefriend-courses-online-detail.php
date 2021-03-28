@@ -163,14 +163,14 @@ if(!empty(get_field('เนื้อหาของคอร์สนี้'))){
       }
 
       #documents .banner-slide {
-        width: 80%;
+        width: 90%;
       }
     }
   </style>
 
-  <section id="documents" class="text-white pt-32 bro-max-width flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
+  <section id="documents" class="text-white pt-32 w-full md:px-12 px-4 flex items-center flex-col" style="background-color: #F2F2F2; color:#262145;">
     <!-- Slider main container -->
-    <div class="bro-max-width">
+    <div class="md:px-12 px-4">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <!-- Slides -->
@@ -186,8 +186,8 @@ if(!empty(get_field('เนื้อหาของคอร์สนี้'))){
       </div>
     </div>
 
-    <div class="bro-max-width" style="margin-top: 4rem!important;margin-bottom: 3rem!important;">
-      <div class="flex items-center justify-between">
+    <div class="w-full my-12 md:px-12 px-4">
+      <div class="w-full flex items-center justify-between">
         <div class="flex items-center">
           <div class="flex">
             <div class="text-xs rounded-full text-sm px-4 py-2 text-white" style="background-color: #062241;">online</div>

@@ -26,7 +26,7 @@
     }
   </style>
   <!-- Set up your HTML -->
-  <section id="contact-us" class="bro-max-width lg:pt-18 pt-32 flex items-center text-en" style="background-color: #F2F2F2;">
+  <section id="contact-us" class="bro-max-width lg:py-18 py-32 flex items-center text-en" style="background-color: #F2F2F2;">
     <div class="xl:mx-36 lg:mb-4 lg:flex w-full flex-col lg:flex-row">
       <div class="flex flex-col gap-8 flex-1" style="color: #262145;">
         <div class="flex flex-col gap-1">
