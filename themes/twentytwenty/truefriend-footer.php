@@ -27,8 +27,8 @@
 					<img src="<?= isset($footerlogo) ? $footerlogo : get_theme_file_uri() . '/assets/images/logo-white.svg' ?>" class="cursor-pointer w-auto h-16 mx-auto" />
 				</a>
 				<div>
-					<p class="text-en mt-10 "><a href="mailto:restaurantbuddysme@gmail.com">restaurantbuddysme@gmail.com</a></p>
-					<p class="text-en  text-2xl mt-2"><a href="tel:0917804724">091 780 4724</a></p>
+					<p class="text-en mt-10 md:text-base text-sm"><a href="mailto:restaurantbuddysme@gmail.com">restaurantbuddysme@gmail.com</a></p>
+					<p class="text-en text-2xl mt-2 md:text-base text-sm"><a href="tel:0917804724">091 780 4724</a></p>
 				</div>					
 			</div>
 		</div>			
