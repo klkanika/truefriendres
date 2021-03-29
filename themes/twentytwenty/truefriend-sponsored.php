@@ -1,5 +1,5 @@
 <?php
-$currentPostId = $post->ID;
+// $currentPostId = $post->ID;
 $currentPost = get_post($currentPostId);
 $adsObjects = Post::getPostsByCategory('advertisement', null, null, 0, null);
 $adsPosts = array_values(array_filter($adsObjects->posts, function ($p) {
@@ -82,7 +82,6 @@ if ($query->have_posts()) {
     array_push($queryPosts, $thePost);
   endforeach;
 }
-  
 ?>
 <div class="mb-8 light_theme">
   <div class="border-b pb-2 mb-2 font-semibold tracking-wide">Read next</div>
@@ -95,7 +94,7 @@ if ($query->have_posts()) {
         $postDate = date_format(date_create($thePost->post_date),"d/m/Y");
       ?>
       <a href="<?=$link?>" class="border-b my-2 button_ghost <?= $key > 2 ? 'flex gap-5 items-center' : '' ?>" style="padding: 0!important;border-radius: 0!important;">
-        <img class="mobject-cover rounded <?= $key > 2 ? 'w-20 h-20' : 'w-full h-40' ?>" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
+        <img class="object-cover object-center rounded <?= $key > 2 ? 'w-20 h-20' : 'w-full h-40 md:h-56 lg:h-40' ?>" src="<?= $image ?>" onerror="this.src='<?= $defaultImage ?>'" alt="">
         <div class="mx-4 mb-2">
           <div class="text-sans-serift leading-relaxed <?= $key > 2 ? '' : 'mt-2' ?>"><?= $thePost->post_title ?></div>
           <div class="text-gray-500 text-xs" style="color: rgba(6, 34, 65, 0.5);"><?= $postDate ?></div>
