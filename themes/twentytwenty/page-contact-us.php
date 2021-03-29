@@ -26,8 +26,8 @@
     }
   </style>
   <!-- Set up your HTML -->
-  <section id="contact-us" class="bro-max-width lg:py-18 py-32 flex items-center text-en" style="background-color: #F2F2F2;">
-    <div class="xl:mx-36 lg:mb-4 lg:flex w-full flex-col lg:flex-row">
+  <section id="contact-us" class="w-full  lg:py-18 py-32 flex items-center text-en" style="background-color: #F2F2F2;">
+    <div class="xl:mx-56 md:mx-12 mx-4 lg:mb-4 lg:flex w-full flex-col lg:flex-row 2xl:flex-col">
       <div class="flex flex-col gap-8 flex-1" style="color: #262145;">
         <div class="flex flex-col gap-1">
           <span class="text-xl" style="color: #262145;">ติดต่อเรา</span>
@@ -47,7 +47,7 @@
           <div><a href="https://line.me/ti/p/~@ormzins" target="_blank" class="inline-flex items-center"><img class="w-5 h-5 mr-2" src="<?= get_theme_file_uri() ?>/assets/images/line-icon.svg" alt=""> @ormzins</a></div>
         </div>
       </div>
-      <div class="text-sm flex flex-col flex-1 flex-grow gap-3 max-w-md lg:my-0 my-16">
+      <div class="text-sm flex flex-col flex-1 flex-grow gap-3 max-w-md lg:my-0 my-16 2xl:my-16">
         <?= the_content() ?>
       </div>
     </div>
