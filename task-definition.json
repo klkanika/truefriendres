@@ -1,0 +1,62 @@
+{
+  "requiresCompatibilities": ["FARGATE"],
+  "containerDefinitions": [
+    {
+      "name": "server",
+      "memoryReservation": "128",
+      "resourceRequirements": null,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": "80",
+          "protocol": "tcp"
+        }
+      ],
+      "environment": null,
+      "environmentFiles": [],
+      "secrets": [
+        {
+          "name": "WORDPRESS_DB_HOST",
+          "valueFrom": "arn:aws:ssm:ap-southeast-1:988947493523:parameter/BRO_WORDPRESS_DB_HOST"
+        },
+        {
+          "name": "WORDPRESS_DB_USER",
+          "valueFrom": "arn:aws:ssm:ap-southeast-1:988947493523:parameter/BRO_WORDPRESS_DB_USER"
+        },
+        {
+          "name": "WORDPRESS_DB_PASSWORD",
+          "valueFrom": "arn:aws:ssm:ap-southeast-1:988947493523:parameter/BRO_WORDPRESS_DB_PASSWORD"
+        },
+        {
+          "name": "WORDPRESS_DB_NAME",
+          "valueFrom": "arn:aws:ssm:ap-southeast-1:988947493523:parameter/BRO_WORDPRESS_DB_NAME"
+        },
+        {
+          "name": "WORDPRESS_CONFIG_EXTRA",
+          "valueFrom": "arn:aws:ssm:ap-southeast-1:988947493523:parameter/BRO_WORDPRESS_CONFIG_EXTRA"
+        }
+      ],
+      "mountPoints": null,
+      "volumesFrom": null,
+      "hostname": null,
+      "user": null,
+      "workingDirectory": null,
+      "extraHosts": null,
+      "logConfiguration": null,
+      "ulimits": null,
+      "dockerLabels": null,
+      "dependsOn": null,
+      "repositoryCredentials": {
+        "credentialsParameter": ""
+      }
+    }
+  ],
+  "volumes": [],
+  "networkMode": "awsvpc",
+  "memory": "512",
+  "cpu": "256",
+  "executionRoleArn": "arn:aws:iam::988947493523:role/ecsTaskExecutionRole",
+  "tags": [],
+  "family": "food-bro",
+  "taskRoleArn": ""
+}
